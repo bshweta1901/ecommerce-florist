@@ -1,0 +1,48 @@
+<app-common-table  [title]="'Factory List'"
+[genericColsInput]="tableColsEvent"
+[genericTableSettingInput]="tableSettingsEvent" 
+[genericListInput]="eventList"
+(addEntityEvent)="addEvent()"
+(paginateEvent)="paginateEvent($event)"
+[totalRecords]="totalRecords"
+(editEntityEvent)="EditEvent($event)"
+(resetEntityEvent)="resetSearch($event)" 
+(searchEntityEvent)="searchData($event)"
+(deactiveDataEvent)="deactiveEntity($event)"
+[placeholder]="searchPlaceholder"
+(activeDataEvent)="activeEntity($event)"
+(deleteDataEvent)="deleteEvent($event)"
+[exportName]="getExportName()"
+(filterEntityEvent)="openSidebar()"
+(exportEntityEvent)="exportEntity()">
+    <!-- <span search class="p-input-icon-left mb-2 searchGeneric">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" placeholder="Project Name" (input)="searchData()" [(ngModel)]="project.searchValue" class="w-full form-control"/>
+    </span> -->
+</app-common-table>
+
+
+<p-sidebar [(visible)]="visibleSidebar" position="right" [transitionOptions]="'100ms'">
+    <div class="mb-5" *ngFor="let filter of statusList">
+        <span *ngIf="filter.fieldType == 'dropdown'">
+            <p class="mb-2 f-normal">{{filter.defaultLabel}}</p>
+            <p-dropdown (onChange)="onDropdownChange($event)" inputId="dropdown" appendTo="body" [options]="filter.filterLookupList" optionLabel="lookupId" [autoDisplayFirst]="false" [(ngModel)]="factory[filter.fieldName]" Placeholder="{{filter.defaultLabel}}"></p-dropdown>
+        </span>
+    </div>
+    <div class="mt-5">
+        <button pButton pRipple type="button" (click)="searchFilter();"
+            class="searchbtn p-button-info w-50 mr-2 justify-center">
+            Search
+        </button>
+        <button pButton pRipple type="button" (click)="resetFilter();"
+            class="searchbtn p-button-danger w-50 justify-center">
+            Reset
+        </button>
+    </div>
+</p-sidebar>
+
+
+<app-common-modal [title]="titleEVent" [visible]="openAddDialogModuleEvent" [closable]="true"  (closeEvent)="closeEventDialog()">
+    <app-add-factory [hideButton]="hideButtonView" (saveEvents)="saveEventDialog()" (close)="closeEventDialog()" [eventData]="factory" *ngIf="openAddDialogModuleEvent" body>
+    </app-add-factory>
+</app-common-modal>

@@ -1,0 +1,69 @@
+<div class="linkExpireWrap" *ngIf="isShowSignature">
+    <h1>Thank You!</h1>
+    <div>
+        <!-- <img src="assets/images/images (1).png"> -->
+    </div>
+</div>
+<div class="linkExpireWrap" *ngIf="contract.is_already_signed">
+    <h1>Link Expired!</h1>
+    <div>
+        <img src="assets/images/images (1).png" />
+    </div>
+</div>
+<div *ngIf="!contract.is_already_signed">
+    <div
+        *ngIf="contract?.document?.file_path"
+        class="popup-bg-trans cert-popup"
+    >
+        <div>
+            <pdf-viewer
+                [src]="contract.document.file_path"
+                [original-size]="false"
+                [render-text]="true"
+                style="width: 100%; height: 600px"
+            ></pdf-viewer>
+        </div>
+
+        <div class="sign-Button">
+            <button
+                (click)="isShowSignature = true"
+                class="getOtp m-t-0 wid-100 btn-Sign"
+            >
+                Sign
+            </button>
+        </div>
+    </div>
+</div>
+<div class="adharDialog sign-popup">
+    <p-dialog
+        [(visible)]="isShowSignature"
+        [modal]="true"
+        [style]="{ width: '40vw' }"
+        [draggable]="false"
+        [resizable]="false"
+    >
+        <h5 class="signText color-black text-center f-w-600 m-b-30">
+            Sign Inside The Box
+        </h5>
+        <div>
+            <div class="text-center canvasDiv">
+                <canvas #canvas width="500" height="250"></canvas>
+            </div>
+
+            <div class="text-center flexEsign box-Button">
+                <button
+                    class="getOtp m-t-0 wid-100 btn-Sign"
+                    (click)="submitSign()"
+                >
+                    Submit
+                </button>
+                <button
+                    (click)="clearSignature()"
+                    class="logoutWrap m-b-0 m-t-0 wid-100 btn-Sign-Cancel"
+                >
+                    Clear
+                </button>
+            </div>
+        </div>
+    </p-dialog>
+</div>

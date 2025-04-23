@@ -1,0 +1,417 @@
+async def send_otp(data):
+    try:
+        with session_scope() as session:
+            if data.get("email"):
+                user = (
+                    session.query(User)
+                    .filter(
+                        User.email == data["email"],
+                        User.is_delete == False,
+                        User.is_active == True,
+                    )
+                    .first()
+                )
+            elif data.get("phone"):
+                user = (
+                    session.query(User)
+                    .filter(
+                        User.phone == data["phone"],
+                        User.is_delete == False,
+                        User.is_active == True,
+                    )
+                    .first()
+                )
+            if not user:
+                return {"message": "User does not exists."}, 400
+            elif user.is_active == False:
+                return {
+                    "message": "Your account has been deactivated please contact admin."
+                }, 400
+
+            roles = [role.name for role in user.roles]
+            auth_config = AuthConfig.get_auth_config_by_roles(roles, session)
+            if not auth_config:
+                return {"message": "No authentication method found for this user."}, 400
+            if auth_config.auth_type == "OTP":
+                otp = UserOtp.random_with_N_digits(4)
+                expiry_date_time = indian_time_now() + datetime.timedelta(minutes=10)
+                if data.get("email"):
+                    user_otp = (
+                        session.query(UserOtp)
+                        .filter(UserOtp.email == data["email"])
+                        .first()
+                    )
+                elif data.get("phone"):
+                    user_otp = (
+                        session.query(UserOtp)
+                        .filter(UserOtp.phone == data["phone"])
+                        .first()
+                    )
+                else:
+                    return {"message": "User phone or email not provided."}, 400
+
+                if user_otp:
+                    user_otp.otp = otp
+                    user_otp.expiry_date_time = expiry_date_time
+                else:
+                    if data.get("email"):
+                        user_otp = UserOtp(
+                            email=data.get("email"),
+                            otp=otp,
+                            expiry_date_time=expiry_date_time,
+                        )
+                    elif data.get("phone"):
+                        user_otp = UserOtp(
+                            phone=data.get("phone"),
+                            otp=otp,
+                            expiry_date_time=expiry_date_time,
+                        )
+                    else:
+                        return {"message": "User phone or email not provided."}, 400
+                session.add(user_otp)
+                # otp_dict = {"otp": otp, "name": user.first_name}
+                otp_dict = {"otp": otp, "name": user.full_name}
+
+                if auth_config.otp_verification_on == "EMAIL":
+                    email_content = render_template("otp.html", data=otp_dict)
+                    await asyncio.gather(
+                        send_email(
+                            "One-Time Passcode For Your Xkrow Account",
+                            user.email,
+                            email_content,
+                        )
+                    )
+
+                elif auth_config.otp_verification_on == "SMS":
+                    if user:
+                        pass
+                        # send_sms(user.phone, otp_dict)
+
+                elif auth_config.otp_verification_on == "BOTH":
+                    if user is not None:
+                        email_content = render_template("otp.html", data=otp_dict)
+                        send_email("OTP Email", user.email, email_content)
+                        # send_sms(user.phone, otp_dict)
+                session.commit()
+                return {"message": "Otp sent to user", "otp": otp}, 200
+            elif auth_config.auth_type == "PASSWORD":
+                return {
+                    "message": "Inavlid authentication method used for this user."
+                }, 400
+
+    except Exception as e:
+        current_app.logger.exception(e)
+        return {"message": "An error occurred while sending OTP"}, 500
+
+
+def send_sms(phone, otp_dict):
+    if phone is not None:
+        unicode = current_app.config["SMS_UNICODE"]
+        sms_from = current_app.config["SMS_FROM"]
+        dlt_content_id = current_app.config["SMS_DLT_CONTENT_ID"]
+        username = current_app.config["SMS_USERNAME"]
+        password = current_app.config["SMS_PASSWORD"]
+        unicode = current_app.config["SMS_UNICODE"]
+        text = current_app.config["SMS_TEXT"]
+
+        formatted_sms_text = text.format(otp=otp_dict.get("otp", None))
+        # Constructing the API URL
+        url = current_app.config["SMS_API_URL"]
+
+        # Constructing the request parameters
+        params = {
+            "username": username,
+            "password": password,
+            "unicode": unicode,
+            "from": sms_from,
+            "to": phone,
+            "dltContentId": dlt_content_id,
+            "text": formatted_sms_text,
+        }
+        # Disable SSL verification (Not recommended for production)
+        response = requests.get(url, params=params, verify=False)
+
+        return response
+
+
+def send_email_in_bg(func, subject, recipient, body):
+    def run_in_context(app_context):
+        with app_context:
+            func(subject, recipient, body)
+
+    app_context = current_app.app_context()
+    thread = threading.Thread(target=run_in_context, args=(app_context,))
+    thread.start()
+
+
+def send_notification_in_bg(
+    func,
+    registration_token,
+    title,
+    body,
+    data,
+    session,
+):
+    def run_in_context(app_context):
+        with app_context:
+            func(
+                registration_token,
+                title,
+                body,
+                data,
+                session,
+            )
+
+    app_context = current_app.app_context()
+    thread = threading.Thread(target=run_in_context, args=(app_context,))
+    thread.start()
+
+
+def send_notification_in_bg(func, subject, recipient, body):
+    def run_in_context(app_context):
+        with app_context:
+            func(subject, recipient, body)
+
+    app_context = current_app.app_context()
+    thread = threading.Thread(target=run_in_context, args=(app_context,))
+    thread.start()
+
+
+async def send_email(subject, recipient, body):
+
+    if recipient is not None:
+        mail = Mail()
+
+        msg = Message(subject=subject, recipients=[recipient], html=body)
+        mail.send(msg)
+
+
+def send_email_sync(subject, recipient, body):
+
+    if recipient is not None:
+        mail = Mail()
+
+        msg = Message(subject=subject, recipients=[recipient], html=body)
+        mail.send(msg)
+
+
+def send_email_with_attachment(subject, recipient, body, attachment=None):
+
+    if recipient is not None:
+        mail = Mail(current_app)
+
+        msg = Message(subject=subject, recipients=[recipient], html=body)
+        if attachment:
+            try:
+                # Download the file from the URL
+                response = requests.get(attachment)
+                if response.status_code == 200:
+                    # Extract filename from URL
+                    attachment_name = os.path.basename(attachment)
+                    # Attach the downloaded file
+                    msg.attach(attachment_name, "application/pdf", response.content)
+                else:
+                    current_app.logger.error(
+                        f"Failed to download attachment from URL: {attachment}. Status code: {response.status_code}"
+                    )
+            except Exception as e:
+                current_app.logger.exception(
+                    f"Error downloading attachment from URL: {attachment}. Error: {str(e)}"
+                )
+
+        mail.send(msg)
+
+
+def verify_otp_for_user(data):
+
+    from app.main.auth.service.auth_service import generate_token
+
+    try:
+        with session_scope() as session:
+            if data.get("email"):
+                user_otp = (
+                    session.query(UserOtp)
+                    .filter(
+                        UserOtp.email == data.get("email"),
+                        UserOtp.otp == data.get("otp"),
+                    )
+                    .first()
+                )
+            elif data.get("phone"):
+                user_otp = (
+                    session.query(UserOtp)
+                    .filter(
+                        UserOtp.phone == data.get("phone"),
+                        UserOtp.otp == data.get("otp"),
+                    )
+                    .first()
+                )
+            else:
+                return {"message": "email or phone req"}, 400
+            if not user_otp:
+                return {"message": "Invalid OTP"}, 400
+            if data.get("email"):
+                is_verified = user_otp.verify_otp(session, user_otp.email, user_otp.otp)
+            elif data.get("phone"):
+                is_verified = user_otp.verify_otp_with_phone(
+                    session, user_otp.phone, user_otp.otp
+                )
+            if not is_verified:
+                return {"message": "OTP has expired"}, 400
+            if is_verified:
+                if data.get("email"):
+                    user = (
+                        session.query(User)
+                        .filter(User.email == data.get("email"))
+                        .first()
+                    )
+                elif data.get("phone"):
+                    user = (
+                        session.query(User)
+                        .filter(User.phone == data.get("phone"))
+                        .first()
+                    )
+                return generate_token(user, session)
+            return {
+                "message": (
+                    "Valid OTP"
+                    if is_verified
+                    else "You have entered an invalid OTP or Expired"
+                ),
+                "is_verified": is_verified,
+            }, (200 if is_verified else 400)
+    except Exception as e:
+        current_app.logger.exception(e)
+        return {"error": "An error occurred while verifying OTP"}, 500
+
+
+def change_user_password(uuid, data):
+    try:
+
+        password = data.get("old_password", None)
+        new_password = data.get("new_password", None)
+        if not password or not new_password:
+            return {"message": "Passwords are required"}, 400
+        with session_scope() as session:
+            user = (
+                session.query(User)
+                .filter(User.uuid == uuid, User.is_delete == False)
+                .first()
+            )
+            if not user:
+                return {"message": "User not found"}, 400
+            if not user.check_password(password):
+                return {"message": "Old password does not match"}, 400
+            user.password = new_password
+            session.add(user)
+            session.commit()
+            return {"message": "Password changed successfully", "user_uuid": uuid}, 200
+
+    except Exception as e:
+        current_app.logger.error(f"An error occurred: {str(e)}")
+        return {"message": "An error occurred while changing password"}, 500
+
+
+def forget_password(email, is_otp):
+    try:
+        with session_scope() as session:
+
+            user = (
+                session.query(User)
+                .filter_by(email=email, is_delete=False, is_active=True)
+                .first()
+            )
+            if not user:
+                return {"message": "User not found"}, 400
+            if is_otp:
+                otp = UserOtp.random_with_N_digits(4)
+                user_otp = session.query(UserOtp).filter(UserOtp.email == email).first()
+                expiry_date_time = indian_time_now() + datetime.timedelta(minutes=10)
+                if user_otp:
+                    user_otp.otp = otp
+                    user_otp.expiry_date_time = expiry_date_time
+                else:
+                    user_otp = UserOtp(
+                        email=email, otp=otp, expiry_date_time=expiry_date_time
+                    )
+                session.add(user_otp)
+                session.commit()
+                html_body = f"""
+                <p>Your OTP to reset password is : {otp}</p>
+                <p>If you did not make this request, simply ignore this email.</p>
+                """
+                asyncio.run(send_email("Password Reset OTP", email, html_body))
+                return {"message": "OTP sent to email successfully"}, 200
+            else:
+                token = create_access_token(
+                    identity=user.uuid, expires_delta=datetime.timedelta(minutes=10)
+                )
+                url = (
+                    current_app.config["DOCUMENT_TEMP_URL"]
+                    + f"api/user/reset-password?token={token}"
+                )
+                html_body = f"""
+                <p>To reset your password, visit the following link:</p>
+                <p><a href="{url}">{url}</a></p>
+                <p>If you did not make this request, simply ignore this email.</p>
+                """
+                asyncio.run(send_email("Password Reset Request", email, html_body))
+                return {
+                    "message": "Reset password link sent to email successfully"
+                }, 200
+    except Exception as e:
+        current_app.logger.error(f"An error occurred: {str(e)}")
+        return {"message": "An error occurred while resetting password"}, 500
+
+
+def reset_password(data):
+    try:
+        token = data.get("token", None)
+        new_password = data.get("new_password", None)
+        otp = data.get("otp")
+        email = data.get("email")
+        if not new_password:
+            return {"message": "Password is required"}, 400
+        with session_scope() as session:
+            if token:
+                try:
+                    decoded_token = decode_token(token)
+                    user_uuid = decoded_token["sub"]
+                except ExpiredSignatureError:
+                    return {"message": "Token has expired"}, 400
+                except InvalidTokenError:
+                    return {"message": "Invalid token"}, 400
+                user = (
+                    session.query(User)
+                    .filter_by(uuid=user_uuid, is_delete=False)
+                    .first()
+                )
+                if not user:
+                    return {"message": "Invalid or expired token"}, 400
+            else:
+                if not otp:
+                    return {"message": "OTP is required"}, 400
+                if not email:
+                    return {"message": "Email is required"}, 400
+                user_otp = session.query(UserOtp).filter_by(email=email).first()
+                if (
+                    not user_otp
+                    or user_otp.otp != otp
+                    or user_otp.expiry_date_time > indian_time_now()
+                ):
+                    return {"message": "Invalid OTP or Expired"}, 400
+
+                user = (
+                    session.query(User).filter_by(email=email, is_delete=False).first()
+                )
+                if not user:
+                    return {"message": "Invalid OTP or Expired"}, 400
+
+            user.password = new_password
+            session.add(user)
+            session.commit()
+
+            return {"message": "Your password has been updated"}, 200
+    except Exception as e:
+        current_app.logger.error(f"An error occurred: {str(e)}")
+        return {"message": "An error occurred while resetting password"}, 500

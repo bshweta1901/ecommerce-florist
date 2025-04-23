@@ -1,0 +1,109 @@
+<div class="service-Request-Management-Container">
+    <div class="service-grid col-10">
+        <div class="secInner1 col-4" (click)="filterServiceRequestByDate()">
+            <div>
+                <p class="card-header">Service Scheduled Today</p>
+                <h4 class="card-sub-header">
+                    {{ serviceRequestStatsObject.scheduled_services }}
+                </h4>
+            </div>
+            <div>
+                <img src="assets/images/AppWindow.svg" />
+            </div>
+        </div>
+
+        <div class="secInner2 col-4" (click)="filterServiceRequestByMissed()">
+            <div>
+                <p class="card-header">SLA Missed Till Date</p>
+                <h4 class="card-sub-header">
+                    {{ serviceRequestStatsObject.sla_missed }}
+                </h4>
+            </div>
+            <div>
+                <img src="assets/images/ClockClockwise.svg" />
+            </div>
+        </div>
+    </div>
+
+    <div class="header-of-Table-Four">
+        <div class="Table-Four">
+            <app-common-table
+                [title]="'Service Request Management'"
+                [genericColsInput]="tableColsEvent"
+                [genericTableSettingInput]="tableSettingsEvent"
+                [genericListInput]="serviceRequestList"
+                (addEntityEvent)="addEvent()"
+                (viewEntityEvent)="onViewClicked($event)"
+                (paginateEvent)="paginateEvent($event)"
+                [totalRecords]="totalRecords"
+                (editEntityEvent)="EditEvent($event)"
+                (searchEntityEvent)="searchData($event)"
+                [placeholder]="searchPlaceholder"
+                (activeDataEvent)="activeEntity($event)"
+                (deactiveDataEvent)="deactiveEntity($event)"
+                (deleteDataEvent)="deleteEvent($event)"
+                (filterEntityEvent)="openSidebar()"
+                (exportEntityEvent)="exportServiceRequestList()"
+            >
+            </app-common-table>
+        </div>
+    </div>
+</div>
+
+<p-sidebar
+    [(visible)]="visibleSidebar"
+    position="right"
+    [transitionOptions]="'100ms'"
+>
+    <div class="select-Satus col-12">
+        <label for="satus">Status</label>
+        <p-dropdown
+            class="service-Request-Status"
+            [options]="statusList"
+            [(ngModel)]="predefinedMasterObject"
+            optionLabel="name"
+            placeholder="Select a status"
+        ></p-dropdown>
+    </div>
+
+    <div class="select-Satus col-12">
+        <label for="satus">Location</label>
+        <p-dropdown
+            class="service-Request-Status"
+            [options]="cityList"
+            [(ngModel)]="selectedLocation"
+            optionLabel="name"
+            placeholder="Select a location"
+        ></p-dropdown>
+    </div>
+    <div class="select-Satus col-12">
+        <label for="satus">Service Type</label>
+        <p-dropdown
+            class="service-Request-Status"
+            [options]="serviceTypeList"
+            [(ngModel)]="selectedServiceType"
+            optionLabel="name"
+            placeholder="Select a Service Type"
+        ></p-dropdown>
+    </div>
+    <div class="mt-5">
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="searchFilter()"
+            class="searchbtn p-button-info w-50 mr-2 justify-center"
+        >
+            Search
+        </button>
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="resetFilter()"
+            class="searchbtn p-button-danger w-50 justify-center"
+        >
+            Reset
+        </button>
+    </div>
+</p-sidebar>

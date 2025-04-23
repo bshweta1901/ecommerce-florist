@@ -1,0 +1,39 @@
+<form [formGroup]="addFactoryForm" autocomplete="off">
+    <div class="add-project-wrap">    
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="factory.factoryName" formControlName="factoryName" (keypress)="keyPressForAlphaNum($event)">
+                <label for="inputtext">Factory Name*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addFactoryForm.get('factoryName').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addFactoryForm.get('factoryName').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <!-- *ngIf="!hideButton" -->
+                <input type="text" id="inputtext" *ngIf="!hideButton" pInputText [(ngModel)]="factory.code" formControlName="code" (keypress)="keyPressForAlphaNum($event)">
+                <!-- *ngIf="hideButton" -->
+                <input type="text"  *ngIf="hideButton" id="inputtext"  pInputText [(ngModel)]="factory.code" formControlName="code" (keypress)="keyPressForAlphaNum($event)">
+                <label for="inputtext">Factory Abbreviation*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addFactoryForm.get('code').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addFactoryForm.get('code').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="factory.location" formControlName="location" (keypress)="keyPressForAlphaNum($event)">
+                <label for="inputtext">Location*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addFactoryForm.get('location').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addFactoryForm.get('location').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+    </div>
+    <div class="popup-form-btn">
+        <button pButton type="button" *ngIf="hideButton" (click)="saveFactory()" [disabled]="!addFactoryForm.valid" label="Save Factory" class="p-button-raised" [loading]="isLoading"></button>
+        <button pButton type="button" *ngIf="!hideButton" (click)="updateFactory()"  [disabled]="!addFactoryForm.valid" label="Update Factory" class="p-button-raised" [loading]="isLoading"></button>
+   
+        <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="close.emit($event)"></button>
+    </div>
+</form>

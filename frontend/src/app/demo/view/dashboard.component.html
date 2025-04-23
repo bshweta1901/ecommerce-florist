@@ -1,0 +1,359 @@
+
+<div class="card">
+
+    <p-tabView>
+        <p-tabPanel header="Dashboard">
+            <div class="dashbardWrap">
+                <h5>Order</h5>
+                <div class="sec1Grid">
+                    
+                    <div
+                        class="secInner1"
+                        data-tooltip="Completed Installation Service Requests with its Total Amount"
+                    >
+                    
+                        <div>
+                            <p>Total Order</p>
+                            <h4>
+                               100
+                                / <span>&#8377;</span>
+                               2000
+                            </h4>
+                        </div>
+                        <div>
+                            <img src="assets/images/AppWindow.svg" />
+                        </div>
+                    </div>
+                    <div
+                        class="secInner2"
+                        data-tooltip="Pending Installation Service Requests with its Total Amount"
+                    >
+                        <div>
+                            <p>Pending Installation</p>
+                            <h4>
+                                {{
+                                    dashboardInstallationObject.pending_installation_count
+                                }}
+                                / <span>&#8377;</span>
+                                {{
+                                    dashboardInstallationObject.total_pending_amount_due
+                                }}
+                            </h4>
+                        </div>
+                        <div>
+                            <img src="assets/images/ClockClockwise.svg" />
+                        </div>
+                    </div>
+                    <div
+                        class="secInner3"
+                        data-tooltip="Installation Services due today with its Total Amount"
+                    >
+                        <div>
+                            <p>Installation Due</p>
+                            <h4>
+                                {{
+                                    dashboardInstallationObject.overdue_installation_count
+                                }}
+                                / <span>&#8377;</span>
+                                {{
+                                    dashboardInstallationObject.total_overdue_amount_due
+                                }}
+                            </h4>
+                        </div>
+                        <div>
+                            <img src="assets/images/CalendarDot.svg" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sec2Grid">
+                    <div>
+                        <h5>Machine Universe</h5>
+                        <!-- <p>Lorem ipsum is dummy text</p> -->
+                        <div class="machinestatusWrap">
+                            <div
+                                class="machineStatusGrid"
+                                data-tooltip="The total installed and active units"
+                            >
+                                <div class="flexWrap">
+                                    <img src="assets/images/Icon (2).svg" />
+                                    <p>Total Installation Base</p>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{
+                                            dashboardMachineStatusObject.total_installation_base
+                                        }}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div
+                                class="machineStatusGrid"
+                                data-tooltip="Machines covered under AMC/CAMC plans"
+                            >
+                                <div class="flexWrap">
+                                    <img src="assets/images/Icon2 (1).svg" />
+                                    <p>Machine Under AMC/CMC</p>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{
+                                            dashboardMachineStatusObject.machine_under_amc_camc
+                                        }}
+                                    </h4>
+                                    <!-- <p class="small">On hover show AMC, CAMC, Warranty</p> -->
+                                </div>
+                            </div>
+                            <div
+                                class="machineStatusGrid"
+                                data-tooltip="Machines approaching end of life"
+                            >
+                                <div class="flexWrap">
+                                    <img src="assets/images/Icon (4).svg" />
+                                    <p>Machine Near End Of Life</p>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{
+                                            dashboardMachineStatusObject.machine_end_of_life
+                                        }}
+                                    </h4>
+                                    <!-- <p class="small">On hover show AMC, CAMC, Warranty</p> -->
+                                </div>
+                            </div>
+                            <div
+                                class="lastMachineStatusGrid"
+                                data-tooltip="Machines not covered by AMC/CAMC"
+                            >
+                                <div class="flexWrap">
+                                    <img src="assets/images/Icon (5).svg" />
+                                    <p>Machine Out Of AMC/CAMC</p>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{
+                                            dashboardMachineStatusObject.machine_not_under_amc_camc
+                                        }}
+                                    </h4>
+                                    <!-- <p class="small">On hover show AMC, CAMC, Warranty</p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="serCalender">
+                            <h5>Service Request (SLA)</h5>
+                        </div>
+
+                        <!-- <p>Lorem ipsum is dummy text</p> -->
+                        <div class="machinestatusWrap">
+                            <div
+                                class="machineStatusGrid"
+                                data-tooltip="Installations completed as scheduled"
+                            >
+                                <div class="flexWrap">
+                                    <img src="assets/images/Icon (2).svg" />
+                                    <p>Installation Done On Time</p>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{
+                                            dashboardServiceSLAObject.installation_on_time_percentage
+                                        }}%
+                                    </h4>
+                                    <!-- <p class="small">On hover show AMC, CAMC, Warranty</p> -->
+                                </div>
+                            </div>
+                            <div
+                                class="machineStatusGrid"
+                                data-tooltip="Tickets resolved within deadline"
+                            >
+                                <div class="flexWrap">
+                                    <img src="assets/images/Icon (11).svg" />
+                                    <p>Service Ticket Closed On Time</p>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{
+                                            dashboardServiceSLAObject.service_closed_percentage
+                                        }}%
+                                    </h4>
+                                    <!-- <p class="small">On hover show AMC, CAMC, Warranty</p> -->
+                                </div>
+                            </div>
+
+                            <div
+                                class="machineStatusGrid"
+                                data-tooltip="AMC/CAMC resolution adherence rate"
+                            >
+                                <div class="flexWrap">
+                                    <img src="assets/images/Icon (3).svg" />
+                                    <p>
+                                        Preventive Maintenance Compliance Rate
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{
+                                            dashboardServiceSLAObject.service_for_amc_camc_percentage
+                                        }}%
+                                    </h4>
+                                </div>
+                            </div>
+                            <div
+                                (click)="RedirectToServiceRequest()"
+                                class="lastMachineStatusGrid"
+                                data-tooltip="Pending service tickets past due"
+                            >
+                                <div class="flexWrap">
+                                    <img src="assets/images/Icon (6).svg" />
+                                    <p>Overdue Service Tickets</p>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{
+                                            dashboardServiceSLAObject.service_overdue_percentage
+                                        }}%
+                                    </h4>
+                                    <!-- <p class="small">On hover show AMC, CAMC, Warranty</p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sec3Grid">
+                    <h5>Contract Renewal Status</h5>
+                    <div class="sec3Wrap">
+                        <div class="tooltip-container">
+                            <div class="flexWrap">
+                                <img src="assets/images/Icon (7).svg" />
+                                <p>Contract Due <b>Today</b></p>
+                            </div>
+                            <h4>
+                                {{
+                                    dashboardContractStatusObject.renewals_today
+                                }}
+                                / <span>&#8377;</span>
+                                {{
+                                    dashboardContractStatusObject.renewal_amount_today
+                                }}
+                            </h4>
+                        </div>
+                        <div class="tooltip-container">
+                            <div class="flexWrap">
+                                <img src="assets/images/Icon2 (1).svg" />
+                                <p>
+                                    Contract Due In
+                                    <b>Next 10 Days</b>
+                                </p>
+                            </div>
+                            <h4>
+                                {{
+                                    dashboardContractStatusObject.renewals_next_10_days
+                                }}
+                                / <span>&#8377;</span>
+                                {{
+                                    dashboardContractStatusObject.renewal_amount_next_10_days
+                                }}
+                            </h4>
+                        </div>
+                        <div class="tooltip-container">
+                            <div class="flexWrap">
+                                <img src="assets/images/Icon (3).svg" />
+                                <p>
+                                    Contract Due In
+                                    <b>Next 30 Days</b>
+                                </p>
+                            </div>
+                            <h4>
+                                {{
+                                    dashboardContractStatusObject.renewals_next_30_days
+                                }}
+                                / <span>&#8377;</span>
+                                {{
+                                    dashboardContractStatusObject.renewal_amount_next_30_days
+                                }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sec3Grid">
+                    <h5>Invoice Status</h5>
+                    <!-- <p>Lorem ipsum is dummy text</p> -->
+                    <div class="sec3Wrap">
+                        <div class="tooltip-container">
+                            <div class="flexWrap">
+                                <img src="assets/images/Icon (2).svg" />
+                                <p>Contract e-Sign Pending</p>
+                            </div>
+                            <h4>
+                                {{
+                                    dashboardInvoicingObject.customer_contract_count
+                                }}
+                                / <span>&#8377;</span>
+                                {{
+                                    dashboardInvoicingObject.customer_contract_total
+                                }}
+                            </h4>
+                        </div>
+                        <div class="tooltip-container">
+                            <div class="flexWrap">
+                                <img src="assets/images/Icon (10).svg" />
+                                <p>Invoicing Pending For Due Date</p>
+                            </div>
+                            <h4>
+                                {{
+                                    dashboardInvoicingObject.invoice_passed_count
+                                }}
+                                / <span>&#8377;</span>
+                                {{
+                                    dashboardInvoicingObject.invoice_passed_total
+                                }}
+                            </h4>
+                        </div>
+                        <div class="tooltip-container">
+                            <div class="flexWrap">
+                                <img src="assets/images/Icon (8).svg" />
+                                <p>Pending Collection</p>
+                            </div>
+                            <h4>
+                                {{
+                                    dashboardInvoicingObject.invoice_pending_count
+                                }}
+                                / <span>&#8377;</span>
+                                {{
+                                    dashboardInvoicingObject.invoice_pending_total
+                                }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+      
+    </p-tabView>
+
+    <!-- <p-calendar
+        [(ngModel)]="rangeDates"
+        appendTo="body"
+        selectionMode="range"
+        [showIcon]="true"
+        placeholder="Select"
+        (onSelect)="onSelect()"
+        dateFormat="dd/mm/yy"
+        [readonlyInput]="true"
+        class="select-date-field"
+        style="margin-left: -18%; width: 275px"
+    ></p-calendar> -->
+</div>
+
+<!-- <div class="footer">
+    <div>
+        <p>© 2024 <span class="skyblurColor">Product Service</span>. All Rights Reserved</p>
+    </div>
+    <div>
+        <p><span>Designed & Developed by </span>  <span ><a class="skyblurColor" href="https://weqtechnologies.com/" target="_blank">WEQ Technologies</a></span></p>
+    </div>
+</div> -->

@@ -1,0 +1,88 @@
+.service-Request-Management-Container {
+    margin: 1rem;
+}
+
+.grid,
+col-12 {
+    display: flex;
+    gap: 2rem;
+}
+
+.select-Satus {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-bottom: 1rem;
+}
+
+p-dropdown {
+    width: 20%;
+}
+
+.service-Request-header-right > i {
+    font-size: 16px;
+    padding: 8px;
+    background: #00000020;
+    border-radius: 10px;
+    color: #2196f3;
+}
+
+.service-Request-Status {
+    width: 100%;
+}
+
+.secInner1 {
+    padding: 10px 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 3px 12px 0px #2f2b3d24;
+    justify-content: space-between;
+    background: #e9f1ff;
+    cursor: pointer;
+}
+
+.secInner2 {
+    padding: 10px 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 3px 12px 0px #2f2b3d24;
+    justify-content: space-between;
+    background: #ffecea;
+    cursor: pointer;
+}
+
+.service-grid {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 14px;
+}
+
+.service-Request {
+    font-size: 15px;
+    font-weight: 400;
+    color: #2f2b3de5;
+    margin: 0px;
+}
+
+.service-Request-count {
+    font-size: 24px;
+    font-weight: 500;
+    color: #2f2b3de5;
+    margin: 5px 0px 0px 0px;
+}
+
+.card-header {
+    font-size: 15px;
+    font-weight: 400;
+    color: #2f2b3de5;
+    margin: 0px;
+}
+
+.card-sub-header {
+    font-size: 24px;
+    font-weight: 500;
+    color: #2f2b3de5;
+    margin: 5px 0px 0px 0px;
+}

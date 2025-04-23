@@ -1,0 +1,128 @@
+.add-client-container {
+    margin-left: 0.7rem;
+}
+
+.row-One,
+.row-Two {
+    display: flex;
+}
+
+.user-Name,
+.customer-ID,
+.parent-Setting,
+.value-Setting {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-bottom: 1rem;
+}
+
+input,
+p-dropdown {
+    width: 80%;
+}
+
+.add-Customer-Type {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.custom-button {
+    width: 13rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.custom-button-cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #757575;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button-cancel:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.add-Create-Order-Grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.add-SOP {
+    margin-top: 1.3rem;
+}
+
+.add-Problem-Statement {
+    margin-top: 1.3rem;
+}
+
+.back-Button-Header {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 1rem;
+}
+
+.back-Button {
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.back-Button > i {
+    font-size: 1.2rem;
+    color: #065388;
+}
+
+.back-Button > p {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: #065388;
+}
+
+.add-Product-Category {
+    display: flex;
+    margin: 1rem;
+    float: right;
+    gap: 2rem;
+    padding-bottom: 2rem;
+}
+
+.sop-Colm {
+    display: flex;
+}
+
+.problem-Statement {
+    display: flex;
+}

@@ -1,0 +1,541 @@
+.add-client-container {
+    margin-left: 0.7rem;
+}
+
+.header-Client {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-Button {
+    // background-color: #fff;
+    // border-radius: 50%;
+    // height: 3.5rem;
+    // width: 3.5rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.back-Button > i {
+    font-size: 1.2rem;
+}
+
+.back-Button > p {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: #065388;
+}
+.header-Client {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-Button {
+    // background-color: #fff;
+    // border-radius: 50%;
+    // height: 3.5rem;
+    // width: 3.5rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.back-Button > i {
+    font-size: 1.2rem;
+    color: #065388;
+}
+
+.back-Button > p {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: #065388;
+}
+
+.row-One,
+.row-Two,
+.row-Three,
+.row-Four,
+.location-Details-row-One,
+.location-Details-row-Two,
+.location-Details-row-Three,
+.product-Details-Row-One,
+.product-Details-Row-Two {
+    display: flex;
+}
+
+.user-Name,
+.customer-ID,
+.phone-Number,
+.user-E-mail,
+.user-Status,
+.user-Mail-ID,
+.user-Customer-Type,
+.user-Customer-Group,
+.user-Pancard-Number,
+.Address1,
+.Address2,
+.state-ID,
+.city-Type,
+.city,
+.zone-1,
+.city .zone-1,
+.pin-Code,
+.SPOC-Person,
+.location-Mail-Id,
+.location-Mobile-Number,
+.select-Location,
+.product-Category,
+.product-Name,
+.product-Serial-Number,
+.approx-Life,
+.equipment-Type,
+.SAP-Oracle-Code,
+.start-Date-for-Life {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.header-Customer-KYC {
+    margin: 1rem 0px 0px 0px;
+}
+
+// input,
+// .split-Dropdown,
+// .p-float-label,
+// p-dropdown {
+//     width: 80%;
+// }
+
+.split-Dropdown {
+    width: 35%;
+}
+
+.no-Of-Invoices-Field {
+    width: 100%;
+}
+
+.Address1-Field,
+.Address2-Field {
+    width: 80%;
+    height: 50px;
+    resize: both;
+    overflow: auto;
+    z-index: 1;
+    min-height: 50px;
+    max-height: 80px;
+    min-width: 80%;
+    max-width: 100%;
+}
+
+textarea:focus {
+    z-index: 2;
+}
+
+.header-of-add-client-btn p {
+    background-color: #065388;
+    color: #fff;
+    margin-top: 1.5rem;
+}
+
+.personal-Details,
+.location-Details {
+    width: 100%;
+    padding-left: 0.5rem;
+}
+
+.p-datatable .p-datatable-header {
+    display: none;
+}
+
+.Contract-Details-Colums {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    row-gap: 1.2rem;
+    column-gap: 2rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.remarks,
+.Split-Payment,
+.no-of-Invoices,
+.payment-Terms,
+.billing-Address,
+.billing-row,
+.contract_Remarks,
+.GST-no,
+.TC {
+    display: contents;
+}
+
+.remarks,
+.Split-Payment,
+.no-of-Invoices,
+.payment-Terms,
+.billing-Address,
+.GST-no,
+.contract_Remarks,
+.TC,
+label {
+    grid-column: 1;
+    justify-self: end;
+}
+
+// textarea,
+// input,
+// .inputNumber,
+// p-inputNumber {
+//     grid-column: 2;
+//     justify-self: end;
+//     width: 100%;
+// }
+
+.billing-row,
+.contract-Details-Files,
+.document-Available,
+.add-Contract-Details {
+    display: flex;
+    flex-direction: row;
+    // gap: 2rem;
+    // justify-content: space-between;
+    grid-column: 2;
+    width: 100%;
+    align-items: center;
+}
+
+.billingCity-Dropdown {
+    width: 90%;
+}
+.billing-row label {
+    justify-self: start;
+}
+
+.billing-City,
+.billing-State,
+.billing-Pincode {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.contract-Details-Files {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+textarea.remarks-Field,
+textarea.billing-Address-Field,
+input.no-Of-Invoices-Field,
+input.payment-Terms-Field,
+.input.billing-Address-Field,
+.input.billing-City-Field,
+.input.billing-State-Field,
+.input.billing-Pincode-Field,
+.input.GSTno-field,
+.input.Tc-Field {
+    width: 100%;
+}
+
+.Contract-Details-Colums {
+    max-width: 60%;
+    box-sizing: border-box;
+}
+
+.add-Account-Details {
+    display: flex;
+    gap: 2rem;
+    margin-left: 1rem;
+    margin-top: 2rem;
+    justify-content: flex-end;
+}
+
+.custom-button {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.custom-button-cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #cdcfd0;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button-cancel:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.add-Product-Details {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.2rem;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.add-Contract-Details {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 2rem;
+    // margin-top: 1.2rem;
+}
+
+.close-Service-Details {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5rem;
+    margin-top: 1rem;
+}
+
+.select-Status-Dropdown {
+    margin-bottom: 1rem;
+}
+
+.image-preview {
+    margin-top: 10px;
+}
+
+.preview-image {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.header-Dialogue-Box {
+    margin-bottom: 0px;
+}
+
+.add-Create-Order-Grid {
+    background-color: #fff;
+    padding-bottom: 1rem;
+}
+
+.row-One,
+.row-Two,
+.row-Three {
+    display: flex;
+}
+
+.name,
+.tenure,
+.preventive-Maintenance,
+.standard-Price,
+.selling-Price,
+.tax,
+.TAT,
+.remarks,
+.coverage-Details,
+.spare-Part-Covered {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+p-dropdown,
+p-multiSelect {
+    width: 100%;
+}
+
+:host ::ng-deep .p-autocomplete {
+    display: block;
+}
+
+::ng-deep .p-autocomplete-input {
+    width: 100%;
+}
+
+.save-Product-Category {
+    display: flex;
+    gap: 1rem;
+    margin-top: 96px;
+    justify-content: flex-end;
+    margin-right: 1rem;
+}
+
+.custom-button {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.custom-button-cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #cdcfd0;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remarks-Field {
+    width: 87%;
+    height: 50px;
+    resize: both;
+    overflow: auto;
+    z-index: 1;
+    min-height: 50px;
+    max-height: 80px;
+    min-width: 80%;
+    max-width: 100%;
+}
+
+textarea:focus {
+    z-index: 2;
+}
+
+.vld-contract {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.download-button {
+    width: 250px;
+    height: 38px;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: "Poppins", sans-serif;
+}
+
+.download-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+.personalGrid {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.required-field {
+    color: red;
+}
+
+.back-Button-Contract {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 0px 0px 12px;
+}
+
+.legal-dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.view-invoice-detail {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-dialogue-box {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid #007dfc;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.detail-grid {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 18px 0px;
+}
+
+.btn-invoice {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.file-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.icons-name {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}

@@ -1,0 +1,384 @@
+<form [formGroup]="addUserForm" autocomplete="off">
+    <div class="add-project-wrap">
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    id="inputtext"
+                    pInputText
+                    [(ngModel)]="user.firstName"
+                    formControlName="firstName"
+                    (keypress)="keyPressForName($event)"
+                />
+                <label for="inputtext">First Name *</label>
+                <!-- <app-custom-validation [control]="addProjectForm.get('projectName')" label="projectName"></app-custom-validation> -->
+            </span>
+            <div
+                style="color: Red; font-size: 10px"
+                *ngIf="addUserForm.get('firstName').hasError('leadingSpace')"
+            >
+                Space at the beginning is not allowed.
+            </div>
+            <div
+                style="color: Red; font-size: 10px"
+                *ngIf="addUserForm.get('firstName').hasError('onlySpaces')"
+            >
+                Empty data is not allowed.
+            </div>
+
+            <div
+                *ngIf="
+                    addUserForm.get('firstName')?.invalid &&
+                    (addUserForm.get('firstName')?.dirty ||
+                        addUserForm.get('firstName')?.touched)
+                "
+                class="text-danger"
+            >
+                <p
+                    class="color-red text-left mt-1"
+                    style="font-size: 10px"
+                    *ngIf="addUserForm.get('firstName')?.hasError('required')"
+                >
+                    First Name is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    id="inputtext"
+                    pInputText
+                    [(ngModel)]="user.lastName"
+                    formControlName="lastName"
+                    (keypress)="keyPressForName($event)"
+                />
+                <label for="inputtext">Last Name *</label>
+                <!-- <app-custom-validation [control]="addProjectForm.get('projectName')" label="projectName"></app-custom-validation> -->
+            </span>
+            <div
+                style="color: Red; font-size: 10px"
+                *ngIf="addUserForm.get('lastName').hasError('leadingSpace')"
+            >
+                Space at the beginning is not allowed.
+            </div>
+            <div
+                style="color: Red; font-size: 10px"
+                *ngIf="addUserForm.get('lastName').hasError('onlySpaces')"
+            >
+                Empty data is not allowed.
+            </div>
+            <div
+                *ngIf="
+                    addUserForm.get('lastName')?.invalid &&
+                    (addUserForm.get('lastName')?.dirty ||
+                        addUserForm.get('lastName')?.touched)
+                "
+                class="text-danger"
+            >
+                <p
+                    class="color-red text-left mt-1"
+                    style="font-size: 10px"
+                    *ngIf="addUserForm.get('lastName')?.hasError('required')"
+                >
+                    Last Name is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    id="inputtext"
+                    pInputText
+                    [(ngModel)]="user.email"
+                    formControlName="email"
+                />
+                <label for="inputtext">Email *</label>
+                <!-- <app-custom-validation [control]="addProjectForm.get('projectName')" label="projectName"></app-custom-validation> -->
+            </span>
+            <div
+                *ngIf="
+                    addUserForm.get('email')?.invalid &&
+                    (addUserForm.get('email')?.dirty ||
+                        addUserForm.get('email')?.touched)
+                "
+                class="text-danger"
+            >
+                <p
+                    style="font-size: 10px"
+                    class="color-red text-left mt-1"
+                    *ngIf="addUserForm.get('email')?.hasError('required')"
+                >
+                    Email is required.
+                </p>
+
+                <p
+                    style="font-size: 10px"
+                    class="color-red text-left mt-1"
+                    *ngIf="addUserForm.get('email')?.hasError('pattern')"
+                >
+                    Please enter a valid Email
+                </p>
+            </div>
+            <!-- <div *ngIf="addUserForm.get('email')?.invalid && (addUserForm.get('email')?.dirty || addUserForm.get('email')?.touched)" class="text-danger">
+                <p class="color-red text-left mt-1" style="font-size: 10px;" *ngIf="addUserForm.get('email')?.hasError('required')">Email is required.</p>
+            </div> -->
+        </div>
+
+        <div class="field col-12 full-width" *ngIf="hideButton">
+            <span class="p-float-label">
+                <input
+                    type="password"
+                    id="inputtext"
+                    pInputText
+                    [title]="passwordTooltip"
+                    [type]="changetype ? 'password' : 'text'"
+                    [(ngModel)]="user.password"
+                    formControlName="password"
+                />
+                <button
+                    type="button"
+                    id="password-addon"
+                    (click)="viewpass()"
+                    class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                >
+                    <!-- <i class="fa fa-eye-slash font-awesomeClass"></i> -->
+                    <i
+                        [ngClass]="
+                            visible
+                                ? 'fa fa-eye-slash font-awesomeClass'
+                                : 'fa fa-eye font-awesomeClass'
+                        "
+                    ></i>
+                </button>
+                <label for="inputtext">Password *</label>
+                <!-- <app-custom-validation [control]="addProjectForm.get('projectName')" label="projectName"></app-custom-validation> -->
+            </span>
+            <div
+                *ngIf="
+                    addUserForm.get('password')?.invalid &&
+                    (addUserForm.get('password')?.dirty ||
+                        addUserForm.get('password')?.touched)
+                "
+                class="text-danger"
+            >
+                <p
+                    class="color-red text-left mt-1"
+                    style="font-size: 10px"
+                    *ngIf="addUserForm.get('password')?.hasError('required')"
+                >
+                    Password is required.
+                </p>
+                <p
+                    class="color-red text-left mt-1"
+                    style="font-size: 10px"
+                    *ngIf="
+                        addUserForm.get('password').hasError('invalidPassword')
+                    "
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Password must have at least 6 characters including 1 uppercase letter, 1 digit, and 1 special character."
+                >
+                    Password must have at least 6 characters including 1
+                    uppercase letter,<br />1 lowercase letter, 1 digit, and 1
+                    special character.
+                </p>
+            </div>
+        </div>
+
+        <!-- <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="dropdown" [options]="userList" [(ngModel)]="user.roles" formControlName="roles" optionLabel="name" [autoDisplayFirst]="false"></p-dropdown>
+                <label for="dropdown">Roles *</label>
+            </span>
+        </div> -->
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown
+                    inputId="multiselect"
+                    [options]="roleList"
+                    appendTo="body"
+                    [(ngModel)]="user.roles"
+                    [autoDisplayFirst]="false"
+                    [ngModelOptions]="{ standalone: true }"
+                    optionLabel="name"
+                ></p-dropdown>
+                <label for="multiselect">Roles *</label>
+            </span>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    id="inputtext"
+                    pInputText
+                    [(ngModel)]="user.phone"
+                    formControlName="phone"
+                    (ngModelChange)="errorShowphone()"
+                    onKeyPress="if(this.value.length==10) return false;return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                />
+                <label for="inputtext">Phone Number *</label>
+                <!-- <app-custom-validation [control]="addProjectForm.get('siteContact')" label="SiteContact"></app-custom-validation> -->
+            </span>
+            <span class="error-msg" *ngIf="errorBean.phone1"
+                >Please enter valid phone number</span
+            >
+            <div
+                *ngIf="
+                    addUserForm.get('phone')?.invalid &&
+                    (addUserForm.get('phone')?.dirty ||
+                        addUserForm.get('phone')?.touched)
+                "
+                class="text-danger"
+            >
+                <p
+                    class="color-red text-left mt-1"
+                    style="font-size: 10px"
+                    *ngIf="addUserForm.get('phone')?.hasError('required')"
+                >
+                    Password is required.
+                </p>
+            </div>
+        </div>
+
+        <!-- <div class="field col-12">
+            <span class="p-float-label">
+                <p-inputNumber inputId="inputnumber" [(ngModel)]="value2"></p-inputNumber>
+                <label for="inputnumber">Organisaition Size</label>
+            </span>
+        </div>
+    
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="value1">
+                <label for="inputtext">Email Address</label>
+            </span>
+        </div> -->
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <textarea
+                    inputId="textarea"
+                    rows="3"
+                    cols="30"
+                    [(ngModel)]="user.address"
+                    formControlName="address"
+                    (keypress)="keyPressAddress($event)"
+                    pInputTextarea
+                ></textarea>
+                <label for="textarea">Address</label>
+                <!-- <app-custom-validation [control]="addProjectForm.get('address')" label="Address"></app-custom-validation> -->
+            </span>
+        </div>
+        <!-- <div class="field col-12">
+            <span class="p-float-label p-input-icon-right">
+                <p-calendar [showIcon]="true" inputId="calendar" [(ngModel)]="project.startDate" formControlName="startDate" appendTo="body"></p-calendar>
+                <label for="calendar">Start Date *</label>
+                <i class="pi pi-calendar"></i>    
+            </span>
+        </div> -->
+
+        <div class="field col-12 file-upload">
+            <div class="image-wrap">
+                <!-- <img src="../../../assets/images/placeholder-image.jpg"> -->
+                <img
+                    [src]="
+                        imageSrc
+                            ? imageSrc
+                            : '../../../assets/images/placeholder-image.jpg'
+                    "
+                />
+                <span
+                    *ngIf="imageSrc != undefined && imageSrc != null"
+                    class="remove-image"
+                    ><i class="pi pi-times" (click)="deleteImgSrc($event)"></i
+                ></span>
+            </div>
+
+            <div class="col-12 mb-2 lg:col-12 lg:mb-0">
+                <input
+                    type="file"
+                    #iconImage
+                    id="iconImage"
+                    accept="image/*"
+                    maxFileSize="10000000"
+                    style="display: none"
+                    (change)="uploadDocument(user.id, $event)"
+                />
+                <div
+                    class="upload"
+                    onclick="document.getElementById('iconImage').click();"
+                >
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        *ngIf="imageSrc == null"
+                    >
+                        Upload Profile
+                    </button>
+                    <!-- <i class="pi pi-upload"></i>
+                    <p>Upload Icon</p> -->
+                </div>
+            </div>
+            <div class="error-msg" *ngIf="fileSizeExceeded">
+                {{ fileSizeErrorMessage }}
+            </div>
+            <!-- <div *ngIf="(project.id == null || project.id == undefined) && imageSrc!=undefined"> -->
+            <!-- <i  onclick="document.getElementById('iconImage').click();" class="fas fa-edit font-awesomeClass fa-edit2"></i> -->
+            <!-- <input
+                    type="file"
+                    #iconImage
+                    id="iconImage"
+                    accept="image/*"
+                    maxFileSize="1000000"
+                    style="display: none"
+                    (change)="uploadDocument(project.id,$event)" />
+                                                   
+                <a style="cursor:pointer;">
+                    <img [src]="imageSrc" width="100%" height="100%">
+                </a>
+    
+                <i (change)="uploadDocument(project.id,$event)" onclick="document.getElementById('iconImage').click();"
+                    class="fas fa-edit font-awesomeClass fa-edit2"></i>
+            </div> -->
+
+            <!-- <p-fileUpload  mode="basic" name="demo[]" url="/src/upload.php" 
+            (onUpload)="onUpload($event)" [auto]="true"
+                [showUploadButton]="false" [showCancelButton]="false" 
+                [maxFileSize]="1000000" [accept]="'.jpg,.png,.jpeg'"
+                chooseLabel="Select" class="upload-button"></p-fileUpload> -->
+        </div>
+    </div>
+    <div class="popup-form-btn">
+        <button
+            pButton
+            type="button"
+            *ngIf="hideButton"
+            (click)="saveUser()"
+            [disabled]="!addUserForm.valid"
+            label="Add User"
+            class="p-button-raised"
+        ></button>
+        <button
+            pButton
+            type="button"
+            *ngIf="!hideButton"
+            [disabled]="!addUserForm.valid"
+            label="Update User"
+            class="p-button-raised"
+        ></button>
+
+        <button
+            pButton
+            type="button"
+            label="Cancel"
+            class="p-button-outlined"
+            (click)="close.emit($event)"
+        ></button>
+    </div>
+</form>

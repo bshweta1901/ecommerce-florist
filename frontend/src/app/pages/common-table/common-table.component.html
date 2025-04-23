@@ -1,0 +1,1232 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <!-- <h5>{{ title }}</h5> -->
+            <div class="flex justify-content-between sm:flex-row">
+                <div class="action-buttons">
+                    <button
+                        *ngIf="genericTableSettingInput.addCatelog != false"
+                        class="action-button add-client"
+                        [routerLink]="['/panel/add-catelog-management']"
+                        routerLinkActive="router-link-active"
+                    >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Catelog
+                    </button>
+                    <button
+                        *ngIf="genericTableSettingInput.addClient != false"
+                        class="action-button add-client"
+                        (click)="addAccount()"
+                        [routerLink]="['/panel/add-client']"
+                        routerLinkActive="router-link-active"
+                    >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Account
+                    </button>
+                    <button
+                        *ngIf="genericTableSettingInput.createOrder != false"
+                        class="action-button create-order"
+                        [routerLink]="['/panel/create-order-customer']"
+                        routerLinkActive="router-link-active"
+                    >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Create Order
+                    </button>
+                    <button
+                        *ngIf="genericTableSettingInput.addSparePart != false"
+                        class="action-button add-Spare-Part"
+                        [routerLink]="['/panel/add-spare-part-management']"
+                        routerLinkActive="router-link-active"
+                    >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Spare Part
+                    </button>
+                    <button
+                        *ngIf="
+                            genericTableSettingInput.addServicePerson != false
+                        "
+                        class="action-button add-Service-Person"
+                        [routerLink]="['/panel/add-service-person-management']"
+                        routerLinkActive="router-link-active"
+                    >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Service Person
+                    </button>
+                    <button
+                        *ngIf="
+                            genericTableSettingInput.addOrderDetailsSparePart !=
+                            false
+                        "
+                        class="action-button add-Order-Details-Spare-Part"
+                        (click)="
+                            handleButtonClickToOpenDialogueForSparePartRequest()
+                        "
+                    >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add Spare Part
+                    </button>
+                    <button
+                        *ngIf="
+                            genericTableSettingInput.addOrderDetailsOnDemand !=
+                            false
+                        "
+                        class="action-button add-Order-Details-On-Demand"
+                        (click)="handleButtonClickToOpenDialogueForOnDemand()"
+                    >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add On Demand
+                    </button>
+                </div>
+                <div class="flex align-items-center">
+                    <div class="normal-flex table-options mb-2">
+                        <button
+                            *ngIf="genericTableSettingInput.add != false"
+                            pButton
+                            class="p-button-outlined mb-2 add-button"
+                            icon="pi pi-plus"
+                            (click)="addEntity()"
+                        ></button>
+                        <span
+                            *ngIf="genericTableSettingInput.changeView == true"
+                            class="table-view-switch"
+                            (click)="changeView(false)"
+                            ><i class="fa fa-regular fa-clipboard"></i
+                        ></span>
+                        <span
+                            *ngIf="
+                                genericTableSettingInput.search != undefined &&
+                                genericTableSettingInput.search != false
+                            "
+                            class="search-box p-input-icon-left"
+                        >
+                            <i class="fa fa-solid fa-magnifying-glass"></i>
+                            <input
+                                pInputText
+                                type="text"
+                                #filter
+                                [placeholder]="placeholder"
+                                class="w-full"
+                                (input)="searchEntity()"
+                                [(ngModel)]="searchText"
+                            />
+                        </span>
+                        <button
+                            *ngIf="
+                                genericTableSettingInput.filter != null &&
+                                genericTableSettingInput.filter
+                            "
+                            pButton
+                            class="p-button-outlined mb-2 filter-button"
+                            icon="pi pi-filter"
+                            (click)="filterEnitity()"
+                        ></button>
+                        <!-- <button *ngIf="
+                                    genericTableSettingInput.clear != null &&
+                                    genericTableSettingInput.clear
+                                " pButton class="p-button-outlined mb-2 clear-filter" icon="pi pi-filter-slash"
+                            (click)="resetEntity()"></button> -->
+
+                        <button
+                            *ngIf="
+                                genericTableSettingInput.bulkUpdate != null &&
+                                genericTableSettingInput.bulkUpdate
+                            "
+                            pButton
+                            label="Bulk Email"
+                            class="p-button-outlined mb-2"
+                            icon="pi pi-upload"
+                            (click)="bulkUpdateEntity()"
+                        ></button>
+
+                        <div
+                            class="actionClasses"
+                            *ngIf="
+                                genericTableSettingInput.allowExport != false
+                            "
+                        >
+                            <p-overlayPanel
+                                styleClass="export-popup"
+                                #op
+                                appendTo="body"
+                            >
+                                <ng-template pTemplate>
+                                    <div
+                                        class="export-item"
+                                        style="text-align: center"
+                                        align="center"
+                                        *ngIf="
+                                            genericTableSettingInput.allowExport !=
+                                                null &&
+                                            genericTableSettingInput.allowExport
+                                        "
+                                    >
+                                        <p
+                                            class="action-menu"
+                                            (click)="exportCSV()"
+                                        >
+                                            Export
+                                        </p>
+                                    </div>
+                                </ng-template>
+                            </p-overlayPanel>
+                            <button
+                                type="text"
+                                pButton
+                                (click)="op.toggle($event)"
+                            >
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+
+                        <div
+                            class="actionClasses"
+                            *ngIf="
+                                genericTableSettingInput.allowExportxl != false
+                            "
+                        >
+                            <p-overlayPanel
+                                styleClass="export-popup"
+                                #op
+                                appendTo="body"
+                            >
+                                <ng-template pTemplate>
+                                    <div
+                                        class="export-item"
+                                        style="text-align: center"
+                                        align="center"
+                                        *ngIf="
+                                            genericTableSettingInput.allowExportxl !=
+                                                null &&
+                                            genericTableSettingInput.allowExportxl
+                                        "
+                                    >
+                                        <p
+                                            class="action-menu"
+                                            (click)="dt.exportCSV()"
+                                        >
+                                            Export
+                                        </p>
+                                    </div>
+                                </ng-template>
+                            </p-overlayPanel>
+                            <button
+                                type="text"
+                                pButton
+                                (click)="op.toggle($event)"
+                            >
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- <div *ngIf="genericTableSettingInput.search != false">
+                            <span search class="p-input-icon-left mb-2 searchGeneric">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" placeholder="{{searchTable}}" [(ngModel)]="" class="w-full form-control"  />
+                                </span>
+                        </div> -->
+                </div>
+            </div>
+
+            <p-table
+                #dt
+                [columns]="selectedColumns"
+                [value]="genericListInput"
+                [exportFilename]="exportName"
+            >
+                <ng-template pTemplate="caption">
+                    <div
+                        *ngIf="opendivtemp && enableFilter"
+                        class="input-dialog pcolor"
+                    >
+                        <p (click)="showHidePopup()" class="dialog-closebutton">
+                            X
+                        </p>
+                        <ng-content> </ng-content>
+                        <div class="butn-flex m-t-20">
+                            <button
+                                pButton
+                                pRipple
+                                type="button"
+                                (click)="searchEntity(); opendivtemp = false"
+                                class="searchbtn p-button-info w-50 mr-2 justify-center"
+                            >
+                                Search
+                            </button>
+                            <!-- <button pButton pRipple type="button" (click)="resetEntity(); opendivtemp = false"
+                                class="searchbtn p-button-danger w-50 justify-center">
+                                Reset
+                            </button> -->
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th
+                            *ngFor="let col of columns"
+                            title="{{ col.header }}"
+                            style="display: table-cell !important"
+                        >
+                            {{ col.header }}
+                            <!-- <p-sortIcon field="code"></p-sortIcon> -->
+                        </th>
+                        <th
+                            style="
+                                text-align: center;
+                                display: table-cell !important;
+                            "
+                            *ngIf="
+                                genericTableSettingInput.action != null &&
+                                genericTableSettingInput.action
+                            "
+                        >
+                            Action
+                        </th>
+                        <th
+                            style="
+                                text-align: center;
+                                display: table-cell !important;
+                            "
+                            *ngIf="
+                                genericTableSettingInput.action2 != null &&
+                                genericTableSettingInput.action2
+                            "
+                        >
+                            Action
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template
+                    pTemplate="body"
+                    let-rowData
+                    let-columns="columns"
+                    let-index="rowIndex"
+                >
+                    <!--  -->
+
+                    <tr
+                        [class.highlight]="rowData.isHighlight"
+                        [ngClass]="
+                            rowData.isDeactivate == 'Y' ||
+                            rowData.statusName == 'DEACTIVE' ||
+                            rowData.status?.name == 'DEACTIVE'
+                                ? 'deactivated'
+                                : ''
+                        "
+                    >
+                        <td *ngFor="let col of columns">
+                            <!-- <div *ngIf="col.fieldType == 'editCell'">
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <div class="flex">
+                                            <input pInputText type="text" [(ngModel)]="rowData[col.field]">  
+                                            <div><button type="text" pButton class="p-button-outlined mb-2" (click)="saveRowData(rowData)">Save</button></div>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                             <div class="flex">
+                                           <span> {{ rowData[col.field] }} </span> <i 
+                                            class="pi pi-pencil ml-2" 
+                                            style="cursor: pointer;" 
+                                            (click)="editCell($event)"
+                                        ></i></div>
+                                        </ng-template>
+                                    </p-cellEditor>
+                                    
+                                </td>
+                            </div>
+
+
+                            <div *ngIf="col.fieldType == 'editCellTime'">
+                                <td pEditableColumn>
+                                    <p-cellEditor class="dateTimeWarp">
+                                        <ng-template pTemplate="input">
+                                            <div class="flex">
+                                            <p-calendar [showIcon]="true" appendTo="body" inputId="basic" [(ngModel)]="rowData[col.field]"></p-calendar>
+                                            <div><button type="text" pButton class="p-button-outlined mb-2" (click)="saveRowData(rowData)">Save</button></div>
+                                                </div>
+
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            <div class="flex">
+                                            <span>{{ rowData[col.field] | date: 'dd MMM, yyyy' }}</span>
+                                            <i 
+                                            class="pi pi-pencil ml-2" 
+                                            style="cursor: pointer;" 
+                                            (click)="editCell($event)"
+                                        ></i>
+                                            </div>
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                
+                            </div> -->
+                            <div
+                                *ngIf="
+                                    col.fieldType === 'index';
+                                    else otherFields
+                                "
+                            >
+                                {{ index + 1 }}
+                            </div>
+                            <div *ngIf="col.fieldType == 'button'">
+                                <button
+                                    class="view-details-button"
+                                    (click)="openViewDetailsModal(rowData)"
+                                >
+                                    View Details
+                                </button>
+                            </div>
+                            <div
+                                style="white-space: pre-line"
+                                *ngIf="col.fieldType == 'text'"
+                                title="{{ rowData[col.field] }}"
+                            >
+                                {{ rowData[col.field] || "-" }}
+                            </div>
+                            <div
+                                *ngIf="col.fieldType == 'nestedList'"
+                                title="{{ rowData[col.field] }}"
+                            >
+                                <span *ngFor="let item of rowData[col.field]">
+                                    <table
+                                        style="
+                                            border: 1px solid
+                                                rgba(232, 241, 248, 0.7);
+                                        "
+                                    >
+                                        <td>{{ item || "-" }}</td>
+                                    </table>
+                                </span>
+                            </div>
+                            <div
+                                *ngIf="col.fieldType == 'adminTrue'"
+                                [class.highlight]="rowData.adminLogin == true"
+                                title="{{ rowData[col.field] }}"
+                            >
+                                {{ rowData[col.field] }}
+                            </div>
+                            <div
+                                *ngIf="
+                                    col.fieldType == 'cycleLog' &&
+                                    rowData[col.field] > 1
+                                "
+                                [class.highlight]="rowData[col.field] > 1"
+                                title="{{ rowData[col.field] }}"
+                            >
+                                {{ rowData[col.field] }}
+                            </div>
+                            <div
+                                *ngIf="
+                                    col.fieldType == 'dqrValue' &&
+                                    rowData[col.field] > 0
+                                "
+                                [class.highlight]="rowData[col.field] > 1"
+                                title="{{ rowData[col.field] }}"
+                            >
+                                {{ rowData[col.field] }}
+                            </div>
+                            <div
+                                *ngIf="
+                                    col.fieldType == 'dqrValue' &&
+                                    rowData[col.field] <= 0
+                                "
+                                [class.highlightNo]="rowData[col.field] <= 0"
+                                title="{{ rowData[col.field] }}"
+                            >
+                                {{ rowData[col.field] }}
+                            </div>
+                            <div
+                                *ngIf="
+                                    col.fieldType == 'dqrValue' &&
+                                    rowData[col.field] != 0 &&
+                                    (rowData[col.field] === '' ||
+                                        rowData[col.field] == null ||
+                                        rowData[col.field] == undefined)
+                                "
+                            >
+                                0
+                            </div>
+                            <div
+                                *ngIf="col.fieldType == 'roundOff'"
+                                title="{{ rowData[col.field] }}"
+                            >
+                                {{ rowData[col.field] | number : "1.0-0" }}
+                            </div>
+                            <div
+                                *ngIf="col.fieldType == 'lossFat'"
+                                [class.highlight]="rowData.isHighlightFat"
+                                title="{{ rowData[col.field] }}"
+                            >
+                                {{ rowData[col.field] }}
+                            </div>
+                            <div *ngIf="col.fieldType == 'click'">
+                                <span
+                                    (click)="viewEntity(rowData)"
+                                    class="table-link"
+                                    title="{{ rowData[col.field] }}"
+                                >
+                                    {{ rowData[col.field] }}</span
+                                >
+                            </div>
+                            <div *ngIf="col.fieldType == 'addRepairChecklist'">
+                                <span
+                                    style="white-space: pre-line"
+                                    (click)="addRepairChecklistEntity(rowData)"
+                                    class="table-link"
+                                    title="{{ rowData[col.field] }}"
+                                >
+                                    {{
+                                        rowData[col.field] ||
+                                            "Add Repair Checklist"
+                                    }}</span
+                                >
+                            </div>
+                            <div *ngIf="col.fieldType == 'addProblemDiagnosis'">
+                                <span
+                                    style="white-space: pre-line"
+                                    (click)="addProblemDiagnosisEntity(rowData)"
+                                    class="table-link"
+                                    title="{{ rowData[col.field] }}"
+                                >
+                                    {{
+                                        rowData[col.field] ||
+                                            "Add Problem Diagnosis"
+                                    }}</span
+                                >
+                            </div>
+
+                            <div
+                                *ngIf="col.fieldType == 'date'"
+                                title="{{
+                                    rowData[col.field]
+                                        | date : 'dd MMM, yyyy' || '-'
+                                }}"
+                            >
+                                {{
+                                    rowData[col.field]
+                                        | date : "dd MMM, yyyy" || "-"
+                                }}
+                            </div>
+                            <div
+                                *ngIf="col.fieldType == 'dateTime'"
+                                title="{{
+                                    rowData[col.field]
+                                        | date : 'dd MMM, yyyy hh:mm a'
+                                }}"
+                            >
+                                {{
+                                    rowData[col.field]
+                                        | date : "dd MMM, yyyy hh:mm a" || "-"
+                                }}
+                            </div>
+
+                            <div
+                                *ngIf="col.fieldType == 'Indiantime'"
+                                title="{{
+                                    rowData[col.field] | date : 'hh:mm a' || '-'
+                                }}"
+                            >
+                                {{
+                                    rowData[col.field]
+                                        | date : "HH:mm:ss a" || "-"
+                                }}
+                            </div>
+
+                            <div
+                                *ngIf="col.fieldType == 'time'"
+                                title="{{
+                                    stringToTime(rowData[col.field])
+                                        | date : 'hh:mm:ss a'
+                                }}"
+                            >
+                                <!-- <span (click)="stringToTime(rowData)"> -->
+                                {{
+                                    stringToTime(rowData[col.field])
+                                        | date : "hh:mm:ss a"
+                                }}
+                                <!-- </span>                                 -->
+                                <!-- {{ rowData[col.field] | date:'hh:mm:ss a' }} -->
+                            </div>
+
+                            <div
+                                *ngIf="col.fieldType == 'roundUp'"
+                                class="first-text"
+                            >
+                                <div
+                                    *ngIf="rowData[col.field] != null"
+                                    title="{{ rowData[col.field] }}"
+                                >
+                                    <span>
+                                        {{ roundUp(rowData[col.field]) }}%
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div
+                                *ngIf="col.fieldType == 'image'"
+                                class="first-text"
+                            >
+                                <div
+                                    *ngIf="rowData[col.field] != null"
+                                    title="{{ rowData[col.field] }}"
+                                >
+                                    <img
+                                        src="{{ rowData[col.field] }}"
+                                        style="width: 50%; height: 50%"
+                                        class="info-icon"
+                                        (click)="
+                                            showImageModal(rowData[col.field])
+                                        "
+                                    />
+                                </div>
+                            </div>
+
+                            <div
+                                *ngIf="col.fieldType == 'readingImage'"
+                                class="readingImage-first-text"
+                            >
+                                <div *ngIf="rowData[col.field] != null">
+                                    <!-- <img src="{{ rowData[col.field] }}" style="width: 50%;height: 50%;" class="info-icon" > -->
+                                    <i
+                                        class="fa fa-solid fa-image"
+                                        (click)="
+                                            showImageModal(rowData[col.field])
+                                        "
+                                        style="font-size: 18px"
+                                    ></i>
+                                </div>
+                            </div>
+
+                            <div
+                                *ngIf="col.fieldType == 'percentage'"
+                                class="first-text"
+                            >
+                                <div
+                                    *ngIf="rowData[col.field] != null"
+                                    title="{{ rowData[col.field] }}"
+                                >
+                                    <span>
+                                        {{ roundUp(rowData[col.field]) }}%
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div
+                                *ngIf="col.fieldType == 'temp'"
+                                class="first-text"
+                            >
+                                <div
+                                    *ngIf="rowData[col.field] != null"
+                                    title="{{ rowData[col.field] }}"
+                                >
+                                    <span>
+                                        {{ roundUp(rowData[col.field])
+                                        }}<small>c</small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="col.fieldType == 'nestedData'"
+                                class="first-text"
+                            >
+                                <span
+                                    title="{{
+            rowData[col.field]?.[col.subfield] || '-'
+        }}"
+                                >
+                                    {{ rowData[col.field]?.[col.subfield] || "-" }}
+                                </span>
+                            </div>
+                            <!-- <div
+                                *ngIf="col.fieldType == 'nestedData'"
+                                class="first-text"
+                            >
+                                <div
+                                    *ngIf="rowData[col.field] != null"
+                                    title="{{
+                                        rowData[col.field][col.subfield] ||
+                                            '-'
+                                    }}"
+                                >
+                                    <span>
+                                        {{
+                                            rowData[col.field][col.subfield] ||
+                                                "-"
+                                        }}
+                                    </span>
+                                </div>
+                            </div> -->
+
+                            <div
+                                *ngIf="col.fieldType == 'status'"
+                                class="first-text"
+                            >
+                                <div>
+                                    <span *ngIf="rowData.is_active == true">
+                                        Active
+                                    </span>
+                                    <span *ngIf="rowData.is_active == false">
+                                        Deactive
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="col.fieldType == 'viewActions'">
+                                <div class="view-actions">
+                                    <p class="pointerclass">
+                                        Check in<i class="pi pi-sign-in"></i>
+                                    </p>
+                                    <p class="pointerclass">
+                                        Check out<i class="pi pi-sign-out"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td
+                            class="actionClasses"
+                            *ngIf="
+                                genericTableSettingInput.action != null &&
+                                genericTableSettingInput.action
+                            "
+                        >
+                            <!-- <div>
+                                <span class="view-item" style="text-align: center" align="center"
+                                    *ngIf="genericTableSettingInput.view != null && genericTableSettingInput.view">
+                                    <i (click)="viewEntity(rowData)"
+                                        class="fas fa-eye fa-fa-eye color-orange font-awesomeClass pointerclass"
+                                        title="View"></i>
+                                </span>
+
+                                <span class="edit-item" style="text-align: center" align="center"
+                                    *ngIf="genericTableSettingInput.edit != null && genericTableSettingInput.edit">
+                                    <i (click)="editEntity(rowData)" class="fas  fa-edit font-awesomeClass pointerclass"
+                                        title="Edit"></i>
+                                </span>
+
+                                <span class="delete-item" style="text-align: center" align="center"
+                                    *ngIf="genericTableSettingInput.delete != null && genericTableSettingInput.delete">
+                                    <i (click)="deleteEntity(rowData)" title="Delete"
+                                        class="far fa-trash-can color-red font-awesomeClass pointerclass"></i>
+                                </span>
+                            </div> -->
+
+                            <div>
+                                <p-overlayPanel #op>
+                                    <ng-template pTemplate>
+                                        <div
+                                            class="viewForServiceRequest-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                rowData[
+                                                    'viewForServiceRequest'
+                                                ] != null &&
+                                                rowData['viewForServiceRequest']
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    viewEntityForServiceRequest(
+                                                        rowData
+                                                    );
+                                                    op.hide()
+                                                "
+                                                routerLinkActive="router-link-active"
+                                            >
+                                                View
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="reassignForServiceRequest-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                rowData[
+                                                    'reassignForServiceRequest'
+                                                ] != null &&
+                                                rowData[
+                                                    'reassignForServiceRequest'
+                                                ]
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    reassignEntity(rowData);
+                                                    op.hide()
+                                                "
+                                                [routerLink]="[
+                                                    '/panel/status-service-request-management/' +
+                                                        rowData['uuid']
+                                                ]"
+                                                routerLinkActive="router-link-active"
+                                            >
+                                                Reassign
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="resheduleForServiceRequest-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                rowData[
+                                                    'rescheduleForServiceRequest'
+                                                ] != null &&
+                                                rowData[
+                                                    'rescheduleForServiceRequest'
+                                                ]
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    resheduleEntity(rowData);
+                                                    op.hide()
+                                                "
+                                                [routerLink]="[
+                                                    '/panel/status-service-request-management/' +
+                                                        rowData['uuid']
+                                                ]"
+                                            >
+                                                Reschedule
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="addRepairChecklist-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.addRepairChecklist !=
+                                                    null &&
+                                                genericTableSettingInput.addRepairChecklist
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    addRepairChecklistEntity(
+                                                        rowData
+                                                    );
+                                                    op.hide()
+                                                "
+                                                routerLinkActive="router-link-active"
+                                            >
+                                                Add Repair Checklist
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="addProblemDiagnosis-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.addProblemDiagnosis !=
+                                                    null &&
+                                                genericTableSettingInput.addProblemDiagnosis
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    addProblemDiagnosisEntity(
+                                                        rowData
+                                                    );
+                                                    op.hide()
+                                                "
+                                                routerLinkActive="router-link-active"
+                                            >
+                                                Add Problem Diagnosis
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="updateStatusForOrderDetails-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.updateStatusForOrderDetails !=
+                                                    null &&
+                                                genericTableSettingInput.updateStatusForOrderDetails
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    orderStatusEntity(rowData);
+                                                    op.hide()
+                                                "
+                                                (click)="
+                                                    handleButtonClickToOpenDialogueForUpdateStatus(
+                                                        rowData
+                                                    )
+                                                "
+                                            >
+                                                Update Status
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="updateStatusForOrderDetails-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.addReceipt !=
+                                                    null &&
+                                                genericTableSettingInput.addReceipt
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    handleAddReceipt(rowData)
+                                                "
+                                            >
+                                                Add Receipt
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="view-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.view !=
+                                                    null &&
+                                                genericTableSettingInput.view
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    viewEntity(rowData);
+                                                    op.hide()
+                                                "
+                                            >
+                                                View
+                                            </p>
+                                        </div>
+
+                                        <div
+                                            class="edit-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.edit !=
+                                                    null &&
+                                                genericTableSettingInput.edit
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    editEntity(rowData);
+                                                    op.hide()
+                                                "
+                                            >
+                                                Edit
+                                            </p>
+                                        </div>
+
+                                        <!-- <div *ngIf="rowData.status!='Available to Load'">
+                                        <div class="edit-item"  style="text-align: center" align="center"
+                                        *ngIf="genericTableSettingInput.editData != null && genericTableSettingInput.editData">
+                                        <p class="action-menu" (click)="saveRowData(rowData);op.hide();">Edit</p> -->
+
+                                        <div
+                                            *ngIf="
+                                                rowData.loadingStartDatetime !=
+                                                    null &&
+                                                rowData.loadingStartDatetime !=
+                                                    undefined
+                                            "
+                                        >
+                                            <div
+                                                class="edit-item"
+                                                style="text-align: center"
+                                                align="center"
+                                                *ngIf="
+                                                    genericTableSettingInput.editData !=
+                                                        null &&
+                                                    genericTableSettingInput.editData
+                                                "
+                                            >
+                                                <p
+                                                    class="action-menu"
+                                                    (click)="
+                                                        saveRowData(rowData);
+                                                        op.hide()
+                                                    "
+                                                >
+                                                    Edit
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            *ngIf="
+                                                rowData.chillerStatusName !=
+                                                'Available to load'
+                                            "
+                                        >
+                                            <div
+                                                class="edit-item"
+                                                style="text-align: center"
+                                                align="center"
+                                                *ngIf="
+                                                    genericTableSettingInput.editDataChiller !=
+                                                        null &&
+                                                    genericTableSettingInput.editDataChiller
+                                                "
+                                            >
+                                                <p
+                                                    class="action-menu"
+                                                    (click)="
+                                                        saveRowData(rowData);
+                                                        op.hide()
+                                                    "
+                                                >
+                                                    Edit
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div
+                                                class="edit-item"
+                                                style="text-align: center"
+                                                align="center"
+                                                *ngIf="
+                                                    genericTableSettingInput.editLoadUnload !=
+                                                        null &&
+                                                    genericTableSettingInput.editLoadUnload
+                                                "
+                                            >
+                                                <p
+                                                    class="action-menu"
+                                                    (click)="
+                                                        saveRowDataUnload(
+                                                            rowData
+                                                        );
+                                                        op.hide()
+                                                    "
+                                                >
+                                                    Edit
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="delete-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.delete !=
+                                                    null &&
+                                                genericTableSettingInput.delete
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    deleteEntity(rowData);
+                                                    op.hide()
+                                                "
+                                            >
+                                                Delete
+                                            </p>
+                                        </div>
+
+                                        <!-- <div
+                                            class="deactive-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.deactive !=
+                                                    null &&
+                                                genericTableSettingInput.deactive
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    activeDeactive(
+                                                        rowData,
+                                                        'deactive'
+                                                    )
+                                                "
+                                            >
+                                                Deactive
+                                            </p>
+                                        </div> -->
+
+                                        <div
+                                            class="deactive-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.active !=
+                                                    null &&
+                                                genericTableSettingInput.active
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    activeDeactive(
+                                                        rowData,
+                                                        'active'
+                                                    )
+                                                "
+                                            >
+                                                {{
+                                                    rowData.is_active == false
+                                                        ? "Active"
+                                                        : "Deactivate"
+                                                }}
+                                            </p>
+                                        </div>
+
+                                        <div
+                                            class="view-log-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.viewLogs !=
+                                                    null &&
+                                                genericTableSettingInput.viewLogs
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    viewLogsEntity(rowData);
+                                                    op.hide()
+                                                "
+                                            >
+                                                View Logs
+                                            </p>
+                                        </div>
+
+                                        <div
+                                            class="deactive-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.archive !=
+                                                    null &&
+                                                genericTableSettingInput.archive
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    archiveEntity(rowData);
+                                                    op.hide()
+                                                "
+                                            >
+                                                Archive
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="deactive-item"
+                                            style="text-align: center"
+                                            align="center"
+                                            *ngIf="
+                                                genericTableSettingInput.download !=
+                                                    null &&
+                                                genericTableSettingInput.download
+                                            "
+                                        >
+                                            <p
+                                                class="action-menu"
+                                                (click)="
+                                                    downloadEntity(rowData);
+                                                    op.hide()
+                                                "
+                                            >
+                                                Download
+                                            </p>
+                                        </div>
+                                    </ng-template>
+                                </p-overlayPanel>
+                                <button
+                                    type="text"
+                                    pButton
+                                    (click)="op.toggle($event)"
+                                >
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                        <td
+                            [attr.colspan]="calculateColspan()"
+                            style="text-align: center"
+                        >
+                            {{ emptyMessage }}
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="7">Loading data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <!-- <p-paginator [first]="1" [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]" [showFirstLastIcon]="false">
+            </p-paginator> -->
+            <div
+                *ngIf="
+                    genericTableSettingInput.paginate != null &&
+                    genericTableSettingInput.paginate
+                "
+                class="paginator-div"
+            >
+                <p-paginator
+                    #paginator
+                    *ngIf="genericTableSettingInput.paginateSize == null"
+                    [rows]="10"
+                    [totalRecords]="totalRecords"
+                    (onPageChange)="paginate($event)"
+                    [pageLinkSize]="3"
+                    [rowsPerPageOptions]="[10, 20, 30, totalRecords]"
+                ></p-paginator>
+
+                <p-paginator
+                    #paginator
+                    *ngIf="genericTableSettingInput.paginateSize != null"
+                    [rows]="genericTableSettingInput.rows"
+                    [totalRecords]="totalRecords"
+                    (onPageChange)="paginate($event)"
+                    [pageLinkSize]="3"
+                    [rowsPerPageOptions]="[10, 20, 30, totalRecords]"
+                    [first]="genericTableSettingInput.paginateSize"
+                ></p-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div *ngIf="isImageModalVisible" class="modal loaded-popup">
+    <div class="modal-content">
+        <span class="close" (click)="hideImageModal()">&times;</span>
+        <img [src]="src">
+        
+    </div>
+</div> -->
+
+<!-- <p-sidebar [(visible)]="visibleSidebar2" position="right" [transitionOptions]="'100ms'">
+    Content
+</p-sidebar> -->
+
+<p-dialog
+    [(visible)]="isImageModalVisible"
+    [style]="{ width: '50vw' }"
+    styleClass="popup-image"
+>
+    <img [src]="src" style="display: block; width: 100%; height: 100%" />
+</p-dialog>

@@ -1,0 +1,376 @@
+<!-- <div class="login-body">
+    <div class="login-wrapper">
+        <div class="login-panel">
+            <a [routerLink]="['/']" class="logo">
+                <img src="assets/layout/images/logo-poseidon-dark.svg" alt="poseidon-layout" />
+            </a>
+            <div class="login-form">
+                <h2>Login To Your Premium Account</h2>
+                <p>You don't have an account? <a href="#"> Sign up</a></p>
+                <input type="text" autocomplete="off" pInputText placeholder="Email">
+                <input type="password" autocomplete="off" pInputText placeholder="Password">
+                <button pButton pRipple label="LOGIN" type="button"></button>
+            </div>
+
+            <p>A problem? <a href="#">Click here</a> and let us help you.</p>
+        </div>
+    </div>
+</div> -->
+
+<section class="auth-page-wrapper align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11 mx-auto">
+                <div class="card mb-0 p-0">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-5 col-xxl-6 mx-auto">
+                            <div
+                                class="card mb-0 border-0 shadow-none mb-0 login-car"
+                            >
+                                <img src="assets/images/Logo1.png" />
+                                <div class="card-body p-sm-5 m-lg-4">
+                                    <div class="loginText">
+                                        <h1
+                                            class="fs-3xl"
+                                            *ngIf="
+                                                showLoginForm && !showOTPForm
+                                            "
+                                        >
+                                            Get Started Now
+                                        </h1>
+                                        <!-- <p
+                                            class="text-muted"
+                                            *ngIf="
+                                                showLoginForm && !showOTPForm
+                                            "
+                                        >
+                                        Welcome to Denim Matin. Community Dashboard
+                                        </p> -->
+                                        <h5
+                                            class="fs-3xl"
+                                            *ngIf="
+                                                !showLoginForm && !showOTPForm
+                                            "
+                                        >
+                                            Reset Password
+                                        </h5>
+                                        <h5 class="fs-3xl" *ngIf="showOTPForm">
+                                            Enter OTP
+                                        </h5>
+                                    </div>
+                                    <div
+                                        class="p-2 mt-5 loginWrap"
+                                        *ngIf="showLoginForm && !showOTPForm"
+                                    >
+                                        <form action="index.html">
+                                            <div class="mb-3">
+                                                <label
+                                                    for="username"
+                                                    class="form-label"
+                                                    >Email
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    ></label
+                                                >
+                                                <div class="position-relative">
+                                                    <input
+                                                        type="text"
+                                                        id="username"
+                                                        [(ngModel)]="
+                                                            user.username
+                                                        "
+                                                        name="username"
+                                                        placeholder="Enter your email"
+                                                        required=""
+                                                        class="form-control password-input"
+                                                        autocomplete="off"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 mt-4">
+                                                <!-- <div class="float-end">
+                                                    <a
+                                                        class="text-muted table-view-switch"
+                                                        (click)="toggleForms()"
+                                                        >Reset password?
+                                                    </a>
+                                                </div> -->
+                                                <label
+                                                    for="password-input"
+                                                    class="form-label"
+                                                    >Password
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    >
+                                                </label>
+                                                <div
+                                                    class="position-relative auth-pass-inputgroup mb-3"
+                                                >
+                                                    <input
+                                                        placeholder="Enter password"
+                                                        [(ngModel)]="
+                                                            user.password
+                                                        "
+                                                        name="password-input"
+                                                        id="password-input"
+                                                        required=""
+                                                        class="form-control pe-5 password-input"
+                                                        [type]="
+                                                            changetype
+                                                                ? 'password'
+                                                                : 'text'
+                                                        "
+                                                        autocomplete="off"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        id="password-addon"
+                                                        (click)="viewpass()"
+                                                        class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                                                    >
+                                                        <img
+                                                            src="assets/images/Vector (20).png"
+                                                        />
+                                                        <!-- <i class="fa fa-eye-slash font-awesomeClass"></i> -->
+                                                        <!-- <i
+                                                            [ngClass]="
+                                                                visible
+                                                                    ? 'fa fa-eye-slash font-awesomeClass'
+                                                                    : 'fa fa-eye font-awesomeClass'
+                                                            "
+                                                        ></i> -->
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="resetPassword-wrap">
+                                                <!-- <div>
+                                                    <p-checkbox
+                                                        label="Remember me"
+                                                        name="abc"
+                                                        value="Remember me"
+                                                        [binary]="true"
+                                                        (onChange)="
+                                                            checkRemember(
+                                                                $event
+                                                            )
+                                                        "
+                                                    ></p-checkbox>
+                                                </div> -->
+                                                <!-- <div>
+            <p>Forgot Password?</p>
+        </div> -->
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <button
+                                                    (click)="validateUser()"
+                                                    type="submit"
+                                                    class="btn btn-primary w-100"
+                                                >
+                                                    Login
+                                                </button>
+                                            </div>
+                                            <div class="mt-2">
+                                                <!-- <label class="form-label" style="margin-left: 42%;">UAT 2.0.0</label> -->
+                                                <!-- <label class="form-label" style="margin-left: 42%;">PROD 1.0.4</label> -->
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="p-2 mt-5" *ngIf="showOTPForm">
+                                        <form action="index.html">
+                                            <div class="mb-3">
+                                                <label
+                                                    for="otp"
+                                                    class="form-label"
+                                                    >OTP
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    ></label
+                                                >
+                                                <div class="position-relative">
+                                                    <input
+                                                        type="text"
+                                                        id="otp"
+                                                        (keypress)="
+                                                            keyPressForNum(
+                                                                $event
+                                                            )
+                                                        "
+                                                        [(ngModel)]="
+                                                            userOtp.otp
+                                                        "
+                                                        name="otp"
+                                                        maxlength="6"
+                                                        minlength="6"
+                                                        placeholder="Enter OTP"
+                                                        required=""
+                                                        class="form-control password-input"
+                                                        autocomplete="off"
+                                                    />
+                                                    <p
+                                                        class="text-left mt-2"
+                                                        style="color: red"
+                                                    >
+                                                        {{ errorLoginString }}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <button
+                                                    (click)="verifyOTP()"
+                                                    type="submit"
+                                                    class="btn btn-primary w-100"
+                                                >
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div
+                                        class="p-2 mt-5"
+                                        *ngIf="!showLoginForm && !showOTPForm"
+                                    >
+                                        <!-- Reset Password Form -->
+                                        <form action="index.html">
+                                            <!-- Reset password form fields -->
+                                            <div class="mb-3">
+                                                <label
+                                                    for="resetemail"
+                                                    class="form-label"
+                                                    >Email
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    ></label
+                                                >
+                                                <div class="position-relative">
+                                                    <input
+                                                        type="email"
+                                                        id="resetEmail"
+                                                        [(ngModel)]="
+                                                            user.resetEmail
+                                                        "
+                                                        name="resetEmail"
+                                                        placeholder="Enter Email"
+                                                        required
+                                                        class="form-control password-input"
+                                                        autocomplete="off"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label
+                                                    for="password-input"
+                                                    class="form-label"
+                                                    >Password
+                                                    <span class="text-danger"
+                                                        >*</span
+                                                    >
+                                                </label>
+                                                <div
+                                                    class="position-relative auth-pass-inputgroup mb-3"
+                                                >
+                                                    <input
+                                                        placeholder="Enter new password"
+                                                        [(ngModel)]="
+                                                            user.newPassword
+                                                        "
+                                                        name="password-input"
+                                                        id="newpassword-input"
+                                                        required=""
+                                                        class="form-control pe-5 password-input"
+                                                        [type]="
+                                                            changenewtype
+                                                                ? 'password'
+                                                                : 'text'
+                                                        "
+                                                        autocomplete="off"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        id="password-addon"
+                                                        (click)="viewnewpass()"
+                                                        class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                                                    >
+                                                        <!-- <i class="fa fa-eye-slash font-awesomeClass"></i> -->
+                                                        <i
+                                                            [ngClass]="
+                                                                newvisible
+                                                                    ? 'fa fa-eye-slash font-awesomeClass'
+                                                                    : 'fa fa-eye font-awesomeClass'
+                                                            "
+                                                        ></i>
+                                                    </button>
+                                                </div>
+                                                <div
+                                                    class="position-relative auth-pass-inputgroup mb-3"
+                                                >
+                                                    <input
+                                                        placeholder="Enter confirm new password"
+                                                        [(ngModel)]="
+                                                            user.confirmNewPassword
+                                                        "
+                                                        name="password-input"
+                                                        id="confirmPassword-input"
+                                                        required=""
+                                                        class="form-control pe-5 password-input"
+                                                        [type]="
+                                                            changeconfirmtype
+                                                                ? 'password'
+                                                                : 'text'
+                                                        "
+                                                        autocomplete="off"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        id="password-addon"
+                                                        (click)="
+                                                            viewconfirmpass()
+                                                        "
+                                                        class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                                                    >
+                                                        <!-- <i class="fa fa-eye-slash font-awesomeClass"></i> -->
+                                                        <i
+                                                            [ngClass]="
+                                                                confirmvisible
+                                                                    ? 'fa fa-eye-slash font-awesomeClass'
+                                                                    : 'fa fa-eye font-awesomeClass'
+                                                            "
+                                                        ></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="mt-4">
+                                                <button
+                                                    (click)="validatePwd()"
+                                                    type="submit"
+                                                    class="btn btn-primary w-100"
+                                                >
+                                                    Reset Password
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <br />
+                                        <a class="btn" (click)="toggleForms()"
+                                            >Back to Login</a
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <p class="accountText">Don't have an account? <span>Register</span></p> -->
+                        </div>
+                        <div class="col-md-5 col-xxl-5">
+                            <img
+                                src="assets/images/Rectangle 100.svg"
+                                class="w-100 imagLogin"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

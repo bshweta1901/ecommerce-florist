@@ -1,0 +1,141 @@
+.add-Spare-Container {
+    margin-left: 0.7rem;
+}
+
+.add-Spare-Grid {
+    background-color: #fff;
+    padding-bottom: 1rem;
+}
+
+.header-Client {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-Button {
+    // background-color: #fff;
+    // border-radius: 50%;
+    // height: 3.5rem;
+    // width: 3.5rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.back-Button > i {
+    font-size: 1.2rem;
+    color: #065388;
+}
+
+.back-Button > p {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: #065388;
+}
+
+.row-One,
+.row-Two {
+    display: flex;
+}
+
+.spare-Name,
+.spare-Type,
+.spare-SKU,
+.spare-Status,
+.spare-Approx-Life,
+.spare-Standard-Price,
+.spare-GST,
+.spare-Selling-Price,
+.spare-Description,
+.product-Category {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+input,
+p-dropdown,
+p-multiSelect {
+    width: 80%;
+}
+
+.custom-button {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.custom-button-cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #cdcfd0;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button-cancel:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.add-Spare-Details,
+.add-More-Details {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+    margin-right: 5rem;
+    margin-top: 1.2rem;
+}
+
+.spareDescription-Field {
+    width: 90%;
+    height: 50px;
+    resize: both;
+    overflow: auto;
+    z-index: 1;
+    min-height: 50px;
+    max-height: 80px;
+    min-width: 70%;
+    max-width: 100%;
+}
+
+textarea:focus {
+    z-index: 2;
+}
+
+.dull-input {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.required-field {
+    color: red;
+}

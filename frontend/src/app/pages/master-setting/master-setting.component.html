@@ -1,0 +1,3944 @@
+<div class="add-client-container">
+    <h5>Master Settings</h5>
+    <p-tabView>
+        <p-tabPanel header="Legal Entity">
+            <p-tabView>
+                <p-tabPanel header="Legal Entity">
+                    <!-- <div
+                        class="add-Legal-Entity-Grid"
+                        [formGroup]="legalEntityForm"
+                    >
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Name<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="name"
+                                    [(ngModel)]="legalEntityObject.name"
+                                    pInputText
+                                    placeholder="Enter a Name"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="legalEntityForm.get('name')"
+                                    label="Name"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >GST Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="gstNumber"
+                                    [(ngModel)]="legalEntityObject.gst_number"
+                                    pInputText
+                                    placeholder="Enter a GST Number"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="legalEntityForm.get('gstNumber')"
+                                    label="GST Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >PAN Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="panNumber"
+                                    [(ngModel)]="legalEntityObject.pan_number"
+                                    pInputText
+                                    placeholder="Enter a PAN Number"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="legalEntityForm.get('panNumber')"
+                                    label="PAN Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Financial Year<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="financialYear"
+                                    [(ngModel)]="
+                                        legalEntityObject.financial_year
+                                    "
+                                    placeholder="Enter a Financial Year"
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalEntityForm.get('financialYear')
+                                    "
+                                    label="Financial Year"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >ROC Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="rocNumber"
+                                    placeholder="Enter a ROC Number"
+                                    [(ngModel)]="legalEntityObject.roc_number"
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="legalEntityForm.get('rocNumber')"
+                                    label="ROC Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >TDS Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="tdsNumber"
+                                    [(ngModel)]="legalEntityObject.tds_number"
+                                    pInputText
+                                    placeholder="Enter a TDS Number"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="legalEntityForm.get('tdsNumber')"
+                                    label="TDS Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Branches<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-multiSelect
+                                    [options]="legalBranchList"
+                                    optionLabel="name"
+                                    placeholder="Select a Branches"
+                                    [(ngModel)]="selectedLegalBranch"
+                                    formControlName="selectedLegalBranch"
+                                ></p-multiSelect>
+                            </div>
+                        </div>
+
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Bank Name<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="bank_name"
+                                    placeholder="Enter a Bank Name"
+                                    [(ngModel)]="legalEntityObject.bank_name"
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="legalEntityForm.get('bank_name')"
+                                    label="Bank Name"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Bank Account Name<span
+                                        class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="bank_account_name"
+                                    [(ngModel)]="
+                                        legalEntityObject.bank_account_name
+                                    "
+                                    pInputText
+                                    placeholder="Enter a Bank Account Name"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalEntityForm.get('bank_account_name')
+                                    "
+                                    label="Bank Account Name"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Bank Account Number<span
+                                        class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="bank_account_number"
+                                    placeholder="Enter a Bank Account Number"
+                                    [(ngModel)]="
+                                        legalEntityObject.bank_account_number
+                                    "
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalEntityForm.get(
+                                            'bank_account_number'
+                                        )
+                                    "
+                                    label="Bank Account Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Bank Ifsc Code<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="bank_ifsc_code"
+                                    placeholder="Enter a Bank Ifsc Code"
+                                    [(ngModel)]="
+                                        legalEntityObject.bank_ifsc_code
+                                    "
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalEntityForm.get('bank_ifsc_code')
+                                    "
+                                    label="Bank Ifsc Code"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-6">
+                                <label>Authroized Signature Specimen</label>
+                                <div class="image-wrap" *ngIf="imageSrc">
+                                    <img
+                                        [src]="imageSrc"
+                                        class="banner-image"
+                                    />
+                                    <span
+                                        class="remove-image"
+                                        (click)="deleteImgSrc()"
+                                    >
+                                        <i class="pi pi-times"></i>
+                                    </span>
+                                </div>
+
+                                <p-fileUpload
+                                    #fileUpload
+                                    name="image"
+                                    mode="basic"
+                                    accept="image/*"
+                                    [customUpload]="true"
+                                    (onSelect)="uploadDocuments($event)"
+                                    [showUploadButton]="false"
+                                    [showCancelButton]="false"
+                                    maxFileSize="5242880"
+                                >
+                                </p-fileUpload>
+                            </div>
+                        </div>
+
+                        <div class="header-of-add-client-btn">
+                            <p class="location-Details">Address Details</p>
+                            <div class="legal-entity-address col-12">
+                                <div class="legal-entity-filds col-3">
+                                    <label for="Address1"
+                                        >Address 1<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <textarea
+                                        [(ngModel)]="
+                                            legalEntityObject.registered_address
+                                                .address_1
+                                        "
+                                        formControlName="address_1"
+                                        class="Address1-Field"
+                                        placeholder="Enter a Address 1"
+                                        rows="4"
+                                        cols="4"
+                                        pInputTextarea
+                                    ></textarea>
+                                    <app-custom-validation
+                                        [control]="
+                                            legalEntityForm.get('address_1')
+                                        "
+                                        label="Address 1"
+                                    ></app-custom-validation>
+                                </div>
+
+                                <div class="legal-entity-filds col-3">
+                                    <label for="Address2">Address 2</label>
+                                    <textarea
+                                        [(ngModel)]="
+                                            legalEntityObject.registered_address
+                                                .address_2
+                                        "
+                                        formControlName="address_2"
+                                        class="Address2-Field"
+                                        placeholder="Enter a Address 2"
+                                        rows="4"
+                                        cols="4"
+                                        pInputTextarea
+                                    ></textarea>
+                                </div>
+                                <div class="legal-entity-filds col-3">
+                                    <label for="cityType"
+                                        >Country<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <p-dropdown
+                                        [(ngModel)]="selectedCountry"
+                                        formControlName="country"
+                                        [options]="countryTypeList"
+                                        optionLabel="name"
+                                        placeholder="Select a Country"
+                                    ></p-dropdown>
+                                    <app-custom-validation
+                                        [control]="
+                                            legalEntityForm.get('country')
+                                        "
+                                        label="Country"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="legal-entity-filds col-3">
+                                    <label for="stateID"
+                                        >State<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <p-dropdown
+                                        [(ngModel)]="selectedState"
+                                        formControlName="state"
+                                        [options]="stateList"
+                                        optionLabel="name"
+                                        placeholder="Select a State"
+                                    ></p-dropdown>
+                                    <app-custom-validation
+                                        [control]="legalEntityForm.get('state')"
+                                        label="State"
+                                    ></app-custom-validation>
+                                </div>
+                            </div>
+
+                            <div class="legal-entity-address col-12">
+                                <div class="legal-entity-filds col-3">
+                                    <label for="City"
+                                        >City<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <p-dropdown
+                                        [(ngModel)]="selectedLegalCity"
+                                        [options]="cityList"
+                                        optionLabel="name"
+                                        placeholder="Select a City"
+                                        formControlName="roles"
+                                        formControlName="city"
+                                    ></p-dropdown>
+
+                                    <app-custom-validation
+                                        [control]="legalEntityForm.get('city')"
+                                        label="City"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="legal-entity-filds col-3">
+                                    <label for="pincode"
+                                        >Pincode<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            legalEntityObject.registered_address
+                                                .pincode
+                                        "
+                                        formControlName="pincode"
+                                        placeholder="Enter a Pincode"
+                                        pInputText
+                                        id="pincode"
+                                        aria-describedby="pincode-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            legalEntityForm.get('pincode')
+                                        "
+                                        label="Pincode"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="field-btn-entity col-3">
+                                    <div class="add-legal-entity-address">
+                                        <button
+                                            class="custom-button-cancel"
+                                            (click)="resetLegalEntity()"
+                                        >
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="field-btn-entity-add col-3">
+                                    <div class="add-legal-entity-address">
+                                        <button
+                                            class="custom-button"
+                                            (click)="saveLegalEntity()"
+                                        >
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="
+                                    tableColsEventForLegalEntity
+                                "
+                                [genericTableSettingInput]="
+                                    tableSettingsLegailEntity
+                                "
+                                [genericListInput]="legalEntityList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="paginateEventForEntity($event)"
+                                [totalRecords]="totalRecordsForLegalEntity"
+                                (editEntityEvent)="
+                                    openDialogueForLegalEntity($event)
+                                "
+                                (searchEntityEvent)="searchLegalEntity($event)"
+                                [placeholder]="searchPlaceholderLegalEntity"
+                                [exportName]="getExportEntityName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveLegalEntity($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Branch">
+                    <div
+                        class="add-Legal-Entity-Grid"
+                        [formGroup]="legalBrancheForm"
+                    >
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Name<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="name"
+                                    [(ngModel)]="legalBranchObject.name"
+                                    pInputText
+                                    placeholder="Enter a Name"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="legalBrancheForm.get('name')"
+                                    label="Name"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >GST Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="gstNumber"
+                                    [(ngModel)]="legalBranchObject.gst_number"
+                                    pInputText
+                                    placeholder="Enter a GST Number"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get('gstNumber')
+                                    "
+                                    label="GST Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >TDS Number<span class="gst_number"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="tdsNumber"
+                                    [(ngModel)]="legalBranchObject.tds_number"
+                                    pInputText
+                                    placeholder="Enter a TDS Number"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get('tdsNumber')
+                                    "
+                                    label="TDS Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Legal Entity<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    [(ngModel)]="selectedLegalEntity"
+                                    [options]="legalEntityList"
+                                    optionLabel="name"
+                                    placeholder="Select a Legal Entity"
+                                    formControlName="legalEntity"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get('legalEntity')
+                                    "
+                                    label="Legal Entity"
+                                ></app-custom-validation>
+                            </div>
+                            <!-- <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Registered Address<span
+                                        class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <textarea
+                                    [(ngModel)]="
+                                        legalBranchObject.registered_address
+                                    "
+                                    placeholder="Enter a Registered Address"
+                                    class="registered-address-Field"
+                                    rows="2"
+                                    cols="2"
+                                    pInputTextarea
+                                    formControlName="registeredAddress"
+                                ></textarea>
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get(
+                                            'registeredAddress'
+                                        )
+                                    "
+                                    label="Registered Address"
+                                ></app-custom-validation>
+                            </div> -->
+                        </div>
+
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Bank Name<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="bank_name"
+                                    placeholder="Enter a Bank Name"
+                                    [(ngModel)]="legalBranchObject.bank_name"
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get('bank_name')
+                                    "
+                                    label="Bank Name"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Bank Account Name<span
+                                        class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="bank_account_name"
+                                    [(ngModel)]="
+                                        legalBranchObject.bank_account_name
+                                    "
+                                    pInputText
+                                    placeholder="Enter a Bank Account Name"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get(
+                                            'bank_account_name'
+                                        )
+                                    "
+                                    label="Bank Account Name"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Bank Account Number<span
+                                        class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="bank_account_number"
+                                    placeholder="Enter a Bank Account Number"
+                                    [(ngModel)]="
+                                        legalBranchObject.bank_account_number
+                                    "
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get(
+                                            'bank_account_number'
+                                        )
+                                    "
+                                    label="Bank Account Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Bank Ifsc Code<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="bank_ifsc_code"
+                                    placeholder="Enter a Bank Ifsc Code"
+                                    [(ngModel)]="
+                                        legalBranchObject.bank_ifsc_code
+                                    "
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get('bank_ifsc_code')
+                                    "
+                                    label="Bank Ifsc Code"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-6">
+                                <label>Upload Sign Document</label>
+                                <div class="image-wrap" *ngIf="imageSrc">
+                                    <img
+                                        [src]="imageSrc"
+                                        class="banner-image"
+                                    />
+                                    <span
+                                        class="remove-image"
+                                        (click)="deleteImgSrc()"
+                                    >
+                                        <i class="pi pi-times"></i>
+                                    </span>
+                                </div>
+
+                                <!-- File Upload -->
+                                <p-fileUpload
+                                    #fileUploadTwo
+                                    name="image"
+                                    mode="basic"
+                                    accept="image/*"
+                                    [customUpload]="true"
+                                    (onSelect)="uploadDocuments($event)"
+                                    [showUploadButton]="false"
+                                    [showCancelButton]="false"
+                                    maxFileSize="5242880"
+                                >
+                                </p-fileUpload>
+                            </div>
+                        </div>
+
+                        <div class="header-of-add-client-btn">
+                            <p class="location-Details">Address Details</p>
+                            <div class="legal-entity-address col-12">
+                                <div class="legal-entity-filds col-3">
+                                    <label for="Address1"
+                                        >Address 1<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <textarea
+                                        [(ngModel)]="
+                                            legalBranchObject.registered_address
+                                                .address_1
+                                        "
+                                        formControlName="address_1"
+                                        class="Address1-Field"
+                                        placeholder="Enter a Address 1"
+                                        rows="4"
+                                        cols="4"
+                                        pInputTextarea
+                                    ></textarea>
+                                    <app-custom-validation
+                                        [control]="
+                                            legalBrancheForm.get('address_1')
+                                        "
+                                        label="Address 1"
+                                    ></app-custom-validation>
+                                </div>
+
+                                <div class="legal-entity-filds col-3">
+                                    <label for="Address2">Address 2</label>
+                                    <textarea
+                                        [(ngModel)]="
+                                            legalBranchObject.registered_address
+                                                .address_2
+                                        "
+                                        formControlName="address_2"
+                                        class="Address2-Field"
+                                        placeholder="Enter a Address 2"
+                                        rows="4"
+                                        cols="4"
+                                        pInputTextarea
+                                    ></textarea>
+                                </div>
+                                <div class="legal-entity-filds col-3">
+                                    <label for="cityType"
+                                        >Country<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <p-dropdown
+                                        [(ngModel)]="selectedCountry"
+                                        formControlName="country"
+                                        [options]="countryTypeList"
+                                        optionLabel="name"
+                                        placeholder="Select a Country"
+                                    ></p-dropdown>
+                                    <app-custom-validation
+                                        [control]="
+                                            legalBrancheForm.get('country')
+                                        "
+                                        label="Country"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="legal-entity-filds col-3">
+                                    <label for="stateID"
+                                        >State<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <p-dropdown
+                                        [(ngModel)]="selectedState"
+                                        formControlName="state"
+                                        [options]="stateList"
+                                        optionLabel="name"
+                                        placeholder="Select a State"
+                                    ></p-dropdown>
+                                    <app-custom-validation
+                                        [control]="
+                                            legalBrancheForm.get('state')
+                                        "
+                                        label="State"
+                                    ></app-custom-validation>
+                                </div>
+                            </div>
+
+                            <div class="legal-entity-address col-12">
+                                <div class="legal-entity-filds col-3">
+                                    <label for="City"
+                                        >City<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <p-dropdown
+                                        [(ngModel)]="selectedLegalCity"
+                                        [options]="cityList"
+                                        optionLabel="name"
+                                        placeholder="Select a City"
+                                        formControlName="roles"
+                                        formControlName="city"
+                                    ></p-dropdown>
+
+                                    <app-custom-validation
+                                        [control]="legalBrancheForm.get('city')"
+                                        label="City"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="legal-entity-filds col-3">
+                                    <label for="pincode"
+                                        >Pincode<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            legalBranchObject.registered_address
+                                                .pincode
+                                        "
+                                        formControlName="pincode"
+                                        placeholder="Enter a Pincode"
+                                        pInputText
+                                        id="pincode"
+                                        aria-describedby="pincode-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            legalBrancheForm.get('pincode')
+                                        "
+                                        label="Pincode"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="field-btn-entity col-3">
+                                    <div class="add-legal-entity-address">
+                                        <button
+                                            class="custom-button-cancel"
+                                            (click)="resetLegalBranch()"
+                                        >
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="field-btn-entity-add col-3">
+                                    <div class="add-legal-entity-address">
+                                        <button
+                                            class="custom-button"
+                                            (click)="saveLegalBranch()"
+                                        >
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="legal-entity-address col-12">
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Legal Entity<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    [(ngModel)]="selectedLegalEntity"
+                                    [options]="legalEntityList"
+                                    optionLabel="name"
+                                    placeholder="Select a Legal Entity"
+                                    formControlName="legalEntity"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="
+                                        legalBrancheForm.get('legalEntity')
+                                    "
+                                    label="Legal Entity"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="field-btn-entity col-9">
+                                <div class="add-legal-entity-address">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetLegalBranch()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                                <div class="add-legal-entity-address">
+                                    <button
+                                        class="custom-button"
+                                        (click)="saveLegalBranch()"
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="
+                                    tableColsEventForLegalBranche
+                                "
+                                [genericTableSettingInput]="
+                                    tableSettingsLegailEntity
+                                "
+                                [genericListInput]="legalBranchList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="paginateEventForBranch($event)"
+                                [totalRecords]="totalRecordsForBranch"
+                                (editEntityEvent)="
+                                    openDialogueForLegalBranch($event)
+                                "
+                                (searchEntityEvent)="searchLegalBranch($event)"
+                                [placeholder]="searchPlaceholderLegalBranch"
+                                [exportName]="getExportBranchName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveLegalBranch($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Entity Currency">
+                    <div class="add-Create-Order-Grid">
+                        <div class="row-One col-12">
+                            <div class="field-and-btn col-9">
+                                <div
+                                    class="value-Setting col-4"
+                                    [formGroup]="entityCurrencyForm"
+                                >
+                                    <label for="standardPrice"
+                                        >Entity Currency<span
+                                            class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        formControlName="value"
+                                        [(ngModel)]="
+                                            selectedEntityCurrency.name
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Entity Currency"
+                                        id="standardPrice"
+                                        aria-describedby="standardPrice-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            entityCurrencyForm.get('value')
+                                        "
+                                        label="Entity Currency"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="col-4">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetEntityCurrency()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveUnavailability('CURRENCY')"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="
+                                    tableColsEventForEntityCurrency
+                                "
+                                [genericTableSettingInput]="tableSettingsEvent"
+                                [genericListInput]="currencyList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="
+                                    paginateEventForCurrency($event)
+                                "
+                                [totalRecords]="totalRecordsForCurrency"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForEntityCurrency(
+                                        $event
+                                    )
+                                "
+                                (deleteDataEvent)="
+                                    deletePredefinedEntityType($event)
+                                "
+                                (searchEntityEvent)="
+                                    searchProductCurrency($event)
+                                "
+                                [placeholder]="searchPlaceholderEntityCurrency"
+                                [exportName]="getExportEntityCurrencyName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomer($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <!-- <p-tabPanel header="Subsidiary">
+                    <div
+                        class="add-Legal-Entity-Grid"
+                        [formGroup]="legalSubsidiaryForm"
+                    >
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Name<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="name"
+                                    [(ngModel)]="legalSubsidiaryObject.name"
+                                    pInputText
+                                    placeholder="Enter a Name"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="legalSubsidiaryForm.get('name')"
+                                    label="Name"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >GST Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="gstNumber"
+                                    [(ngModel)]="
+                                        legalSubsidiaryObject.gst_number
+                                    "
+                                    placeholder="Enter a GST Number"
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalSubsidiaryForm.get('gstNumber')
+                                    "
+                                    label="GST Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >PAN Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="panNumber"
+                                    [(ngModel)]="
+                                        legalSubsidiaryObject.pan_number
+                                    "
+                                    pInputText
+                                    placeholder="Enter a PAN Number"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalSubsidiaryForm.get('panNumber')
+                                    "
+                                    label="PAN Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Financial Year<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="financialYear"
+                                    [(ngModel)]="
+                                        legalSubsidiaryObject.financial_year
+                                    "
+                                    pInputText
+                                    id="standardPrice"
+                                    placeholder="Enter a Financial Year"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalSubsidiaryForm.get('financialYear')
+                                    "
+                                    label="Financial Year"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+
+                        <div class="legal-entity-form col-12">
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >ROC Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="rocNumber"
+                                    [(ngModel)]="
+                                        legalSubsidiaryObject.roc_number
+                                    "
+                                    placeholder="Enter a ROC Number"
+                                    pInputText
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalSubsidiaryForm.get('rocNumber')
+                                    "
+                                    label="ROC Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >TDS Number<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="tdsNumber"
+                                    [(ngModel)]="
+                                        legalSubsidiaryObject.tds_number
+                                    "
+                                    pInputText
+                                    placeholder="Enter a TDS Number"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        legalSubsidiaryForm.get('tdsNumber')
+                                    "
+                                    label="TDS Number"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Registered Address<span
+                                        class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <textarea
+                                    [(ngModel)]="
+                                        legalSubsidiaryObject.registered_address
+                                    "
+                                    class="registered-address-Field"
+                                    placeholder="Enter a Registered Address"
+                                    rows="2"
+                                    cols="2"
+                                    pInputTextarea
+                                    formControlName="registeredAddress"
+                                ></textarea>
+                                <app-custom-validation
+                                    [control]="
+                                        legalSubsidiaryForm.get(
+                                            'registeredAddress'
+                                        )
+                                    "
+                                    label="Registered Address"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="legal-entity-filds col-3">
+                                <label for="standardPrice"
+                                    >Legal Entity<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    [(ngModel)]="selectedLegalEntity"
+                                    [options]="legalEntityList"
+                                    optionLabel="name"
+                                    placeholder="Select a Legal Entity"
+                                    formControlName="legalEntity"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="
+                                        legalSubsidiaryForm.get('legalEntity')
+                                    "
+                                    label="Legal Entity"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+
+                        <div class="add-legal-Subsidiary">
+                            <button
+                                class="custom-button-cancel"
+                                (click)="resetLegalSubsidiary()"
+                            >
+                                Reset
+                            </button>
+                            <button
+                                class="custom-button"
+                                (click)="saveLegalSubsidiary()"
+                            >
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="
+                                    tableColsEventForLegalSubsidiary
+                                "
+                                [genericTableSettingInput]="
+                                    tableSettingsLegailEntity
+                                "
+                                [genericListInput]="legalSubsidiaryList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="
+                                    paginateEventForSubsidiary($event)
+                                "
+                                [totalRecords]="totalRecordsForSubsidiary"
+                                (editEntityEvent)="
+                                    openDialogueForLegalSubsidiary($event)
+                                "
+                                (searchEntityEvent)="
+                                    searchLegalSubsidiary($event)
+                                "
+                                [placeholder]="searchPlaceholderLegalSubsidiary"
+                                [exportName]="getExportSubsidiaryName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveLegalSubsidiary($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel> -->
+            </p-tabView>
+        </p-tabPanel>
+
+        <p-tabPanel header="Address">
+            <p-tabView>
+                <p-tabPanel header="Zone">
+                    <div class="add-Create-Order-Grid">
+                        <div class="row-One col-12" [formGroup]="zoneForm">
+                            <div class="field-and-btn col-9">
+                                <div class="value-Setting col-4">
+                                    <label for="standardPrice"
+                                        >Zone<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="selectedZone.name"
+                                        pInputText
+                                        formControlName="value"
+                                        placeholder="Enter a value"
+                                        id="standardPrice"
+                                        aria-describedby="standardPrice-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="zoneForm.get('value')"
+                                        label="value"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="col-4">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetZoneType()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveUnavailability('ZONE')"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="tableColsEventForZone"
+                                [genericTableSettingInput]="
+                                    tableSettingsEventTwo
+                                "
+                                [genericListInput]="zoneList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="paginateEventForZone($event)"
+                                [totalRecords]="totalRecordsForZone"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForZone($event)
+                                "
+                                (deleteDataEvent)="
+                                    deletePredefinedEntityType($event)
+                                "
+                                (searchEntityEvent)="searchZoneType($event)"
+                                [placeholder]="searchPlaceholderZone"
+                                [exportName]="getExportZoneName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomer($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <!-- <p-tabPanel header="State"> -->
+                <!-- <div class="add-Create-Order-Grid" [formGroup]="stateForm">
+                        <div class="row-One col-12">
+                            <div class="value-Setting col-3">
+                                <label for="standardPrice"
+                                    >State<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    [(ngModel)]="selectedStateValue.name"
+                                    pInputText
+                                    formControlName="value"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                            
+                                <app-custom-validation
+                                    [control]="stateForm.get('value')"
+                                    label="Value"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveUnavailability('STATE')"
+                                >
+                                    Add
+                                </button>
+                                <button
+                                    class="custom-button-cancel"
+                                    (click)="resetStateType()"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                <!-- <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="tableColsEventForLocation"
+                                [genericTableSettingInput]="
+                                    tableSettingsEventStateAndCity
+                                "
+                                [genericListInput]="stateList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="paginateEventForState($event)"
+                                [totalRecords]="totalRecordsForState"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForState($event)
+                                "
+                                (deleteDataEvent)="
+                                    deletePredefinedEntityType($event)
+                                "
+                                (searchEntityEvent)="searchStateType($event)"
+                                [placeholder]="searchPlaceholderState"
+                                [exportName]="getExportStateName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomer($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel> -->
+
+                <p-tabPanel header="City Type">
+                    <div class="add-Create-Order-Grid">
+                        <div class="row-One col-12" [formGroup]="cityForm">
+                            <div class="field-and-btn col-9">
+                                <div class="value-Setting col-4">
+                                    <label for="standardPrice"
+                                        >value<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="selectedCityType.name"
+                                        pInputText
+                                        formControlName="value"
+                                        placeholder="Enter a value"
+                                        id="standardPrice"
+                                        aria-describedby="standardPrice-help"
+                                    />
+                                    <!-- <p class="color-red" *ngIf="showText">Value is Required</p> -->
+
+                                    <app-custom-validation
+                                        [control]="cityForm.get('value')"
+                                        label="value"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="col-4">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetCityType()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveUnavailability('CITY-TYPE')"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="tableColsEventForCity"
+                                [genericTableSettingInput]="
+                                    tableSettingsEventTwo
+                                "
+                                [genericListInput]="cityTypeList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="
+                                    paginateEventForCityType($event)
+                                "
+                                [totalRecords]="totalRecordsForCityType"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForCity($event)
+                                "
+                                (deleteDataEvent)="
+                                    deletePredefinedEntityType($event)
+                                "
+                                (searchEntityEvent)="searchCityType($event)"
+                                [placeholder]="searchPlaceholderCity"
+                                [exportName]="getExportCityTypeName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomer($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <!-- <p-tabPanel header="City"> -->
+                <!-- <div class="add-Create-Order-Grid">
+                        <div class="row-One col-12" [formGroup]="cityTypeForm">
+                            <div class="value-Setting col-3">
+                                <label for="state"
+                                    >State<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    [options]="stateList"
+                                    optionLabel="name"
+                                    formControlName="state"
+                                    [(ngModel)]="selectedState"
+                                    placeholder="Select a state"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="cityTypeForm.get('state')"
+                                    label="State"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="value-Setting col-3">
+                                <label for="name"
+                                    >City<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="cityType"
+                                    [(ngModel)]="selectedCityTabName.name"
+                                    pInputText
+                                    id="name"
+                                    aria-describedby="name-help"
+                                />
+                                <app-custom-validation
+                                    [control]="cityTypeForm.get('cityType')"
+                                    label="City"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="add-City col-6">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveStateCityZone('CITY')"
+                                >
+                                    Add
+                                </button>
+                                <button
+                                    class="custom-button-cancel"
+                                    (click)="resetCityTab()"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                <!-- <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="tableColsEventForCityTab"
+                                [genericTableSettingInput]="
+                                    tableSettingsEventStateAndCity
+                                "
+                                [genericListInput]="cityList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="paginateEventForCity($event)"
+                                [totalRecords]="totalRecordsForCity"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForCityTab($event)
+                                "
+                                (deleteDataEvent)="
+                                    deletePredefinedEntityType($event)
+                                "
+                                (searchEntityEvent)="searchCityTab($event)"
+                                [placeholder]="searchPlaceholderCityTab"
+                                [exportName]="getExportCityTabName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomer($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel> -->
+            </p-tabView>
+        </p-tabPanel>
+
+        <p-tabPanel header="Product">
+            <p-tabView>
+                <p-tabPanel header="Product Category">
+                    <div class="add-Create-Order-Grid col-12">
+                        <div class="field-and-btn col-9">
+                            <div
+                                class="value-Setting col-4"
+                                [formGroup]="productCategoryForm"
+                            >
+                                <label for="standardPrice"
+                                    >Category Name<span class="required_field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    [(ngModel)]="
+                                        productCategoryObject.product_category
+                                    "
+                                    pInputText
+                                    placeholder="Enter a Category Name"
+                                    formControlName="product_category"
+                                    id="standardPrice"
+                                    aria-describedby="standardPrice-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        productCategoryForm.get(
+                                            'product_category'
+                                        )
+                                    "
+                                    label="Category Name"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="col-4">
+                                <button
+                                    class="custom-button-cancel"
+                                    (click)="resetProductCategory()"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                        <div class="add-Customer-Type col-3">
+                            <button
+                                class="custom-button"
+                                (click)="saveProductCategory()"
+                            >
+                                Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="
+                                    tableColsEventForProductCategory
+                                "
+                                [genericTableSettingInput]="
+                                    tableCategotySettingsEvent
+                                "
+                                [genericListInput]="productCategoryList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="
+                                    paginateEventForProductCategory($event)
+                                "
+                                [totalRecords]="totalRecordsForProductCategory"
+                                (editEntityEvent)="
+                                    editProductCategoryEvent($event)
+                                "
+                                (deleteDataEvent)="
+                                    deleteProductCategory($event)
+                                "
+                                [placeholder]="searchPlaceholderCategory"
+                                (addRepairCheckEntityEvent)="
+                                    openDialogBoxForCategoryRepair($event)
+                                "
+                                (addProblemDiagnosisEntityEvent)="
+                                    openDialogBoxForCategoryProblem($event)
+                                "
+                                [exportName]="getExportProductCategoryName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveProductCategory($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Product OEM">
+                    <div class="add-Create-Order-Grid">
+                        <div class="row-One col-12">
+                            <div class="field-and-btn col-9">
+                                <div
+                                    class="value-Setting col-4"
+                                    [formGroup]="productOEMForm"
+                                >
+                                    <label for="ProductOEM"
+                                        >Product OEM<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        formControlName="value"
+                                        [(ngModel)]="selectedProductOEM.name"
+                                        pInputText
+                                        placeholder="Enter a Product OEM"
+                                        id="ProductOEM"
+                                        aria-describedby="ProductOEM-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="productOEMForm.get('value')"
+                                        label="Product OEM"
+                                    ></app-custom-validation>
+                                </div>
+
+                                <div class="col-4">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetProductOEM()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveUnavailability('OEM')"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="tableColsEventForProductOEM"
+                                [genericTableSettingInput]="tableSettingsEvent"
+                                [genericListInput]="ProductOEMList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="paginateEventForOEM($event)"
+                                [totalRecords]="totalRecordsForOEM"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForProductOEM($event)
+                                "
+                                (deleteDataEvent)="
+                                    deletePredefinedEntityType($event)
+                                "
+                                (searchEntityEvent)="searchProductOEM($event)"
+                                [placeholder]="searchPlaceholderProductOEM"
+                                [exportName]="getExportProductOEMName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomer($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Spare Part Type">
+                    <div class="add-Create-Order-Grid">
+                        <div class="row-One col-12">
+                            <div class="field-and-btn col-9">
+                                <div
+                                    class="value-Setting col-4"
+                                    [formGroup]="sparePartTypeForm"
+                                >
+                                    <label for="standardPrice"
+                                        >Spare Part Type<span
+                                            class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        formControlName="value"
+                                        [(ngModel)]="
+                                            sparePartManagerObject.product_type
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Spare Part Type"
+                                        id="standardPrice"
+                                        aria-describedby="standardPrice-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            sparePartTypeForm.get('value')
+                                        "
+                                        label="Spare Part Type"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="col-4">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetSparePartType()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveProductTypes()"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="
+                                    tableColsEventForProductType
+                                "
+                                [genericTableSettingInput]="tableSettingsEvent"
+                                [genericListInput]="sparePartManagerList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="
+                                    paginateEventForSparePart($event)
+                                "
+                                [totalRecords]="totalRecordsForSparePart"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForSparePart($event)
+                                "
+                                (deleteDataEvent)="deleteProductType($event)"
+                                (searchEntityEvent)="
+                                    searchSparePartType($event)
+                                "
+                                [placeholder]="searchPlaceholderSparePart"
+                                [exportName]="getExportSparePartTypeName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveSparePart($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </p-tabPanel>
+
+        <p-tabPanel header="Customer">
+            <p-tabView>
+                <p-tabPanel header="Customer Type">
+                    <div class="add-Create-Order-Grid">
+                        <div
+                            [formGroup]="customerTypeForm"
+                            class="row-One col-12"
+                        >
+                            <div class="field-and-btn col-9">
+                                <div class="value-Setting col-4">
+                                    <label for="customer_type"
+                                        >Customer Type<span
+                                            class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            selectedCustomerType.customer_type
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Customer Type"
+                                        formControlName="value"
+                                        id="customer_type"
+                                        aria-describedby="customer_type-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            customerTypeForm.get('value')
+                                        "
+                                        label="Customer Type"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="col-4">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetCustomerType()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="
+                                        saveCustomerTypes(selectedCustomerType)
+                                    "
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="
+                                    tableColsEventForCustomerType
+                                "
+                                [genericTableSettingInput]="tableSettingsEvent"
+                                [genericListInput]="customerTypeList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="
+                                    paginateEventForCustomerType($event)
+                                "
+                                [totalRecords]="totalRecordsForCustomerType"
+                                (editEntityEvent)="
+                                    openDialogueCustomerCategory($event)
+                                "
+                                (deleteDataEvent)="
+                                    deleteCustomerCategory($event)
+                                "
+                                (searchEntityEvent)="searchCustomerType($event)"
+                                [placeholder]="searchPlaceholder"
+                                [exportName]="getExportCustomerTypeName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomerCategory($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Parent Group">
+                    <div class="add-Create-Order-Grid">
+                        <div
+                            class="row-One col-12"
+                            [formGroup]="parentGroupForm"
+                        >
+                            <div class="parent-fields col-9">
+                                <div class="value-Setting col-4">
+                                    <label for="standardPrice"
+                                        >Parent Code<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="selectedParentGroup.code"
+                                        pInputText
+                                        placeholder="Enter a Parent Code"
+                                        formControlName="code"
+                                        id="standardPrice"
+                                        aria-describedby="standardPrice-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="parentGroupForm.get('code')"
+                                        label="Parent Code"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="value-Setting col-4">
+                                    <label for="standardPrice"
+                                        >Parent Group<span
+                                            class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="selectedParentGroup.name"
+                                        pInputText
+                                        placeholder="Enter a Parent Group"
+                                        formControlName="value"
+                                        id="standardPrice"
+                                        aria-describedby="standardPrice-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="parentGroupForm.get('value')"
+                                        label="Parent Group"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="col-4">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetParentGroup()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveUnavailability('PARENT-GROUP')"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="tableColsEventForParent"
+                                [genericTableSettingInput]="
+                                    tableSettingsEventTwo
+                                "
+                                [genericListInput]="parentGroupList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="paginateEventForParent($event)"
+                                [totalRecords]="totalRecordsForParentGroup"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForParentGroup($event)
+                                "
+                                (deleteDataEvent)="
+                                    deletePredefinedEntityType($event)
+                                "
+                                (searchEntityEvent)="searchParentGroup($event)"
+                                [placeholder]="searchPlaceholderParent"
+                                [exportName]="getExportParentGroup()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomer($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </p-tabPanel>
+
+        <p-tabPanel header="Service Engineer">
+            <p-tabView>
+                <p-tabPanel header="Time Slot">
+                    <div class="add-Create-Order-Grid">
+                        <div class="row-One col-12" [formGroup]="slotTypeForm">
+                            <div class="parent-fields col-10">
+                                <div class="value-Setting col-3">
+                                    <label for="standardPrice"
+                                        >Slot Name<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        formControlName="slotName"
+                                        [(ngModel)]="
+                                            slotManagerObject.slot_name
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Slot Name"
+                                        id="standardPrice"
+                                        aria-describedby="standardPrice-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="slotTypeForm.get('slotName')"
+                                        label="Slot Name"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="value-Setting col-3">
+                                    <label for="standardPrice"
+                                        >Start Time<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+
+                                    <p-calendar
+                                        formControlName="selectedStartTime"
+                                        [(ngModel)]="selectedStartTimeDate"
+                                        selectionMode="single"
+                                        inputId="single-time"
+                                        placeholder="Enter a Start Time"
+                                        showTime="true"
+                                        timeOnly="true"
+                                        hourFormat="24"
+                                    ></p-calendar>
+
+                                    <app-custom-validation
+                                        [control]="
+                                            slotTypeForm.get(
+                                                'selectedStartTime'
+                                            )
+                                        "
+                                        label="Start Time"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="value-Setting col-3">
+                                    <label for="standardPrice"
+                                        >End Time<span class="required_field"
+                                            >*</span
+                                        ></label
+                                    >
+
+                                    <p-calendar
+                                        formControlName="selectedEndTime"
+                                        [(ngModel)]="selectedEndTimeDate"
+                                        selectionMode="single"
+                                        inputId="single-time"
+                                        placeholder="Enter a End Time"
+                                        showTime="true"
+                                        timeOnly="true"
+                                        hourFormat="24"
+                                    ></p-calendar>
+
+                                    <app-custom-validation
+                                        [control]="
+                                            slotTypeForm.get('selectedEndTime')
+                                        "
+                                        label="End Time"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="col-2">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetSlotType()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-solt col-2">
+                                <button
+                                    class="custom-button"
+                                    (click)="saveSlotType()"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="tableColsEventForSlotType"
+                                [genericTableSettingInput]="tableSettingsEvent"
+                                [genericListInput]="slotManagerList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="
+                                    paginateEventForTimeSlot($event)
+                                "
+                                [totalRecords]="totalRecordsForTimeSlot"
+                                (editEntityEvent)="
+                                    openDialogueForSlotType($event)
+                                "
+                                (deleteDataEvent)="deleteSlotById($event)"
+                                (searchEntityEvent)="searchSlotType($event)"
+                                [placeholder]="searchPlaceholderSlotType"
+                                [exportName]="getExportSlotTabName()"
+                                (activeDeactiveEvent)="
+                                    activeDeactiveSlotType($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Unavailability Reason">
+                    <div class="add-Create-Order-Grid">
+                        <div class="row-One col-12">
+                            <div class="field-and-btn col-9">
+                                <div
+                                    class="value-Setting col-4"
+                                    [formGroup]="unavailabilityForm"
+                                >
+                                    <label for="standardPrice"
+                                        >Unavailability Reason</label
+                                    >
+                                    <input
+                                        formControlName="value"
+                                        [(ngModel)]="selectedUnavailabity.name"
+                                        pInputText
+                                        placeholder="Enter a Unavailability Reason"
+                                        id="standardPrice"
+                                        aria-describedby="standardPrice-help"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            unavailabilityForm.get('value')
+                                        "
+                                        label="Unavailability Reason"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="col-4">
+                                    <button
+                                        class="custom-button-cancel"
+                                        (click)="resetUnAvailability()"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="add-Customer-Type col-3">
+                                <button
+                                    class="custom-button"
+                                    (click)="
+                                        saveUnavailability(
+                                            'UNAVAILABILITY-REASON'
+                                        )
+                                    "
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-of-Table-One">
+                        <div class="Table-One">
+                            <app-common-table
+                                [genericColsInput]="
+                                    tableColsEventForUnavailability
+                                "
+                                [genericTableSettingInput]="tableSettingsEvent"
+                                [genericListInput]="unAvailabilityTypeList"
+                                (addEntityEvent)="addEvent()"
+                                (paginateEvent)="
+                                    paginateEventForUnavailability($event)
+                                "
+                                [totalRecords]="totalRecordsForUnAvailability"
+                                (editEntityEvent)="
+                                    openDialoguePredefineForUnAvailability(
+                                        $event
+                                    )
+                                "
+                                (deleteDataEvent)="
+                                    deletePredefinedEntityType($event)
+                                "
+                                (searchEntityEvent)="
+                                    searchUnAvailability($event)
+                                "
+                                [placeholder]="searchPlaceholderUnAvailability"
+                                [exportName]="
+                                    getExportUnavaliabilityReasonName()
+                                "
+                                (activeDeactiveEvent)="
+                                    activeDeactiveCustomer($event)
+                                "
+                            >
+                            </app-common-table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+<!-- Edit Customer Type -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogBoxForCustomerCategory"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeCustomerEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Customer Type</h5>
+        <div class="row-One col-12" [formGroup]="updatedForms">
+            <div class="value-Setting col-12">
+                <label for="customer_type"
+                    >Value<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updateCustomerType.customer_type"
+                    pInputText
+                    id="customer_type"
+                    aria-describedby="customer_type-help"
+                    formControlName="customerType"
+                    placeholder="Enter a Value"
+                />
+                <app-custom-validation
+                    [control]="updatedForms.get('customerType')"
+                    label="Value"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button
+                class="custom-button"
+                (click)="updateCustomerCategory(updateCustomerType)"
+            >
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeCustomerEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit State -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogModuleForState"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeStateEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update State</h5>
+        <div class="row-One col-12" [formGroup]="updatedStateForms">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Value<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.name"
+                    pInputText
+                    id="standardPrice"
+                    aria-describedby="standardPrice-help"
+                    formControlName="updateStateType"
+                    placeholder="Enter a Value"
+                />
+                <app-custom-validation
+                    [control]="updatedStateForms.get('updateStateType')"
+                    label="Value"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button class="custom-button" (click)="updatePredefine('STATE')">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeStateEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit City Type -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogModuleForCity"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeCityEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update City Type</h5>
+        <div class="row-One col-12" [formGroup]="updatedCityForms">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Value<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.name"
+                    pInputText
+                    id="standardPrice"
+                    aria-describedby="standardPrice-help"
+                    formControlName="cityTypeName"
+                    placeholder="Enter a Value"
+                />
+                <app-custom-validation
+                    [control]="updatedCityForms.get('cityTypeName')"
+                    label="Value"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button
+                class="custom-button"
+                (click)="updatePredefine('CITY-TYPE')"
+            >
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeCityEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Zone -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogModuleForZone"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeZoneEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Zone</h5>
+        <div class="row-One col-12" [formGroup]="updatedZoneForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Value<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.name"
+                    pInputText
+                    id="standardPrice"
+                    aria-describedby="standardPrice-help"
+                    formControlName="zoneTypeName"
+                    placeholder="Enter a Value"
+                />
+                <app-custom-validation
+                    [control]="updatedZoneForm.get('zoneTypeName')"
+                    label="Value"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button class="custom-button" (click)="updatePredefine('ZONE')">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeZoneEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit UnAvailability Reason -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogModuleForUnAvailability"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeAvailabilityEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update UnAvailability Reason</h5>
+        <div class="row-One col-12" [formGroup]="updatedUnavailabilityForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Value<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.name"
+                    pInputText
+                    id="standardPrice"
+                    placeholder="Enter a Value"
+                    aria-describedby="standardPrice-help"
+                    formControlName="unavailabilityTypeName"
+                />
+                <app-custom-validation
+                    [control]="
+                        updatedUnavailabilityForm.get('unavailabilityTypeName')
+                    "
+                    label="Value"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button
+                class="custom-button"
+                (click)="updatePredefine('UNAVAILABILITY-REASON')"
+            >
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeAvailabilityEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Spare Part Type -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogBoxForProductType"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeProductTypeEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Spare Part Type</h5>
+        <div class="row-One col-12" [formGroup]="updatedSparePartForm">
+            <div class="value-Setting col-12">
+                <label for="product_type"
+                    >Value<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updateSparePartObject.product_type"
+                    pInputText
+                    id="product_type"
+                    placeholder="Enter a Value"
+                    aria-describedby="customer_type-help"
+                    formControlName="sparePartTypeName"
+                />
+                <app-custom-validation
+                    [control]="updatedSparePartForm.get('sparePartTypeName')"
+                    label="Value"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button
+                class="custom-button"
+                (click)="updateProductType(updateSparePartObject)"
+            >
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeProductTypeEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit City Tab -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogBoxForCityTab"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeCityTabEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update City</h5>
+        <div class="row-One col-12" [formGroup]="updatedCityTabForm">
+            <div class="value-Setting col-12">
+                <label for="state"
+                    >State<span class="required_field">*</span></label
+                >
+                <p-dropdown
+                    [options]="stateList"
+                    optionLabel="name"
+                    [(ngModel)]="updatedSelectedState"
+                    placeholder="Select a State"
+                    formControlName="updatedSelectedState"
+                ></p-dropdown>
+                <app-custom-validation
+                    [control]="updatedCityTabForm.get('updatedSelectedState')"
+                    label="State"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="row-One col-12" [formGroup]="updatedCityTabForm">
+            <div class="value-Setting col-12">
+                <label for="name"
+                    >City<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.name"
+                    pInputText
+                    placeholder="Enter a City"
+                    id="name"
+                    aria-describedby="name-help"
+                    formControlName="cityTabTypeName"
+                />
+                <app-custom-validation
+                    [control]="updatedCityTabForm.get('cityTabTypeName')"
+                    label="City"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button class="custom-button" (click)="updatePredefineCityTab()">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeCityTabEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Slot Type -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogBoxForSlotType"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeSlotTypeEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Slot Type</h5>
+        <div class="row-One col-12" [formGroup]="updateSlotForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Slot Name<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updateSlotObject.slot_name"
+                    pInputText
+                    id="standardPrice"
+                    formControlName="updateName"
+                    placeholder="Enter a Slot Name"
+                    aria-describedby="standardPrice-help"
+                />
+                <app-custom-validation
+                    [control]="updateSlotForm.get('updateName')"
+                    label="Slot Name"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="row-One col-12" [formGroup]="updateSlotForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Start Time<span class="required_field">*</span></label
+                >
+                <p-calendar
+                    #calendar
+                    formControlName="updatedStartTime"
+                    [(ngModel)]="updateStartTimeDate"
+                    selectionMode="single"
+                    inputId="single-time"
+                    showTime="true"
+                    timeOnly="true"
+                    hourFormat="24"
+                ></p-calendar>
+
+                <app-custom-validation
+                    [control]="updateSlotForm.get('updatedStartTime')"
+                    label="Start Time"
+                ></app-custom-validation>
+            </div>
+        </div>
+
+        <div class="row-One col-12" [formGroup]="updateSlotTwoForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >End Time<span class="required_field">*</span></label
+                >
+                <p-calendar
+                    #calendar
+                    formControlName="updatedEndTime"
+                    [(ngModel)]="updateEndTimeDate"
+                    selectionMode="single"
+                    inputId="single-time"
+                    showTime="true"
+                    timeOnly="true"
+                    hourFormat="24"
+                ></p-calendar>
+
+                <app-custom-validation
+                    [control]="updateSlotTwoForm.get('updatedEndTime')"
+                    label="End Time"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button
+                class="custom-button"
+                (click)="updateSlotType(updateSlotObject)"
+            >
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeSlotTypeEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Add Repair Checlist -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="openDialogBoxForRepairCheclist"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeRepairCheclistDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Add Repair Checlist</h5>
+        <div class="row-One col-12" [formGroup]="repairChecklistForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Repair Checlist<span class="required_field">*</span></label
+                >
+                <input
+                    pInputText
+                    aria-describedby="sop-help"
+                    [(ngModel)]="productCategoryObject.sops_string"
+                    formControlName="addRepairChecklist"
+                    placeholder="Enter a Repair Checlist"
+                />
+                <app-custom-validation
+                    [control]="repairChecklistForm.get('addRepairChecklist')"
+                    label="Repair Checlist"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="add-category-Type">
+            <button class="custom-button" (click)="updateAddRepairChecklist()">
+                Add
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeRepairCheclistDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+        <div class="Table-One">
+            <app-common-table
+                [genericColsInput]="tableColsRepairChecklist"
+                [genericTableSettingInput]="tableSettingsRepairChecklist"
+                [genericListInput]="repaiChecklistList"
+                (paginateEvent)="paginateEvent($event)"
+                [totalRecords]="totalRecords"
+                (editEntityEvent)="editRepairChecklistEvent($event)"
+                (deleteDataEvent)="deleteRepairAndProblem($event)"
+                (activeDeactiveEvent)="activeDeactiveRepairChecklist($event)"
+            >
+            </app-common-table>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Add Problem Diagnosis -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="openDialogBoxForProblemDiagnosis"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeProblemDiagnosisDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Add Problem Diagnosis</h5>
+        <div class="row-One col-12" [formGroup]="problemStatementForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Problem Diagnosis<span class="required_field"
+                        >*</span
+                    ></label
+                >
+                <input
+                    pInputText
+                    aria-describedby="problemStatement-help"
+                    [(ngModel)]="productCategoryObject.pss_string"
+                    formControlName="addproblemStatement"
+                    placeholder="Enter a Problem Diagnosis"
+                />
+                <app-custom-validation
+                    [control]="problemStatementForm.get('addproblemStatement')"
+                    label="Problem Diagnosis"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="add-category-Type">
+            <button class="custom-button" (click)="updateProblemStatement()">
+                Add
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeProblemDiagnosisDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+        <div class="Table-One">
+            <app-common-table
+                [genericColsInput]="tableColsProblemDiagnosis"
+                [genericTableSettingInput]="tableSettingsProblemDiagnosis"
+                [genericListInput]="repaiProblemDiagnosis"
+                (paginateEvent)="paginateEvent($event)"
+                [totalRecords]="totalRecords"
+                (editEntityEvent)="editProblemDiagnosisEvent($event)"
+                (deleteDataEvent)="deleteRepairAndProblem($event)"
+                (activeDeactiveEvent)="activeDeactiveProblemDiagnosis($event)"
+            >
+            </app-common-table>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Category Name -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="openEditDialogModuleCategoryName"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeCategoryNameDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Category Name</h5>
+        <div class="row-One col-12" [formGroup]="categoryNameForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Category Name<span class="required_field">*</span></label
+                >
+                <input
+                    pInputText
+                    aria-describedby="problemStatement-help"
+                    [(ngModel)]="updatedProductCategoryName.product_category"
+                    formControlName="editCategoryName"
+                    placeholder="Enter a Category Name"
+                />
+                <app-custom-validation
+                    [control]="categoryNameForm.get('editCategoryName')"
+                    label="Category Name"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="add-category-Type">
+            <button class="custom-button" (click)="updateProductCategory()">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeCategoryNameDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Repair Checlist -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="openEditDialogModuleRepairCheclist"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeUpdateRepairCheclistDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Repair Checlist</h5>
+        <div class="row-One col-12">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Repair Checlist<span class="required_field">*</span></label
+                >
+                <input
+                    pInputText
+                    aria-describedby="problemStatement-help"
+                    [(ngModel)]="updateRepairAndProblemObj.sops_string"
+                    placeholder="Enter a Repair Checlist"
+                />
+                <!-- <app-custom-validation
+                    [control]="editRepairForm.get('editRepairChecklist')"
+                    label="Repair Checlist"
+                ></app-custom-validation> -->
+            </div>
+        </div>
+        <div class="add-category-Type">
+            <button class="custom-button" (click)="updateRepairAndProblem()">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeUpdateRepairCheclistDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Problem Diagnosis -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogModuleProblemDiagnosisEvent"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeUpdateProblemDiagnosisDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Problem Diagnosis</h5>
+        <!-- [formGroup]="editProblemForm" -->
+        <div class="row-One col-12">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Problem Diagnosis<span class="required_field"
+                        >*</span
+                    ></label
+                >
+                <input
+                    pInputText
+                    aria-describedby="problemStatement-help"
+                    [(ngModel)]="updateRepairAndProblemObj.pss_string"
+                    placeholder="Enter a Problem Diagnosis"
+                />
+                <!-- <app-custom-validation
+                    [control]="editProblemForm.get('editProblemDiagnosis')"
+                    label="Problem Diagnosis"
+                ></app-custom-validation> -->
+            </div>
+        </div>
+        <div class="add-category-Type">
+            <button class="custom-button" (click)="updateRepairAndProblem()">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeUpdateProblemDiagnosisDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Parent Group -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogModuleForParentGroup"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeZoneEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Parent Group</h5>
+        <div class="" [formGroup]="updatedParentGroupForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Parent Code<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.code"
+                    pInputText
+                    id="standardPrice"
+                    placeholder="Enter a Parent Code"
+                    aria-describedby="standardPrice-help"
+                    formControlName="parentGroupCode"
+                />
+                <app-custom-validation
+                    [control]="updatedParentGroupForm.get('parentGroupCode')"
+                    label="Parent Code"
+                ></app-custom-validation>
+            </div>
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Parent Group<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.name"
+                    pInputText
+                    id="standardPrice"
+                    aria-describedby="standardPrice-help"
+                    formControlName="parentGroupName"
+                    placeholder="Enter a Parent Group"
+                />
+                <app-custom-validation
+                    [control]="updatedParentGroupForm.get('parentGroupName')"
+                    label="Parent Group"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button
+                class="custom-button"
+                (click)="updatePredefineParentGroup('PARENT-GROUP')"
+            >
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeZoneEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Product OEM -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogModuleForProductOEM"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeOEMEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Product OEM</h5>
+        <div class="row-One col-12" [formGroup]="updatedProductOEMForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Product OEM<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.name"
+                    pInputText
+                    id="standardPrice"
+                    aria-describedby="standardPrice-help"
+                    placeholder="Enter a Product OEM"
+                    formControlName="OemName"
+                />
+                <app-custom-validation
+                    [control]="updatedProductOEMForm.get('OemName')"
+                    label="Product OEM"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button class="custom-button" (click)="updatePredefine('OEM')">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeOEMEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Entity Currency -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogModuleForEntityCurrency"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeCurrencyEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Entity Currency</h5>
+        <div class="row-One col-12" [formGroup]="updatedCurrencytForm">
+            <div class="value-Setting col-12">
+                <label for="standardPrice"
+                    >Value<span class="required_field">*</span></label
+                >
+                <input
+                    [(ngModel)]="updatedPredefineObject.name"
+                    pInputText
+                    placeholder="Enter a Value"
+                    id="standardPrice"
+                    aria-describedby="standardPrice-help"
+                    formControlName="CurrencyName"
+                />
+                <app-custom-validation
+                    [control]="updatedCurrencytForm.get('CurrencyName')"
+                    label="Value"
+                ></app-custom-validation>
+            </div>
+        </div>
+        <div class="update-Customer-Type">
+            <button class="custom-button" (click)="updatePredefine('CURRENCY')">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeCurrencyEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Legal Entity -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogBoxForLegalEntity"
+    [closable]="true"
+    [dynamicWidth]="dialogWidthForLegalEntity"
+    (closeEvent)="closeLegalEntityEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Legal Entity</h5>
+        <div class="" [formGroup]="updatedLegalEntityForm">
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Name<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="name"
+                        [(ngModel)]="updatedLegalEntityObject.name"
+                        pInputText
+                        id="standardPrice"
+                        placeholder="Enter a Name"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalEntityForm.get('name')"
+                        label="Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >GST Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="gstNumber"
+                        placeholder="Enter a GST Number"
+                        [(ngModel)]="updatedLegalEntityObject.gst_number"
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalEntityForm.get('gstNumber')"
+                        label="GST Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >PAN Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="panNumber"
+                        [(ngModel)]="updatedLegalEntityObject.pan_number"
+                        pInputText
+                        id="standardPrice"
+                        placeholder="Enter a PAN Number"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalEntityForm.get('panNumber')"
+                        label="PAN Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Financial Year<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        formControlName="financialYear"
+                        [(ngModel)]="updatedLegalEntityObject.financial_year"
+                        pInputText
+                        id="standardPrice"
+                        placeholder="Enter a Financial Year"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalEntityForm.get('financialYear')"
+                        label="Financial Year"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >ROC Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="rocNumber"
+                        [(ngModel)]="updatedLegalEntityObject.roc_number"
+                        pInputText
+                        id="standardPrice"
+                        placeholder="Enter a ROC Number"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalEntityForm.get('rocNumber')"
+                        label="ROC Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >TDS Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="tdsNumber"
+                        [(ngModel)]="updatedLegalEntityObject.tds_number"
+                        pInputText
+                        placeholder="Enter a TDS Number"
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalEntityForm.get('tdsNumber')"
+                        label="TDS Number"
+                    ></app-custom-validation>
+                </div>
+
+                <!-- <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Subsidiaries<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <p-multiSelect
+                        [options]="legalSubsidiaryList"
+                        optionLabel="name"
+                        placeholder="Select a Subsidiaries"
+                        [(ngModel)]="updateSelectedSubsidiaries"
+                        formControlName="updateSelectedSubsidiaries"
+                        class="branch-dropdown"
+                    ></p-multiSelect>
+                    <app-custom-validation
+                        [control]="
+                            updatedLegalEntityForm.get(
+                                'updateSelectedSubsidiaries'
+                            )
+                        "
+                        label="Subsidiaries"
+                    ></app-custom-validation>
+                </div> -->
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Branches<span class="required_field">*</span></label
+                    >
+                    <p-multiSelect
+                        [options]="legalBranchList"
+                        optionLabel="name"
+                        placeholder="Select a Branches"
+                        [(ngModel)]="updateSelectedBranch"
+                        formControlName="updateSelectedBranch"
+                        class="branch-dropdown"
+                    ></p-multiSelect>
+                    <!-- <app-custom-validation
+                        [control]="
+                            updatedLegalEntityForm.get('updateSelectedBranch')
+                        "
+                        label="Branches"
+                    ></app-custom-validation> -->
+                </div>
+            </div>
+
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Bank Name<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="bank_name"
+                        placeholder="Enter a Bank Name"
+                        [(ngModel)]="updatedLegalEntityObject.bank_name"
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalEntityForm.get('bank_name')"
+                        label="Bank Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Bank Account Name<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        formControlName="bank_account_name"
+                        [(ngModel)]="updatedLegalEntityObject.bank_account_name"
+                        pInputText
+                        placeholder="Enter a Bank Account Name"
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="
+                            updatedLegalEntityForm.get('bank_account_name')
+                        "
+                        label="Bank Account Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Bank Account Number<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        formControlName="bank_account_number"
+                        placeholder="Enter a Bank Account Number"
+                        [(ngModel)]="
+                            updatedLegalEntityObject.bank_account_number
+                        "
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="
+                            updatedLegalEntityForm.get('bank_account_number')
+                        "
+                        label="Bank Account Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Bank Ifsc Code<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        formControlName="bank_ifsc_code"
+                        placeholder="Enter a Bank Ifsc Code"
+                        [(ngModel)]="updatedLegalEntityObject.bank_ifsc_code"
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalEntityForm.get('bank_ifsc_code')"
+                        label="Bank Ifsc Code"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-4">
+                    <label>Upload Sign Document</label>
+                    <div
+                        class="image-wrap"
+                        *ngIf="
+                            updateImageSrc ||
+                            updatedLegalEntityObject?.sign_document?.file_path
+                        "
+                    >
+                        <img
+                            [src]="
+                                updateImageSrc
+                                    ? updateImageSrc
+                                    : updatedLegalEntityObject?.sign_document
+                                          ?.file_path
+                            "
+                            class="banner-image"
+                        />
+                        <span class="remove-image" (click)="deleteImgSrc()">
+                            <i class="pi pi-times"></i>
+                        </span>
+                    </div>
+
+                    <!-- File Upload -->
+                    <p-fileUpload
+                        #fileUploadUpdateOne
+                        name="image"
+                        mode="basic"
+                        accept="image/*"
+                        [customUpload]="true"
+                        (onSelect)="updateUploadDocuments($event)"
+                        [showUploadButton]="false"
+                        [showCancelButton]="false"
+                        maxFileSize="5242880"
+                    >
+                    </p-fileUpload>
+                </div>
+            </div>
+
+            <div class="header-of-add-client-btn">
+                <p class="location-Details">Address Details</p>
+                <div class="legal-entity-address col-12">
+                    <div class="legal-entity-filds col-3">
+                        <label for="Address1"
+                            >Address 1<span class="required_field"
+                                >*</span
+                            ></label
+                        >
+                        <textarea
+                            [(ngModel)]="
+                                updatedLegalEntityObject.registered_address
+                                    .address_1
+                            "
+                            formControlName="address_1"
+                            class="Address1-Field"
+                            placeholder="Enter a Address 1"
+                            rows="4"
+                            cols="4"
+                            pInputTextarea
+                        ></textarea>
+                        <app-custom-validation
+                            [control]="updatedLegalEntityForm.get('address_1')"
+                            label="Address 1"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="legal-entity-filds col-3">
+                        <label for="Address2">Address 2</label>
+                        <textarea
+                            [(ngModel)]="
+                                updatedLegalEntityObject.registered_address
+                                    .address_2
+                            "
+                            formControlName="address_2"
+                            class="Address2-Field"
+                            placeholder="Enter a Address 2"
+                            rows="4"
+                            cols="4"
+                            pInputTextarea
+                        ></textarea>
+                    </div>
+                    <div class="legal-entity-filds col-3">
+                        <label for="cityType"
+                            >Country<span class="required_field">*</span></label
+                        >
+                        <p-dropdown
+                            [(ngModel)]="updatedLegalCountry"
+                            formControlName="country"
+                            [options]="countryTypeList"
+                            optionLabel="name"
+                            placeholder="Select a Country"
+                        ></p-dropdown>
+                        <app-custom-validation
+                            [control]="updatedLegalEntityForm.get('country')"
+                            label="Country"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="legal-entity-filds col-3">
+                        <label for="stateID"
+                            >State<span class="required_field">*</span></label
+                        >
+                        <p-dropdown
+                            [(ngModel)]="updatedLegalState"
+                            formControlName="state"
+                            [options]="stateList"
+                            optionLabel="name"
+                            placeholder="Select a State"
+                        ></p-dropdown>
+                        <app-custom-validation
+                            [control]="updatedLegalEntityForm.get('state')"
+                            label="State"
+                        ></app-custom-validation>
+                    </div>
+                </div>
+
+                <div class="legal-entity-address col-12">
+                    <div class="legal-entity-filds col-3">
+                        <label for="City"
+                            >City<span class="required_field">*</span></label
+                        >
+                        <p-dropdown
+                            [(ngModel)]="updatedLegalCity"
+                            [options]="cityList"
+                            optionLabel="name"
+                            placeholder="Select a City"
+                            formControlName="roles"
+                            formControlName="city"
+                        ></p-dropdown>
+
+                        <app-custom-validation
+                            [control]="updatedLegalEntityForm.get('city')"
+                            label="City"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="legal-entity-filds col-3">
+                        <label for="pincode"
+                            >Pincode<span class="required_field">*</span></label
+                        >
+                        <input
+                            [(ngModel)]="
+                                updatedLegalEntityObject.registered_address
+                                    .pincode
+                            "
+                            formControlName="pincode"
+                            placeholder="Enter a Pincode"
+                            pInputText
+                            id="pincode"
+                            aria-describedby="pincode-help"
+                        />
+                        <app-custom-validation
+                            [control]="updatedLegalEntityForm.get('pincode')"
+                            label="Pincode"
+                        ></app-custom-validation>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="update-Legal-Entity">
+            <button class="custom-button" (click)="updateLegalEntity()">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeLegalEntityEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Legal Branch -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogBoxForLegalBranch"
+    [closable]="true"
+    [dynamicWidth]="dialogWidthForLegalEntity"
+    (closeEvent)="closeLegalBranchEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Legal Branch</h5>
+        <div class="" [formGroup]="updatedLegalBranchForm">
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Name<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="name"
+                        [(ngModel)]="updatedLegalBranchObject.name"
+                        pInputText
+                        id="standardPrice"
+                        placeholder="Enter a Name"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalBranchForm.get('name')"
+                        label="Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >GST Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="gstNumber"
+                        [(ngModel)]="updatedLegalBranchObject.gst_number"
+                        pInputText
+                        placeholder="Enter a GST Number"
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalBranchForm.get('gstNumber')"
+                        label="GST Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >TDS Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="tdsNumber"
+                        [(ngModel)]="updatedLegalBranchObject.tds_number"
+                        pInputText
+                        id="standardPrice"
+                        placeholder="Enter a TDS Number"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalBranchForm.get('tdsNumber')"
+                        label="TDS Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Legal Entity<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <p-dropdown
+                        [(ngModel)]="updateSelectedEntity"
+                        [options]="legalEntityList"
+                        optionLabel="name"
+                        placeholder="Select a Legal Entity"
+                        formControlName="legalEntity"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="updatedLegalBranchForm.get('legalEntity')"
+                        label="Legal Entity"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Bank Name<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="bank_name"
+                        placeholder="Enter a Bank Name"
+                        [(ngModel)]="updatedLegalBranchObject.bank_name"
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalBranchForm.get('bank_name')"
+                        label="Bank Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Bank Account Name<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        formControlName="bank_account_name"
+                        [(ngModel)]="updatedLegalBranchObject.bank_account_name"
+                        pInputText
+                        placeholder="Enter a Bank Account Name"
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="
+                            updatedLegalBranchForm.get('bank_account_name')
+                        "
+                        label="Bank Account Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Bank Account Number<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        formControlName="bank_account_number"
+                        placeholder="Enter a Bank Account Number"
+                        [(ngModel)]="
+                            updatedLegalBranchObject.bank_account_number
+                        "
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="
+                            updatedLegalBranchForm.get('bank_account_number')
+                        "
+                        label="Bank Account Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Bank Ifsc Code<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        formControlName="bank_ifsc_code"
+                        placeholder="Enter a Bank Ifsc Code"
+                        [(ngModel)]="updatedLegalBranchObject.bank_ifsc_code"
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalBranchForm.get('bank_ifsc_code')"
+                        label="Bank Ifsc Code"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-4">
+                    <label>Upload Sign Document</label>
+                    <div
+                        class="image-wrap"
+                        *ngIf="
+                            updateImageSrc ||
+                            updatedLegalBranchObject?.sign_document?.file_path
+                        "
+                    >
+                        <img
+                            [src]="
+                                updateImageSrc
+                                    ? updateImageSrc
+                                    : updatedLegalBranchObject?.sign_document
+                                          ?.file_path
+                            "
+                            class="banner-image"
+                        />
+                        <span class="remove-image" (click)="deleteImgSrc()">
+                            <i class="pi pi-times"></i>
+                        </span>
+                    </div>
+
+                    <!-- File Upload -->
+                    <p-fileUpload
+                        #fileUploadUpdateTwo
+                        name="image"
+                        mode="basic"
+                        accept="image/*"
+                        [customUpload]="true"
+                        (onSelect)="updateUploadDocuments($event)"
+                        [showUploadButton]="false"
+                        [showCancelButton]="false"
+                        maxFileSize="5242880"
+                    >
+                    </p-fileUpload>
+                </div>
+            </div>
+
+            <div class="header-of-add-client-btn">
+                <p class="location-Details">Address Details</p>
+                <div class="legal-entity-address col-12">
+                    <div class="legal-entity-filds col-3">
+                        <label for="Address1"
+                            >Address 1<span class="required_field"
+                                >*</span
+                            ></label
+                        >
+                        <textarea
+                            [(ngModel)]="
+                                updatedLegalBranchObject.registered_address
+                                    .address_1
+                            "
+                            formControlName="address_1"
+                            class="Address1-Field"
+                            placeholder="Enter a Address 1"
+                            rows="4"
+                            cols="4"
+                            pInputTextarea
+                        ></textarea>
+                        <app-custom-validation
+                            [control]="updatedLegalBranchForm.get('address_1')"
+                            label="Address 1"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="legal-entity-filds col-3">
+                        <label for="Address2">Address 2</label>
+                        <textarea
+                            [(ngModel)]="
+                                updatedLegalBranchObject.registered_address
+                                    .address_2
+                            "
+                            formControlName="address_2"
+                            class="Address2-Field"
+                            placeholder="Enter a Address 2"
+                            rows="4"
+                            cols="4"
+                            pInputTextarea
+                        ></textarea>
+                    </div>
+                    <div class="legal-entity-filds col-3">
+                        <label for="cityType"
+                            >Country<span class="required_field">*</span></label
+                        >
+                        <p-dropdown
+                            [(ngModel)]="updatedLegalCountry"
+                            formControlName="country"
+                            [options]="countryTypeList"
+                            optionLabel="name"
+                            placeholder="Select a Country"
+                        ></p-dropdown>
+                        <app-custom-validation
+                            [control]="updatedLegalBranchForm.get('country')"
+                            label="Country"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="legal-entity-filds col-3">
+                        <label for="stateID"
+                            >State<span class="required_field">*</span></label
+                        >
+                        <p-dropdown
+                            [(ngModel)]="updatedLegalState"
+                            formControlName="state"
+                            [options]="stateList"
+                            optionLabel="name"
+                            placeholder="Select a State"
+                        ></p-dropdown>
+                        <app-custom-validation
+                            [control]="updatedLegalBranchForm.get('state')"
+                            label="State"
+                        ></app-custom-validation>
+                    </div>
+                </div>
+
+                <div class="legal-entity-address col-12">
+                    <div class="legal-entity-filds col-3">
+                        <label for="City"
+                            >City<span class="required_field">*</span></label
+                        >
+                        <p-dropdown
+                            [(ngModel)]="updatedLegalCity"
+                            [options]="cityList"
+                            optionLabel="name"
+                            placeholder="Select a City"
+                            formControlName="roles"
+                            formControlName="city"
+                        ></p-dropdown>
+
+                        <app-custom-validation
+                            [control]="updatedLegalBranchForm.get('city')"
+                            label="City"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="legal-entity-filds col-3">
+                        <label for="pincode"
+                            >Pincode<span class="required_field">*</span></label
+                        >
+                        <input
+                            [(ngModel)]="
+                                updatedLegalBranchObject.registered_address
+                                    .pincode
+                            "
+                            formControlName="pincode"
+                            placeholder="Enter a Pincode"
+                            pInputText
+                            id="pincode"
+                            aria-describedby="pincode-help"
+                        />
+                        <app-custom-validation
+                            [control]="updatedLegalBranchForm.get('pincode')"
+                            label="Pincode"
+                        ></app-custom-validation>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="update-Legal-Entity">
+            <button class="custom-button" (click)="updateLegalBranch()">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeLegalBranchEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<!-- Edit Legal Subsidiary -->
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="editDialogBoxForLegalSubsidiary"
+    [closable]="true"
+    [dynamicWidth]="dialogWidthForLegalEntity"
+    (closeEvent)="closeLegalSubsidiaryEventDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Legal Subsidiary</h5>
+        <div class="" [formGroup]="updatedLegalSubsidiaryForm">
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Name<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="name"
+                        [(ngModel)]="updatedLegalSubsidiaryObject.name"
+                        pInputText
+                        placeholder="Enter a Name"
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalSubsidiaryForm.get('name')"
+                        label="Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >GST Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="gstNumber"
+                        [(ngModel)]="updatedLegalSubsidiaryObject.gst_number"
+                        pInputText
+                        id="standardPrice"
+                        placeholder="Enter a GST Number"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalSubsidiaryForm.get('gstNumber')"
+                        label="GST Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >PAN Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="panNumber"
+                        [(ngModel)]="updatedLegalSubsidiaryObject.pan_number"
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                        placeholder="Enter a PAN Number"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalSubsidiaryForm.get('panNumber')"
+                        label="PAN Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Financial Year<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        formControlName="financialYear"
+                        [(ngModel)]="
+                            updatedLegalSubsidiaryObject.financial_year
+                        "
+                        placeholder="Enter a Financial Year"
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="
+                            updatedLegalSubsidiaryForm.get('financialYear')
+                        "
+                        label="Financial Year"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="legal-entity-form col-12">
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >ROC Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="rocNumber"
+                        [(ngModel)]="updatedLegalSubsidiaryObject.roc_number"
+                        pInputText
+                        placeholder="Enter a ROC Number"
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalSubsidiaryForm.get('rocNumber')"
+                        label="ROC Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >TDS Number<span class="required_field">*</span></label
+                    >
+                    <input
+                        formControlName="tdsNumber"
+                        [(ngModel)]="updatedLegalSubsidiaryObject.tds_number"
+                        pInputText
+                        placeholder="Enter a TDS Number"
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                    />
+                    <app-custom-validation
+                        [control]="updatedLegalSubsidiaryForm.get('tdsNumber')"
+                        label="TDS Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Registered Address<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <textarea
+                        [(ngModel)]="
+                            updatedLegalSubsidiaryObject.registered_address
+                        "
+                        class="registered-address-Field"
+                        placeholder="Enter a Registered Address"
+                        rows="2"
+                        cols="2"
+                        pInputTextarea
+                        formControlName="registeredAddress"
+                    ></textarea>
+                    <app-custom-validation
+                        [control]="
+                            updatedLegalSubsidiaryForm.get('registeredAddress')
+                        "
+                        label="Registered Address"
+                    ></app-custom-validation>
+                </div>
+                <div class="legal-entity-filds col-3">
+                    <label for="standardPrice"
+                        >Legal Entity<span class="required_field"
+                            >*</span
+                        ></label
+                    >
+                    <p-dropdown
+                        [(ngModel)]="updateSelectedEntity"
+                        [options]="legalEntityList"
+                        optionLabel="name"
+                        placeholder="Select a Legal Entity"
+                        formControlName="legalEntity"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="
+                            updatedLegalSubsidiaryForm.get('legalEntity')
+                        "
+                        label="Legal Entity"
+                    ></app-custom-validation>
+                </div>
+            </div>
+        </div>
+        <div class="update-Legal-Entity">
+            <button class="custom-button" (click)="updateLegalSubsidiary()">
+                Update
+            </button>
+            <button
+                class="custom-button-cancel"
+                (click)="closeLegalSubsidiaryEventDialog()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>

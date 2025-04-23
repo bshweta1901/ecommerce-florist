@@ -1,0 +1,54 @@
+<app-common-table
+    [title]="'Product Catelog & Pricing'"
+    [genericColsInput]="tableColsEvent"
+    [genericTableSettingInput]="tableSettingsEvent"
+    [genericListInput]="catelogProductList"
+    (paginateEvent)="paginateEvent($event)"
+    [totalRecords]="totalRecords"
+    (editEntityEvent)="editEvent($event)"
+    (searchEntityEvent)="searchData($event)"
+    [placeholder]="searchPlaceholder"
+    (deleteDataEvent)="deleteCatelogProduct($event)"
+    (filterEntityEvent)="openSidebar()"
+    (exportEntityEvent)="exportCatelogList()"
+    (viewEntityEvent)="viewEntity($event)"
+    (activeDeactiveEvent)="activeDeactiveCustomer($event)"
+>
+</app-common-table>
+
+<p-sidebar
+    [(visible)]="visibleSidebar"
+    position="right"
+    [transitionOptions]="'100ms'"
+>
+    <div class="select-Satus col-12">
+        <label for="satus">Product Category</label>
+        <p-dropdown
+            class="service-Request-Status"
+            [options]="productCategoryDropdownList"
+            [(ngModel)]="selectedStatus"
+            optionLabel="product_category"
+            placeholder="Select a product category"
+        ></p-dropdown>
+    </div>
+    <div class="mt-5">
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="searchFilter()"
+            class="searchbtn p-button-info w-50 mr-2 justify-center"
+        >
+            Search
+        </button>
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="resetFilter()"
+            class="searchbtn p-button-danger w-50 justify-center"
+        >
+            Reset
+        </button>
+    </div>
+</p-sidebar>

@@ -1,0 +1,85 @@
+<h5>Update Product Category</h5>
+<div class="add-Create-Order-Grid col-12">
+    <!-- Value Section -->
+    <!-- <div class="value-Setting col-6">
+        <label for="standardPrice">Value</label>
+        <input
+            [(ngModel)]="productCategoryObject.product_category"
+            pInputText
+            id="standardPrice"
+            aria-describedby="standardPrice-help"
+        />
+    </div> -->
+
+    <!-- SOP Section -->
+    <div class="sop-Colm col-12">
+        <div class="sop-Section col-6">
+            <div
+                *ngFor="let sop of sopFields; let i = index"
+                class="value-Setting"
+            >
+                <label *ngIf="sop !== ''" for="sop{{ i }}"
+                    >Repair Checklist</label
+                >
+                <input
+                    *ngIf="sop !== ''"
+                    pInputText
+                    id="sop{{ i }}"
+                    aria-describedby="sop-help{{ i }}"
+                    [value]="sop"
+                />
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Statement Section -->
+    <div class="problem-Statement col-12">
+        <div class="problem-Statement-Section col-6">
+            <div
+                *ngFor="
+                    let problemStatement of problemStatementFields;
+                    let i = index
+                "
+                class="value-Setting"
+            >
+                <label
+                    *ngIf="problemStatement === ''"
+                    for="problemStatement{{ i }}"
+                    >Problem Statement</label
+                >
+                <input
+                    *ngIf="problemStatement === ''"
+                    pInputText
+                    id="problemStatement{{ i }}"
+                    aria-describedby="problemStatement-help{{ i }}"
+                    [(ngModel)]="posValue"
+                />
+                <label
+                    *ngIf="problemStatement !== ''"
+                    for="problemStatement{{ i }}"
+                    >Problem Diagnosis</label
+                >
+                <input
+                    *ngIf="problemStatement !== ''"
+                    pInputText
+                    id="problemStatement{{ i }}"
+                    aria-describedby="problemStatement-help{{ i }}"
+                    [(ngModel)]="problemStatementFields[i]"
+                />
+            </div>
+        </div>
+        <div class="add-Problem-Statement col-1">
+            <button class="custom-button" (click)="addproblemStatementField()">
+                Add Problem Diagnosis
+            </button>
+        </div>
+    </div>
+</div>
+<div class="add-Product-Category">
+    <button class="custom-button" (click)="updateProductCategory()">
+        Update
+    </button>
+    <button class="custom-button-cancel" (click)="closeDialogueBoxEntity()">
+        Cancel
+    </button>
+</div>

@@ -1,0 +1,224 @@
+.add-client-container {
+    margin-left: 0.7rem;
+}
+
+.header-Client {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-Button {
+    // background-color: #fff;
+    // border-radius: 50%;
+    // height: 3.5rem;
+    // width: 3.5rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.back-Button > i {
+    font-size: 1.2rem;
+    color: #065388;
+}
+
+.back-Button > p {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: #065388;
+}
+
+.row-One,
+.row-Two,
+.row-Three,
+.row-Four,
+.location-Details-row-One,
+.location-Details-row-Two,
+.location-Details-row-Three,
+.product-Details-Row-One,
+.product-Details-Row-Two {
+    display: flex;
+}
+
+.employee-Id,
+.name,
+.product-Category,
+.user-E-mail,
+.user-Status,
+.user-Mail-ID,
+.user-Gender,
+.user-DOB,
+.Address1,
+.Address2,
+.user-Mobile-Number,
+.city-Type,
+.city,
+.zone-1,
+.city .zone-1,
+.pin-Code,
+.user-Manager-Name,
+.user-Username,
+.user-Password,
+.user-CTC,
+.user-Allowed-Discount,
+.state-ID,
+.module-Name,
+.user-Manager-Role {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+input,
+p-multiSelect,
+p-dropdown {
+    width: 80%;
+}
+
+:host ::ng-deep .p-autocomplete {
+    display: block;
+}
+
+::ng-deep .p-autocomplete-input {
+    width: 80%;
+}
+
+.Address1-Field,
+.Address2-Field {
+    width: 80%;
+    height: 50px;
+    resize: both;
+    overflow: auto;
+    z-index: 1;
+    min-height: 50px;
+    max-height: 80px;
+    min-width: 80%;
+    max-width: 100%;
+}
+
+textarea:focus {
+    z-index: 2;
+}
+
+.header-of-add-client-btn p {
+    background-color: #065388;
+    color: #fff;
+    margin-top: 1.5rem;
+    padding: 4px 0px 4px 4px;
+}
+
+.Contract-Details-Colums * {
+    max-width: 70%;
+    box-sizing: border-box;
+}
+
+.save-Service-Details {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+}
+
+.personal-Details,
+.location-Details {
+    width: 100%;
+    padding-left: 0.5rem;
+}
+
+.custom-button {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.custom-button-cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #cdcfd0;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button-cancel:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.save-Product-Category {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-end;
+    margin-top: 3rem;
+}
+
+.service-Person-Calender {
+    height: 51rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+// .full-calendar {
+//     height: 60%;
+// }
+
+.event-pending {
+    background-color: yellow !important; /* Yellow for Pending */
+    color: black !important;
+}
+
+.event-accepted {
+    background-color: green !important;
+    color: black !important;
+}
+
+.event-rejected {
+    background-color: transparent !important;
+    color: black !important;
+}
+
+:host ::deep .fc .fc-daygrid-day-frame {
+    border-style: solid;
+}
+
+.fc .fc-daygrid-day-frame {
+    border: 1px solid red;
+}
+
+::deep .fc-daygrid-block-event .fc-event-title {
+    color: black !important;
+}
+
+.dull-input {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.required-field {
+    color: red;
+}

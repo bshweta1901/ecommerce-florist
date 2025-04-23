@@ -1,0 +1,59 @@
+.canvasDiv {
+    border: 1px solid;
+}
+
+.sign-Button {
+    display: flex;
+    justify-content: space-around;
+}
+
+.box-Button {
+    display: flex;
+    gap: 1.5rem;
+    margin: 2rem;
+    justify-content: flex-end;
+}
+
+.btn-Sign {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-Sign:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.btn-Sign-Cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #cdcfd0;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-Sign-Cancel:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}

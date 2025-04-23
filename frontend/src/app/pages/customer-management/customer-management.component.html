@@ -1,0 +1,68 @@
+<app-common-table
+    [title]="'Account List'"
+    [genericColsInput]="tableColsEvent"
+    [genericTableSettingInput]="tableSettingsEvent"
+    [genericListInput]="customers"
+    (addEntityEvent)="addEvent()"
+    (viewEntityEvent)="viewEntityEvent($event)"
+    (paginateEvent)="paginateEvent($event)"
+    (exportEntityEvent)="exportCustomers()"
+    [totalRecords]="totalRecords"
+    (editEntityEvent)="editEvent($event)"
+    (searchEntityEvent)="searchData($event)"
+    [placeholder]="searchPlaceholder"
+    (activeDataEvent)="activeEntity($event)"
+    (deactiveDataEvent)="deactiveEntity($event)"
+    (deleteDataEvent)="deleteCustomer($event)"
+    (filterEntityEvent)="openSidebar()"
+    (activeDeactiveEvent)="activeDeactiveCustomer($event)"
+   
+>
+</app-common-table>
+
+<p-sidebar
+    [(visible)]="visibleSidebar"
+    position="right"
+    [transitionOptions]="'100ms'"
+>
+    <div class="select-Satus col-12">
+        <label for="satus">Customer Category</label>
+        <p-dropdown
+            [options]="customerTypeList"
+            [(ngModel)]="selectedcustomerType"
+            class="service-Request-Status"
+            optionLabel="customer_type"
+            placeholder="Select a customer category"
+        ></p-dropdown>
+    </div>
+    <div class="select-Satus col-12">
+        <label for="satus">Contract Status</label>
+        <p-dropdown
+            [options]="statusList"
+            [(ngModel)]="selectedCustomerContract"
+            class="service-Request-Status"
+            optionLabel="name"
+            placeholder="Select a contract status"
+        ></p-dropdown>
+    </div>
+    <div class="mt-5">
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="searchFilter()"
+            class="searchbtn p-button-info w-50 mr-2 justify-center"
+        >
+            Search
+        </button>
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="resetFilter()"
+            class="searchbtn p-button-danger w-50 justify-center"
+        >
+            Reset
+        </button>
+    </div>
+</p-sidebar>

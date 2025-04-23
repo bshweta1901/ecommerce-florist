@@ -1,0 +1,123 @@
+.create-Order-Container {
+    margin-left: 0.7rem;
+}
+
+.create-Order-Grid {
+    background-color: #fff;
+    padding-bottom: 1rem;
+}
+
+.header-Client {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-Button {
+    // background-color: #fff;
+    // border-radius: 50%;
+    // height: 3.5rem;
+    // width: 3.5rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.back-Button > i {
+    font-size: 1.2rem;
+    color: #065388;
+}
+
+.back-Button > p {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: #065388;
+}
+
+.row-One,
+.row-Two {
+    display: flex;
+}
+
+.select-Customer,
+.select-Product,
+.serial-Number,
+.service-Type,
+.warranty-Billable,
+.package-Name,
+.user-Tenure,
+.preventive-Cycle {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+input,
+p-dropdown,
+p-multiSelect {
+    width: 80%;
+}
+
+.custom-button {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.custom-button-cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #cdcfd0;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button-cancel:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.create-Contract-Details,
+.add-More-Details {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+    margin: 1rem 5rem 1rem 0rem;
+}
+
+.back-Button-To-Product {
+    display: flex;
+    justify-content: end;
+    padding: 8px 0px;
+}
+
+.mandatory-field {
+    color: red;
+}

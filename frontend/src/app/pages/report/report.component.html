@@ -1,0 +1,15 @@
+<div class="field" style="width: 25%;">
+    <span class="date_productivity">
+        Date: <p-calendar [showIcon]="true" #calendar inputId="calendar" dateFormat="dd M yy" [(ngModel)]="selectedDates" (onSelect)="getDateRange()" selectionMode="range"  appendTo="body"  [readonlyInput]="true" showButtonBar="true"></p-calendar>                 
+    </span>
+</div>
+
+<div class="field" style="width: 25%;">
+    <span class="date_productivity">
+        Report : <p-dropdown inputId="dropdown" appendTo="body" (onChange)="onReportSelect($event)" [options]="reportList" optionLabel="label" [autoDisplayFirst]="true"></p-dropdown>                 
+    </span>
+</div>
+
+<div class="popup-form-btn">
+    <button pButton type="button" (click)="download()"  label="Download Report" class="p-button-raised"></button>
+</div>

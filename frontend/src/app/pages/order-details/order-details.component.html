@@ -1,0 +1,267 @@
+<app-common-table
+    [title]="'Invoice Order Details'"
+    [genericColsInput]="tableColsEvent"
+    [genericTableSettingInput]="tableSettingsEvent"
+    [genericListInput]="oredrDetailsList"
+    (addEntityEvent)="addEvent()"
+    (paginateEvent)="paginateEvent($event)"
+    [totalRecords]="totalRecords"
+    (editEntityEvent)="EditEvent($event)"
+    (searchEntityEvent)="searchData($event)"
+    [placeholder]="searchPlaceholder"
+    (activeDataEvent)="activeEntity($event)"
+    (deactiveDataEvent)="deactiveEntity($event)"
+    (deleteDataEvent)="deleteEvent($event)"
+    (filterEntityEvent)="openSidebar()"
+    (exportEntityEvent)="exportOrderDetails()"
+    (openAddDialogModuleEventForSparePartRequest)="
+        handleButtonClickToOpenDialogueForSparePartRequest()
+    "
+    (openAddDialogModuleEventForOnDemand)="
+        handleButtonClickToOpenDialogueForOnDemand()
+    "
+    (openAddDialogModuleEventForUpdateStatus)="
+        handleButtonClickToOpenDialogueForUpdateStatus($event)
+    "
+    (addReceiptEvent)="handleAddReceipt($event)"
+>
+</app-common-table>
+
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="openAddDialogModuleEventForSparePartRequest"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <app-add-spare-part-request
+        [hideButton]="hideButtonView"
+        (closeModalEvent)="closeEventDialog()"
+        *ngIf="openAddDialogModuleEventForSparePartRequest"
+        body
+    >
+    </app-add-spare-part-request>
+</app-common-modal>
+
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="openAddDialogModuleEventForOnDemand"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <app-add-on-demand
+        [hideButton]="hideButtonView"
+        (closeModalEventOnDemand)="closeEventDialog()"
+        *ngIf="openAddDialogModuleEventForOnDemand"
+        body
+    >
+    </app-add-on-demand>
+</app-common-modal>
+
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="openAddDialogModuleEventForUpdateStatus"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <app-update-status-order
+        [orderId]="oredrDetailsObject.uuid"
+        [orderDetailsMode]="oredrDetailsObject"
+        [hideButton]="hideButtonView"
+        (closeModalEventOnUpdate)="closeEventDialog()"
+        *ngIf="openAddDialogModuleEventForUpdateStatus"
+        body
+    >
+    </app-update-status-order>
+</app-common-modal>
+
+<app-common-modal
+    [title]="'Add Receipt'"
+    [visible]="editReceiptDialogue"
+    [closable]="true"
+    [dynamicWidth]="dialogWidthForRecepit"
+    (closeEvent)="closeEventDialog()"
+>
+    <ng-container body>
+        <div class="add-Create-Order-Container">
+            <div *ngIf="balanceAmount != 0" class="add-Create-Order-Grid">
+                <form [formGroup]="updateStatusForm">
+                    <div class="row-One col-12">
+                        <div class="select-Satus col-6">
+                            <label class="f-normal">Payment Date</label>
+                            <p-calendar
+                                #calendar
+                                [(ngModel)]="receiptMaster.payment_date"
+                                selectionMode="single"
+                                [readonlyInput]="true"
+                                inputId="single-date"
+                                dateFormat="yy-mm-dd"
+                                formControlName="payment_date"
+                            ></p-calendar>
+                        </div>
+                        <div class="tenure col-6">
+                            <label for="tenure">Mode Of Payment</label>
+                            <p-dropdown
+                                [(ngModel)]="selectedModeOfPayment"
+                                [options]="paymentList"
+                                optionLabel="name"
+                                placeholder="Select a payment"
+                                formControlName="selectedModeOfPayment"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="
+                                    updateStatusForm.get(
+                                        'selectedModeOfPayment'
+                                    )
+                                "
+                                label="Mode Of Payment"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                    <div class="row-Two col-12">
+                        <div class="standard-Price col-6">
+                            <label for="Amount">Amount</label>
+                            <input
+                                [(ngModel)]="receiptMaster.amount"
+                                pInputText
+                                id="no_of_receipt"
+                                aria-describedby="Amount-help"
+                                formControlName="amount"
+                            />
+                            <app-custom-validation
+                                [control]="updateStatusForm.get('amount')"
+                                label="Amount"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="standard-Price col-6">
+                            <label for="standardPrice"
+                                >Transaction Details</label
+                            >
+                            <textarea
+                                [(ngModel)]="receiptMaster.transaction_details"
+                                pInputText
+                                id="standardPrice"
+                                aria-describedby="standardPrice-help"
+                                formControlName="transaction_details"
+                                class="remarks-Field"
+                                rows="2"
+                                cols="2"
+                            ></textarea>
+                            <app-custom-validation
+                                [control]="
+                                    updateStatusForm.get('transaction_details')
+                                "
+                                label="Transaction Details"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                    <div class="row-Three col-12">
+                        <div class="remarks col-6">
+                            <label for="Remarks">Remarks</label>
+                            <textarea
+                                [(ngModel)]="receiptMaster.remarks"
+                                class="remarks-Field"
+                                rows="2"
+                                cols="2"
+                                pInputTextarea
+                                formControlName="remarks"
+                            ></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="balanceAmount != 0" class="save-Product-Category">
+                <button class="custom-button" (click)="saveReceipt()">
+                    Save
+                </button>
+                <button
+                    class="custom-button-cancel"
+                    (click)="closeEventDialog()"
+                >
+                    Cancel
+                </button>
+            </div>
+            <b>Balance: {{ balanceAmount }}</b>
+            <app-common-table
+                [title]="'Invoice Order Details'"
+                [genericColsInput]="receiptColsEvent"
+                [genericTableSettingInput]="receiptTableSettingEvent"
+                [genericListInput]="receiptList"
+            >
+            </app-common-table>
+        </div>
+    </ng-container>
+</app-common-modal>
+
+<p-sidebar
+    [(visible)]="visibleSidebar"
+    position="right"
+    [transitionOptions]="'100ms'"
+>
+    <div class="select-Satus col-12">
+        <label for="satus">Invoice Status</label>
+        <p-dropdown
+            class="service-Request-Status"
+            [options]="statusList"
+            [(ngModel)]="selectedStatusObject"
+            optionLabel="name"
+            placeholder="Select a status"
+        ></p-dropdown>
+    </div>
+    <div class="select-Satus col-12">
+        <label for="satus">Package Type</label>
+        <p-dropdown
+            class="service-Request-Status"
+            [options]="packageTypeList"
+            [(ngModel)]="selectedDetailsService"
+            optionLabel="value"
+            placeholder="Select a package type"
+        ></p-dropdown>
+    </div>
+    <div class="select-Satus">
+        <p>Start Date</p>
+        <p-calendar
+            #calendar
+            [(ngModel)]="oredrDetailsObject.start_date"
+            selectionMode="single"
+            [readonlyInput]="true"
+            inputId="single-date"
+            dateFormat="yy-mm-dd"
+            (ngModelChange)="onStartDateChange($event)"
+        ></p-calendar>
+    </div>
+    <div class="select-Satus">
+        <p>End Date</p>
+        <p-calendar
+            #calendar
+            [(ngModel)]="oredrDetailsObject.end_date"
+            selectionMode="single"
+            [readonlyInput]="true"
+            inputId="single-date"
+            dateFormat="yy-mm-dd"
+            (ngModelChange)="onEndDateChange($event)"
+        ></p-calendar>
+    </div>
+    <div class="mt-5">
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="searchFilter()"
+            class="searchbtn p-button-info w-50 mr-2 justify-center"
+        >
+            Search
+        </button>
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="resetFilter()"
+            class="searchbtn p-button-danger w-50 justify-center"
+        >
+            Reset
+        </button>
+    </div>
+</p-sidebar>

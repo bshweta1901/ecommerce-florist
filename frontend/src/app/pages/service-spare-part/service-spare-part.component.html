@@ -1,0 +1,84 @@
+<app-common-table
+    [title]="'Service Spare Part'"
+    [genericColsInput]="tableColsEventSparePart"
+    [genericTableSettingInput]="tableSettingsEvent"
+    [genericListInput]="spareList"
+    (paginateEvent)="paginateEvent($event)"
+    [totalRecords]="totalRecords"
+    [totalRecords]="totalRecords"
+    (searchEntityEvent)="searchData($event)"
+    [placeholder]="searchPlaceholder"
+    (filterEntityEvent)="openSidebar()"
+    (editEntityEvent)="openDialogueBoxForSparePart($event)"
+>
+</app-common-table>
+
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="showDialogueBoxForSparePart"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <div body>
+        <div class="Old-Spare-Part col-12">
+            <h5>Old Spare Part Collected/Received</h5>
+            <div class="flex flex-wrap gap-3" style="margin-top: 5%">
+                <div class="flex align-items-center">
+                    <p-checkbox
+                        name="is_old_status"
+                        value="Received"
+                        [(ngModel)]="updateSparePartObj.is_old_status"
+                        inputId="ingredient2"
+                    >
+                    </p-checkbox>
+                    <label for="ingredient2" class="ml-2">Received</label>
+                </div>
+            </div>
+        </div>
+        <div class="service-Request-Btn">
+            <button class="custom-button" (click)="updateSpareParts()">
+                Update
+            </button>
+            <button class="custom-button-cancel" (click)="closeEventDialog()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<p-sidebar
+    [(visible)]="visibleSidebar"
+    position="right"
+    [transitionOptions]="'100ms'"
+>
+    <!-- <div class="select-Satus col-12">
+        <label for="satus">Location</label>
+        <p-dropdown
+            class="service-Request-Status"
+            [options]="serviceEngineerDropdownList"
+            optionLabel="city"
+            placeholder="Select a location"
+        ></p-dropdown>
+    </div> -->
+    <div class="mt-5">
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="searchFilter()"
+            class="searchbtn p-button-info w-50 mr-2 justify-center"
+        >
+            Search
+        </button>
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="resetFilter()"
+            class="searchbtn p-button-danger w-50 justify-center"
+        >
+            Reset
+        </button>
+    </div>
+</p-sidebar>

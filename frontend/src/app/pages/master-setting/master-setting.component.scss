@@ -1,0 +1,261 @@
+.add-client-container {
+    margin: 1rem;
+}
+
+.row-One,
+.row-Two {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.legal-entity-form {
+    display: flex;
+}
+
+.legal-entity-filds {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.add-legal-entity {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 0px 0px 21px 0px;
+}
+
+.user-Name,
+.customer-ID,
+.parent-Setting,
+.value-Setting {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-bottom: 1rem;
+}
+
+input,
+p-dropdown,
+p-calendar {
+    width: 80%;
+}
+
+.add-Customer-Type {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+}
+
+.add-City {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+}
+
+.add-solt {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+}
+
+.custom-button {
+    width: 13rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.custom-button-cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #757575;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button-cancel:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.add-Create-Order-Grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.add-SOP {
+    margin-top: 1.4rem;
+}
+
+.add-Problem-Statement {
+    margin-top: 1.4rem;
+}
+
+.back-Button-Header {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 1rem;
+}
+
+.back-Button {
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.back-Button > i {
+    font-size: 1.2rem;
+    color: #065388;
+}
+
+.back-Button > p {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: #065388;
+}
+
+.add-Product-Category {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 1rem;
+}
+
+.update-Create-Order-Grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+}
+
+.update-Customer-Type {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+    margin: 4px 0px 2px 0px;
+}
+
+.update-Legal-Entity {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+    // margin: 112px 0px 14px 0px;
+}
+
+.add-category-Type {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+}
+
+.required_field {
+    color: red;
+}
+
+input,
+p-multiSelect,
+p-dropdown {
+    width: 80%;
+}
+
+.registered-address-Field {
+    width: 80%;
+    height: 50px;
+    resize: both;
+    overflow: auto;
+    z-index: 1;
+    min-height: 50px;
+    max-height: 80px;
+    min-width: 80%;
+    max-width: 100%;
+}
+
+.legal-entity-address {
+    display: flex;
+    // align-items: center;
+}
+
+.add-legal-entity-address {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 0px 0px 6px 0px;
+}
+
+.parent-fields {
+    display: flex;
+    align-items: center;
+}
+
+.field-and-btn {
+    display: flex;
+    align-items: center;
+}
+
+.field-btn-entity {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.field-btn-entity-add {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.add-legal-Subsidiary {
+    display: flex;
+    // justify-content: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0px 0px 21px 14px;
+}
+
+.header-of-add-client-btn p {
+    background-color: #065388;
+    color: #fff;
+    margin-top: 1.5rem;
+    padding: 4px 0px 4px 4px;
+}
+
+.Address1-Field,
+.Address2-Field {
+    width: 80%;
+    height: 50px;
+    resize: both;
+    overflow: auto;
+    z-index: 1;
+    min-height: 50px;
+    max-height: 80px;
+    min-width: 80%;
+    max-width: 100%;
+}

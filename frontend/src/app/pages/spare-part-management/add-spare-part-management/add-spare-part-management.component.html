@@ -1,0 +1,271 @@
+<div class="add-Spare-Container">
+    <div class="header-Client">
+        <h5>Add Spare Part</h5>
+        <div class="back-Button-Header">
+            <button
+                class="back-Button"
+                [routerLink]="['/panel/spare-part-management']"
+                routerLinkActive="router-link-active"
+            >
+                <i class="pi pi-arrow-left"></i>
+                <p>Back</p>
+            </button>
+        </div>
+    </div>
+    <div class="add-Spare-Grid">
+        <form [formGroup]="addSparePartForm">
+            <div class="row-One col-12">
+                <div class="product-Category col-3">
+                    <label for="product_category"
+                        >Product Category<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <p-dropdown
+                        [disabled]="
+                            actionForEdit === false && actionForView === true
+                        "
+                        [(ngModel)]="selectedProductCategory"
+                        [options]="productCategoryDropdownList"
+                        optionLabel="product_category"
+                        formControlName="selectedProductCategory"
+                        placeholder="Select a Product Category"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="
+                            addSparePartForm.get('selectedProductCategory')
+                        "
+                        label="Product Category"
+                    ></app-custom-validation>
+                </div>
+
+                <div class="spare-Name col-3">
+                    <label for="serialNumber"
+                        >Name<span class="required-field">*</span></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="sparePartManagerObject.spare_part_name"
+                        pInputText
+                        placeholder="Enter a Name"
+                        formControlName="spare_part_name"
+                        id="serialNumber"
+                        aria-describedby="serialNumber-help"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('spare_part_name')"
+                        label="Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="spare-Type col-3">
+                    <label for="selectProduct"
+                        >Type<span class="required-field">*</span></label
+                    >
+                    <p-dropdown
+                        [disabled]="
+                            actionForEdit === false && actionForView === true
+                        "
+                        [(ngModel)]="selectedProductTypeDropDown"
+                        [options]="ProductTypeDropDownList"
+                        optionLabel="product_type"
+                        formControlName="spare_part_type_name"
+                        placeholder="Select a Type"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('spare_part_type_name')"
+                        label="Type"
+                    ></app-custom-validation>
+                </div>
+                <div class="spare-Status col-3">
+                    <label for="status"
+                        >Status<span class="required-field">*</span></label
+                    >
+                    <p-dropdown
+                        [disabled]="
+                            actionForEdit === false && actionForView === true
+                        "
+                        [(ngModel)]="selectedType"
+                        [options]="typeList"
+                        optionLabel="name"
+                        formControlName="spare_part_status_name"
+                        placeholder="Select a Status"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="
+                            addSparePartForm.get('spare_part_status_name')
+                        "
+                        label="Status"
+                    ></app-custom-validation>
+                </div>
+            </div>
+        </form>
+        <form [formGroup]="addSparePartForm">
+            <div class="row-Two col-12">
+                <div class="spare-SKU col-3">
+                    <label for="serialNumber"
+                        >SKU<span class="required-field">*</span></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="sparePartManagerObject.sku"
+                        pInputText
+                        placeholder="Enter a SKU"
+                        id="serialNumber"
+                        formControlName="sku"
+                        aria-describedby="serialNumber-help"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('sku')"
+                        label="SKU"
+                    ></app-custom-validation>
+                </div>
+                <div class="spare-Approx-Life col-3">
+                    <label for="approx_life"
+                        >Approx Life (In years)<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="sparePartManagerObject.approx_life"
+                        pInputText
+                        placeholder="Enter a Approx Life (In years)"
+                        formControlName="approx_life"
+                        id="approx_life"
+                        aria-describedby="serialNumber-help"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('approx_life')"
+                        label="Approx Life (In years)"
+                    ></app-custom-validation>
+                </div>
+                <div class="spare-Standard-Price col-3">
+                    <label for="serialNumber"
+                        >Standard Cost Price<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="sparePartManagerObject.standard_price"
+                        pInputText
+                        placeholder="Enter a Standard Cost Price"
+                        formControlName="standard_price"
+                        id="serialNumber"
+                        aria-describedby="serialNumber-help"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('standard_price')"
+                        label="Standard Cost Price"
+                    ></app-custom-validation>
+                </div>
+                <div class="spare-GST col-3">
+                    <label for="serialNumber"
+                        >Taxes %<span class="required-field">*</span></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="sparePartManagerObject.tax"
+                        pInputText
+                        placeholder="Enter a Taxes %"
+                        formControlName="tax"
+                        id="serialNumber"
+                        aria-describedby="serialNumber-help"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('tax')"
+                        label="Taxes %"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="row-Two col-12">
+                <div class="spare-Selling-Price col-3">
+                    <label for="serialNumber"
+                        >Selling Price (Excl. Taxes)<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="sparePartManagerObject.selling_price"
+                        pInputText
+                        placeholder="Enter a Selling Price (Excl. Taxes)"
+                        formControlName="selling_price"
+                        id="serialNumber"
+                        aria-describedby="serialNumber-help"
+                        (change)="checkStandardAndSelling()"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('selling_price')"
+                        label="Selling Price (Excl. Taxes)"
+                    ></app-custom-validation>
+                </div>
+                <div class="spare-Description col-6">
+                    <label for="serialNumber">Description</label>
+                    <textarea
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="sparePartManagerObject.description"
+                        class="spareDescription-Field"
+                        placeholder="Enter a Description"
+                        rows="2"
+                        cols="2"
+                        pInputTextarea
+                        formControlName="description"
+                    ></textarea>
+                </div>
+            </div>
+        </form>
+        <div class="add-Spare-Details">
+            <button
+                class="custom-button"
+                *ngIf="id && actionForEdit"
+                (click)="updateSparePartManager()"
+            >
+                Update
+            </button>
+            <button
+                *ngIf="!id && !actionForEdit"
+                class="custom-button"
+                (click)="saveSparePartManager()"
+            >
+                Save
+            </button>
+            <button
+                *ngIf="!id || actionForEdit"
+                class="custom-button-cancel"
+                (click)="resetSparePartManager()"
+            >
+                Reset
+            </button>
+        </div>
+    </div>
+</div>

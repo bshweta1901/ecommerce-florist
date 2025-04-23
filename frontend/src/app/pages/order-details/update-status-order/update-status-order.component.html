@@ -1,0 +1,88 @@
+<div class="add-Create-Order-Container">
+    <h5 class="header-Dialogue-Box">Update Status</h5>
+    <div class="add-Create-Order-Grid">
+        <form [formGroup]="updateStatusForm">
+            <div class="row-One col-12">
+                <div class="name col-10">
+                    <label for="name">Status</label>
+                    <p-dropdown
+                        [(ngModel)]="selectedUpdateStatus"
+                        [options]="statusList"
+                        optionLabel="name"
+                        placeholder="Select a Status"
+                        formControlName="selectedUpdateStatus"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="updateStatusForm.get('selectedUpdateStatus')"
+                        label="Status"
+                    ></app-custom-validation>
+                </div>
+                <!-- <div class="tenure col-4">
+                    <label for="tenure">Mode Of Payment</label>
+                    <p-dropdown
+                        [(ngModel)]="selectedModeOfPayment"
+                        [options]="paymentList"
+                        optionLabel="name"
+                        placeholder="Select a payment"
+                        formControlName="selectedModeOfPayment"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="
+                            updateStatusForm.get('selectedModeOfPayment')
+                        "
+                        label="Mode Of Payment"
+                    ></app-custom-validation>
+                </div>
+                <div class="standard-Price col-4">
+                    <label for="standardPrice">Transaction Details</label>
+                    <input
+                        [(ngModel)]="updateStatusObject.transaction_details"
+                        pInputText
+                        id="standardPrice"
+                        aria-describedby="standardPrice-help"
+                        formControlName="transaction_details"
+                    />
+                    <app-custom-validation
+                        [control]="updateStatusForm.get('transaction_details')"
+                        label="Transaction Details"
+                    ></app-custom-validation>
+                </div> -->
+            </div>
+
+            <div class="row-Two col-12">
+                <!-- <div class="standard-Price col-4">
+                    <label for="standardPrice">No of Receipt</label>
+                    <input
+                        [(ngModel)]="updateStatusObject.no_of_receipt"
+                        pInputText
+                        id="no_of_receipt"
+                        aria-describedby="standardPrice-help"
+                        formControlName="no_of_receipt"
+                    />
+                    <app-custom-validation
+                        [control]="updateStatusForm.get('no_of_receipt')"
+                        label="Transaction Details"
+                    ></app-custom-validation>
+                </div> -->
+                <div class="remarks col-12">
+                    <label for="Remarks">Remarks</label>
+                    <textarea
+                        [(ngModel)]="updateStatusObject.remarks"
+                        class="remarks-Field"
+                        placeholder="Enter a Remarks"
+                        rows="2"
+                        cols="2"
+                        pInputTextarea
+                        formControlName="remarks"
+                    ></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="save-Product-Category">
+        <button class="custom-button" (click)="saveUpdateStatus()">Save</button>
+        <button class="custom-button-cancel" (click)="closeEventDialog()">
+            Cancel
+        </button>
+    </div>
+</div>

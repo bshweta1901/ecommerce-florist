@@ -1,0 +1,165 @@
+<div class="add-Create-Order-Container">
+    <h5 class="header-Dialogue-Box">New On Demand Request</h5>
+    <div class="add-Create-Order-Grid">
+        <form [formGroup]="addOnDemandForm">
+            <div class="row-One col-12">
+                <div class="name col-4">
+                    <label for="name">Account Name</label>
+                    <p-autoComplete
+                        class="auto-complete"
+                        [suggestions]="customers"
+                        [(ngModel)]="selectedcustomer"
+                        field="account_name"
+                        formControlName="addOnDemandObject"
+                        placeholder="Select a account name"
+                        (completeMethod)="searchParent($event)"
+                    ></p-autoComplete>
+                    <app-custom-validation
+                        [control]="addOnDemandForm.get('addOnDemandObject')"
+                        label="Account Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="tenure col-4">
+                    <label for="tenure">Location</label>
+                    <p-dropdown
+                        [(ngModel)]="addOnDemandObject"
+                        [options]="cityList"
+                        optionLabel="name"
+                        placeholder="Select a location"
+                        formControlName="location"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="addOnDemandForm.get('location')"
+                        label="Location"
+                    ></app-custom-validation>
+                </div>
+                <div class="preventive-Maintenance col-4">
+                    <label for="preventiveMaintenance">Service Person</label>
+                    <p-autoComplete
+                        class="auto-complete"
+                        [suggestions]="serviceEngineerList"
+                        [(ngModel)]="selectedServiceEngineer"
+                        formControlName="servicePerson"
+                        field="first_name"
+                        placeholder="Select a service person"
+                        (completeMethod)="searchServiceEngineer($event)"
+                    ></p-autoComplete>
+                    <app-custom-validation
+                        [control]="addOnDemandForm.get('servicePerson')"
+                        label="Service Person"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="row-Two col-12">
+                <div class="standard-Price col-4">
+                    <label for="subtotal">Standard Price</label>
+                    <input
+                        [(ngModel)]="addOnDemandObject.subtotal"
+                        pInputText
+                        id="subtotal"
+                        aria-describedby="standardPrice-help"
+                        formControlName="subtotal"
+                    />
+                    <app-custom-validation
+                        [control]="addOnDemandForm.get('subtotal')"
+                        label="Standard Price"
+                    ></app-custom-validation>
+                    <div
+                        *ngIf="addOnDemandForm.get('subtotal')?.errors?.['max']"
+                        style="color: red"
+                    >
+                        The value must be less than 100000.
+                    </div>
+                </div>
+                <div class="selling-Price col-4">
+                    <label for="sellingPrice">Discount%</label>
+                    <input
+                        [disabled]="
+                            addOnDemandObject.subtotal === null ||
+                            addOnDemandObject.subtotal === '' ||
+                            addOnDemandObject.subtotal === undefined
+                        "
+                        pInputText
+                        [(ngModel)]="addOnDemandObject.discount"
+                        (ngModelChange)="subTotalDiscountAmount()"
+                        id="sellingPrice"
+                        aria-describedby="sellingPrice-help"
+                        formControlName="discount"
+                    />
+                    <app-custom-validation
+                        [control]="addOnDemandForm.get('discount')"
+                        label="Discount%"
+                    ></app-custom-validation>
+                    <div
+                        *ngIf="addOnDemandForm.get('discount')?.errors?.['max']"
+                        style="color: red"
+                    >
+                        The value must be less than 100.
+                    </div>
+                </div>
+                <div class="tax col-4">
+                    <label for="tax">Discount Amount</label>
+                    <input
+                        pInputText
+                        readonly
+                        id="tax"
+                        aria-describedby="tax-help"
+                        [(ngModel)]="addOnDemandObject.discount_total"
+                        formControlName="discount_total"
+                    />
+                    <app-custom-validation
+                        [control]="addOnDemandForm.get('discount_total')"
+                        label="Discount Amount"
+                    ></app-custom-validation>
+                </div>
+            </div>
+            <div class="row-Three col-12">
+                <div class="TAT col-4">
+                    <label for="tat">Tax Total</label>
+                    <input
+                        pInputText
+                        id="tat"
+                        aria-describedby="tat-help"
+                        [(ngModel)]="addOnDemandObject.tax_total"
+                        (ngModelChange)="subTaxDiscountAmount()"
+                        formControlName="tax_total"
+                    />
+                    <app-custom-validation
+                        [control]="addOnDemandForm.get('tax_total')"
+                        label="Tax Total"
+                    ></app-custom-validation>
+                    <div
+                        *ngIf="addOnDemandForm.get('tax_total')?.errors?.['max']"
+                        style="color: red"
+                    >
+                        The value must be less than 1000.
+                    </div>
+                </div>
+                <div class="coverage-Details col-4">
+                    <label for="coverageDetails">Total</label>
+                    <input
+                        [(ngModel)]="addOnDemandObject.total_payable"
+                        pInputText
+                        readonly
+                        id="coverageDetails"
+                        aria-describedby="coverageDetails-help"
+                        formControlName="total_payable"
+                    />
+                    <app-custom-validation
+                        [control]="addOnDemandForm.get('total_payable')"
+                        label="Total"
+                    ></app-custom-validation>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="save-Product-Category">
+        <button class="custom-button" (click)="saveAddOnDemand()">
+            Add On Demand
+        </button>
+        <button class="custom-button-cancel" (click)="closeEventDialog()">
+            Cancel
+        </button>
+    </div>
+</div>

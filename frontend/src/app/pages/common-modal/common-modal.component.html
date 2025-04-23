@@ -1,0 +1,5 @@
+<p-dialog header="{{title}}"  [closable]="closable" [(visible)]="visible" [modal]="true" [contentStyle]="{'overflow':'auto'}"  [responsive]="true" [style]="{width: dynamicWidth, minWidth: '200px'}"  [minY]="70" 
+        [maximizable]="false" [baseZIndex]="10000" appendTo="{{ appendTo }}" (onHide)="onDialogHide()">
+   <ng-content select="[body]"></ng-content>
+     
+</p-dialog>

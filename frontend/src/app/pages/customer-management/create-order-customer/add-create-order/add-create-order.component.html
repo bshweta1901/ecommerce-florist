@@ -1,0 +1,104 @@
+<div class="add-Create-Order-Container">
+    <h5 class="header-Dialogue-Box">Package Details</h5>
+    <div class="add-Create-Order-Grid">
+        <div class="row-One col-12">
+            <div class="name col-4">
+                <label for="name">Name</label>
+                <input
+                    readonly
+                    [(ngModel)]="contractItem.package_name"
+                    pInputText
+                    id="name"
+                    aria-describedby="Name-help"
+                />
+            </div>
+            <div class="tenure col-4">
+                <label for="tenure">Tenure(in yr)</label>
+                <input
+                    readonly
+                    [(ngModel)]="contractItem.tenure"
+                    pInputText
+                    id="tenure"
+                    aria-describedby="tenure-help"
+                />
+            </div>
+            <div class="preventive-Maintenance col-4">
+                <label for="preventiveMaintenance"
+                    >Preventive Maintenance</label
+                >
+                <input
+                    readonly
+                    [(ngModel)]="maintanceCycleName"
+                    pInputText
+                    id="preventiveMaintenance"
+                    aria-describedby="preventiveMaintenance-help"
+                />
+            </div>
+        </div>
+
+        <div class="row-Two col-12">
+            <div class="standard-Price col-4">
+                <label for="standardPrice">Standard Price</label>
+                <input
+                    readonly
+                    [(ngModel)]="contractItem.standard_price"
+                    pInputText
+                    id="standardPrice"
+                    aria-describedby="standardPrice-help"
+                />
+            </div>
+            <div class="selling-Price col-4">
+                <label for="sellingPrice">Selling Price</label>
+                <input
+                    readonly
+                    [(ngModel)]="contractItem.selling_price"
+                    pInputText
+                    id="sellingPrice"
+                    aria-describedby="sellingPrice-help"
+                />
+            </div>
+            <div class="tax col-4">
+                <label for="tax">Tax</label>
+                <input
+                    readonly
+                    [(ngModel)]="contractItem.tax"
+                    pInputText
+                    id="tax"
+                    aria-describedby="tax-help"
+                />
+            </div>
+        </div>
+        <div class="row-Three col-12">
+            <div class="TAT col-4">
+                <label for="tat">TAT</label>
+                <input
+                    readonly
+                    [(ngModel)]="contractItem.turn_around_time"
+                    pInputText
+                    id="tat"
+                    aria-describedby="tat-help"
+                />
+            </div>
+            <div class="coverage-Details col-4">
+                <label for="coverageDetails">Coverage Details</label>
+                <input
+                    readonly
+                    [(ngModel)]="contractItem.coverage_details"
+                    pInputText
+                    id="coverageDetails"
+                    aria-describedby="coverageDetails-help"
+                />
+            </div>
+            <div class="spare-Part-Covered col-4">
+                <label for="sparePartCovered">Spare Part covered</label>
+                <input
+                    readonly
+                    [(ngModel)]="sparePartTemp"
+                    pInputText
+                    id="sparePartCovered"
+                    aria-describedby="sparePartCovered-help"
+                />
+            </div>
+        </div>
+    </div>
+</div>

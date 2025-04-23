@@ -1,0 +1,66 @@
+<app-common-table
+    [title]="'Spare Part Master'"
+    [genericColsInput]="tableColsEvent"
+    [genericTableSettingInput]="tableSettingsEvent"
+    [genericListInput]="sparePartManagerList"
+    (addEntityEvent)="addEvent()"
+    (paginateEvent)="paginateEvent($event)"
+    [totalRecords]="totalRecords"
+    (editEntityEvent)="editEvent($event)"
+    (searchEntityEvent)="searchData($event)"
+    [placeholder]="searchPlaceholder"
+    (activeDataEvent)="activeEntity($event)"
+    (filterEntityEvent)="openSidebar()"
+    (exportEntityEvent)="exportSparePartList()"
+    (viewEntityEvent)="viewEntity($event)"
+    (activeDeactiveEvent)="activeDeactiveCustomer($event)"
+>
+    <!-- (deleteDataEvent)="deleteSparePartMaster($event)" -->
+</app-common-table>
+
+<p-sidebar
+    [(visible)]="visibleSidebar"
+    position="right"
+    [transitionOptions]="'100ms'"
+>
+    <div class="mt-5">
+        <div class="select-Satus col-12">
+            <label for="satus">Satus</label>
+            <p-dropdown
+                class="service-Request-Status"
+                [options]="statusList"
+                [(ngModel)]="predefinedMasterObject"
+                optionLabel="name"
+                placeholder="Select a status"
+            ></p-dropdown>
+        </div>
+        <div class="select-Satus col-12">
+            <label for="satus">Product Category</label>
+            <p-dropdown
+                class="service-Request-Status"
+                [(ngModel)]="selectedProductCategory"
+                [options]="productCategoryDropdownList"
+                optionLabel="product_category"
+                placeholder="Select a Product Category"
+            ></p-dropdown>
+        </div>
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="searchFilter()"
+            class="searchbtn p-button-info w-50 mr-2 justify-center"
+        >
+            Search
+        </button>
+        <button
+            pButton
+            pRipple
+            type="button"
+            (click)="resetFilter()"
+            class="searchbtn p-button-danger w-50 justify-center"
+        >
+            Reset
+        </button>
+    </div>
+</p-sidebar>

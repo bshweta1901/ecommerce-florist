@@ -1,0 +1,158 @@
+<div class="add-Create-Order-Container">
+    <h5 class="header-Dialogue-Box">New Spare Part Request</h5>
+
+    <div class="add-Create-Order-Grid">
+        <form [formGroup]="addSparePartForm">
+            <div class="row-One col-12">
+                <div class="tenure col-6">
+                    <label for="tenure">Service Request Client Name</label>
+                    <p-autoComplete
+                        class="auto-complete"
+                        [suggestions]="serviceRequestList"
+                        [(ngModel)]="selectedServiceRequest"
+                        field="service_person"
+                        formControlName="serviceRequest"
+                        placeholder="Select a Service Request Client Name"
+                        (completeMethod)="searchServiceRequests($event)"
+                    ></p-autoComplete>
+                    <!-- <p-dropdown
+                        [(ngModel)]="selectedServiceRequest"
+                        [options]="serviceRequestList"
+                        optionLabel="service_person"
+                        placeholder="Select a service request id"
+                        formControlName="serviceRequest"
+                    ></p-dropdown> -->
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('serviceRequest')"
+                        label="Service Request Client Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="tenure col-6">
+                    <label for="tenure">Spare Part</label>
+                    <p-autoComplete
+                        class="auto-complete"
+                        [suggestions]="sparePartManagerList"
+                        [(ngModel)]="selectedSparePart"
+                        field="spare_part_name"
+                        formControlName="selectedSparePart"
+                        placeholder="Select a Spare Part"
+                        (onSelect)="onSparePartSelect()"
+                        (completeMethod)="searchParent($event)"
+                    ></p-autoComplete>
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('selectedSparePart')"
+                        label="Spare Part"
+                    ></app-custom-validation>
+                </div>
+            </div>
+            <div class="header-of-Table-Four">
+                <div class="Table-Four">
+                    <p-table
+                        [value]="addProducts"
+                        styleClass="p-datatable-striped"
+                    >
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Spare Part</th>
+                                <th>SKU</th>
+                                <th>Price</th>
+                                <th>Tax</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product>
+                            <tr *ngFor="let product of addProducts">
+                                <td>{{ product.spare_part_type_name }}</td>
+                                <td>{{ product.sku }}</td>
+                                <td>{{ product.selling_price }}</td>
+                                <td>{{ product.tax }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="row-Two col-12">
+                <div class="standard-Price col-4">
+                    <label for="subtotal">Sub Total</label>
+                    <input
+                        [(ngModel)]="addSparePartObject.subtotal"
+                        readonly
+                        pInputText
+                        placeholder="Enter a Sub Total"
+                        id="subtotal"
+                        aria-describedby="subtotal-help"
+                        formControlName="subtotal"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('subtotal')"
+                        label="Sub Total"
+                    ></app-custom-validation>
+                </div>
+                <div class="selling-Price col-4">
+                    <label for="discount_total">Discount%</label>
+                    <input
+                        [(ngModel)]="addSparePartObject.discount_total"
+                        (ngModelChange)="subTotalDiscountAmount()"
+                        pInputText
+                        placeholder="Enter a Discount Total"
+                        id="discount_total"
+                        aria-describedby="discount_total-help"
+                        formControlName="discount_total"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('discount_total')"
+                        label="Discount Total"
+                    ></app-custom-validation>
+                    <div
+                        *ngIf="addSparePartForm.get('discount_total')?.errors?.['max']"
+                        style="color: red"
+                    >
+                        The value must be less than 100.
+                    </div>
+                </div>
+                <div class="coverage-Details col-4">
+                    <label for="tax_total">Tax Total</label>
+                    <input
+                        [(ngModel)]="addSparePartObject.tax_total"
+                        pInputText
+                        readonly
+                        placeholder="Enter a Tax Total"
+                        id="tax_total"
+                        aria-describedby="tax_total-help"
+                        formControlName="tax_total"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('tax_total')"
+                        label="Tax Total"
+                    ></app-custom-validation>
+                </div>
+            </div>
+            <div class="row-Three col-12">
+                <div class="spare-Part-Covered col-4">
+                    <label for="total_payable">Total</label>
+                    <input
+                        [(ngModel)]="addSparePartObject.total_payable"
+                        pInputText
+                        readonly
+                        placeholder="Enter a Total"
+                        id="total_payable"
+                        aria-describedby="total_payable-help"
+                        formControlName="total_payable"
+                    />
+                    <app-custom-validation
+                        [control]="addSparePartForm.get('total_payable')"
+                        label="Total"
+                    ></app-custom-validation>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="save-Product-Category">
+        <button class="custom-button" (click)="saveAddSparePart()">
+            Add Spare Part
+        </button>
+        <button class="custom-button-cancel" (click)="closeEventDialog()">
+            Cancel
+        </button>
+    </div>
+</div>

@@ -1,0 +1,257 @@
+$input-background: #f0edffcc;
+$primary-background: #071f86;
+$primary-background-text: #fff;
+
+.p-datatable .p-datatable-header {
+    display: none !important;
+}
+
+.action-menu {
+    padding: 5px 20px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.action-menu:hover {
+    background-color: $input-background;
+}
+
+.actionClasses .p-button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.actionClasses .p-button i {
+    font-family: "Font Awesome 6 Free" !important;
+    font-size: 13px;
+}
+
+.actionClasses .p-button:focus {
+    box-shadow: none;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem !important;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #065388;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+}
+
+.action-button i {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.action-button:hover {
+    background-color: #005bb5;
+}
+
+.action-button:active {
+    background-color: #00408a;
+}
+
+.add-client {
+    display: flex;
+    align-items: center;
+    background-color: #065388;
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
+    color: #fff;
+}
+
+.create-order {
+    display: flex;
+    align-items: center;
+    background-color: #065388;
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
+    color: #fff;
+}
+
+.add-Spare-Part {
+    display: flex;
+    align-items: center;
+    background-color: #065388;
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
+    color: #fff;
+    width: 12rem;
+}
+
+.add-Service-Person {
+    display: flex;
+    align-items: center;
+    background-color: #065388;
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
+    color: #fff;
+    width: 14rem;
+}
+
+.add-Order-Details-Spare-Part {
+    display: flex;
+    align-items: center;
+    background-color: #065388;
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
+    color: #fff;
+    width: 14rem;
+}
+
+.add-Order-Details-On-Demand {
+    display: flex;
+    align-items: center;
+    background-color: #065388;
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
+    color: #fff;
+    width: 14rem;
+}
+
+.add-button {
+    box-shadow: 0px 0px 20px #227270c7;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    border-radius: 50%;
+    background: $primary-background;
+    color: $primary-background-text;
+    width: 50px;
+    aspect-ratio: 1 / 1;
+    border: 0;
+    z-index: 9;
+}
+
+.view-details-button {
+    display: flex;
+    background: none;
+    border: none;
+    color: #065388;
+    // font-size: 1rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.add-button:hover {
+    box-shadow: none;
+    background: $primary-background !important;
+    color: $primary-background-text !important;
+    transition: all 0.2s ease-in-out;
+    border: 0;
+    scale: 0.9;
+}
+
+.add-button .p-button-icon {
+    font-size: 20px;
+}
+
+.filter-button {
+    border: 0;
+    border-radius: 50%;
+    width: auto;
+    // height: 32px;
+    margin-bottom: 0 !important;
+}
+
+.filter-button:hover,
+.filter-button:active,
+.filter-button:focus-visible {
+    border: 0 !important;
+    background: transparent !important;
+    outline: 0 !important;
+}
+
+.filter-button:focus {
+    box-shadow: none;
+}
+
+.table-options .search-box input {
+    border-radius: 8px;
+    outline: 0;
+    border: 1px solid $primary-background;
+    padding: 5px;
+    padding-left: 25px;
+}
+
+.table-options .search-box i {
+    left: 0;
+    top: 10px;
+    font-size: 14px;
+}
+
+.table-options .pi,
+.table-options .p-button i {
+    font-size: 18px;
+    color: $primary-background;
+}
+
+.table-link {
+    cursor: pointer;
+    color: $primary-background;
+    // text-decoration: underline;
+}
+
+/*td div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}*/
+
+tr.deactivated {
+    opacity: 0.5;
+    background: #d1cbcb;
+}
+
+.view-actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.view-actions p {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.loaded-popup .modal-content img {
+    width: 459px;
+    height: 500px;
+}
+
+.loaded-popup .modal-content {
+    margin: 5% auto !important;
+}
+.highlight {
+    background-color: #ffa50087 !important;
+    padding: 0px 5px;
+}
+.highlightNo {
+    background-color: transparent;
+    color: #000;
+}

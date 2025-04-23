@@ -1,0 +1,123 @@
+<form [formGroup]="addStaffForm" autocomplete="off">
+    <div class="add-project-wrap">    
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="staff.firstName" formControlName="firstname" (keypress)="keyPressForName($event)" maxlength="20">
+                <label for="inputtext">First Name*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('firstname').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('firstname').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="staff.lastName" formControlName="lastname" (keypress)="keyPressForName($event)" maxlength="20">
+                <label for="inputtext">Last Name*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('lastname').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('lastname').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+    
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input *ngIf="hideButton" type="text" id="inputtext" pInputText [(ngModel)]="staff.email" formControlName="email">
+                <input *ngIf="!hideButton" type="text" id="inputtext" pInputText [(ngModel)]="staff.email" formControlName="email" disabled>
+                <label for="inputtext">Email Address*</label>                
+            </span>
+            <div *ngIf="addStaffForm.get('email')?.invalid && (addStaffForm.get('email')?.dirty || addStaffForm.get('email')?.touched)" class="text-danger">
+                <p style="font-size: 10px;" class="color-red text-left mt-1" *ngIf="addStaffForm.get('email')?.hasError('required')">Email is required.</p>              
+                <p style="font-size: 10px;" class="color-red text-left mt-1" *ngIf="addStaffForm.get('email')?.hasError('pattern')">Please enter a valid Email</p>
+            </div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="staff.phone" formControlName="phone" (ngModelChange)="errorShowphone()"
+                onKeyPress="if(this.value.length==10) return false;return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57">
+                <label for="inputtext">Mobile Number</label>                
+            </span>
+            <span class="error-msg" *ngIf="errorBean.phone1">Please enter valid phone number</span>
+            <div *ngIf="addStaffForm.get('phone')?.invalid && (addStaffForm.get('phone')?.dirty || addStaffForm.get('phone')?.touched)" class="text-danger">
+                <p class="color-red text-left mt-1" style="font-size: 10px;" *ngIf="addStaffForm.get('phone')?.hasError('required')">Phone is required.</p>
+            </div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="staff.alternatePhone" formControlName="alternatePhone" (ngModelChange)="errorShowphone1()"
+                onKeyPress="if(this.value.length==10) return false;return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57">
+                <label for="inputtext">Alternate Mobile Number</label>                
+            </span>
+            <span class="error-msg" *ngIf="errorBean.phone2">Please enter valid phone number</span>
+
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-multiSelect inputId="multiselect" [options]="factoryList" appendTo="body"
+                [(ngModel)]="staff.factory" formControlName="factory" optionLabel="factoryName" (onChange)="staffMultiselect($event.value, staff.factory)"></p-multiSelect>
+                <label for="inputtext">Factory *</label>
+            </span>
+            <div *ngIf="addStaffForm.controls.factory.invalid && (addStaffForm.controls.factory.dirty || addStaffForm.controls.factory.touched)">
+                <small class="p-error">Factory is required.</small>
+            </div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="multiselect" [options]="roleList" appendTo="body"
+                [(ngModel)]="staff.selectedRole" [autoDisplayFirst]="false" 
+                optionLabel="code" formControlName="roles"></p-dropdown>
+                <label for="inputtext">Roles *</label>
+            </span>
+            <div *ngIf="addStaffForm.controls.roles.invalid && (addStaffForm.controls.roles.dirty || addStaffForm.controls.roles.touched)">
+                <small class="p-error">Role is required.</small>
+            </div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <!-- <span class="p-float-label">            
+                <p-calendar [showIcon]="true" #calendar appendTo="body" (onSelect)="onSelect()" selectionMode="range" [(ngModel)]="rangeDates"
+                [readonlyInput]="true" inputId="range"></p-calendar>
+                <label for="inputtext">Date of Birth</label>
+            </span> -->
+            <span class="p-float-label p-input-icon-right">
+                <p-calendar [showIcon]="true" inputId="calendar" [minDate]="minDate"  dateFormat="dd/mm/yy" appendTo="body" [(ngModel)]="staff.dob" formControlName="dob"></p-calendar>
+                <label for="calendar">Date of Birth</label>
+                <i class="pi pi-calendar"></i>
+            </span>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label  p-input-icon-right">            
+                <p-calendar [showIcon]="true" inputId="calendar" appendTo="body" (onSelect)="onSelect()" [(ngModel)]="staff.doj"
+                formControlName="doj" dateFormat="dd/mm/yy"></p-calendar>
+                <label for="inputtext">Date of Joining</label>
+                <i class="pi pi-calendar"></i>
+            </span>
+        </div>
+
+        <div class="field col-12 full-width">
+            <!-- <span class="p-float-label  p-input-icon-right">   -->
+                <p-checkbox [(ngModel)]="staff.adminLogin" label="Allowed Admin Login" [binary]="true" formControlName="adminLogin"></p-checkbox>         
+                <!-- <label for="inputtext">Allowed Admin Login</label> -->
+            <!-- </span> -->
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-multiSelect inputId="multiselect" [options]="moduleList" appendTo="body"
+                (onChange)="staffAccessControlMultiselect($event.value, staff.selectedAccessControlList)" formControlName="accessControlMasterList" [(ngModel)]="staff.selectedAccessControlList"
+                optionLabel="moduleName"></p-multiSelect>
+                <label for="multiselect">Select Module*</label>
+            </span>
+        </div>
+        
+    </div>
+    <div class="popup-form-btn">
+        <button pButton type="button" *ngIf="hideButton" (click)="saveStaff()" [disabled]="!addStaffForm.valid" label="Save Staff and Send email" class="p-button-raised" [loading]="isLoading"></button>
+        <button pButton type="button" *ngIf="!hideButton" (click)="updateStaff()"  [disabled]="!addStaffForm.valid" label="Update Staff" class="p-button-raised" [loading]="isLoading"></button>
+    
+        <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="close.emit($event)"></button>
+    </div>
+</form>    

@@ -1,0 +1,90 @@
+.header-Dialogue-Box {
+    margin-bottom: 0px;
+}
+
+.add-Create-Order-Grid {
+    background-color: #fff;
+    padding-bottom: 1rem;
+}
+
+.row-One,
+.row-Two,
+.row-Three {
+    display: flex;
+}
+
+.name,
+.tenure,
+.preventive-Maintenance,
+.standard-Price,
+.selling-Price,
+.tax,
+.TAT,
+.preventive-Cycle,
+.coverage-Details,
+.spare-Part-Covered {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+input,
+p-dropdown,
+p-multiSelect {
+    width: 95%;
+}
+
+:host ::ng-deep .p-autocomplete {
+    display: block;
+}
+
+::ng-deep .p-autocomplete-input {
+    width: 95%;
+}
+
+.save-Product-Category {
+    display: flex;
+    gap: 1rem;
+    // margin-top: 1.2rem;
+    justify-content: flex-end;
+    margin-right: 1rem;
+}
+
+.custom-button {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #065388;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-button:hover {
+    background-color: #005bb5;
+    cursor: pointer;
+}
+
+.custom-button-cancel {
+    width: 12rem;
+    height: 2.5rem;
+    background-color: #cdcfd0;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

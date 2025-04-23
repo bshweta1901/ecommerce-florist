@@ -1,0 +1,2323 @@
+<div class="add-Catelog-Container">
+    <div class="header-Client">
+        <h5>Product Details</h5>
+        <div class="back-Button-Header">
+            <button
+                class="back-Button"
+                [routerLink]="['/panel/catelog-management']"
+                routerLinkActive="router-link-active"
+            >
+                <i class="pi pi-arrow-left"></i>
+                <p>Back</p>
+            </button>
+        </div>
+    </div>
+    <div class="add-Catelog-Order-Grid">
+        <form [formGroup]="addProductDetailsForm">
+            <div class="row-One col-12">
+                <div class="product-Category col-3">
+                    <label for="product_category"
+                        >Product Category<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <p-dropdown
+                        [disabled]="
+                            actionForEdit === false && actionForView === true
+                        "
+                        [(ngModel)]="selectedProductCategory"
+                        [options]="productCategoryDropdownList"
+                        (onChange)="setProductCategoryList()"
+                        optionLabel="product_category"
+                        placeholder="Select a Product Category"
+                        formControlName="selectedProductCategory"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="
+                            addProductDetailsForm.get('selectedProductCategory')
+                        "
+                        label="Product Category"
+                    ></app-custom-validation>
+                </div>
+                <div class="sku col-3">
+                    <label for="sku"
+                        >SKU<span class="required-field">*</span></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="catelogProductObject.sku"
+                        placeholder="Enter a SKU"
+                        pInputText
+                        id="sku"
+                        formControlName="sku"
+                        aria-describedby="sku-help"
+                    />
+                    <app-custom-validation
+                        [control]="addProductDetailsForm.get('sku')"
+                        label="SKU"
+                    ></app-custom-validation>
+                </div>
+                <div class="preventive-Maintenance col-3">
+                    <label for="product_name"
+                        >Product Name<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="catelogProductObject.product_name"
+                        pInputText
+                        placeholder="Enter a Product name"
+                        id="product_name"
+                        formControlName="product_name"
+                        aria-describedby="product_name-help"
+                    />
+                    <app-custom-validation
+                        [control]="addProductDetailsForm.get('product_name')"
+                        label="Product Name"
+                    ></app-custom-validation>
+                </div>
+                <div class="preventive-Maintenance col-3">
+                    <label for="sap_oracle_code"
+                        >ERP GL Code<span class="required-field">*</span></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="catelogProductObject.sap_oracle_code"
+                        pInputText
+                        placeholder="Enter a ERP GL Code"
+                        id="sap_oracle_code"
+                        formControlName="sap_oracle_code"
+                        aria-describedby="sap_oracle_code-help"
+                    />
+                    <app-custom-validation
+                        [control]="addProductDetailsForm.get('sap_oracle_code')"
+                        label="ERP GL Code"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="row-Two col-12">
+                <div class="standard-Price col-3">
+                    <label for="approx_life"
+                        >Approx Life(in yrs)<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="catelogProductObject.approx_life"
+                        pInputText
+                        placeholder="Enter a Approx Life(in yrs)"
+                        id="approx_life"
+                        formControlName="approx_life"
+                        aria-describedby="approx_life-help"
+                    />
+                    <app-custom-validation
+                        [control]="addProductDetailsForm.get('approx_life')"
+                        label="Approx Life(in yrs)"
+                    ></app-custom-validation>
+                </div>
+                <div class="selling-Price col-3">
+                    <label for="standard_price"
+                        >Standard Cost Price<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="catelogProductObject.standard_price"
+                        pInputText
+                        id="standard_price"
+                        placeholder="Enter a Standard Cost Price"
+                        formControlName="standard_price"
+                        aria-describedby="standard_price-help"
+                    />
+                    <app-custom-validation
+                        [control]="addProductDetailsForm.get('standard_price')"
+                        label="Standard Cost Price"
+                    ></app-custom-validation>
+                </div>
+                <div class="tax col-3">
+                    <label for="tax"
+                        >Tax (%)<span class="required-field">*</span></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="catelogProductObject.tax"
+                        pInputText
+                        id="tax"
+                        placeholder="Enter a Tax (%)"
+                        formControlName="tax"
+                        aria-describedby="tax-help"
+                    />
+                    <app-custom-validation
+                        [control]="addProductDetailsForm.get('tax')"
+                        label="Tax (%)"
+                    ></app-custom-validation>
+                </div>
+                <div class="selling-Price col-3">
+                    <label for="selling_price"
+                        >Selling Price (Excl. Taxes)<span class="required-field"
+                            >*</span
+                        ></label
+                    >
+                    <input
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="catelogProductObject.selling_price"
+                        pInputText
+                        placeholder="Enter a Selling Price (Excl. Taxes)"
+                        id="selling_price"
+                        formControlName="selling_price"
+                        aria-describedby="selling_price-help"
+                        (change)="checkStandardAndSelling()"
+                    />
+                    <app-custom-validation
+                        [control]="addProductDetailsForm.get('selling_price')"
+                        label="Selling Price (Excl. Taxes)"
+                    ></app-custom-validation>
+                </div>
+            </div>
+
+            <div class="row-Three col-12 align-items-center">
+                <div class="coverage-Details col-3">
+                    <label for="coverageDetails"
+                        >Spare Part List (Total :
+                        {{ selectedSparePartList?.length || 0 }})<span
+                            class="required-field"
+                        >
+                            *</span
+                        ></label
+                    >
+                    <p-multiSelect
+                        [disabled]="
+                            actionForEdit === false && actionForView === true
+                        "
+                        [(ngModel)]="selectedSparePartList"
+                        [options]="SparePartList"
+                        optionLabel="spare_part_name"
+                        formControlName="selectedSparePartList"
+                        placeholder="Select a Spare Part List"
+                    ></p-multiSelect>
+                    <app-custom-validation
+                        [control]="
+                            addProductDetailsForm.get('selectedSparePartList')
+                        "
+                        label="Spare Part List"
+                    ></app-custom-validation>
+                </div>
+                <div class="product-Category col-3">
+                    <label for="product_category"
+                        >Product OEM<span class="required-field">*</span></label
+                    >
+                    <p-dropdown
+                        [disabled]="
+                            actionForEdit === false && actionForView === true
+                        "
+                        [(ngModel)]="selectedProductOEM"
+                        [options]="ProductOEMList"
+                        optionLabel="name"
+                        placeholder="Select a Product OEM"
+                        formControlName="selectedProductOEM"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="
+                            addProductDetailsForm.get('selectedProductOEM')
+                        "
+                        label="Product OEM"
+                    ></app-custom-validation>
+                </div>
+                <div class="repair-Checklist col-3">
+                    <label for="repairChecklist">Repair Checklist</label>
+                    <textarea
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        [(ngModel)]="productCategoryObject.pss_string"
+                        class="repair-Checklist-Field"
+                        rows="2"
+                        cols="2"
+                        pInputTextarea
+                        disabled="actionForEdit == false && actionForView == true"
+                        formControlName="repairChecklist"
+                    ></textarea>
+                </div>
+                <div class="coverage-Details col-3">
+                    <label for="problemDiagnosis">Problem Diagnosis</label>
+                    <textarea
+                        [(ngModel)]="productCategoryObject.sops_string"
+                        class="problem-Diagnosis-Field"
+                        rows="2"
+                        cols="2"
+                        pInputTextarea
+                        [readOnly]="!actionForEdit"
+                        disabled="actionForEdit === false && actionForView === true"
+                        [ngClass]="{
+                            'dull-input':
+                                actionForEdit === false &&
+                                actionForView === true
+                        }"
+                        formControlName="problemDiagnosis"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="row-Three col-12">
+                <div class="spare-Part-Covered col-3">
+                    <label for="description">Description</label>
+                    <textarea
+                        class="problem-Diagnosis-Field"
+                        [disabled]="
+                            actionForEdit === false && actionForView === true
+                        "
+                        [(ngModel)]="catelogProductObject.description"
+                        pInputText
+                        placeholder="Enter a Description"
+                        id="description"
+                        aria-describedby="description-help"
+                        formControlName="description"
+                    ></textarea>
+                </div>
+                <div class="user-Customer-Type col-6">
+                    <div class="spare-Part-Covered">
+                        <label for="description">Upload Document</label>
+                        <p-fileUpload
+                            [disabled]="
+                                actionForEdit === false &&
+                                actionForView === true
+                            "
+                            #fileUploader
+                            mode="basic"
+                            chooseLabel="Upload Document"
+                            chooseIcon="pi pi-upload"
+                            [multiple]="true"
+                            name="demo[]"
+                            customUpload="true"
+                            accept="application/pdf"
+                            maxFileSize="100000000"
+                            (onSelect)="uploadAgreement($event)"
+                        ></p-fileUpload>
+                    </div>
+                    <div *ngIf="selectedFiles.length > 0" class="file-actions">
+                        <span
+                            class="cursor-pointer icons-name"
+                            (click)="viewPdf(selectedProductFile[0].objectURL)"
+                            pTooltip="View Document"
+                            tooltipPosition="top"
+                            ><strong>View</strong>
+                            <i class="pi pi-eye" style="color: blue"></i>
+                        </span>
+
+                        <span
+                            class="cursor-pointer icons-name"
+                            (click)="reselectFile(fileUploader)"
+                            pTooltip="Remove Document"
+                            tooltipPosition="top"
+                        >
+                            <strong>Remove</strong>
+                            <i class="pi pi-times" style="color: red"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="save-Product-Category">
+            <button
+                class="custom-button"
+                *ngIf="(id && actionForEdit) || showCreatePackage"
+                (click)="updateCatelogManager()"
+            >
+                Update
+            </button>
+            <button
+                *ngIf="!id && !actionForEdit && !showCreatePackage"
+                class="custom-button"
+                (click)="saveCatelogProduct()"
+            >
+                Save
+            </button>
+            <button
+                *ngIf="!id || actionForEdit"
+                class="custom-button-cancel"
+                (click)="resetCatelogProductMaster()"
+            >
+                Reset
+            </button>
+        </div>
+
+        <div
+            *ngIf="id || (!id && showCreatePackage)"
+            class="header-Of-Add-Catelog-Package"
+        >
+            <p class="add-Package">Add Package</p>
+            <div *ngIf="(id && actionForEdit) || !id" class="add-Package-Btn">
+                <div class="add-Create-Package">
+                    <button class="custom-button" (click)="showDropdown()">
+                        Create Package
+                    </button>
+                </div>
+            </div>
+            <div class="package-Colms">
+                <div>
+                    <div
+                        class="add-DropDown-For-Product col-12"
+                        *ngIf="showPackageDropdown"
+                    >
+                        <div class="coverage-Details col-3">
+                            <label for="customerType">Package Type</label>
+                            <p-dropdown
+                                [(ngModel)]="selectedPackage"
+                                [options]="packageServiceList"
+                                optionLabel="name"
+                                placeholder="Select a Package Type"
+                                (onChange)="filterPackageList()"
+                            >
+                            </p-dropdown>
+                        </div>
+                    </div>
+
+                    <!-- Warranty Section -->
+                    <div *ngIf="filteredPackageServiceListForWarranty">
+                        <form [formGroup]="addCreatePackageFormWarranty">
+                            <div class="warranty-Section-One col-12">
+                                <div class="warranty-Duration col-3">
+                                    <label for="warrantyDuration"
+                                        >Warranty Duration (in months)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="savePackageObj.tenure"
+                                        pInputText
+                                        placeholder="Enter a Warranty Duration (in months)"
+                                        aria-describedby="coverageDetails-help"
+                                        id="warrantyDuration"
+                                        formControlName="warranty_Tenure"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormWarranty.get(
+                                                'warranty_Tenure'
+                                            )
+                                        "
+                                        label="Warranty Duration (in months)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="warranty-Coverage-Details col-3">
+                                    <label for="coverage_details"
+                                        >Warranty Coverage Details<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.coverage_details
+                                        "
+                                        placeholder="Enter a Warranty Coverage Details"
+                                        pInputText
+                                        aria-describedby="coverageDetails-help"
+                                        id="coverage_details"
+                                        formControlName="Warranty_coverage_details"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormWarranty.get(
+                                                'Warranty_coverage_details'
+                                            )
+                                        "
+                                        label="Warranty Coverage Details"
+                                    ></app-custom-validation>
+                                </div>
+
+                                <div class="coverage-Details col-3">
+                                    <label for="tat"
+                                        >Service Request TAT (in days)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.turn_around_time
+                                        "
+                                        placeholder="Enter a Service Request TAT (in days)"
+                                        pInputText
+                                        aria-describedby="coverageDetails-help"
+                                        id="tat"
+                                        formControlName="warranty_Tat"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormWarranty.get(
+                                                'warranty_Tat'
+                                            )
+                                        "
+                                        label="Service Request TAT (in days)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="coverage-Details col-3">
+                                    <label for="tat">
+                                        Spare Part covered (Total:
+                                        {{ selectedSparePart?.length || 0 }})
+                                    </label>
+                                    <button
+                                        class="custom-button"
+                                        (click)="
+                                            handleButtonClickToOpenDialogueForSparePartCovered()
+                                        "
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <form [formGroup]="addCreatePackageFormWarranty">
+                            <div class="warranty-Section-One col-12">
+                                <div class="selling-Price col-3">
+                                    <label for="sellingPrice"
+                                        >Selling Price</label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.selling_price
+                                        "
+                                        placeholder="Enter a Selling Price"
+                                        readonly
+                                        pInputText
+                                        id="sellingPrice"
+                                        aria-describedby="sellingPrice-help"
+                                        formControlName="Amc_selling_price"
+                                        (change)="
+                                            checkStandardAndSellingPackage()
+                                        "
+                                    />
+                                </div>
+                                <div class="selling-Price col-3">
+                                    <label for="standard_price"
+                                        >Standard Cost Price</label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.standard_price
+                                        "
+                                        placeholder="Enter a Standard Cost Price"
+                                        readonly
+                                        pInputText
+                                        id="standard_price"
+                                        aria-describedby="standard_price-help"
+                                        formControlName="Amc_standard_price"
+                                    />
+                                </div>
+                                <div class="tax col-3">
+                                    <label for="tax"
+                                        >Tax (%)<span class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [readOnly]="true"
+                                        [(ngModel)]="savePackageObj.tax"
+                                        pInputText
+                                        placeholder="Enter a Tax (%)"
+                                        id="tax"
+                                        formControlName="tax"
+                                        aria-describedby="tax-help"
+                                    />
+                                </div>
+                                <div class="user-Customer-Type col-3">
+                                    <div class="spare-Part-Covered">
+                                        <label for="uploadDocument"
+                                            >Upload Document</label
+                                        >
+                                        <p-fileUpload
+                                            #fileUploader
+                                            mode="basic"
+                                            chooseLabel="Upload Document"
+                                            chooseIcon="pi pi-upload"
+                                            name="demo[]"
+                                            customUpload="true"
+                                            accept="application/pdf"
+                                            maxFileSize="100000000"
+                                            (onSelect)="
+                                                uploadAgreementPackage($event)
+                                            "
+                                        ></p-fileUpload>
+                                    </div>
+                                    <div
+                                        *ngIf="selectedFiles.length > 0"
+                                        class="file-actions"
+                                    >
+                                        <span
+                                            class="cursor-pointer icons-name"
+                                            (click)="
+                                                viewPdf(
+                                                    selectedWarrantyFile[0]
+                                                        .objectURL
+                                                )
+                                            "
+                                            pTooltip="View Document"
+                                            tooltipPosition="top"
+                                            ><strong>View</strong>
+                                            <i
+                                                class="pi pi-eye"
+                                                style="color: blue"
+                                            ></i>
+                                        </span>
+
+                                        <span
+                                            class="cursor-pointer icons-name"
+                                            (click)="
+                                                reselectFilePackage(
+                                                    fileUploader
+                                                )
+                                            "
+                                            pTooltip="Remove Document"
+                                            tooltipPosition="top"
+                                        >
+                                            <strong>Remove</strong>
+                                            <i
+                                                class="pi pi-times"
+                                                style="color: red"
+                                            ></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- AMC Section -->
+
+                    <div *ngIf="filteredPackageServiceListForAMC">
+                        <form [formGroup]="addCreatePackageFormAmc">
+                            <div class="amc-section col-12">
+                                <div class="coverage-Details col-3">
+                                    <label for="package_name"
+                                        >Name<span class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.package_name
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Name"
+                                        aria-describedby="coverageDetails-help"
+                                        id="package_name"
+                                        formControlName="Amc_Package_name"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormAmc.get(
+                                                'Amc_Package_name'
+                                            )
+                                        "
+                                        label="Name"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="coverage-Details col-3">
+                                    <label for="tenure"
+                                        >Tenure (in yr)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="savePackageObj.tenure"
+                                        pInputText
+                                        placeholder="Enter a Tenure (in yr)"
+                                        aria-describedby="coverageDetails-help"
+                                        id="tenure"
+                                        formControlName="Amc_Tenure"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormAmc.get(
+                                                'Amc_Tenure'
+                                            )
+                                        "
+                                        label="Tenure"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="coverage-Details col-3">
+                                    <label for="preventiveMaintenance"
+                                        >Preventive Maintenance<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <p-dropdown
+                                        [(ngModel)]="selectedmaintenance"
+                                        [options]="maintenanceList"
+                                        optionLabel="name"
+                                        placeholder="Select a Preventive Maintenance"
+                                        formControlName="Amc_Preventive_Maintenance"
+                                    ></p-dropdown>
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormAmc.get(
+                                                'Amc_Preventive_Maintenance'
+                                            )
+                                        "
+                                        label="Preventive Maintenance"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="selling-Price col-3">
+                                    <label for="standard_price"
+                                        >Standard Cost Price<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.standard_price
+                                        "
+                                        placeholder="Enter a Standard Cost Price"
+                                        pInputText
+                                        id="standard_price"
+                                        aria-describedby="standard_price-help"
+                                        formControlName="Amc_standard_price"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormAmc.get(
+                                                'Amc_standard_price'
+                                            )
+                                        "
+                                        label="Standard Cost Price"
+                                    ></app-custom-validation>
+                                </div>
+                            </div>
+                        </form>
+                        <form [formGroup]="addCreatePackageFormAmc">
+                            <div class="amc-section col-12">
+                                <div class="tax col-3">
+                                    <label for="tax"
+                                        >Tax (%)<span class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="savePackageObj.tax"
+                                        pInputText
+                                        placeholder="Enter a Tax (%)"
+                                        id="tax"
+                                        aria-describedby="tax-help"
+                                        formControlName="Amc_Tax"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormAmc.get(
+                                                'Amc_Tax'
+                                            )
+                                        "
+                                        label="Tax (%)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="selling-Price col-3">
+                                    <label for="sellingPrice"
+                                        >Selling Price (Excl. Taxes)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.selling_price
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Selling Price (Excl. Taxes)"
+                                        id="sellingPrice"
+                                        aria-describedby="sellingPrice-help"
+                                        formControlName="Amc_selling_price"
+                                        (change)="
+                                            checkStandardAndSellingPackage()
+                                        "
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormAmc.get(
+                                                'Amc_selling_price'
+                                            )
+                                        "
+                                        label="Selling Price (Excl. Taxes)"
+                                    ></app-custom-validation>
+                                </div>
+
+                                <div class="coverage-Details col-3">
+                                    <label for="tat"
+                                        >Service Request TAT (in days)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.turn_around_time
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Service Request TAT (in days)"
+                                        aria-describedby="coverageDetails-help"
+                                        id="tat"
+                                        formControlName="amc_Tat"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormAmc.get(
+                                                'amc_Tat'
+                                            )
+                                        "
+                                        label="Service Request TAT (in days)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="coverage-Details col-3">
+                                    <label for="tat">
+                                        Spare Part covered (Total:
+                                        {{ selectedSparePart?.length || 0 }})
+                                    </label>
+                                    <button
+                                        class="custom-button"
+                                        (click)="
+                                            handleButtonClickToOpenDialogueForSparePartCovered()
+                                        "
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <form [formGroup]="addCreatePackageFormAmc">
+                            <div class="amc-section col-12">
+                                <div class="coverage-Details col-3">
+                                    <label for="coverage_details"
+                                        >Coverage Details</label
+                                    >
+                                    <textarea
+                                        [(ngModel)]="
+                                            savePackageObj.coverage_details
+                                        "
+                                        id="coverage_details"
+                                        class="coverageDetails-Field"
+                                        placeholder="Enter a Coverage Details"
+                                        rows="2"
+                                        cols="2"
+                                        pInputTextarea
+                                        formControlName="Amc_coverage_details"
+                                    ></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- <div class="amc-section row mt-2"></div> -->
+                    </div>
+
+                    <!--CMC Section-->
+
+                    <div *ngIf="filteredPackageServiceListForCAMC">
+                        <form [formGroup]="addCreatePackageFormCamc">
+                            <div class="amc-section col-12">
+                                <div class="coverage-Details col-3">
+                                    <label for="package_name"
+                                        >Name<span class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.package_name
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Name"
+                                        aria-describedby="coverageDetails-help"
+                                        id="package_name"
+                                        formControlName="Camc_Name"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormCamc.get(
+                                                'Camc_Name'
+                                            )
+                                        "
+                                        label="Name"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="coverage-Details col-3">
+                                    <label for="tenure"
+                                        >Tenure (in yr)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="savePackageObj.tenure"
+                                        pInputText
+                                        placeholder="Enter a Tenure (in yr)"
+                                        aria-describedby="coverageDetails-help"
+                                        id="tenure"
+                                        formControlName="Camc_Tenure"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormCamc.get(
+                                                'Camc_Tenure'
+                                            )
+                                        "
+                                        label="Tenure (in yr)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="coverage-Details col-3">
+                                    <label for="preventiveMaintenance"
+                                        >Preventive Maintenance<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <p-dropdown
+                                        [(ngModel)]="selectedmaintenance"
+                                        [options]="maintenanceList"
+                                        optionLabel="name"
+                                        placeholder="Select a Preventive Maintenance"
+                                        formControlName="Camc_Preventive_Maintenance"
+                                    ></p-dropdown>
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormCamc.get(
+                                                'Camc_Preventive_Maintenance'
+                                            )
+                                        "
+                                        label="Preventive Maintenance"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="selling-Price col-3">
+                                    <label for="standard_price"
+                                        >Standard Cost Price<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.standard_price
+                                        "
+                                        placeholder="Enter a Standard Cost Price"
+                                        pInputText
+                                        id="standard_price"
+                                        aria-describedby="standard_price-help"
+                                        formControlName="Camc_standard_price"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormCamc.get(
+                                                'Camc_standard_price'
+                                            )
+                                        "
+                                        label="Standard Cost Price"
+                                    ></app-custom-validation>
+                                </div>
+                            </div>
+                        </form>
+                        <form [formGroup]="addCreatePackageFormCamc">
+                            <div class="amc-section col-12">
+                                <div class="tax col-3">
+                                    <label for="tax"
+                                        >Tax (%)<span class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="savePackageObj.tax"
+                                        pInputText
+                                        id="tax"
+                                        placeholder="Enter a Tax (%)"
+                                        aria-describedby="tax-help"
+                                        formControlName="Camc_Tax"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormCamc.get(
+                                                'Camc_Tax'
+                                            )
+                                        "
+                                        label="Tax (%)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="selling-Price col-3">
+                                    <label for="sellingPrice"
+                                        >Selling Price (Excl. Taxes)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.selling_price
+                                        "
+                                        pInputText
+                                        placeholder="Enter a Selling Price (Excl. Taxes)"
+                                        id="sellingPrice"
+                                        aria-describedby="sellingPrice-help"
+                                        formControlName="Camc_selling_price"
+                                        (change)="
+                                            checkStandardAndSellingPackage()
+                                        "
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormCamc.get(
+                                                'Camc_selling_price'
+                                            )
+                                        "
+                                        label="Selling Price (Excl. Taxes)"
+                                    ></app-custom-validation>
+                                </div>
+
+                                <div class="coverage-Details col-3">
+                                    <label for="tat"
+                                        >Service Request TAT (in days)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.turn_around_time
+                                        "
+                                        placeholder="Enter a Service Request TAT (in days)"
+                                        pInputText
+                                        aria-describedby="coverageDetails-help"
+                                        id="tat"
+                                        formControlName="Camc_Tat"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormCamc.get(
+                                                'Camc_Tat'
+                                            )
+                                        "
+                                        label="Service Request TAT (in days)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="coverage-Details col-3">
+                                    <label for="tat">
+                                        Spare Part covered (Total:
+                                        {{ selectedSparePart?.length || 0 }})
+                                    </label>
+                                    <button
+                                        class="custom-button"
+                                        (click)="
+                                            handleButtonClickToOpenDialogueForSparePartCovered()
+                                        "
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <form [formGroup]="addCreatePackageFormCamc">
+                            <div class="amc-section col-12">
+                                <div class="coverage-Details col-3">
+                                    <label for="coverage_details"
+                                        >Coverage Details</label
+                                    >
+                                    <textarea
+                                        [(ngModel)]="
+                                            savePackageObj.coverage_details
+                                        "
+                                        placeholder="Enter a Coverage Details"
+                                        id="coverage_details"
+                                        class="coverageDetails-Field"
+                                        rows="2"
+                                        cols="2"
+                                        pInputTextarea
+                                        formControlName="Camc_coverage_details"
+                                    ></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- <div class="amc-section row mt-2">
+                                
+                            </div> -->
+                    </div>
+
+                    <!--On Demand Section-->
+
+                    <div *ngIf="filteredPackageServiceListForOnDemand">
+                        <form [formGroup]="addCreatePackageFormDemand">
+                            <div class="on-Demand-Section col-12">
+                                <div class="selling-Price col-3">
+                                    <label for="sellingPrice"
+                                        >Standard Cost Price<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.standard_price
+                                        "
+                                        placeholder="Enter a Standard Cost Price"
+                                        pInputText
+                                        id="sellingPrice"
+                                        aria-describedby="sellingPrice-help"
+                                        formControlName="OnDemand_standard_price"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormDemand.get(
+                                                'OnDemand_standard_price'
+                                            )
+                                        "
+                                        label="Standard Cost Price"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="tax col-3">
+                                    <label for="tax"
+                                        >Tax (%)<span class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="savePackageObj.tax"
+                                        pInputText
+                                        id="tax"
+                                        placeholder="Enter a Tax (%)"
+                                        aria-describedby="tax-help"
+                                        formControlName="OnDemand_Tax"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormDemand.get(
+                                                'OnDemand_Tax'
+                                            )
+                                        "
+                                        label="Tax (%)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="selling-Price col-3">
+                                    <label for="sellingPrice"
+                                        >Selling Price (Excl. Taxes)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.selling_price
+                                        "
+                                        placeholder="Enter a Selling Price (Excl. Taxes)"
+                                        pInputText
+                                        id="sellingPrice"
+                                        aria-describedby="sellingPrice-help"
+                                        formControlName="OnDemand_selling_price"
+                                        (change)="
+                                            checkStandardAndSellingPackage()
+                                        "
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormDemand.get(
+                                                'OnDemand_selling_price'
+                                            )
+                                        "
+                                        label="Selling Price (Excl. Taxes)"
+                                    ></app-custom-validation>
+                                </div>
+
+                                <div class="coverage-Details col-3">
+                                    <label for="tat"
+                                        >Service Request TAT (in days)</label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.turn_around_time
+                                        "
+                                        placeholder="Enter a Service Request TAT (in days)"
+                                        pInputText
+                                        aria-describedby="coverageDetails-help"
+                                        id="tat"
+                                        formControlName="OnDemand_TAT"
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                        <!-- <form [formGroup]="addCreatePackageFormDemand">
+                            <div class="on-Demand-Section row mt-2">
+                                <div class="coverage-Details col-3">
+                                    <label for="tat">Service Request TAT</label>
+                                    <input
+                                        [(ngModel)]="savePackageObj.turn_around_time"
+                                        pInputText
+                                        aria-describedby="coverageDetails-help"
+                                        id="tat"
+                                        formControlName="OnDemand_TAT"
+                                    />
+                                </div>
+                            </div>
+                        </form> -->
+                    </div>
+
+                    <!--Installation Charges Section-->
+
+                    <div *ngIf="filteredPackageServiceListForInstallation">
+                        <form [formGroup]="addCreatePackageFormInstallation">
+                            <div class="installation-Charges-Section col-12">
+                                <!-- <div class="coverage-Details col-3">
+                                    <label for="Price">Price</label>
+                                    <input
+                                        pInputText
+                                        aria-describedby="coverageDetails-help"
+                                        id="Price"
+                                    />
+                                </div> -->
+
+                                <div class="selling-Price col-3">
+                                    <label for="sellingPrice"
+                                        >Standard Cost Price<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.standard_price
+                                        "
+                                        placeholder="Enter a Standard Cost Price"
+                                        pInputText
+                                        id="sellingPrice"
+                                        aria-describedby="sellingPrice-help"
+                                        formControlName="Installation_standard_price"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormInstallation.get(
+                                                'Installation_standard_price'
+                                            )
+                                        "
+                                        label="Standard Cost Price"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="tax col-3">
+                                    <label for="tax"
+                                        >Tax (%)<span class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="savePackageObj.tax"
+                                        pInputText
+                                        id="tax"
+                                        placeholder="Enter a Tax (%)"
+                                        aria-describedby="tax-help"
+                                        formControlName="Installation_Tax"
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormInstallation.get(
+                                                'Installation_Tax'
+                                            )
+                                        "
+                                        label="Tax (%)"
+                                    ></app-custom-validation>
+                                </div>
+                                <div class="selling-Price col-3">
+                                    <label for="sellingPrice"
+                                        >Selling Price (Excl. Taxes)<span
+                                            class="required-field"
+                                            >*</span
+                                        ></label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.selling_price
+                                        "
+                                        pInputText
+                                        id="sellingPrice"
+                                        aria-describedby="sellingPrice-help"
+                                        formControlName="Installation_selling_price"
+                                        placeholder="Enter a Selling Price (Excl. Taxes)"
+                                        (change)="
+                                            checkStandardAndSellingPackage()
+                                        "
+                                    />
+                                    <app-custom-validation
+                                        [control]="
+                                            addCreatePackageFormInstallation.get(
+                                                'Installation_selling_price'
+                                            )
+                                        "
+                                        label="Selling Price (Excl. Taxes)"
+                                    ></app-custom-validation>
+                                </div>
+
+                                <div class="coverage-Details col-3">
+                                    <label for="tat"
+                                        >Service Request TAT (in days)</label
+                                    >
+                                    <input
+                                        [(ngModel)]="
+                                            savePackageObj.turn_around_time
+                                        "
+                                        placeholder="Enter a Service Request TAT (in days)"
+                                        pInputText
+                                        aria-describedby="coverageDetails-help"
+                                        id="tat"
+                                        formControlName="Installation_TAT"
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                        <!-- <form [formGroup]="addCreatePackageFormInstallation">
+                            <div class="installation-Charges-Section row mt-2">
+                                <div class="coverage-Details col-3">
+                                    <label for="tat">Service Request TAT (in days)</label>
+                                    <input
+                                        [(ngModel)]="savePackageObj.turn_around_time"
+                                        pInputText
+                                        aria-describedby="coverageDetails-help"
+                                        id="tat"
+                                        formControlName="Installation_TAT"
+                                    />
+                                </div>
+                            </div>
+                        </form> -->
+                    </div>
+                </div>
+                <div class="save-Product-Category">
+                    <button
+                        *ngIf="!id || actionForEdit"
+                        class="custom-button"
+                        (click)="addToCreatePackageItem()"
+                    >
+                        Save
+                    </button>
+                    <button
+                        *ngIf="!id || actionForEdit"
+                        class="custom-button-cancel"
+                        (click)="resetCreatePackageMaster()"
+                    >
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+            *ngIf="!id && !actionForEdit && showCreatePackage"
+            class="header-of-Table-Two"
+        >
+            <div class="Table-Two">
+                <app-common-table
+                    [genericColsInput]="tableColsEvent"
+                    [genericTableSettingInput]="tableSettingsEvent"
+                    [genericListInput]="createPackageList"
+                    (addEntityEvent)="addEvent()"
+                    [totalRecords]="totalRecords"
+                >
+                </app-common-table>
+            </div>
+        </div>
+        <div
+            *ngIf="id || (actionForEdit && showCreatePackage)"
+            class="header-of-Table-Two"
+        >
+            <div class="Table-Two">
+                <app-common-table
+                    [genericColsInput]="tableColsEvent"
+                    [genericTableSettingInput]="tableSettingsEvent"
+                    [genericListInput]="packageList"
+                    (addEntityEvent)="addEvent()"
+                    [totalRecords]="totalRecords"
+                    (editEntityEvent)="editEventForPackage($event)"
+                    (deleteDataEvent)="deletePackageType($event)"
+                    (activeDeactiveEvent)="activeDeactivePackageType($event)"
+                >
+                </app-common-table>
+            </div>
+        </div>
+        <div class="save-Product-Category">
+            <!-- <button
+                class="custom-button"
+                *ngIf="id || (actionForEdit && showCreatePackage)"
+                (click)="updateCreatePackageList()"
+            >
+                Update
+            </button> -->
+            <!-- <button
+                *ngIf="!id && !actionForEdit && showCreatePackage"
+                class="custom-button"
+                (click)="saveSinglePackage()"
+            >
+                Save
+            </button> -->
+        </div>
+    </div>
+</div>
+
+<!-- Add Spare Part Covered -->
+
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="openAddDialogModuleEventForSparePartCovered"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <div body>
+        <div class="add-Create-Order-Container">
+            <h5 class="header-Dialogue-Box">Spare Part Covered</h5>
+            <div class="add-Create-Order-Grid">
+                <div class="row-One col-12">
+                    <div class="tenure col-6">
+                        <form [formGroup]="addSparePartForm">
+                            <label for="tenure">Spare Part List</label>
+                            <p-multiSelect
+                                [options]="addSparePartList"
+                                optionLabel="spare_part_name"
+                                placeholder="Select a Spare Part List"
+                                [(ngModel)]="selectedSparePart"
+                                (onChange)="onSparePartsSelect()"
+                                formControlName="selectedSparePart"
+                            ></p-multiSelect>
+                            <app-custom-validation
+                                [control]="
+                                    addSparePartForm.get('selectedSparePart')
+                                "
+                                label="Spare Part"
+                            ></app-custom-validation>
+                        </form>
+                    </div>
+                </div>
+                <div class="header-of-Table-Four">
+                    <div class="Table-Four">
+                        <p-table
+                            [value]="addProducts"
+                            styleClass="p-datatable-striped"
+                            [tableStyle]="{
+                                'min-width': '40rem',
+                                padding: '1rem'
+                            }"
+                        >
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Spare Part</th>
+                                    <th>SKU</th>
+                                    <th>Price</th>
+                                    <th>Tax (%)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-product>
+                                <tr>
+                                    <td>{{ product.spare_part_type_name }}</td>
+                                    <td>{{ product.sku }}</td>
+                                    <td>{{ product.standard_price }}</td>
+                                    <td>{{ product.tax }}</td>
+                                    <td>
+                                        <i
+                                            class="pi pi-trash"
+                                            (click)="removeProduct(rowIndex)"
+                                            style="
+                                                color: red;
+                                                font-size: 16px;
+                                                cursor: pointer;
+                                            "
+                                            pTooltip="Remove Spare Part"
+                                            tooltipPosition="top"
+                                        ></i>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+            <div class="save-Product-Category">
+                <button
+                    class="custom-button"
+                    (click)="addNewSparePartRequest()"
+                >
+                    Add
+                </button>
+                <button
+                    class="custom-button-cancel"
+                    (click)="closeEventDialog()"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</app-common-modal>
+
+<app-common-modal
+    *ngIf="actionForEdit && !actionForView"
+    [title]="titleEVent"
+    [visible]="openDialogForCreatePackage"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeSparePartDialog()"
+>
+    <div body>
+        <h5 class="header-Dialogue-Box">Update Package</h5>
+        <div class="package-Colms">
+            <!-- Warranty Section -->
+            <div
+                *ngIf="
+                    createPackageObject &&
+                    createPackageObject?.service_type?.code === 'Warranty'
+                "
+                class="col-12"
+            >
+                <form [formGroup]="addCreatePackageFormWarranty">
+                    <div class="warranty-Section-One col-12">
+                        <div class="warranty-Duration col-4">
+                            <label for="warrantyDuration"
+                                >Warranty Duration (in months)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.tenure"
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                placeholder="Enter a Warranty Duration (in months)"
+                                id="warrantyDuration"
+                                formControlName="warranty_Tenure"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormWarranty.get(
+                                        'warranty_Tenure'
+                                    )
+                                "
+                                label="Warranty Duration"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="warranty-Coverage-Details col-4">
+                            <label for="coverage_details"
+                                >Warranty Coverage Details<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="
+                                    createPackageObject.coverage_details
+                                "
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                id="coverage_details"
+                                placeholder="Enter a Warranty Coverage Details"
+                                formControlName="Warranty_coverage_details"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormWarranty.get(
+                                        'Warranty_coverage_details'
+                                    )
+                                "
+                                label="Coverage Details"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="tat"
+                                >Service Request TAT (in days)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="
+                                    createPackageObject.turn_around_time
+                                "
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                placeholder="Enter a Service Request TAT (in days)"
+                                id="tat"
+                                formControlName="warranty_Tat"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormWarranty.get(
+                                        'warranty_Tat'
+                                    )
+                                "
+                                label="Service Request TAT (in days)"
+                            ></app-custom-validation>
+                        </div>
+
+                        <!-- <div class="spare-Part-Covered col-3">
+                            <label for="sparePartCovered"
+                                >Spare Part Covered*</label
+                            >
+                            <p-dropdown
+                                [(ngModel)]="selectedSparePart"
+                                [options]="SparePartList"
+                                optionLabel="spare_part_name"
+                                placeholder="Select an option"
+                                formControlName="warranty_spare_part_name"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormWarranty.get(
+                                        'warranty_spare_part_name'
+                                    )
+                                "
+                                label="Spare Part Covered"
+                            ></app-custom-validation>
+                        </div> -->
+                    </div>
+                </form>
+                <form [formGroup]="addCreatePackageFormWarranty">
+                    <div class="warranty-Section-One col-12">
+                        <div class="coverage-Details col-4">
+                            <label for="tat">
+                                Spare Part covered (Total:
+                                {{ selectedSparePart?.length || 0 }})
+                            </label>
+                            <button
+                                class="custom-button"
+                                (click)="
+                                    handleButtonClickToOpenDialogueForSparePartCovered()
+                                "
+                            >
+                                Add
+                            </button>
+                        </div>
+                        <div class="user-Customer-Type col-6">
+                            <div class="spare-Part-Covered">
+                                <label for="uploadDocument"
+                                    >Upload Document</label
+                                >
+                                <p-fileUpload
+                                    #fileUploader
+                                    mode="basic"
+                                    chooseLabel="Upload Document"
+                                    chooseIcon="pi pi-upload"
+                                    name="demo[]"
+                                    customUpload="true"
+                                    accept="application/pdf"
+                                    maxFileSize="100000000"
+                                    (onSelect)="uploadAgreementPackage($event)"
+                                ></p-fileUpload>
+                            </div>
+                            <div
+                                *ngIf="selectedFiles.length > 0"
+                                class="file-actions"
+                            >
+                                <span
+                                    class="cursor-pointer icons-name"
+                                    (click)="
+                                        viewPdf(
+                                            selectedWarrantyFile[0].objectURL
+                                        )
+                                    "
+                                    pTooltip="View Document"
+                                    tooltipPosition="top"
+                                    ><strong>View</strong>
+                                    <i
+                                        class="pi pi-eye"
+                                        style="color: blue"
+                                    ></i>
+                                </span>
+
+                                <span
+                                    class="cursor-pointer icons-name"
+                                    (click)="reselectFilePackage(fileUploader)"
+                                    pTooltip="Remove Document"
+                                    tooltipPosition="top"
+                                >
+                                    <strong>Remove</strong>
+                                    <i
+                                        class="pi pi-times"
+                                        style="color: red"
+                                    ></i>
+                                </span>
+                            </div>
+                            <!-- <span
+                                *ngIf="selectedFiles.length > 0"
+                                (click)="reselectFilePackage(fileUploader)"
+                                >Remove?</span
+                            > -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- AMC Section -->
+            <div
+                *ngIf="
+                    createPackageObject &&
+                    createPackageObject?.service_type?.name === 'AMC'
+                "
+                class="col-12"
+            >
+                <form [formGroup]="addCreatePackageFormAmc">
+                    <div class="amc-section col-12">
+                        <div class="coverage-Details col-4">
+                            <label for="package_name"
+                                >Name<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.package_name"
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                id="package_name"
+                                formControlName="Amc_Package_name"
+                                placeholder="Enter a Name"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormAmc.get(
+                                        'Amc_Package_name'
+                                    )
+                                "
+                                label="Name"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="tenure"
+                                >Tenure (in yr)<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.tenure"
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                placeholder="Enter a Tenure (in yr)"
+                                id="tenure"
+                                formControlName="Amc_Tenure"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormAmc.get('Amc_Tenure')
+                                "
+                                label="Tenure (in yr)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="preventiveMaintenance"
+                                >Preventive Maintenance<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                [(ngModel)]="selectedmaintenance"
+                                [options]="maintenanceList"
+                                optionLabel="name"
+                                placeholder="Select a Preventive Maintenance"
+                                formControlName="Amc_Preventive_Maintenance"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormAmc.get(
+                                        'Amc_Preventive_Maintenance'
+                                    )
+                                "
+                                label="Preventive Maintenance"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="addCreatePackageFormAmc">
+                    <div class="amc-section col-12">
+                        <div class="selling-Price col-4">
+                            <label for="standard_price"
+                                >Standard Cost Price<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.standard_price"
+                                pInputText
+                                id="standard_price"
+                                aria-describedby="standard_price-help"
+                                formControlName="Amc_standard_price"
+                                placeholder="Enter a Standard Cost Price"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormAmc.get(
+                                        'Amc_standard_price'
+                                    )
+                                "
+                                label="Standard Cost Price"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="tax col-4">
+                            <label for="tax"
+                                >Tax (%)<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.tax"
+                                pInputText
+                                id="tax"
+                                aria-describedby="tax-help"
+                                placeholder="Enter a Tax (%)"
+                                formControlName="Amc_Tax"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormAmc.get('Amc_Tax')
+                                "
+                                label="Tax (%)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="selling-Price col-4">
+                            <label for="sellingPrice"
+                                >Selling Price (Excl. Taxes)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.selling_price"
+                                pInputText
+                                id="sellingPrice"
+                                aria-describedby="sellingPrice-help"
+                                placeholder="Enter a Selling Price (Excl. Taxes)"
+                                formControlName="Amc_selling_price"
+                                (change)="checkStandardAndSellingUpdate()"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormAmc.get(
+                                        'Amc_selling_price'
+                                    )
+                                "
+                                label="Selling Price (Excl. Taxes)"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="addCreatePackageFormAmc">
+                    <div class="amc-section row col-12">
+                        <div class="coverage-Details col-4">
+                            <label for="tat"
+                                >Service Request TAT (in days)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="
+                                    createPackageObject.turn_around_time
+                                "
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                id="tat"
+                                formControlName="amc_Tat"
+                                placeholder="Enter a Service Request TAT (in days)"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormAmc.get('amc_Tat')
+                                "
+                                label="Service Request TAT (in days)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="coverage_details"
+                                >Coverage Details</label
+                            >
+                            <textarea
+                                [(ngModel)]="
+                                    createPackageObject.coverage_details
+                                "
+                                id="coverage_details"
+                                class="coverageDetails-Field"
+                                rows="2"
+                                cols="2"
+                                placeholder="Enter a Coverage Details"
+                                pInputTextarea
+                                formControlName="Amc_coverage_details"
+                            ></textarea>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="tat">
+                                Spare Part covered (Total:
+                                {{ selectedSparePart?.length || 0 }})
+                            </label>
+                            <button
+                                class="custom-button"
+                                (click)="
+                                    handleButtonClickToOpenDialogueForSparePartCovered()
+                                "
+                            >
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!--CMC Section-->
+            <div
+                *ngIf="
+                    createPackageObject &&
+                    createPackageObject?.service_type?.name === 'CAMC'
+                "
+                class="col-12"
+            >
+                <form [formGroup]="addCreatePackageFormCamc">
+                    <div class="amc-section col-12">
+                        <div class="coverage-Details col-4">
+                            <label for="package_name"
+                                >Name<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.package_name"
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                id="package_name"
+                                placeholder="Enter a Name"
+                                formControlName="Camc_Name"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormCamc.get('Camc_Name')
+                                "
+                                label="Name"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="tenure"
+                                >Tenure (in yr)<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.tenure"
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                id="tenure"
+                                formControlName="Camc_Tenure"
+                                placeholder="Enter a Tenure (in yr)"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormCamc.get('Camc_Tenure')
+                                "
+                                label="Tenure (in yr)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="preventiveMaintenance"
+                                >Preventive Maintenance<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                [(ngModel)]="selectedmaintenance"
+                                [options]="maintenanceList"
+                                optionLabel="name"
+                                placeholder="Select a Preventive Maintenance"
+                                formControlName="Camc_Preventive_Maintenance"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormCamc.get(
+                                        'Camc_Preventive_Maintenance'
+                                    )
+                                "
+                                label="Preventive Maintenance"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="addCreatePackageFormCamc">
+                    <div class="amc-section col-12">
+                        <div class="selling-Price col-4">
+                            <label for="standard_price"
+                                >Standard Cost Price<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.standard_price"
+                                pInputText
+                                placeholder="Enter a Standard Cost Price"
+                                id="standard_price"
+                                aria-describedby="standard_price-help"
+                                formControlName="Camc_standard_price"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormCamc.get(
+                                        'Camc_standard_price'
+                                    )
+                                "
+                                label="Standard Cost Price"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="tax col-4">
+                            <label for="tax"
+                                >Tax (%)<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.tax"
+                                pInputText
+                                id="tax"
+                                aria-describedby="tax-help"
+                                placeholder="Enter a Tax (%)"
+                                formControlName="Camc_Tax"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormCamc.get('Camc_Tax')
+                                "
+                                label="Tax (%)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="selling-Price col-4">
+                            <label for="sellingPrice"
+                                >Selling Price (Excl. Taxes)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.selling_price"
+                                pInputText
+                                id="sellingPrice"
+                                aria-describedby="sellingPrice-help"
+                                formControlName="Camc_selling_price"
+                                placeholder="Enter a Selling Price (Excl. Taxes)"
+                                (change)="checkStandardAndSellingUpdate()"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormCamc.get(
+                                        'Camc_selling_price'
+                                    )
+                                "
+                                label="Selling Price (Excl. Taxes)"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="addCreatePackageFormCamc">
+                    <div class="amc-section row col-12">
+                        <div class="coverage-Details col-4">
+                            <label for="tat"
+                                >Service Request TAT (in days)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="
+                                    createPackageObject.turn_around_time
+                                "
+                                pInputText
+                                aria-describedby="coverageDetails-help"
+                                id="tat"
+                                placeholder="Enter a Service Request TAT (in days)"
+                                formControlName="Camc_Tat"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormCamc.get('Camc_Tat')
+                                "
+                                label="Service Request TAT (in days)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="coverage_details"
+                                >Coverage Details</label
+                            >
+                            <textarea
+                                [(ngModel)]="
+                                    createPackageObject.coverage_details
+                                "
+                                id="coverage_details"
+                                class="coverageDetails-Field"
+                                rows="2"
+                                cols="2"
+                                placeholder="Enter a Coverage Details"
+                                pInputTextarea
+                                formControlName="Camc_coverage_details"
+                            ></textarea>
+                        </div>
+                        <div class="coverage-Details col-4">
+                            <label for="tat">
+                                Spare Part covered (Total:
+                                {{ selectedSparePart?.length || 0 }})
+                            </label>
+                            <button
+                                class="custom-button"
+                                (click)="
+                                    handleButtonClickToOpenDialogueForSparePartCovered()
+                                "
+                            >
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!--On Demand Section-->
+            <div
+                *ngIf="
+                    createPackageObject &&
+                    createPackageObject?.service_type?.name === 'On Demand'
+                "
+                class="col-12"
+            >
+                <form [formGroup]="addCreatePackageFormDemand">
+                    <div class="on-Demand-Section col-12">
+                        <div class="selling-Price col-4">
+                            <label for="sellingPrice"
+                                >Standard Cost Price<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.standard_price"
+                                pInputText
+                                id="sellingPrice"
+                                aria-describedby="sellingPrice-help"
+                                placeholder="Enter a Standard Cost Price"
+                                formControlName="OnDemand_standard_price"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormDemand.get(
+                                        'OnDemand_standard_price'
+                                    )
+                                "
+                                label="Standard Cost Price"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="tax col-4">
+                            <label for="tax"
+                                >Tax (%)<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.tax"
+                                pInputText
+                                id="tax"
+                                aria-describedby="tax-help"
+                                placeholder="Enter a Tax (%)"
+                                formControlName="OnDemand_Tax"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormDemand.get(
+                                        'OnDemand_Tax'
+                                    )
+                                "
+                                label="Tax (%)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="selling-Price col-4">
+                            <label for="sellingPrice"
+                                >Selling Price (Excl. Taxes)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.selling_price"
+                                pInputText
+                                id="sellingPrice"
+                                placeholder="Enter a Selling Price (Excl. Taxes)"
+                                aria-describedby="sellingPrice-help"
+                                formControlName="OnDemand_selling_price"
+                                (change)="checkStandardAndSellingUpdate()"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormDemand.get(
+                                        'OnDemand_selling_price'
+                                    )
+                                "
+                                label="Selling Price (Excl. Taxes)"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="addCreatePackageFormDemand">
+                    <div class="on-Demand-Section col-12">
+                        <div class="coverage-Details col-4">
+                            <label for="tat"
+                                >Service Request TAT (in days)</label
+                            >
+                            <input
+                                [(ngModel)]="
+                                    createPackageObject.turn_around_time
+                                "
+                                pInputText
+                                placeholder="Enter a Service Request TAT (in days)"
+                                aria-describedby="coverageDetails-help"
+                                id="tat"
+                                formControlName="OnDemand_TAT"
+                            />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!--Installation Charges Section-->
+            <div
+                *ngIf="
+                    createPackageObject &&
+                    createPackageObject?.service_type?.name ===
+                        'Installation Charges'
+                "
+            >
+                <form [formGroup]="addCreatePackageFormInstallation">
+                    <div class="installation-Charges-Section col-12">
+                        <div class="selling-Price col-4">
+                            <label for="sellingPrice"
+                                >Standard Cost Price<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.standard_price"
+                                pInputText
+                                id="sellingPrice"
+                                aria-describedby="sellingPrice-help"
+                                placeholder="Enter a Standard Cost Price"
+                                formControlName="Installation_standard_price"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormInstallation.get(
+                                        'Installation_standard_price'
+                                    )
+                                "
+                                label="Standard Cost Price"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="tax col-4">
+                            <label for="tax"
+                                >Tax (%)<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.tax"
+                                pInputText
+                                id="tax"
+                                aria-describedby="tax-help"
+                                formControlName="Installation_Tax"
+                                placeholder="Enter a Tax (%)"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormInstallation.get(
+                                        'Installation_Tax'
+                                    )
+                                "
+                                label="Tax (%)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="selling-Price col-4">
+                            <label for="sellingPrice"
+                                >Selling Price (Excl. Taxes)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="createPackageObject.selling_price"
+                                pInputText
+                                id="sellingPrice"
+                                placeholder="Enter a Selling Price (Excl. Taxes)"
+                                aria-describedby="sellingPrice-help"
+                                formControlName="Installation_selling_price"
+                                (change)="checkStandardAndSellingUpdate()"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addCreatePackageFormInstallation.get(
+                                        'Installation_selling_price'
+                                    )
+                                "
+                                label="Selling Price (Excl. Taxes)"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="addCreatePackageFormInstallation">
+                    <div class="installation-Charges-Section col-12">
+                        <div class="coverage-Details col-4">
+                            <label for="tat"
+                                >Service Request TAT (in days)</label
+                            >
+                            <input
+                                [(ngModel)]="
+                                    createPackageObject.turn_around_time
+                                "
+                                pInputText
+                                placeholder="Enter a Service Request TAT (in days)"
+                                aria-describedby="coverageDetails-help"
+                                id="tat"
+                                formControlName="Installation_TAT"
+                            />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="save-Product-Category">
+            <button
+                class="custom-button"
+                *ngIf="id || (actionForEdit && showCreatePackage)"
+                (click)="updateCreatePackageList()"
+            >
+                Update
+            </button>
+        </div>
+    </div>
+</app-common-modal>

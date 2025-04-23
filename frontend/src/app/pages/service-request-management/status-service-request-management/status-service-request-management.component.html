@@ -1,0 +1,697 @@
+<div class="add-client-container">
+    <div class="header-Client">
+        <h5>Service Request Id : {{ serviceRequestListObject.ref_id }}</h5>
+        <div class="back-Button-Header">
+            <button
+                class="back-Button"
+                [routerLink]="['/panel/service-request-management']"
+                routerLinkActive="router-link-active"
+            >
+                <i class="pi pi-arrow-left"></i>
+                <p>Back</p>
+            </button>
+        </div>
+    </div>
+
+    <p-tabView>
+        <p-tabPanel *ngIf="isViewClicked === false" header="Service Request ID">
+            <div class="service-Request-Container">
+                <div class="row-One col-12">
+                    <div class="account-Name col-4">
+                        <h6 class="account-Header">
+                            Account Name -
+                            <b>{{ serviceRequestListObject.account_name }}</b>
+                            <hr />
+                        </h6>
+                        <p>
+                            SPOC Name -
+                            <b>{{ serviceRequestListObject.spoc_name }}</b>
+                        </p>
+                        <p class="account-Header">
+                            Location -
+                            <b>{{ serviceRequestListObject.location }}</b>
+                        </p>
+                        <p class="account-Header">
+                            Address 1 -
+                            <b>{{ serviceRequestListObject.address_1 }}</b>
+                        </p>
+                        <p class="account-Header">
+                            Address 2 -
+                            <b>{{ serviceRequestListObject.address_2 }}</b>
+                        </p>
+                        <p class="account-Header">
+                            City Type -
+                            <b>{{ serviceRequestListObject.city_type }}</b>
+                        </p>
+                        <p class="account-Header">
+                            Pincode -
+                            <b>{{ serviceRequestListObject.pincode }}</b>
+                        </p>
+                    </div>
+
+                    <div class="service-Person-Name col-4">
+                        <h6 class="service-Header">
+                            Service Person Name -
+                            {{ serviceRequestListObject.service_person_sign }}
+                            <hr />
+                        </h6>
+                        <!-- <p>Category -{{ serviceRequestListObject }}</p> -->
+                        <p>Category -</p>
+                        <h6 class="account-Header">
+                            Location - {{ serviceRequestListObject.location }}
+                        </h6>
+                    </div>
+
+                    <div class="service-Status col-3">
+                        <form [formGroup]="updateServiceStatusForm">
+                            <div class="status-service-field">
+                                <label for="serviceStatus"
+                                    >Service Status</label
+                                >
+                                <p-dropdown
+                                    [options]="statusList"
+                                    [(ngModel)]="selectedPredefinedStatus"
+                                    optionLabel="name"
+                                    placeholder="Select a service status"
+                                    formControlName="name"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="
+                                        updateServiceStatusForm.get('name')
+                                    "
+                                    label="Service Status"
+                                ></app-custom-validation>
+                            </div>
+                        </form>
+
+                        <div class="Service-Status-Btn">
+                            <button
+                                class="custom-button"
+                                (click)="saveAssigne()"
+                            >
+                                Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-Two col-12">
+                    <div class="account-Name col-4">
+                        <h6 class="account-Header">
+                            Date & Time
+                            <hr />
+                        </h6>
+                        <div class="details-Service">
+                            <div class="row">
+                                <p>
+                                    Product Name -
+                                    {{ serviceRequestListObject.product_name }}
+                                </p>
+                                <p>
+                                    Product Type -
+                                    {{ serviceRequestListObject.product_type }}
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Package Name -
+                                    {{ serviceRequestListObject.package_name }}
+                                </p>
+                                <p>
+                                    Tenure -
+                                    {{ serviceRequestListObject.tenure }}
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Cycle - {{ serviceRequestListObject.cycle }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="service-Consulion-Grid">
+                            <div class="service-Inclusion">
+                                <label for="serviceInclusion"
+                                    >Service Inclusion</label
+                                >
+                                <textarea
+                                    [(ngModel)]="
+                                        serviceRequestListObject.coverage_details
+                                    "
+                                    class="serviceInclusion-Field"
+                                    rows="2"
+                                    cols="2"
+                                    pInputTextarea
+                                ></textarea>
+                            </div>
+                            <div class="spare-Parts-Included">
+                                <label for="sparePartsIncluded"
+                                    >Spare Parts Included</label
+                                >
+                                <textarea
+                                    [(ngModel)]="
+                                        serviceRequestListObject.spare_parts_string
+                                    "
+                                    class="spare-Parts-Included-Field"
+                                    rows="2"
+                                    cols="2"
+                                    pInputTextarea
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-Person-Name col-4">
+                        <h6 class="service-Header">
+                            View Service Details
+                            <hr />
+                        </h6>
+                        <div class="view-Service-Details">
+                            <ng-container
+                                *ngIf="
+                                    ViewServiceDetailsObject?.length > 0;
+                                    else noData
+                                "
+                            >
+                                <div
+                                    *ngFor="
+                                        let detail of ViewServiceDetailsObject
+                                    "
+                                >
+                                    <h6>Date - {{ detail.date }}</h6>
+                                    <div
+                                        *ngFor="
+                                            let activity of detail.activity;
+                                            let i = index
+                                        "
+                                    >
+                                        <p>
+                                            Activity {{ i + 1 }} -
+                                            {{ activity }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <ng-template #noData>
+                                <p>No Data Available</p>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="service-Request-Btn col-3">
+                        <button
+                            class="custom-button"
+                            (click)="openDialogueBoxForReassign()"
+                        >
+                            Reassign
+                        </button>
+                        <button
+                            class="custom-button"
+                            (click)="openDialogueBoxForReschedule()"
+                        >
+                            Reschedule
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel *ngIf="isViewClicked === true" header="Service Request ID">
+            <div class="service-Request-Container">
+                <div class="row-One col-12">
+                    <div class="account-Name col-4">
+                        <h6 class="account-Header">
+                            Account Name -
+                            <b>{{ serviceRequestListObject.account_name }}</b>
+                            <hr />
+                        </h6>
+                        <p>
+                            SPOC Name -
+                            <b>{{ serviceRequestListObject.spoc_name }}</b>
+                        </p>
+                        <p class="account-Header">
+                            Location -
+                            <b>{{ serviceRequestListObject.location }}</b>
+                        </p>
+                        <p class="account-Header">
+                            Address 1 -
+                            <b>{{ serviceRequestListObject.address_1 }}</b>
+                        </p>
+                        <p class="account-Header">
+                            Address 2 -
+                            <b>{{ serviceRequestListObject.address_2 }}</b>
+                        </p>
+                        <p class="account-Header">
+                            City Type -
+                            <b>{{ serviceRequestListObject.city_type }}</b>
+                        </p>
+                        <p class="account-Header">
+                            Pincode -
+                            <b>{{ serviceRequestListObject.pincode }}</b>
+                        </p>
+                    </div>
+
+                    <div class="service-Person-Name col-4">
+                        <h6 class="service-Header">
+                            Service Person Name -
+                            {{ serviceRequestListObject.service_person_name }}
+                            <hr />
+                        </h6>
+                        <p class="product-Category">
+                            Product Category -
+                            <b>{{ personCategory }}</b>
+                        </p>
+                        <!-- <p>Category -{{ serviceRequestListObject }}</p> -->
+                        <p class="account-Header">
+                            Location -
+                            <b>{{ serviceRequestListObject.location }}</b>
+                        </p>
+                    </div>
+
+                    <div class="service-Status col-3">
+                        <!-- <label for="serviceStatus">Service Status</label>
+                    <p-dropdown
+                        [(ngModel)]="serviceRequestListObject"
+                        optionLabel="serviceStatus"
+                        placeholder="Select a service status"
+                    ></p-dropdown> -->
+                    </div>
+                </div>
+
+                <div class="row-Two col-12">
+                    <div class="account-Name col-4">
+                        <h6 class="account-Header">
+                            Date & Time
+                            <hr />
+                        </h6>
+                        <div class="details-Service">
+                            <div class="row">
+                                <p>
+                                    Product Name -<br />
+                                    <b>{{
+                                        serviceRequestListObject.product_name
+                                    }}</b>
+                                </p>
+                                <p>
+                                    Product Type -<br />
+                                    <b>{{
+                                        serviceRequestListObject.product_type
+                                    }}</b>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Package Name -<br />
+                                    <b>{{
+                                        serviceRequestListObject.package_name
+                                    }}</b>
+                                </p>
+                                <p>
+                                    Tenure -<br />
+                                    <b>{{ serviceRequestListObject.tenure }}</b>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Cycle - <br /><b>{{
+                                        serviceRequestListObject.cycle
+                                    }}</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="service-Consulion-Grid">
+                            <div class="service-Inclusion">
+                                <label for="serviceInclusion"
+                                    >Service Inclusion</label
+                                >
+                                <textarea
+                                    [disabled]="isViewClicked === true"
+                                    [(ngModel)]="
+                                        serviceRequestListObject.coverage_details
+                                    "
+                                    class="serviceInclusion-Field"
+                                    rows="2"
+                                    cols="2"
+                                    pInputTextarea
+                                ></textarea>
+                            </div>
+                            <div class="spare-Parts-Included">
+                                <label for="sparePartsIncluded"
+                                    >Spare Parts Included</label
+                                >
+                                <textarea
+                                    [disabled]="isViewClicked === true"
+                                    [(ngModel)]="
+                                        serviceRequestListObject.spare_parts_string
+                                    "
+                                    class="spare-Parts-Included-Field"
+                                    rows="2"
+                                    cols="2"
+                                    pInputTextarea
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-Person-Name-Views col-4">
+                        <div class="remarks-Technical-Summary">
+                            <label for="remarks">Remarks</label>
+                            <textarea
+                                [disabled]="isViewClicked === true"
+                                [(ngModel)]="
+                                    serviceRequestListObject.service_remarks
+                                "
+                                class="remarks-Field"
+                                rows="2"
+                                cols="2"
+                                pInputTextarea
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="service-Request-Btn col-3">
+                        <!-- <button class="custom-button">Reassign</button>
+                    <button class="custom-button">Reschedule</button> -->
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel
+            *ngIf="isViewClicked === true || isViewClicked === false"
+            header="Problem Statement"
+        >
+            <div class="problem-Statement-Container">
+                <div class="problem-Statement-Row-One col-12">
+                    <div class="table-Problem-Statement">
+                        <app-common-table
+                            [genericColsInput]="tableColsEventProblem"
+                            [genericTableSettingInput]="
+                                tableSettingsProblemEvent
+                            "
+                            [genericListInput]="posList"
+                            (addEntityEvent)="addEvent()"
+                            (paginateEvent)="paginateEvent($event)"
+                            [totalRecords]="totalRecords"
+                        >
+                        </app-common-table>
+                    </div>
+                </div>
+                <div class="other-Consulion-Grid">
+                    <div class="other-Consulion col-6">
+                        <label for="other">Other</label>
+                        <textarea
+                            class="other-Field"
+                            rows="2"
+                            cols="2"
+                            pInputTextarea
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel
+            *ngIf="isViewClicked === true || isViewClicked === false"
+            header="Repair Checklist"
+        >
+            <div class="problem-Statement-Container">
+                <div class="problem-Statement-Row-One col-12">
+                    <div class="table-Problem-Statement">
+                        <app-common-table
+                            [genericColsInput]="tableColsEventSOP"
+                            [genericTableSettingInput]="
+                                tableSettingsRepairCheckEvent
+                            "
+                            [genericListInput]="sopList"
+                            (addEntityEvent)="addEvent()"
+                            (paginateEvent)="paginateEvent($event)"
+                            [totalRecords]="totalRecords"
+                        >
+                        </app-common-table>
+                    </div>
+                </div>
+                <div class="other-Consulion-Grid">
+                    <div class="other-Consulion col-6">
+                        <label for="other">Other</label>
+                        <textarea
+                            class="other-Field"
+                            rows="2"
+                            cols="2"
+                            pInputTextarea
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel
+            *ngIf="isViewClicked === true || isViewClicked === false"
+            header="Spare Part"
+        >
+            <div class="table-Problem-Statement">
+                <app-common-table
+                    [genericColsInput]="tableColsEventSparePart"
+                    [genericTableSettingInput]="sparePartTableSettingsEvent"
+                    [genericListInput]="spareList"
+                    (addEntityEvent)="addEvent()"
+                    (paginateEvent)="paginateEvent($event)"
+                    [totalRecords]="totalRecords"
+                    (editEntityEvent)="openDialogueBoxForSparePart($event)"
+                >
+                </app-common-table>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel
+            *ngIf="isViewClicked === true || isViewClicked === false"
+            header="Repair Workshop Details"
+        >
+            <div class="table-Problem-Statement">
+                <app-common-table
+                    [genericColsInput]="tableColsEventRepairWorkshop"
+                    [genericTableSettingInput]="tableSettingsEvent"
+                    [genericListInput]="docList"
+                    (addEntityEvent)="addEvent()"
+                    (paginateEvent)="paginateEvent($event)"
+                    [totalRecords]="totalRecords"
+                >
+                </app-common-table>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel
+            *ngIf="isViewClicked === true || isViewClicked === false"
+            header="Technical Summary"
+        >
+            <div class="technical-Summary-Container">
+                <h6 class="technical-Report-Btn">
+                    <a
+                        [href]="technicalReportUrl"
+                        target="_blank"
+                        (click)="getTechnicalReportDetails($event)"
+                    >
+                        Click here to download the complete Technical Report
+                    </a>
+                </h6>
+                <div class="delay-In-Sla-Reason-Grid col-12">
+                    <div class="delay-In-Sla-Reason col-5">
+                        <label for="delayInSlaReason"
+                            >Delay in SLA Reason</label
+                        >
+                        <textarea
+                            [(ngModel)]="serviceRequestListObject.delay_reason"
+                            class="delayInSlaReason-Field"
+                            placeholder="Enter a Delay in SLA Reason"
+                            rows="2"
+                            cols="2"
+                            pInputTextarea
+                        ></textarea>
+                    </div>
+                    <div class="remarks-Technical-Summary col-5">
+                        <label for="remarks">Remarks</label>
+                        <textarea
+                            [(ngModel)]="
+                                serviceRequestListObject.service_remarks
+                            "
+                            class="remarks-Field"
+                            rows="2"
+                            cols="2"
+                            pInputTextarea
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="service-Request-Btn">
+                    <button class="custom-button-cancel">Reset</button>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel *ngIf="isViewClicked === true" header="Image Tab">
+            <h3 class="header-of-img">Before Image</h3>
+            <div class="outer-req-img">
+                <div
+                    class="Images-Details"
+                    *ngFor="let doc of serviceRequestListObject.doc"
+                    [ngClass]="{ hidden: doc.image_set !== 1 }"
+                >
+                    <img [src]="doc.file_path" alt="" class="req-img" />
+                </div>
+            </div>
+            <h3 class="header-of-img">During Image</h3>
+            <div class="outer-req-img">
+                <div
+                    class="Images-Details"
+                    *ngFor="let doc of serviceRequestListObject.doc"
+                    [ngClass]="{ hidden: doc.image_set !== 2 }"
+                >
+                    <img [src]="doc.file_path" alt="" class="req-img" />
+                </div>
+            </div>
+            <h3 class="header-of-img">Next Image</h3>
+            <div class="outer-req-img">
+                <div
+                    class="Images-Details"
+                    *ngFor="let doc of serviceRequestListObject.doc"
+                    [ngClass]="{ hidden: doc.image_set !== 3 }"
+                >
+                    <img [src]="doc.file_path" alt="" class="req-img" />
+                </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="showDialogueBoxOnReassign"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <div body>
+        <div class="Manual-Assign col-6">
+            <h5>Assign Bulk Service Person</h5>
+            <form [formGroup]="reassignForm">
+                <label for="serviceStatus">Manual Assign</label>
+                <p-dropdown
+                    [options]="serviceManualAssignList"
+                    [(ngModel)]="selectedAssigneService"
+                    optionLabel="first_name"
+                    placeholder="Select a Manual Assign"
+                    formControlName="manual_assign"
+                ></p-dropdown>
+                <app-custom-validation
+                    [control]="reassignForm.get('manual_assign')"
+                    label="Manual Assign"
+                ></app-custom-validation>
+            </form>
+        </div>
+        <div class="service-Request-Btn">
+            <button class="custom-button" (click)="saveAssigne()">
+                Assign
+            </button>
+            <button class="custom-button-cancel" (click)="closeEventDialog()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="showDialogueBoxOnReschedule"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <div body>
+        <div class="Manual-Reschedule col-6">
+            <h5>Reschedule</h5>
+            <form [formGroup]="rescheduleForm">
+                <div class="row-One">
+                    <div class="send-Date col-12">
+                        <label for="serviceStatus">Date</label>
+                        <p-calendar
+                            [(ngModel)]="
+                                rescheduleServiceRequestObject.service_date
+                            "
+                            placeholder="Select a Date"
+                            dateFormat="mm-dd-yy"
+                            formControlName="date"
+                        ></p-calendar>
+                        <app-custom-validation
+                            [control]="rescheduleForm.get('date')"
+                            label="Date"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="send-Remarks col-12">
+                        <label for="slot">Slot</label>
+                        <p-dropdown
+                            class="slot-dropdown"
+                            [(ngModel)]="slotObject"
+                            [options]="slotList"
+                            optionLabel="slot_name"
+                            placeholder="Select a Slot"
+                            formControlName="slot"
+                        ></p-dropdown>
+                        <app-custom-validation
+                            [control]="rescheduleForm.get('slot')"
+                            label="Slot"
+                        ></app-custom-validation>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="service-Request-Btn">
+            <button class="custom-button" (click)="saveReschedule()">
+                Reschedule
+            </button>
+            <button class="custom-button-cancel" (click)="closeEventDialog()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<app-common-modal
+    [title]="titleEVent"
+    [visible]="showDialogueBoxForSparePart"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <div body>
+        <div class="Old-Spare-Part col-12">
+            <h5>Old Spare Part Collected/Received</h5>
+            <div class="flex flex-wrap gap-3" style="margin-top: 5%">
+                <!-- <div class="flex align-items-center">
+                    <p-radioButton
+                        name="is_old_status"
+                        value="Collected"
+                        [(ngModel)]="updateSparePartObj.is_old_status"
+                        inputId="ingredient1"
+                    >
+                    </p-radioButton>
+                    <label for="ingredient1" class="ml-2">Collected</label>
+                </div> -->
+                <div class="flex align-items-center">
+                    <p-checkbox
+                        name="is_old_status"
+                        value="Received"
+                        [(ngModel)]="updateSparePartObj.is_old_status"
+                        inputId="ingredient2"
+                    >
+                    </p-checkbox>
+                    <label for="ingredient2" class="ml-2">Received</label>
+                </div>
+            </div>
+        </div>
+        <div class="service-Request-Btn">
+            <button class="custom-button" (click)="updateSpareParts()">
+                Update
+            </button>
+            <button class="custom-button-cancel" (click)="closeEventDialog()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>

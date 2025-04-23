@@ -1,0 +1,1636 @@
+<div class="add-client-container">
+    <div class="header-Client">
+        <h5>{{ customer.account_name }}</h5>
+        <div class="back-Button-Header">
+            <button
+                class="back-Button"
+                [routerLink]="['/panel/customer-management']"
+                routerLinkActive="router-link-active"
+            >
+                <i class="pi pi-arrow-left"></i>
+                <p>Back</p>
+            </button>
+        </div>
+    </div>
+    <p-tabView [(activeIndex)]="activeIndex">
+        <p-tabPanel header="Personal Details">
+            <div class="personal-Details-Container">
+                <form [formGroup]="addCustomerForm">
+                    <div class="row-One col-12">
+                        <div class="user-Name col-3">
+                            <label for="name"
+                                >Name<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="customer.account_name"
+                                pInputText
+                                id="name"
+                                formControlName="name"
+                                placeholder="Enter a Name"
+                                aria-describedby="name-help"
+                            />
+                            <app-custom-validation
+                                [control]="addCustomerForm.get('name')"
+                                label="Name"
+                            ></app-custom-validation>
+                        </div>
+
+                        <div class="phone-Number col-3">
+                            <label for="phoneNumber"
+                                >Phone Number (Mobile)<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="customer.phone"
+                                pInputText
+                                id="phoneNumber"
+                                formControlName="phone"
+                                placeholder="Enter a Phone Number (Mobile)"
+                                aria-describedby="phoneNumber-help"
+                            />
+                            <app-custom-validation
+                                [control]="addCustomerForm.get('phone')"
+                                label="Phone Number (Mobile)"
+                            ></app-custom-validation>
+                        </div>
+                        <!-- <div *ngIf="customerId" class="customer-ID col-3">
+                            <label for="customerID">Customer ID</label>
+                            <input
+                                [(ngModel)]="customer.user_uuid"
+                                readonly
+                                formControlName="uuid"
+                                pInputText
+                                id="customerID"
+                                aria-describedby="customerID-help"
+                            />
+                        </div> -->
+                        <div class="user-Mail-ID col-3">
+                            <label for="email"
+                                >Mail Id<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [(ngModel)]="customer.email"
+                                pInputText
+                                formControlName="email"
+                                id="email"
+                                placeholder="Enter a Mail Id"
+                                aria-describedby="email-help"
+                            />
+                            <app-custom-validation
+                                [control]="addCustomerForm.get('email')"
+                                label="Mail Id"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="user-Customer-Group col-3">
+                            <label for="customerGroup">Parent Group</label>
+                            <p-autoComplete
+                                class="auto-complete"
+                                [suggestions]="parentGroupList"
+                                [(ngModel)]="selectedParentGroup"
+                                formControlName="parent"
+                                field="name"
+                                placeholder="Select a Parent Group"
+                                (completeMethod)="searchParent($event)"
+                            ></p-autoComplete>
+                            <!-- <input
+                                [(ngModel)]="customer.customer_group"
+                                pInputText
+                                id="email"
+                                aria-describedby="email-help"
+                            /> -->
+                        </div>
+                    </div>
+                    <div class="row-Two col-12">
+                        <!-- <div class="user-Status col-3">
+                            <label for="Status">Status</label>
+                            <p-dropdown
+                                [options]="contractStatusList"
+                                [(ngModel)]="selectedContractStatus"
+                                optionLabel="name"
+                                placeholder="Select a status"
+                                formControlName="selectedContractStatus"
+                            ></p-dropdown>
+                        </div> -->
+
+                        <div class="user-Customer-Type col-3">
+                            <label for="customerType"
+                                >Customer Type<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                [options]="customerTypeList"
+                                [(ngModel)]="selectedCustomerType"
+                                formControlName="type"
+                                optionLabel="customer_type"
+                                placeholder="Select a Customer Type"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="addCustomerForm.get('type')"
+                                label="Customer Type"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="user-Pancard-Number col-3">
+                            <label for="pancardNumber">License Number</label>
+                            <input
+                                [(ngModel)]="customer.license_number"
+                                pInputText
+                                id="pancardNumber"
+                                aria-describedby="pancardNumber-help"
+                                formControlName="kyc_no"
+                                placeholder="Enter a License Number"
+                            />
+                            <!-- <app-custom-validation
+                                [control]="addCustomerForm.get('kyc_no')"
+                                label="License Number"
+                            ></app-custom-validation> -->
+                        </div>
+                    </div>
+
+                    <div class="personalGrid">
+                        <div class="user-Customer-Type">
+                            <label for="customerType">Upload Document</label>
+                            <p-fileUpload
+                                mode="basic"
+                                #fileUploader1
+                                chooseLabel="Upload Document"
+                                chooseIcon="pi pi-upload"
+                                name="demo[]"
+                                customUpload="true"
+                                accept=".pdf"
+                                maxFileSize="2097152"
+                                class="custom-file-upload"
+                                (onSelect)="onFileSelected($event)"
+                                #uploader
+                            ></p-fileUpload>
+                        </div>
+                        <div
+                            *ngIf="selectedDocument.length > 0"
+                            class="file-actions"
+                        >
+                            <span
+                                class="cursor-pointer icons-name"
+                                (click)="
+                                    viewPdf(selectedPersonalFile[0].objectURL)
+                                "
+                                pTooltip="View Document"
+                                tooltipPosition="top"
+                                ><strong>View</strong>
+                                <i class="pi pi-eye" style="color: blue"></i>
+                            </span>
+
+                            <span
+                                class="cursor-pointer icons-name"
+                                (click)="reselectFile1(uploader)"
+                                pTooltip="Remove Document"
+                                tooltipPosition="top"
+                            >
+                                <strong>Remove</strong>
+                                <i class="pi pi-times" style="color: red"></i>
+                            </span>
+                        </div>
+                        <!-- <span
+                            class="cursor-pointer"
+                            *ngIf="selectedDocument.length > 0"
+                            (click)="reselectFile1(uploader)"
+                            style="
+                                display: flex;
+                                color: red;
+                                align-items: center;
+                                gap: 3px;
+                            "
+                            >Remove <i class="pi pi-times"></i
+                        ></span> -->
+
+                        <button
+                            *ngIf="
+                                customer?.user_uuid &&
+                                customer.kyc_document_path != null &&
+                                customer.kyc_document_path != undefined
+                            "
+                            class="download-button"
+                            (click)="downloadDocumentPersonal()"
+                        >
+                            <span class="pi pi-download"></span>View/Download
+                            Document
+                        </button>
+                    </div>
+                </form>
+                <div
+                    class="header-of-add-client-btn"
+                    *ngIf="customerId && !showView"
+                >
+                    <p class="location-Details">Location Details</p>
+                    <form [formGroup]="addAddressForm">
+                        <div class="location-Details-row-One col-12">
+                            <div class="Address1 col-3">
+                                <label for="address1"
+                                    >Address 1<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <textarea
+                                    [(ngModel)]="address.address_1"
+                                    class="Address1-Field"
+                                    formControlName="address1"
+                                    placeholder="Enter a Address 1"
+                                    rows="2"
+                                    cols="2"
+                                    pInputTextarea
+                                ></textarea>
+                                <app-custom-validation
+                                    [control]="addAddressForm.get('address1')"
+                                    label="Address 1"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="Address2 col-3">
+                                <label for="Address2">Address 2</label>
+                                <textarea
+                                    [(ngModel)]="address.address_2"
+                                    placeholder="Enter a Address 2"
+                                    class="Address2-Field"
+                                    rows="2"
+                                    cols="2"
+                                    formControlName="address2"
+                                    pInputTextarea
+                                ></textarea>
+                            </div>
+                            <div class="state-ID col-3">
+                                <label for="stateID"
+                                    >State<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    formControlName="state"
+                                    [options]="stateList"
+                                    [(ngModel)]="selectedState"
+                                    optionLabel="name"
+                                    [filter]="true"
+                                    placeholder="Select a State"
+                                    (onChange)="onChangeOfState('CITY')"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="addAddressForm.get('state')"
+                                    label="State"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="city-Type col-3">
+                                <label for="cityType"
+                                    >City Type<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    formControlName="cityType"
+                                    [options]="cityTypeList"
+                                    [(ngModel)]="selectedCityType"
+                                    [filter]="true"
+                                    optionLabel="name"
+                                    placeholder="Select a City Type"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="addAddressForm.get('cityType')"
+                                    label="City Type"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+                    </form>
+                    <form [formGroup]="addAddressForm">
+                        <div class="location-Details-row-Two col-12">
+                            <div class="city col-3">
+                                <label for="City"
+                                    >City<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    formControlName="city"
+                                    [options]="cityList"
+                                    [filter]="true"
+                                    [(ngModel)]="selectedCityPre"
+                                    optionLabel="name"
+                                    placeholder="Select a City"
+                                    [disabled]="!isStateSelected"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="addAddressForm.get('city')"
+                                    label="City"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="zone-1 col-3">
+                                <label for="zone">Zone</label>
+                                <p-dropdown
+                                    [options]="zoneList"
+                                    optionLabel="name"
+                                    formControlName="zone"
+                                    [filter]="true"
+                                    [(ngModel)]="selectedZone"
+                                    placeholder="Select a Zone"
+                                ></p-dropdown>
+                            </div>
+                            <div class="pin-Code col-3">
+                                <label for="pincodeType"
+                                    >Pincode<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="pincodeType"
+                                    [(ngModel)]="address.pincode"
+                                    pInputText
+                                    id="pincode"
+                                    placeholder="Enter a Pincode"
+                                    aria-describedby="pincode-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        addAddressForm.get('pincodeType')
+                                    "
+                                    label="Pincode"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="SPOC-Person col-3">
+                                <label for="spoc_name"
+                                    >Contact Person<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="spoc_name"
+                                    [(ngModel)]="address.spoc_name"
+                                    pInputText
+                                    id="SPOCPerson"
+                                    aria-describedby="SPOCPerson-help"
+                                    placeholder="Enter a Contact Person"
+                                />
+                                <app-custom-validation
+                                    [control]="addAddressForm.get('spoc_name')"
+                                    label="Contact Person"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+                    </form>
+                    <form [formGroup]="addAddressForm">
+                        <div class="location-Details-row-Three col-12">
+                            <div class="location-Mail-Id col-3">
+                                <label for="locationMailId"
+                                    >Contact Mail Id<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    formControlName="spoc_email"
+                                    [(ngModel)]="address.spoc_email"
+                                    pInputText
+                                    id="locationMailId"
+                                    aria-describedby="locationMailId-help"
+                                    placeholder="Enter a Contact Mail Id"
+                                />
+                                <app-custom-validation
+                                    [control]="addAddressForm.get('spoc_email')"
+                                    label="Contact Mail Id"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="location-Mobile-Number col-3">
+                                <label for="mobileNumber"
+                                    >Contact Mobile number</label
+                                >
+                                <input
+                                    formControlName="phone"
+                                    [(ngModel)]="address.spoc_phone"
+                                    pInputText
+                                    id="mobileNumber"
+                                    aria-describedby="mobileNumber-help"
+                                    placeholder="Enter a Contact Mobile number"
+                                />
+                                <app-custom-validation
+                                    [control]="addAddressForm.get('phone')"
+                                    label="Contact Mobile Number"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div
+                    class="add-Product-Details"
+                    *ngIf="customerId && !showView"
+                >
+                    <button
+                        *ngIf="!showView"
+                        class="custom-button"
+                        (click)="addAddress()"
+                    >
+                        Add
+                    </button>
+                </div>
+                <div class="header-of-Table-One" *ngIf="customerId">
+                    <div class="Table-One">
+                        <app-common-table
+                            [genericColsInput]="tableColsEventOne"
+                            [genericTableSettingInput]="tableSettingsEvent"
+                            [genericListInput]="customer.addresses"
+                            (deleteDataEvent)="deleteAddress($event)"
+                            (editEntityEvent)="showEditModal($event)"
+                            (activeDeactiveEvent)="
+                                activeDeactiveAddress($event)
+                            "
+                        >
+                        </app-common-table>
+                    </div>
+                </div>
+                <div class="add-Account-Details" *ngIf="!showView">
+                    <button
+                        class="custom-button"
+                        *ngIf="!customerId"
+                        (click)="saveCustomer()"
+                    >
+                        Save
+                    </button>
+                    <button
+                        class="custom-button"
+                        *ngIf="customerId"
+                        (click)="updateCustomer()"
+                    >
+                        Update
+                    </button>
+                    <!-- <button
+                        class="custom-button"
+                        (click)="
+                            !customerId
+                                ? saveAndAddCustomer()
+                                : updateAndAddCustomer()
+                        "
+                    >
+                        {{ !customerId ? "Save" : "Update" }} & Add Location
+                    </button> -->
+                    <button
+                        *ngIf="!customerId"
+                        class="custom-button"
+                        (click)="saveAndAddCustomer()"
+                    >
+                        Save & Add Location
+                    </button>
+                    <button class="custom-button-cancel" (click)="resetFilds()">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Product Details" *ngIf="customerId">
+            <div class="product-Details-Container">
+                <form [formGroup]="addProductForm" *ngIf="!showView">
+                    <div class="product-Details-Row-One col-12">
+                        <div class="select-Location col-3">
+                            <label for="location"
+                                >Location<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                formControlName="location"
+                                [options]="customer.addresses"
+                                optionLabel="addressDisplay"
+                                [(ngModel)]="selectedCity"
+                                placeholder="Select a Location"
+                                [ngModelOptions]="{ standalone: true }"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="addProductForm.get('location')"
+                                label="Location"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="product-Category col-3">
+                            <label for="productCategory"
+                                >Product Category<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                formControlName="category"
+                                [options]="categoryList"
+                                optionLabel="product_category"
+                                [(ngModel)]="selectedCategory"
+                                (onChange)="getProductList()"
+                                placeholder="Select a Product Category"
+                                [ngModelOptions]="{ standalone: true }"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="addProductForm.get('category')"
+                                label="Product Category"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="product-Name col-3">
+                            <label for="productName"
+                                >Product Name<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                formControlName="name"
+                                [options]="productList"
+                                [(ngModel)]="selectedProduct"
+                                (onChange)="logProduct()"
+                                optionLabel="product_name"
+                                placeholder="Select a Product Name"
+                                [ngModelOptions]="{ standalone: true }"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="addProductForm.get('name')"
+                                label="Product Name"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="product-Serial-Number col-3">
+                            <label for="productSerialNumber"
+                                >Product Serial Number<span
+                                    class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                formControlName="serial_no"
+                                [(ngModel)]="customerProduct.serial_no"
+                                pInputText
+                                id="productSerialNumber"
+                                aria-describedby="productSerialNumber-help"
+                                [ngModelOptions]="{ standalone: true }"
+                                placeholder="Enter a Product Serial Number"
+                            />
+                            <app-custom-validation
+                                [control]="addProductForm.get('serial_no')"
+                                label="Product Serial Number"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                    <div class="product-Details-Row-Two col-12">
+                        <div class="approx-Life col-3">
+                            <label for="approxLife">Approx Life(in yrs)</label>
+                            <input
+                                class="disableGrey"
+                                formControlName="approx_life"
+                                [(ngModel)]="selectedProduct.approx_life"
+                                readonly
+                                pInputText
+                                id="approxLife"
+                                aria-describedby="approxLife-help"
+                                [ngModelOptions]="{ standalone: true }"
+                                placeholder="Enter a Approx Life(in yrs)"
+                            />
+                            <!-- <app-custom-validation
+                                [control]="addProductForm.get('approx_life')"
+                                label="Approx Life"
+                            ></app-custom-validation> -->
+                        </div>
+                        <div class="equipment-Type col-3">
+                            <label for="sku">SKU</label>
+                            <input
+                                readonly
+                                formControlName="sku"
+                                [(ngModel)]="selectedProduct.sku"
+                                pInputText
+                                class="disableGrey"
+                                id="sku"
+                                aria-describedby="sku-help"
+                                [ngModelOptions]="{ standalone: true }"
+                                placeholder="Enter a SKU"
+                            />
+                            <!-- [(ngModel)]="customerProduct.sku" -->
+                            <!-- <app-custom-validation
+                                [control]="addProductForm.get('sku')"
+                                label="SKU"
+                            ></app-custom-validation> -->
+                        </div>
+                        <div class="SAP-Oracle-Code col-3">
+                            <label for="sapOracleCode">SAP Oracle Code</label>
+                            <input
+                                formControlName="sap_code"
+                                [(ngModel)]="selectedProduct.sap_oracle_code"
+                                readonly
+                                pInputText
+                                id="sapOracleCode"
+                                class="disableGrey"
+                                aria-describedby="sapOracleCode-help"
+                                placeholder="Enter a SAP Oracle Code"
+                                [ngModelOptions]="{ standalone: true }"
+                            />
+                            <!-- <app-custom-validation
+                                [control]="addProductForm.get('sap_code')"
+                                label="SAP Oacle Code"
+                            ></app-custom-validation> -->
+                        </div>
+                        <div class="start-Date-for-Life col-3">
+                            <label
+                                >Start Date for Life<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-calendar
+                                formControlName="start_date"
+                                [(ngModel)]="selectedDate"
+                                dateFormat="dd-mm-yy"
+                                [ngModelOptions]="{ standalone: true }"
+                            ></p-calendar>
+                            <app-custom-validation
+                                [control]="addProductForm.get('start_date')"
+                                label="Start Date for Life"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <div class="add-Product-Details" *ngIf="!showView">
+                    <button
+                        class="custom-button"
+                        (click)="saveCustomerProduct()"
+                    >
+                        Add
+                    </button>
+                    <button
+                        class="custom-button"
+                        (click)="redirectToCreateOrder()"
+                    >
+                        Create Order
+                    </button>
+                    <button
+                        class="custom-button-cancel"
+                        (click)="restProductDetail()"
+                    >
+                        Reset
+                    </button>
+                </div>
+                <div class="header-of-Table-Two">
+                    <div class="Table-Two">
+                        <app-common-table
+                            [genericColsInput]="tableColsEventTwo"
+                            [genericTableSettingInput]="tableSettingsEvent"
+                            [genericListInput]="customerProductList"
+                            (addEntityEvent)="addEvent()"
+                            (paginateEvent)="paginateEvent($event)"
+                            [totalRecords]="totalRecords"
+                            (editEntityEvent)="editproductDetails($event)"
+                            (deleteDataEvent)="deleteCustomerProduct($event)"
+                            (activeDeactiveEvent)="
+                                activeDeactiveCustomerProduct($event)
+                            "
+                        >
+                        </app-common-table>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Contract Details" *ngIf="customerId">
+            <div class="contract-Details-Container">
+                <div class="header-of-Table-Three">
+                    <div class="Table-Three" *ngIf="!isContractEdit">
+                        <app-common-table
+                            [genericColsInput]="tableColsContract"
+                            [genericTableSettingInput]="tableSettingsEvent"
+                            [genericListInput]="contractList"
+                            (editEntityEvent)="editContract($event)"
+                            (paginateEvent)="paginateEvent($event)"
+                            [totalRecords]="totalRecords"
+                            (deleteDataEvent)="deleteContractDetail($event)"
+                            (activeDeactiveEvent)="
+                                activeDeactiveContract($event)
+                            "
+                        >
+                        </app-common-table>
+                    </div>
+                    <div class="Table-Three" *ngIf="isContractEdit">
+                        <app-common-table
+                            [genericColsInput]="tableColsEventThree"
+                            [genericTableSettingInput]="
+                                contractTableSettingsEvent
+                            "
+                            [genericListInput]="contractItemList"
+                            (addEntityEvent)="addEvent()"
+                            (paginateEvent)="paginateEvent($event)"
+                            [totalRecords]="totalRecords"
+                            (deleteDataEvent)="deleteContractDetails($event)"
+                            (editEntityEvent)="editContractDiscount($event)"
+                        >
+                        </app-common-table>
+                    </div>
+                </div>
+                <div *ngIf="isContractEdit" class="back-Button-Contract">
+                    <button class="back-Button" (click)="backToContractList()">
+                        <i class="pi pi-arrow-left"></i>
+                        <p>Back To Contract</p>
+                    </button>
+                </div>
+                <div
+                    [formGroup]="contractUpdateForm"
+                    class="Contract-Details-Colums"
+                    *ngIf="isContractEdit"
+                >
+                    <!-- <div class="contract_Remarks">
+                        <label for="remarks">Legal Entity</label>
+                        <span class="legal-dropdown-btn">
+                            <p-dropdown
+                                formControlName="legalEntity"
+                                class="split-Dropdown"
+                                [options]="legalEntityList"
+                                optionLabel="name"
+                                [(ngModel)]="selectedLegalEntity"
+                                placeholder="Select a Legal Entity"
+                                [disabled]="disableLegalEntity"
+                                (onChange)="onLegalEntitySelect()"
+                            ></p-dropdown>
+                            <i
+                                *ngIf="disableLegalBranch"
+                                class="pi pi-times"
+                                (click)="clearLegalEntity()"
+                            ></i>
+                        </span>
+                    </div> -->
+                    <div class="contract_Remarks">
+                        <label for="remarks">Legal Branch</label>
+                        <span class="legal-dropdown-btn">
+                            <p-dropdown
+                                formControlName="legalBranch"
+                                class="split-Dropdown"
+                                [options]="legalBranchList"
+                                optionLabel="name"
+                                [(ngModel)]="selectedLegalBranch"
+                                placeholder="Select a Legal Branch"
+                            ></p-dropdown>
+                            <!-- [disabled]="disableLegalBranch"
+                                (onChange)="onLegalBranchSelect()" -->
+                            <!-- <i
+                                *ngIf="disableLegalEntity"
+                                class="pi pi-times clear-icon"
+                                (click)="clearLegalBranch()"
+                            ></i> -->
+                        </span>
+                    </div>
+                    <div class="contract_Remarks">
+                        <label for="remarks"
+                            >Contract Date<span class="required-field"
+                                >*</span
+                            ></label
+                        >
+                        <p-calendar
+                            formControlName="contract_Date"
+                            [(ngModel)]="selectedContractDate"
+                            dateFormat="dd-mm-yy"
+                            [minDate]="minDate"
+                        ></p-calendar>
+                        <app-custom-validation
+                            class="vld-contract"
+                            [control]="contractUpdateForm.get('contract_Date')"
+                            label="Contract Date"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="contract_Remarks">
+                        <label for="remarks">Remarks</label>
+                        <textarea
+                            formControlName="remarks"
+                            class="contract_Remarks-Field"
+                            rows="3"
+                            placeholder="Enter a Remarks"
+                            cols="7"
+                            pInputTextarea
+                            [(ngModel)]="contract.remarks"
+                        ></textarea>
+                    </div>
+                    <div class="Split-Payment">
+                        <label for="splitPayment"
+                            >Split Payment<span class="required-field"
+                                >*</span
+                            ></label
+                        >
+                        <p-dropdown
+                            formControlName="splitPayment"
+                            class="split-Dropdown"
+                            [options]="splitPaymentList"
+                            optionLabel="name"
+                            [(ngModel)]="selectedSplitPayment"
+                            placeholder="Select a Split Payment"
+                        ></p-dropdown>
+                        <app-custom-validation
+                            class="vld-contract"
+                            [control]="contractUpdateForm.get('splitPayment')"
+                            label="Split Payment"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="no-of-Invoices">
+                        <label for="noOfInvoices"
+                            >No of Invoices<span class="required-field"
+                                >*</span
+                            ></label
+                        >
+                        <p-inputNumber
+                            formControlName="invoices"
+                            [(ngModel)]="contract.no_of_invoices"
+                            class="no-Of-Invoices-Field"
+                            placeholder="Enter a No of Invoices"
+                            inputId="integeronly"
+                        ></p-inputNumber>
+                        <app-custom-validation
+                            class="vld-contract"
+                            [control]="contractUpdateForm.get('invoices')"
+                            label="No of Invoices"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="payment-Terms">
+                        <label for="customerID"
+                            >Credit Days<span class="required-field"
+                                >*</span
+                            ></label
+                        >
+                        <p-inputNumber
+                            formControlName="paymentTerms"
+                            [(ngModel)]="contract.payment_terms"
+                            class="no-Of-Invoices-Field"
+                            inputId="integeronly"
+                            placeholder="Enter a Credit Days"
+                        ></p-inputNumber>
+                        <!-- <textarea
+                            formControlName="paymentTerms"
+                            [(ngModel)]="contract.payment_terms"
+                            class="Tc-Field"
+                            rows="3"
+                            cols="7"
+                            pInputTextarea
+                        ></textarea> -->
+                        <app-custom-validation
+                            class="vld-contract"
+                            [control]="contractUpdateForm.get('paymentTerms')"
+                            label="Credit Days"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="billing-Address">
+                        <label for="billingAddress"
+                            >Billing Address<span class="required-field"
+                                >*</span
+                            ></label
+                        >
+                        <textarea
+                            formControlName="billingAddress"
+                            [(ngModel)]="contract.billing_address"
+                            class="billing-Address-Field"
+                            placeholder="Enter a Billing Address"
+                            rows="3"
+                            cols="7"
+                            pInputTextarea
+                        ></textarea>
+                        <app-custom-validation
+                            class="vld-contract"
+                            [control]="contractUpdateForm.get('billingAddress')"
+                            label="Billing Address"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="billing-row">
+                        <div class="billing-State">
+                            <label for="billingState"
+                                >Billing State<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                class="billingCity-Dropdown"
+                                formControlName="billingState"
+                                [options]="stateList"
+                                [(ngModel)]="selectedBillingState"
+                                optionLabel="name"
+                                placeholder="Select a Billing State"
+                                (onChange)="onChangeOfStateBilling('CITY')"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                class="vld-contract"
+                                [control]="
+                                    contractUpdateForm.get('billingState')
+                                "
+                                label="Billing State"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="billing-City">
+                            <label for="billingCity"
+                                >Billing City<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                class="billingCity-Dropdown"
+                                formControlName="billingCity"
+                                [options]="cityList"
+                                [(ngModel)]="selectedBillingCityPre"
+                                optionLabel="name"
+                                placeholder="Select a Billing City"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                class="vld-contract"
+                                [control]="
+                                    contractUpdateForm.get('billingCity')
+                                "
+                                label="Billing City"
+                            ></app-custom-validation>
+                        </div>
+
+                        <div class="billing-Pincode">
+                            <label for="billingPincode"
+                                >Billing Pincode<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                class="billingCity-Dropdown"
+                                formControlName="billingPincode"
+                                [(ngModel)]="contract.billing_pincode"
+                                pInputText
+                                class="billing-Pincode-Field"
+                                placeholder="Enter a Billing Pincode"
+                                inputId="integeronly"
+                            />
+                            <app-custom-validation
+                                class="vld-contract"
+                                [control]="
+                                    contractUpdateForm.get('billingPincode')
+                                "
+                                label="Billing Pincode"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                    <div class="GST-no">
+                        <label for="GSTno">GSTIN</label>
+                        <input
+                            formControlName="gst"
+                            [(ngModel)]="contract.gstin_no"
+                            placeholder="Enter a GSTIN"
+                            pInputText
+                            class="GSTno-field"
+                            inputId="integeronly"
+                        />
+                        <app-custom-validation
+                            class="vld-contract"
+                            [control]="contractUpdateForm.get('gst')"
+                            label="GSTIN"
+                        ></app-custom-validation>
+                    </div>
+                    <div class="TC">
+                        <label for="TC"
+                            >T&C<span class="required-field">*</span></label
+                        >
+                        <textarea
+                            formControlName="terms"
+                            class="Tc-Field"
+                            placeholder="Enter a T&C"
+                            rows="3"
+                            cols="7"
+                            pInputTextarea
+                            [(ngModel)]="contract.tnc"
+                        ></textarea>
+                        <app-custom-validation
+                            class="vld-contract"
+                            [control]="contractUpdateForm.get('terms')"
+                            label="T&C"
+                        ></app-custom-validation>
+                    </div>
+                    <div
+                        class="document-Available display-flex flex-row"
+                        style="
+                            gap: 1rem;
+                            align-items: center;
+                            justify-content: flex-start;
+                        "
+                    >
+                        <p-checkbox
+                            [binary]="true"
+                            inputId="binary"
+                            [(ngModel)]="is_already_signed"
+                            formControlName="is_checkBox"
+                        ></p-checkbox>
+                        <label for="binary"
+                            >Is sign document already available?</label
+                        >
+                    </div>
+                    <div
+                        *ngIf="is_already_signed"
+                        class="contract-Details-Files display-flex flex-row"
+                    >
+                        <p-fileUpload
+                            #fileUploader
+                            mode="basic"
+                            chooseLabel="Upload Document"
+                            chooseIcon="pi pi-upload"
+                            name="demo[]"
+                            customUpload="true"
+                            accept="application/pdf"
+                            maxFileSize="100000000"
+                            (onSelect)="uploadAgreement($event)"
+                        ></p-fileUpload>
+                        <div
+                            *ngIf="selectedFiles.length > 0"
+                            class="file-actions"
+                        >
+                            <span
+                                class="cursor-pointer icons-name"
+                                (click)="
+                                    viewPdf(selectedContractFile[0].objectURL)
+                                "
+                                pTooltip="View Document"
+                                tooltipPosition="top"
+                                ><strong>View</strong>
+                                <i class="pi pi-eye" style="color: blue"></i>
+                            </span>
+
+                            <span
+                                class="cursor-pointer icons-name"
+                                (click)="reselectFile(fileUploader)"
+                                pTooltip="Remove Document"
+                                tooltipPosition="top"
+                            >
+                                <strong>Remove</strong>
+                                <i class="pi pi-times" style="color: red"></i>
+                            </span>
+                        </div>
+                        <!-- <span
+                            class="cursor-pointer"
+                            *ngIf="selectedFiles.length > 0"
+                            (click)="reselectFile(fileUploader)"
+                            >Remove?</span
+                        > -->
+
+                        <button
+                            *ngIf="
+                                contract?.document?.uuid &&
+                                contract?.document?.document_name != null &&
+                                contract?.document?.document_name != undefined
+                            "
+                            class="download-button"
+                            (click)="downloadDocument()"
+                        >
+                            <span class="pi pi-download"></span>
+                            View/Download Document
+                        </button>
+                    </div>
+
+                    <div class="add-Contract-Details" *ngIf="!showView">
+                        <button
+                            *ngIf="!if_signed && !is_already_signed"
+                            class="custom-button"
+                            (click)="updateContract(false)"
+                        >
+                            Save and Send Link
+                        </button>
+                        <!-- [disabled]="
+                                ((!selectedFiles ||
+                                    selectedFiles.length === 0) &&
+                                    is_already_signed) ||
+                                (contract?.document?.uuid &&
+                                    contract?.document?.document_name != null &&
+                                    contract?.document?.document_name !=
+                                        undefined)
+                            " -->
+                        <button
+                            pButton
+                            type="button"
+                            label=" Generate Contract"
+                            *ngIf="is_already_signed && !if_signed"
+                            (click)="updateContract(true)"
+                            class="custom-button"
+                        ></button>
+                        <!-- [disabled]="!is_already_signed || selectedFiles.length === 0" -->
+                        <button
+                            class="custom-button-cancel"
+                            (click)="backToContractList()"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Service Details" *ngIf="customerId">
+            <div class="service-Details-Container">
+                <div class="select-Status-Dropdown col-3">
+                    <label for="selectLocation">Status</label>
+                    <p-dropdown
+                        [(ngModel)]="selectedServiceStatus"
+                        [options]="serviceStatusList"
+                        optionLabel="name"
+                        [showClear]="true"
+                        (onChange)="searchStatus()"
+                        placeholder="Select a status"
+                    ></p-dropdown>
+                </div>
+                <div class="header-of-Table-Four">
+                    <div class="Table-Four">
+                        <app-common-table
+                            [genericColsInput]="tableColsEventFive"
+                            [genericTableSettingInput]="
+                                serviceTableSettingsEvent
+                            "
+                            [genericListInput]="serviceRequestList"
+                            (addEntityEvent)="addEvent()"
+                            (paginateEvent)="paginateEvent($event)"
+                            [totalRecords]="totalRecords"
+                        >
+                        </app-common-table>
+                    </div>
+                </div>
+                <!-- <div class="close-Service-Details">
+                    <button class="custom-button-cancel">Close</button>
+                </div> -->
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Invoices" *ngIf="customerId">
+            <div class="service-Details-Container">
+                <div class="header-of-Table-Four">
+                    <div class="Table-Four">
+                        <app-common-table
+                            [genericColsInput]="tableColsEventFour"
+                            [genericTableSettingInput]="
+                                invoiceTableSettingsEvent
+                            "
+                            [genericListInput]="customerInvoiceList"
+                            (addEntityEvent)="addEvent()"
+                            (paginateEvent)="paginateEvent($event)"
+                            [totalRecords]="totalRecords"
+                            (viewEntityEvent)="viewInvoiceDetail($event)"
+                        >
+                        </app-common-table>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+<app-common-modal
+    [title]="'Update Address'"
+    [visible]="isShowAddressUpdate"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="hideEditModal()"
+>
+    <div class="add-Create-Order-Container" body>
+        <form [formGroup]="updateAddressForm">
+            <div class="location-Details-row-One col-12">
+                <div class="Address1 col-6">
+                    <label for="Address1">Address 1</label>
+                    <textarea
+                        [(ngModel)]="address1"
+                        class="Address1-Field w-100"
+                        placeholder="Enter a Address 1"
+                        formControlName="address1"
+                        rows="2"
+                        cols="2"
+                        pInputTextarea
+                    ></textarea>
+                    <app-custom-validation
+                        [control]="updateAddressForm.get('address1')"
+                        label="Address 1"
+                    ></app-custom-validation>
+                </div>
+                <div class="Address2 col-6">
+                    <label for="Address2">Address 2</label>
+                    <textarea
+                        [(ngModel)]="address2"
+                        class="Address2-Field w-100"
+                        formControlName="address2"
+                        placeholder="Enter a Address 2"
+                        rows="2"
+                        cols="2"
+                        pInputTextarea
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="location-Details-row-One col-12">
+                <div class="state-ID col-3">
+                    <label for="stateID">State</label>
+                    <p-dropdown
+                        formControlName="state"
+                        [options]="stateList"
+                        [(ngModel)]="updateSelectedState"
+                        optionLabel="name"
+                        placeholder="Select a State"
+                        [filter]="true"
+                        (onChange)="onChangeOfEditState('CITY')"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="updateAddressForm.get('state')"
+                        label="State"
+                    ></app-custom-validation>
+                </div>
+                <div class="city-Type col-3">
+                    <label for="cityType">City Type</label>
+                    <p-dropdown
+                        formControlName="cityType"
+                        [options]="cityTypeList"
+                        [(ngModel)]="updateSelectedCityType"
+                        optionLabel="name"
+                        placeholder="Select a City Type"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="updateAddressForm.get('cityType')"
+                        label="City Type"
+                    ></app-custom-validation>
+                </div>
+                <div class="city col-3">
+                    <label for="City">City</label>
+                    <p-dropdown
+                        formControlName="city"
+                        [options]="cityList"
+                        [(ngModel)]="updateSelectedCity"
+                        optionLabel="name"
+                        placeholder="Select a City"
+                        [filter]="true"
+                        [disabled]="!isStateSelected"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="updateAddressForm.get('city')"
+                        label="City"
+                    ></app-custom-validation>
+                </div>
+                <div class="zone-1 col-3">
+                    <label for="zone">Zone</label>
+                    <p-dropdown
+                        [options]="zoneList"
+                        optionLabel="name"
+                        formControlName="zone"
+                        [(ngModel)]="updateSelectedZone"
+                        placeholder="Select a Zone"
+                    ></p-dropdown>
+                </div>
+            </div>
+        </form>
+        <form [formGroup]="updateAddressForm">
+            <div class="location-Details-row-Two col-12">
+                <div class="pin-Code col-3">
+                    <label for="pincode">Pincode</label>
+                    <input
+                        formControlName="pincodeType"
+                        [(ngModel)]="pincodeType"
+                        pInputText
+                        id="pincode"
+                        aria-describedby="pincode-help"
+                        placeholder="Enter a Pincode"
+                    />
+                    <app-custom-validation
+                        [control]="updateAddressForm.get('pincodeType')"
+                        label="Pincode"
+                    ></app-custom-validation>
+                </div>
+                <div class="SPOC-Person col-3">
+                    <label for="spoc">SPOC Person</label>
+                    <input
+                        formControlName="spoc_name"
+                        [(ngModel)]="spoc_name"
+                        pInputText
+                        placeholder="Enter a SPOC Person"
+                        id="SPOCPerson"
+                        aria-describedby="SPOCPerson-help"
+                    />
+                    <app-custom-validation
+                        [control]="updateAddressForm.get('spoc_name')"
+                        label="SPOC Person"
+                    ></app-custom-validation>
+                </div>
+                <div class="location-Mail-Id col-3">
+                    <label for="locationMailId">Mail Id</label>
+                    <input
+                        formControlName="spoc_email"
+                        [(ngModel)]="spoc_email"
+                        pInputText
+                        id="locationMailId"
+                        placeholder="Enter a Mail Id"
+                        aria-describedby="locationMailId-help"
+                    />
+                    <app-custom-validation
+                        [control]="updateAddressForm.get('spoc_email')"
+                        label="Mail Id"
+                    ></app-custom-validation>
+                </div>
+                <div class="location-Mobile-Number col-3">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input
+                        formControlName="phone"
+                        [(ngModel)]="address.spoc_phone"
+                        pInputText
+                        placeholder="Enter a Mobile Number"
+                        id="mobileNumber"
+                        aria-describedby="mobileNumber-help"
+                    />
+                    <app-custom-validation
+                        [control]="updateAddressForm.get('phone')"
+                        label="Mobile Number"
+                    ></app-custom-validation>
+                </div>
+            </div>
+        </form>
+
+        <div class="save-Product-Category">
+            <button
+                class="custom-button"
+                (click)="updateAddress()"
+                *ngIf="!showView"
+            >
+                Update
+            </button>
+            <button class="custom-button-cancel" (click)="hideEditModal()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<app-common-modal
+    [title]="'Update Status'"
+    [visible]="isShowProductDetails"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeProductDetails()"
+>
+    <div class="add-Create-Order-Container" body>
+        <form [formGroup]="updateProductForm">
+            <div class="product-Details-Row-One col-12">
+                <div class="select-Location col-4">
+                    <label for="location">Location</label>
+                    <p-dropdown
+                        formControlName="location"
+                        [options]="customer.addresses"
+                        optionLabel="city"
+                        [(ngModel)]="selectedCity"
+                        placeholder="Select a location"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="updateProductForm.get('location')"
+                        label="Location"
+                    ></app-custom-validation>
+                </div>
+                <div class="product-Category col-4">
+                    <label for="productCategory">Product Category</label>
+                    <p-dropdown
+                        formControlName="category"
+                        [options]="categoryList"
+                        optionLabel="product_category"
+                        [(ngModel)]="selectedCategory"
+                        (onChange)="getProductList()"
+                        placeholder="Select a product category"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="updateProductForm.get('category')"
+                        label="Product Category"
+                    ></app-custom-validation>
+                </div>
+                <div class="product-Name col-4">
+                    <label for="productName">Product Name</label>
+                    <p-dropdown
+                        formControlName="name"
+                        [options]="productList"
+                        [(ngModel)]="updatedSelectedProduct"
+                        (onChange)="logProduct()"
+                        optionLabel="product_name"
+                        placeholder="Select a product name"
+                    ></p-dropdown>
+                    <app-custom-validation
+                        [control]="updateProductForm.get('name')"
+                        label="Product Name"
+                    ></app-custom-validation>
+                </div>
+            </div>
+            <div class="product-Details-Row-One col-12">
+                <div class="product-Serial-Number col-4">
+                    <label for="productSerialNumber"
+                        >Product Serial Number</label
+                    >
+                    <input
+                        formControlName="serial_no"
+                        [(ngModel)]="updateCustomerProductObj.serial_no"
+                        pInputText
+                        placeholder="Enter a Product Serial Number"
+                        id="productSerialNumber"
+                        aria-describedby="productSerialNumber-help"
+                    />
+                    <app-custom-validation
+                        [control]="updateProductForm.get('serial_no')"
+                        label="Product Serial Number"
+                    ></app-custom-validation>
+                </div>
+                <div class="approx-Life col-4">
+                    <label for="approxLife">Approx Life(in yrs)</label>
+                    <input
+                        formControlName="approx_life"
+                        [(ngModel)]="updateCustomerProductObj.approx_life"
+                        pInputText
+                        id="approxLife"
+                        placeholder="Enter a Approx Life(in yrs)"
+                        aria-describedby="approxLife-help"
+                    />
+                    <app-custom-validation
+                        [control]="updateProductForm.get('approx_life')"
+                        label="Approx Life(in yrs)"
+                    ></app-custom-validation>
+                </div>
+                <div class="equipment-Type col-4">
+                    <label for="productCategory">SKU</label>
+                    <input
+                        formControlName="sku"
+                        [(ngModel)]="updateCustomerProductObj.sku"
+                        pInputText
+                        id="productCategory"
+                        placeholder="Enter a SKU"
+                        aria-describedby="productCategory-help"
+                    />
+                    <app-custom-validation
+                        [control]="updateProductForm.get('sku')"
+                        label="SKU"
+                    ></app-custom-validation>
+                </div>
+            </div>
+            <div class="product-Details-Row-Two col-12">
+                <div class="SAP-Oracle-Code col-4">
+                    <label for="sapOracleCode">SAP Oracle Code</label>
+                    <input
+                        formControlName="sap_code"
+                        [(ngModel)]="updateCustomerProductObj.sap_oracle_code"
+                        readonly
+                        pInputText
+                        id="sapOracleCode"
+                        placeholder="Enter a SAP Oracle Code"
+                        aria-describedby="sapOracleCode-help"
+                    />
+                    <app-custom-validation
+                        [control]="updateProductForm.get('sap_code')"
+                        label="SAP Oracle Code"
+                    ></app-custom-validation>
+                </div>
+                <div class="start-Date-for-Life col-4">
+                    <label>Start Date for Life</label>
+                    <p-calendar
+                        formControlName="start_date"
+                        [(ngModel)]="updatedSelectedDate"
+                        dateFormat="dd-mm-yy"
+                        [minDate]="minDate"
+                    ></p-calendar>
+                    <app-custom-validation
+                        [control]="updateProductForm.get('start_date')"
+                        label="Start Date for Life"
+                    ></app-custom-validation>
+                </div>
+            </div>
+        </form>
+        <div class="save-Product-Category">
+            <button
+                class="custom-button"
+                (click)="updateCustomerProduct()"
+                *ngIf="!showView"
+            >
+                Update
+            </button>
+            <button class="custom-button-cancel" (click)="hideProductModal()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<app-common-modal
+    [title]="'Add Discount'"
+    [visible]="isShowContractDiscount"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeContractDiscount()"
+>
+    <div class="add-Create-Order-Container" body>
+        <div class="product-Serial-Number col-4">
+            <label for="discount">Discount%</label>
+            <input
+                [(ngModel)]="contractItem.discount_percent"
+                pInputText
+                id="discount"
+                placeholder="Enter a Discount%"
+                aria-describedby="discount-help"
+                type="number"
+            />
+            <!-- formControlName="discount" -->
+            <!-- <app-custom-validation
+                        [control]="updateProductForm.get('discount')"
+                        label="Serial Number"
+                    ></app-custom-validation> -->
+        </div>
+        <div class="save-Product-Category">
+            <button
+                class="custom-button"
+                (click)="addContractDiscount()"
+                *ngIf="!showView"
+            >
+                Add
+            </button>
+            <button class="custom-button-cancel" (click)="hideContractModal()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>
+
+<app-common-modal
+    [title]="'Inovice Detail'"
+    [visible]="isShowInvoiceDetail"
+    [closable]="true"
+    [dynamicWidth]="dialogWidthForInvoice"
+    (closeEvent)="closeInvoiceDetail()"
+>
+    <div class="view-Invoice-detail" body>
+        <div class="detail-grid">
+            <div class="col-6">
+                <p>
+                    <strong>Account Name :</strong>
+                    {{
+                        invoiceDetails?.account_name
+                            ? invoiceDetails?.account_name
+                            : "-"
+                    }}
+                </p>
+                <p>
+                    <strong>Contract ID :</strong>
+                    {{
+                        invoiceDetails?.customer_contract_id
+                            ? invoiceDetails?.customer_contract_id
+                            : "-"
+                    }}
+                </p>
+                <p>
+                    <strong>Invoice Status :</strong>
+                    {{
+                        invoiceDetails?.invoice_status
+                            ? invoiceDetails?.invoice_status
+                            : "-"
+                    }}
+                </p>
+                <p>
+                    <strong>Package :</strong>
+                    {{
+                        invoiceDetails?.package ? invoiceDetails?.package : "-"
+                    }}
+                </p>
+                <p>
+                    <strong>Invoice Date :</strong>
+                    {{
+                        invoiceDetails?.invoice_date
+                            ? invoiceDetails?.invoice_date
+                            : "-"
+                    }}
+                </p>
+            </div>
+
+            <div class="col-6">
+                <p>
+                    <strong>Spare Part Name :</strong>
+                    {{
+                        invoiceDetails?.spare_part_name
+                            ? invoiceDetails?.spare_part_name
+                            : "-"
+                    }}
+                </p>
+                <p>
+                    <strong>Subtotal :</strong>
+                    {{
+                        invoiceDetails?.subtotal
+                            ? invoiceDetails?.subtotal
+                            : "-"
+                    }}
+                </p>
+                <p>
+                    <strong>Tax Total :</strong>
+                    {{
+                        invoiceDetails?.tax_total
+                            ? invoiceDetails?.tax_total
+                            : "-"
+                    }}
+                </p>
+                <p>
+                    <strong>Total Payable :</strong>
+                    {{
+                        invoiceDetails?.total_payable
+                            ? invoiceDetails?.total_payable
+                            : "-"
+                    }}
+                </p>
+                <p>
+                    <strong>Remarks :</strong>
+                    {{
+                        invoiceDetails?.remarks ? invoiceDetails?.remarks : "-"
+                    }}
+                </p>
+            </div>
+        </div>
+
+        <div class="btn-invoice">
+            <button class="custom-button-cancel" (click)="closeInvoiceDetail()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</app-common-modal>

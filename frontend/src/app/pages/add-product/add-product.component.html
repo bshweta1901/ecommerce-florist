@@ -1,0 +1,143 @@
+<form [formGroup]="addProductForm" autocomplete="off">
+    <div class="">    
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext"   *ngIf="eventData.uuid!=null && eventData.uuid!=undefined" [(ngModel)]="product.productSKU"   readonly pInputText formControlName="productSKU" (keypress)="keyAplhaNumeric($event)">
+                <!-- *ngIf="eventData.productSKU==null || eventData.productSKU==undefined" -->
+                <!-- (input)="onInputChange(product.productSKU)" -->
+                <input type="text" id="inputtext" (input)="onInputChange(product.productSKU)"  *ngIf="eventData.uuid==null || eventData.uuid==undefined"    pInputText [(ngModel)]="product.productSKU" formControlName="productSKU" (keypress)="keyAplhaNumeric($event)">
+                <label for="inputtext">Product Item no(SKU)*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('productSKU').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('productSKU').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+
+        <!-- <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="product.lotNo" formControlName="lotNo" (keypress)="keyAplhaNumeric($event)">
+                <label for="inputtext">Lot No*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('lotNo').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('lotNo').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div> -->
+
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="product.productName" formControlName="productName" (keypress)="keyAplhaNumeric($event)">
+                <label for="inputtext">Product Name*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('productName').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('productName').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="product.description" formControlName="description" (keypress)="keyAplhaNumeric($event)">
+                <label for="inputtext">Item Description</label>
+            </span>
+        </div>
+
+        
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="product.fatPercent" formControlName="fatPercent" (keypress)="keyNumeric($event)">
+                <label for="inputtext">Fat Loss %*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('fatPercent').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('fatPercent').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <input readonly type="text" id="inputtext" pInputText [(ngModel)]="product.productCode" formControlName="productCode" (keypress)="keyAplhaNumeric($event)">
+                <label for="inputtext">Product Code*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('productCode').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('productCode').hasError('onlySpaces')">Product Code is not allowed.</div>
+        </div>
+
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="multiselect" [options]="brandList" appendTo="body" formControlName="brand"
+                [(ngModel)]="product.brand" [autoDisplayFirst]="false" 
+                optionLabel="name"></p-dropdown>
+                <label for="inputtext">Brand</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('brand').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="multiselect" (onChange)="getWeight($event)" [options]="stdList" appendTo="body" formControlName="weightkg"
+                [(ngModel)]="product.weight" [autoDisplayFirst]="false" 
+                optionLabel="name"></p-dropdown>
+                <label for="inputtext">weight(Kg)"</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('weightkg').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="multiselect" [options]="giveAwayList"  appendTo="body" formControlName="weight"
+                [(ngModel)]="product.standardWeight" [autoDisplayFirst]="false" 
+                optionLabel="allowedGiveAway"></p-dropdown>
+                <label for="inputtext">Std giveaway wt*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('weight').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+     
+       
+  
+     
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="multiselect" [options]="freezerList" appendTo="body" formControlName="freezerTypes"
+                [(ngModel)]="product.freezerTypes" [autoDisplayFirst]="false" 
+                optionLabel="name"></p-dropdown>
+                <label for="inputtext">Freezer Types*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('freezerTypes').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="multiselect" [options]="countryList" appendTo="body" formControlName="country"
+                [(ngModel)]="product.country" [autoDisplayFirst]="false" 
+                optionLabel="name"></p-dropdown>
+                <label for="inputtext">Country*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('country').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+   
+<!-- 
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="multiselect" [options]="commodityList" appendTo="body" formControlName="commodity"
+                [(ngModel)]="product.commodity" [autoDisplayFirst]="false" 
+                optionLabel="name"></p-dropdown>
+                <label for="inputtext">Commodity*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('commodity').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+  
+
+        <div class="field col-12 full-width">
+            <span class="p-float-label">
+                <p-dropdown inputId="multiselect" [options]="itemList" appendTo="body" formControlName="itemType"
+                [(ngModel)]="product.itemType" [autoDisplayFirst]="false"
+                optionLabel="name"></p-dropdown>
+                <label for="inputtext">Item Type*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.get('itemType').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div> -->
+    </div>
+        
+
+    <div class="popup-form-btn">
+        <button pButton type="button" *ngIf="hideButton" (click)="saveProduct()" [disabled]="!addProductForm.valid" label="Save Product" class="p-button-raised" [loading]="isLoading"></button>
+        <button pButton type="button" *ngIf="!hideButton" (click)="updateProduct()"  [disabled]="!addProductForm.valid" label="Update Product" class="p-button-raised" [loading]="isLoading"></button>
+    
+        <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="close.emit($event)"></button>
+    </div>
+</form>    

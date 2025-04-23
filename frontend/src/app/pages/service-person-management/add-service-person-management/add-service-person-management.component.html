@@ -1,0 +1,698 @@
+<div class="add-client-container">
+    <div class="header-Client">
+        <h5>
+            {{ serviceEngineerDetailObject.first_name || "Service Engineer" }}
+        </h5>
+        <div class="back-Button-Header">
+            <button
+                class="back-Button"
+                [routerLink]="['/panel/service-person-management']"
+                routerLinkActive="router-link-active"
+            >
+                <i class="pi pi-arrow-left"></i>
+                <p>Back</p>
+            </button>
+        </div>
+    </div>
+
+    <p-tabView (onChange)="onTabChange($event)">
+        <p-tabPanel header="Personal Details" *ngIf="!customerId || customerId">
+            <div class="personal-Details-Container">
+                <form [formGroup]="addPersonalDetailForm">
+                    <div class="row-One col-12">
+                        <div class="employee-Id col-3">
+                            <label for="employee_id"
+                                >Employee Id<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [ngClass]="{
+                                    'dull-input':
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                }"
+                                [(ngModel)]="
+                                    serviceEngineerDetailObject.employee_id
+                                "
+                                formControlName="employeeId"
+                                placeholder="Enter a Employee Id"
+                                pInputText
+                                id="employee_id"
+                                aria-describedby="employee_id-help"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addPersonalDetailForm.get('employeeId')
+                                "
+                                label="Employee Id"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="name col-3">
+                            <label for="first_name"
+                                >Name<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [ngClass]="{
+                                    'dull-input':
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                }"
+                                [(ngModel)]="
+                                    serviceEngineerDetailObject.first_name
+                                "
+                                formControlName="first_name"
+                                placeholder="Enter a Name"
+                                pInputText
+                                id="first_name"
+                                aria-describedby="first_name-help"
+                            />
+                            <app-custom-validation
+                                [control]="
+                                    addPersonalDetailForm.get('first_name')
+                                "
+                                label="Name"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="product-Category col-3">
+                            <label for="productCategory"
+                                >Product Category<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-multiSelect
+                                [disabled]="
+                                    actionForEdit === false &&
+                                    actionForView === true
+                                "
+                                [(ngModel)]="selectedProductCategoryList"
+                                [options]="productCategoryDropdownList"
+                                optionLabel="product_category"
+                                placeholder="Select a Product Category"
+                                formControlName="selectedProductCategoryList"
+                            ></p-multiSelect>
+                            <app-custom-validation
+                                [control]="
+                                    addPersonalDetailForm.get(
+                                        'selectedProductCategoryList'
+                                    )
+                                "
+                                label="Product Category"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="user-Mail-ID col-3">
+                            <label for="email"
+                                >Mail Id<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [ngClass]="{
+                                    'dull-input':
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                }"
+                                [(ngModel)]="serviceEngineerDetailObject.email"
+                                pInputText
+                                formControlName="email"
+                                id="email"
+                                aria-describedby="email-help"
+                                placeholder="Enter a Mail Id"
+                            />
+                            <app-custom-validation
+                                [control]="addPersonalDetailForm.get('email')"
+                                label="Mail Id"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="addPersonalDetailForm">
+                    <div class="row-Three col-12">
+                        <div class="user-Mobile-Number col-3">
+                            <label for="phone"
+                                >Mobile Number<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [ngClass]="{
+                                    'dull-input':
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                }"
+                                [(ngModel)]="serviceEngineerDetailObject.phone"
+                                pInputText
+                                id="phone"
+                                formControlName="phone"
+                                placeholder="Enter a Mobile Number"
+                                aria-describedby="mobileNumber-help"
+                            />
+                            <app-custom-validation
+                                [control]="addPersonalDetailForm.get('phone')"
+                                label="Mobile Number"
+                            ></app-custom-validation>
+                        </div>
+                        <!-- <div class="user-Status col-3">
+                            <label for="status">Status*</label>
+                            <p-dropdown
+                                [options]="statusList"
+                                [(ngModel)]="
+                                    serviceEngineerDetailObject.is_active
+                                "
+                                formControlName="is_active"
+                                optionLabel="name"
+                                placeholder="Select a status"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="
+                                    addPersonalDetailForm.get('is_active')
+                                "
+                                label="Status"
+                            ></app-custom-validation>
+                        </div> -->
+
+                        <div class="user-Manager-Role col-3">
+                            <label for="roles"
+                                >Role<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-dropdown
+                                [disabled]="
+                                    actionForEdit === false &&
+                                    actionForView === true
+                                "
+                                [(ngModel)]="selectedRole"
+                                [options]="roleList"
+                                optionLabel="name"
+                                placeholder="Select a Role"
+                                formControlName="roles"
+                            ></p-dropdown>
+                            <app-custom-validation
+                                [control]="addPersonalDetailForm.get('roles')"
+                                label="Role"
+                            ></app-custom-validation>
+                        </div>
+                        <div
+                            class="user-Manager-Name col-3"
+                            *ngIf="selectedRole.code != 'MANAGER'"
+                        >
+                            <label for="manager_uuid">Manager Name</label>
+                            <p-autoComplete
+                                class="auto-complete"
+                                [ngClass]="{
+                                    'dull-input':
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                }"
+                                [suggestions]="managerList"
+                                [(ngModel)]="selectedManager"
+                                formControlName="manager_uuid"
+                                (completeMethod)="searchParent($event)"
+                                field="first_name"
+                                placeholder="Select a Manager Name"
+                            >
+                            </p-autoComplete>
+                            <app-custom-validation
+                                [control]="
+                                    addPersonalDetailForm.get('manager_uuid')
+                                "
+                                label="Manager Name"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="user-Manager-Role col-3">
+                            <label for="slot"
+                                >Slot Id<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <p-multiSelect
+                                [disabled]="
+                                    actionForEdit === false &&
+                                    actionForView === true
+                                "
+                                [(ngModel)]="selectedSlotMaster"
+                                [options]="slotMasterList"
+                                optionLabel="label"
+                                placeholder="Select a Slot Id"
+                                formControlName="slot"
+                            ></p-multiSelect>
+                            <app-custom-validation
+                                [control]="addPersonalDetailForm.get('slot')"
+                                label="Slot Id"
+                            ></app-custom-validation>
+                        </div>
+                    </div>
+                </form>
+                <form [formGroup]="addPersonalDetailForm">
+                    <div class="row-Four col-12">
+                        <div class="user-CTC col-3">
+                            <label for="ctc"
+                                >CTC (Annually)<span class="required-field"
+                                    >*</span
+                                ></label
+                            >
+                            <input
+                                [ngClass]="{
+                                    'dull-input':
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                }"
+                                [(ngModel)]="serviceEngineerDetailObject.ctc"
+                                pInputText
+                                placeholder="Enter a CTC (Annually)"
+                                id="ctc"
+                                aria-describedby="ctc-help"
+                                formControlName="ctc"
+                            />
+                            <app-custom-validation
+                                [control]="addPersonalDetailForm.get('ctc')"
+                                label="CTC (Annually)"
+                            ></app-custom-validation>
+                        </div>
+                        <div class="user-Allowed-Discount col-3">
+                            <label for="allowed_discount"
+                                >Allowed discount (in %)</label
+                            >
+                            <input
+                                [ngClass]="{
+                                    'dull-input':
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                }"
+                                [(ngModel)]="
+                                    serviceEngineerDetailObject.allowed_discount
+                                "
+                                pInputText
+                                id="allowed_discount"
+                                placeholder="Enter a Allowed discount (in %)"
+                                aria-describedby="allowed_discount-help"
+                                formControlName="allowed_discount"
+                            />
+                        </div>
+                    </div>
+                </form>
+                <div class="header-of-add-client-btn">
+                    <p class="location-Details">Address Details</p>
+                    <form [formGroup]="addAddressDetailForm">
+                        <div class="location-Details-row-One col-12">
+                            <div class="Address1 col-3">
+                                <label for="Address1"
+                                    >Address 1<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <textarea
+                                    [ngClass]="{
+                                        'dull-input':
+                                            actionForEdit === false &&
+                                            actionForView === true
+                                    }"
+                                    [(ngModel)]="
+                                        serviceEngineerDetailObject.addresses
+                                            .address_1
+                                    "
+                                    formControlName="address_1"
+                                    class="Address1-Field"
+                                    placeholder="Enter a Address 1"
+                                    rows="4"
+                                    cols="4"
+                                    pInputTextarea
+                                ></textarea>
+                                <app-custom-validation
+                                    [control]="
+                                        addAddressDetailForm.get('address_1')
+                                    "
+                                    label="Address 1"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="Address2 col-3">
+                                <label for="Address2">Address 2</label>
+                                <textarea
+                                    [ngClass]="{
+                                        'dull-input':
+                                            actionForEdit === false &&
+                                            actionForView === true
+                                    }"
+                                    [(ngModel)]="
+                                        serviceEngineerDetailObject.addresses
+                                            .address_2
+                                    "
+                                    formControlName="address_2"
+                                    class="Address2-Field"
+                                    placeholder="Enter a Address 2"
+                                    rows="4"
+                                    cols="4"
+                                    pInputTextarea
+                                ></textarea>
+                                <!-- <app-custom-validation
+                                    [control]="
+                                        addAddressDetailForm.get('address_2')
+                                    "
+                                    label="Address 2"
+                                ></app-custom-validation> -->
+                            </div>
+                            <div class="state-ID col-3">
+                                <label for="stateID"
+                                    >State<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    [disabled]="
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                    "
+                                    [(ngModel)]="selectedState"
+                                    formControlName="state"
+                                    [options]="stateList"
+                                    optionLabel="name"
+                                    placeholder="Select a State"
+                                    (onChange)="onChangeOfState('CITY')"
+                                ></p-dropdown>
+                                <!-- <input
+                                    [readOnly]="
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                    "
+                                    [(ngModel)]="
+                                        serviceEngineerDetailObject.addresses
+                                            .state
+                                    "
+                                    formControlName="state"
+                                    pInputText
+                                    id="stateID"
+                                    aria-describedby="stateID-help"
+                                /> -->
+                                <app-custom-validation
+                                    [control]="
+                                        addAddressDetailForm.get('state')
+                                    "
+                                    label="State"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="city-Type col-3">
+                                <label for="cityType"
+                                    >City Type<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    [disabled]="
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                    "
+                                    [(ngModel)]="selectedCityType"
+                                    formControlName="city_type"
+                                    [options]="cityTypeList"
+                                    optionLabel="name"
+                                    placeholder="Select a City Type"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="
+                                        addAddressDetailForm.get('city_type')
+                                    "
+                                    label="City type"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+                    </form>
+                    <form [formGroup]="addAddressDetailForm">
+                        <div class="location-Details-row-Two col-12">
+                            <div class="city col-3">
+                                <label for="City"
+                                    >City<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    [disabled]="
+                                        (actionForEdit === false &&
+                                            actionForView === true) ||
+                                        !isStateSelected
+                                    "
+                                    [(ngModel)]="selectedCity"
+                                    [options]="cityList"
+                                    optionLabel="name"
+                                    placeholder="Select a City"
+                                    formControlName="roles"
+                                    formControlName="city"
+                                ></p-dropdown>
+                                <!-- <input
+                                    [readOnly]="
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                    "
+                                    [(ngModel)]="
+                                        serviceEngineerDetailObject.addresses
+                                            .city
+                                    "
+                                    formControlName="city"
+                                    pInputText
+                                    id="city"
+                                    aria-describedby="city-help"
+                                /> -->
+                                <app-custom-validation
+                                    [control]="addAddressDetailForm.get('city')"
+                                    label="City"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="zone-1 col-3">
+                                <label for="zone"
+                                    >Zone<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <p-dropdown
+                                    [disabled]="
+                                        actionForEdit === false &&
+                                        actionForView === true
+                                    "
+                                    [(ngModel)]="selectedZone"
+                                    formControlName="zone_uuid"
+                                    [options]="zoneList"
+                                    optionLabel="name"
+                                    placeholder="Select a Zone"
+                                ></p-dropdown>
+                                <app-custom-validation
+                                    [control]="
+                                        addAddressDetailForm.get('zone_uuid')
+                                    "
+                                    label="Zone"
+                                ></app-custom-validation>
+                            </div>
+                            <div class="pin-Code col-3">
+                                <label for="pincode"
+                                    >Pincode<span class="required-field"
+                                        >*</span
+                                    ></label
+                                >
+                                <input
+                                    [ngClass]="{
+                                        'dull-input':
+                                            actionForEdit === false &&
+                                            actionForView === true
+                                    }"
+                                    [(ngModel)]="
+                                        serviceEngineerDetailObject.addresses
+                                            .pincode
+                                    "
+                                    formControlName="pincode"
+                                    placeholder="Enter a Pincode"
+                                    pInputText
+                                    id="pincode"
+                                    aria-describedby="pincode-help"
+                                />
+                                <app-custom-validation
+                                    [control]="
+                                        addAddressDetailForm.get('pincode')
+                                    "
+                                    label="Pincode"
+                                ></app-custom-validation>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="header-of-add-client-btn">
+                    <p class="location-Details">Module Access</p>
+                    <div class="location-Details-row-One col-12">
+                        <div class="module-Name col-3">
+                            <label for="moduleName">Module Name</label>
+                            <p-multiSelect
+                                [(ngModel)]="
+                                    serviceEngineerDetailObject.module_access
+                                "
+                                optionLabel="serviceType"
+                                placeholder="Select a module name"
+                            ></p-multiSelect>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="save-Service-Details">
+                    <button
+                        class="custom-button"
+                        *ngIf="customerId && actionForEdit"
+                        (click)="updateServiceEngineer()"
+                    >
+                        Update
+                    </button>
+                    <button
+                        class="custom-button"
+                        *ngIf="!customerId && !actionForEdit"
+                        (click)="saveServiceEngineer()"
+                    >
+                        {{ isLoading ? "...Loading" : "Save" }}
+                    </button>
+                    <button
+                        *ngIf="!customerId || actionForEdit"
+                        class="custom-button-cancel"
+                        (click)="resetServiceEngineer()"
+                    >
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Service Details" *ngIf="customerId">
+            <div class="product-Details-Container">
+                <div class="header-of-Table-One">
+                    <div class="Table-One">
+                        <app-common-table
+                            [genericColsInput]="tableColsEvent"
+                            [genericTableSettingInput]="tableSettingsEvent"
+                            [genericListInput]="serviceRequestList"
+                            (addEntityEvent)="addEvent()"
+                            (paginateEvent)="paginateEvent($event)"
+                            (deleteDataEvent)="deleteServiceDetails($event)"
+                            [totalRecords]="totalRecords"
+                            (viewEntityEvent)="onViewClicked($event)"
+                        >
+                        </app-common-table>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Calendar View" *ngIf="customerId">
+            <div class="service-Person-Calender">
+                <ng-container *ngIf="isCalendarVisible">
+                    <full-calendar
+                        #calendar
+                        [options]="calendarOptions"
+                        style="
+                            cursor: pointer;
+                            background-color: lightgray;
+                            border-radius: 10px;
+                        "
+                    ></full-calendar>
+                </ng-container>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Request" *ngIf="customerId">
+            <div class="service-Person-request">
+                <app-common-table
+                    [genericColsInput]="tableRequestColsEvent"
+                    [genericTableSettingInput]="tableRequestSettingsEvent"
+                    [genericListInput]="serviceRequestTableList"
+                    (addEntityEvent)="addEvent()"
+                    (paginateEvent)="paginateEvent($event)"
+                    [totalRecords]="totalRecords"
+                    (openAddDialogModuleEventForUpdateStatus)="
+                        viewDialogueForUpdateStatus($event)
+                    "
+                >
+                </app-common-table>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+<app-common-modal
+    *ngIf="customerId"
+    [title]="titleEVent"
+    [visible]="openDialogModuleForUpdateStatus"
+    [closable]="true"
+    [dynamicWidth]="dialogWidth"
+    (closeEvent)="closeEventDialog()"
+>
+    <div body>
+        <div class="add-Create-Order-Container">
+            <h5 class="header-Dialogue-Box">Update Status</h5>
+            <div class="flex flex-wrap gap-3" style="margin-top: 5%">
+                <div class="flex align-items-center">
+                    <p-radioButton
+                        name="status"
+                        value="Accepted"
+                        [(ngModel)]="UpdateEngineerRequestObj.status"
+                        inputId="ingredient1"
+                    >
+                    </p-radioButton>
+                    <label for="ingredient1" class="ml-2"> Accepted </label>
+                </div>
+                <div class="flex align-items-center">
+                    <p-radioButton
+                        name="status"
+                        value="Rejected"
+                        [(ngModel)]="UpdateEngineerRequestObj.status"
+                        inputId="ingredient2"
+                    >
+                    </p-radioButton>
+                    <label for="ingredient2" class="ml-2"> Rejected </label>
+                </div>
+            </div>
+            <div class="save-Product-Category">
+                <button class="custom-button" (click)="updateStatusRequest()">
+                    Update
+                </button>
+                <button
+                    class="custom-button-cancel"
+                    (click)="closeEventDialog()"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</app-common-modal>
+
+<app-common-modal
+    *ngIf="customerId"
+    [title]="titleEVent"
+    [visible]="openDialogModuleForUnavailability"
+    [closable]="true"
+    [dynamicWidth]="dialogWidthForCalendar"
+    (closeEvent)="closeUnavailabilityEventDialog()"
+>
+    <div body>
+        <div class="add-Create-Order-Container">
+            <h5 class="header-Dialogue-Box">Unavailability Status</h5>
+            <h6>Reason : {{ getReasonsForUnavailability }}</h6>
+            <h6>Slot : {{ getSlotForUnavailability }}</h6>
+            <h6>Start Time : {{ getSlotStartTimeForUnavailability }}</h6>
+            <h6>End Time : {{ getSlotEndTimeForUnavailability }}</h6>
+        </div>
+    </div>
+</app-common-modal>
+
+<app-common-modal
+    *ngIf="customerId"
+    [title]="titleEVent"
+    [visible]="openDialogModuleForAccepted"
+    [closable]="true"
+    [dynamicWidth]="dialogWidthForCalendar"
+    (closeEvent)="closeAcceptedEventDialog()"
+>
+    <div body>
+        <div class="add-Create-Order-Container">
+            <h5 class="header-Dialogue-Box">On service</h5>
+            <h6>Reason : {{ getReasonsForAccepted }}</h6>
+            <h6>Slot : {{ getSlotForAccepted }}</h6>
+            <h6>Start Time : {{ getSlotStartTimeForAccepted }}</h6>
+            <h6>End Time : {{ getSlotEndTimeForAccepted }}</h6>
+        </div>
+    </div>
+</app-common-modal>

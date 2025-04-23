@@ -1,0 +1,39 @@
+.add-Create-Order-Container {
+    // margin-left: 0.7rem;
+}
+
+.header-Dialogue-Box {
+    margin-bottom: 0px;
+}
+
+.add-Create-Order-Grid {
+    background-color: #fff;
+    padding-bottom: 1rem;
+}
+
+.row-One,
+.row-Two,
+.row-Three {
+    display: flex;
+}
+
+.name,
+.tenure,
+.preventive-Maintenance,
+.standard-Price,
+.selling-Price,
+.tax,
+.TAT,
+.preventive-Cycle,
+.coverage-Details,
+.spare-Part-Covered {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+input,
+p-dropdown,
+p-multiSelect {
+    width: 95%;
+}

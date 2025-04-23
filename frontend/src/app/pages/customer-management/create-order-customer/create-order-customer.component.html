@@ -1,0 +1,313 @@
+<div class="create-Order-Container">
+    <div class="header-Client">
+        <h5>Client Name</h5>
+        <div class="back-Button-Header">
+            <button
+                class="back-Button"
+                [routerLink]="['/panel/customer-management']"
+                routerLinkActive="router-link-active"
+            >
+                <i class="pi pi-arrow-left"></i>
+                <p>Back</p>
+            </button>
+        </div>
+    </div>
+    <div class="create-Order-Grid" [formGroup]="createOrderForm">
+        <div class="back-Button-To-Product">
+            <button class="back-Button" (click)="goBackToProductDetails()">
+                <i class="pi pi-arrow-left"></i>
+                <p>Back To Product Details</p>
+            </button>
+        </div>
+        <div class="row-One col-12">
+            <div class="select-Customer col-3">
+                <label for="selectCustomer"
+                    >Customer<span class="mandatory-field">*</span></label
+                >
+                <p-dropdown
+                    [options]="customers"
+                    [(ngModel)]="selectedCustomer"
+                    [ngModelOptions]="{ standalone: true }"
+                    [disabled]="
+                        (customerId !== undefined &&
+                            customerId !== null &&
+                            customerId !== '') ||
+                        contractItemList.length > 0
+                    "
+                    optionLabel="account_name"
+                    (onChange)="getCustomerProductList()"
+                    placeholder="Select a Customer"
+                ></p-dropdown>
+                <!-- <app-custom-validation
+                    [control]="createOrderForm.get('selectedCustomer')"
+                    label="Customer"
+                ></app-custom-validation> -->
+            </div>
+            <div class="select-Product col-3">
+                <label for="selectProduct"
+                    >Product<span class="mandatory-field">*</span></label
+                >
+                <p-dropdown
+                    [options]="customerProductList"
+                    formControlName="selectedCustomerProduct"
+                    (onChange)="getProductTypeList($event)"
+                    [(ngModel)]="selectedCustomerProduct"
+                    optionLabel="productDisplay"
+                    placeholder="Select a Product"
+                ></p-dropdown>
+                <app-custom-validation
+                    [control]="createOrderForm.get('selectedCustomerProduct')"
+                    label="Product"
+                ></app-custom-validation>
+                <!-- <p class="color-red" *ngIf="showProductError">
+                        Product is Required
+                    </p> -->
+            </div>
+
+            <div class="serial-Number col-3">
+                <label for="serialNumber">Serial Number</label>
+                <input
+                    [(ngModel)]="getProductSerialNumber.product_serial_number"
+                    pInputText
+                    placeholder="Enter a Serial Number"
+                    readonly
+                    [ngModelOptions]="{ standalone: true }"
+                    id="serialNumber"
+                    aria-describedby="serialNumber-help"
+                />
+            </div>
+            <div class="service-Type col-3">
+                <label for="serviceType"
+                    >Product/Service Type<span class="mandatory-field"
+                        >*</span
+                    ></label
+                >
+                <p-dropdown
+                    [options]="packageServiceTypeList"
+                    [(ngModel)]="selectedPackageServiceType"
+                    optionLabel="name"
+                    formControlName="selectedPackageServiceType"
+                    placeholder="Select a Product/Service Type"
+                    (onChange)="getServiceType($event)"
+                ></p-dropdown>
+                <app-custom-validation
+                    [control]="
+                        createOrderForm.get('selectedPackageServiceType')
+                    "
+                    label="Product/Service Type"
+                ></app-custom-validation>
+            </div>
+        </div>
+
+        <div class="row-Two col-12">
+            <!-- <div class="warranty-Billable col-3">
+                <label for="warrantyBillable">Warranty Billable</label>
+                <p-dropdown
+                    [options]="warrantyBillabeList"
+                    [(ngModel)]="selectedWarantyBillable"
+                    optionLabel="name"
+                    placeholder="Select a warranty billable"
+                ></p-dropdown>
+            </div> -->
+
+            <div
+                class="package-Name col-3"
+                *ngIf="
+                    selectedPackageServiceType &&
+                    (selectedPackageServiceType?.code == 'AMC' ||
+                        selectedPackageServiceType?.code == 'CAMC')
+                "
+            >
+                <label for="packageName">Package Name</label>
+                <p-dropdown
+                    [options]="packageList"
+                    [(ngModel)]="selectedPackage"
+                    [ngModelOptions]="{ standalone: true }"
+                    optionLabel="package_name"
+                    placeholder="Select a package name"
+                ></p-dropdown>
+            </div>
+            <div
+                class="user-Tenure col-3"
+                *ngIf="
+                    (selectedPackageServiceType &&
+                        selectedPackageServiceType?.code == 'AMC') ||
+                    selectedPackageServiceType?.code == 'CAMC'
+                "
+            >
+                <label for="tenure">Tenure</label>
+                <input
+                    [(ngModel)]="selectedPackage.tenure"
+                    formControlName="tenure"
+                    pInputText
+                    readonly
+                    placeholder="Enter a Tenure"
+                    id="serialNumber"
+                    aria-describedby="serialNumber-help"
+                />
+                <app-custom-validation
+                    [control]="createOrderForm.get('tenure')"
+                    label="Tenure"
+                ></app-custom-validation>
+                <!-- <p-dropdown
+                    optionLabel="tenure"
+                    placeholder="Select a tenure"
+                ></p-dropdown> -->
+            </div>
+
+            <div
+                class="user-Tenure col-3"
+                *ngIf="
+                    (selectedPackageServiceType &&
+                        selectedPackageServiceType?.code ==
+                            'Installation Charges') ||
+                    selectedPackageServiceType?.code == 'On-Demand' ||
+                    selectedPackageServiceType?.code == 'Warranty'
+                "
+            >
+                <label for="tenure">TAT</label>
+                <input
+                    [(ngModel)]="seletedPackageService.turn_around_time"
+                    formControlName="tat"
+                    pInputText
+                    placeholder="Enter a TAT"
+                    readonly
+                    id="serialNumber"
+                    aria-describedby="serialNumber-help"
+                />
+                <app-custom-validation
+                    [control]="createOrderForm.get('tat')"
+                    label="TAT"
+                ></app-custom-validation>
+                <!-- <p-dropdown
+                    optionLabel="tenure"
+                    placeholder="Select a tenure"
+                ></p-dropdown> -->
+            </div>
+            <div
+                class="preventive-Cycle col-3"
+                *ngIf="
+                    selectedPackageServiceType &&
+                    (selectedPackageServiceType?.code == 'AMC' ||
+                        selectedPackageServiceType?.code == 'CAMC')
+                "
+            >
+                <label for="preventiveCycle">Preventive Cycle</label>
+                <input
+                    [(ngModel)]="selectedPackage.maintenance_cycle.name"
+                    [ngModelOptions]="{ standalone: true }"
+                    pInputText
+                    placeholder="Enter a Preventive Cycle"
+                    readonly
+                    id="serialNumber"
+                    aria-describedby="serialNumber-help"
+                />
+                <!-- <p-dropdown
+                    optionLabel="preventiveCycle"
+                    placeholder="Select a preventive cycle"
+                ></p-dropdown> -->
+            </div>
+            <div
+                class="user-Tenure col-3"
+                *ngIf="
+                    (selectedPackageServiceType &&
+                        selectedPackageServiceType?.code == 'Warranty') ||
+                    selectedPackageServiceType?.code == 'On-Demand' ||
+                    selectedPackageServiceType?.code == 'Installation Charges'
+                "
+            >
+                <label for="standard_price">Standard Price</label>
+                <input
+                    [(ngModel)]="seletedPackageService.standard_price"
+                    [ngModelOptions]="{ standalone: true }"
+                    pInputText
+                    placeholder="Enter a Standard Price"
+                    readonly
+                    id="serialNumber"
+                    aria-describedby="serialNumber-help"
+                />
+                <!-- <p-dropdown
+                    optionLabel="tenure"
+                    placeholder="Select a tenure"
+                ></p-dropdown> -->
+            </div>
+            <div
+                class="preventive-Cycle col-3"
+                *ngIf="
+                    (selectedPackageServiceType &&
+                        selectedPackageServiceType?.code == 'Warranty') ||
+                    selectedPackageServiceType?.code == 'On-Demand' ||
+                    selectedPackageServiceType?.code == 'Installation Charges'
+                "
+            >
+                <label for="selling_price">Selling Price</label>
+                <input
+                    [(ngModel)]="seletedPackageService.selling_price"
+                    [ngModelOptions]="{ standalone: true }"
+                    pInputText
+                    placeholder="Enter a Selling Price"
+                    readonly
+                    id="serialNumber"
+                    aria-describedby="serialNumber-help"
+                />
+                <!-- <p-dropdown
+                    optionLabel="preventiveCycle"
+                    placeholder="Select a preventive cycle"
+                ></p-dropdown> -->
+            </div>
+        </div>
+
+        <div class="add-More-Details">
+            <button class="custom-button" (click)="addToContractItem()">
+                Add
+            </button>
+        </div>
+        <div class="create-Order-Table-One">
+            <div class="Table-One">
+                <app-common-table
+                    [genericColsInput]="tableColsEventOne"
+                    [genericTableSettingInput]="tableSettingsEvent"
+                    [genericListInput]="contractItemList"
+                    (addEntityEvent)="addEvent()"
+                    (paginateEvent)="paginateEvent($event)"
+                    (deleteDataEvent)="deleteContractItem($event)"
+                    [totalRecords]="contractItemList.length"
+                    (openEditModal)="openViewModal($event)"
+                >
+                </app-common-table>
+            </div>
+        </div>
+        <app-common-modal
+            [title]="titleEVent"
+            [visible]="openAddDialogModuleEvent"
+            [closable]="true"
+            [dynamicWidth]="dialogWidth"
+            (closeEvent)="closeEventDialog()"
+        >
+            <app-add-create-order
+                [contractItem]="seletedPackageService"
+                [hideButton]="hideButtonView"
+                (close)="closeEventDialog()"
+                body
+                *ngIf="openAddDialogModuleEvent"
+            >
+            </app-add-create-order>
+        </app-common-modal>
+        <div class="create-Contract-Details">
+            <button
+                pButton
+                type="button"
+                class="custom-button"
+                label="Create Contract"
+                [disabled]="contractItemList.length == 0"
+                (click)="createContract()"
+            ></button>
+            <button
+                class="custom-button-cancel"
+                [routerLink]="['/panel/customer-management']"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="card flex flex-column gap-3">
+    <!-- <div class="flex align-items-center justify-content-center">
+        <div>
+            <p-button icon="pi pi-star" styleClass="p-button-outlined"></p-button>
+        </div>
+        <div class="flex-1">
+            <p-paginator (onPageChange)="onPageChange1($event)" [first]="first1" [rows]="rows1" [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]" [showFirstLastIcon]="false"></p-paginator>
+        </div>
+        <div class="justify-content-end">
+            <p-button icon="pi pi-search"></p-button>
+        </div>
+    </div>
+    <p-divider></p-divider> -->
+    <div class="flex align-items-center justify-space-between">
+        <span class="pagination-text">Showing 1 to 10 of 100 entries</span>
+        <!-- <p-dropdown [options]="options" optionLabel="label" optionValue="value" [(ngModel)]="rows2" (ngModelChange)="first2 = 0"></p-dropdown> -->
+        <div class="flex-1">
+            <p-paginator (onPageChange)="onPageChange1($event)" [first]="first1" [rows]="rows1" [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]" [showFirstLastIcon]="false">
+            </p-paginator>
+        </div>
+    </div>
+    <!-- <p-divider></p-divider>
+    <div class="flex align-items-center justify-content-start">
+        <div class="flex justify-content-center align-items-center gap-3">
+            <span>Items per page: </span>
+            <p-slider [(ngModel)]="rows3" (ngModelChange)="first3 = 0" [style]="{ width: '10rem' }" [min]="10" [max]="120" [step]="30"></p-slider>
+        </div>
+        <p-paginator (onPageChange)="onPageChange3($event)" [first]="first3" [rows]="rows3" [totalRecords]="totalRecords"
+            [showFirstLastIcon]="false" [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}"></p-paginator>
+    </div> -->
+</div>

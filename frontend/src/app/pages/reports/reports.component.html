@@ -1,0 +1,118 @@
+<div class="field" style="width: 25%;">
+    <span class="date_productivity">
+        Date: <p-calendar [showIcon]="true" #calendar inputId="calendar" [(ngModel)]="chillerUnder.rangeDates" (onSelect)="getDateRange()" selectionMode="range"  appendTo="body"  [readonlyInput]="true" showButtonBar="true"></p-calendar>                 
+    </span>
+</div>
+
+<div class="field" style="width: 25%;">
+    <span class="date_productivity">
+        Report : <p-dropdown inputId="dropdown" appendTo="body" [options]="reportList" optionLabel="label" [autoDisplayFirst]="true"></p-dropdown>                 
+    </span>
+</div>
+
+<p-tabView>
+    <p-tabPanel header="Over Ran Chiller">
+        <app-common-table  
+            [genericColsInput]="tableColsEvent"
+            [genericTableSettingInput]="tableSettingsEvent" 
+            [genericListInput]="chillerExtraCostList"
+            (paginateEvent)="paginateEvent($event)"
+            [totalRecords]="totalRecords"
+            [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+        </app-common-table>
+    </p-tabPanel>
+    <!-- <p-tabPanel header="Under Utilised Chiller">
+        <app-common-table  
+        [genericColsInput]="tableColsEventUnderUtilisation"
+        [genericTableSettingInput]="tableSettingsEventUnderUtilisation" 
+        [genericListInput]="underUtilisationList"
+        (paginateEvent)="paginateEventUnderUtilization($event)"
+        [totalRecords]="totalRecordsUnderUtilization"
+        [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+    </app-common-table>
+    </p-tabPanel> -->
+    <p-tabPanel header="Chiller Capacity Utilisation">
+        <app-common-table  
+        [genericColsInput]="tableColsEventCapacity"
+        [genericTableSettingInput]="tableSettingsEventCapacity" 
+        [genericListInput]="capacityList"
+        (paginateEvent)="paginateEventCapacity($event)"
+        [totalRecords]="totalRecordsCapacity"
+        [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+    </app-common-table>
+    </p-tabPanel>
+    <p-tabPanel header="Average Carcass Shrinkage %">
+        <app-common-table  
+        [genericColsInput]="tableColsEventShrinkage"
+        [genericTableSettingInput]="tableSettingsEventShrinkage" 
+        [genericListInput]="shrinkageList"
+        (paginateEvent)="paginateEventShrinkage($event)"
+        [totalRecords]="totalRecordsShrinkage"
+        [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+    </app-common-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Over Ran Blast Freezer">
+        <app-common-table  
+        [genericColsInput]="blastExtraCostTableColsEvent"
+        [genericTableSettingInput]="blastExtraCostTableSettingsEvent" 
+        [genericListInput]="blastFreezerExtraCostList"
+        (paginateEvent)="paginateEventBlast($event)"
+        [totalRecords]="blastExtraCostTotalRecords"
+        [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+    </app-common-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Blast Freezer Capacity Utilisation">
+        <app-common-table  
+        [genericColsInput]="blastUtilizationTableColsEvent"
+        [genericTableSettingInput]="blastUtilizationTableSettingsEvent" 
+        [genericListInput]="blastFreezercapacityList"
+        (paginateEvent)="paginateEventShrinkage($event)"
+        [totalRecords]="blastUtilizationTotalRecords"
+        [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+    </app-common-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Over Ran Plate Freezer">
+        <app-common-table  
+        [genericColsInput]="plateExtraCostTableColsEvent"
+        [genericTableSettingInput]="plateExtraCostTableSettingsEvent" 
+        [genericListInput]="plateFreezerExtraCostList"
+        (paginateEvent)="paginateEventBlast($event)"
+        [totalRecords]="plateExtraCostTotalRecords"
+        [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+    </app-common-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Plate Freezer Capacity Utilisation">
+        <app-common-table  
+        [genericColsInput]="plateUtilizationTableColsEvent"
+        [genericTableSettingInput]="plateUtilizationTableSettingsEvent" 
+        [genericListInput]="plateFreezercapacityList"
+        (paginateEvent)="paginateEventShrinkage($event)"
+        [totalRecords]="plateUtilizationTotalRecords"
+        [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+    </app-common-table>
+    </p-tabPanel>
+
+    <!-- <p-tabPanel header="Under Utilised Freezer">
+        <app-common-table  
+        [genericColsInput]="tableColsEventShrinkage"
+        [genericTableSettingInput]="tableSettingsEventShrinkage" 
+        [genericListInput]="shrinkageList"
+        (paginateEvent)="paginateEventShrinkage($event)"
+        [totalRecords]="totalRecordsShrinkage"
+        [exportName]="getExportName()"
+        (exportEntityEvent)="exportEntity()">
+    </app-common-table> 
+    </p-tabPanel> -->
+</p-tabView>
