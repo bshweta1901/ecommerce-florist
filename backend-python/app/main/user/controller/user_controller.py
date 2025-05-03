@@ -122,7 +122,7 @@ class GetUserByUsername(Resource):
 @api.response(400, "error", CommonModelDto.error_response_dto)
 @api.response(500, "Internal server error", CommonModelDto.error_response_dto)
 class ListRoles(Resource):
-    @api.response(200, "success", role)
+    @api.marshal_list_with(role)
     @api.doc("List of Roles")
     def get(self):
         """List of Roles"""

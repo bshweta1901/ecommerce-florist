@@ -29,6 +29,10 @@ class CommonModel(db.Model):
         db.DateTime(), default=indian_time_now, onupdate=indian_time_now
     )
 
+    @property
+    def status(self):
+        return "Active" if self.is_active else "Deactivate"
+
     @declared_attr
     def created_by(cls):
         return db.Column(db.BigInteger(), db.ForeignKey("users.id"))
@@ -41,7 +45,7 @@ class CommonModel(db.Model):
 # Automatically set created_by and modified_by
 @listens_for(CommonModel, "before_insert", propagate=True)
 def set_created_by(mapper, connect, target):
-    user_id = getattr(g, "user_id", None)  # Get user_id from g
+    user_id = getattr(g, "id", None)  # Get user_id from g
     if user_id is not None:
         target.created_by = user_id
         target.modified_by = user_id

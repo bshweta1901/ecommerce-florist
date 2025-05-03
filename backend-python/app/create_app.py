@@ -23,8 +23,7 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
-    app.config.from_object(
-        config_by_name[os.getenv("BOILERPLATE_ENV") or "dev"])
+    app.config.from_object(config_by_name[os.getenv("BOILERPLATE_ENV") or "dev"])
     app.config["CORS_HEADERS"] = "Content-Type"
     app.config["ERROR_404_HELP"] = False
 
@@ -51,8 +50,8 @@ def create_app():
                 token = token.replace("Bearer ", "").strip()
                 decoded_token = decode_token(token)
                 # Assuming 'sub' holds the user ID
-                uuid = decoded_token.get("uuid")
-                g.user_id = get_id_by_uuid(uuid, User)
+                id = decoded_token.get("id")
+                g.user_id = id
             except Exception as e:
 
                 g.user_id = None

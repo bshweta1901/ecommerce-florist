@@ -1,5 +1,3 @@
-from typing import Text
-
 from sqlalchemy import (
     BigInteger,
     CheckConstraint,
@@ -35,7 +33,6 @@ class User(CommonModel, Base):
     roles = relationship("Role", secondary=user_roles, back_populates="users")
     full_name = Column(String(200), nullable=True)
     description = Column(String(500), nullable=True)
-    sports_experience = Column(String(100), nullable=True)
     password_hash = Column(String(100), nullable=True)
     dob = Column(Date, nullable=True)
     gender_id = Column(BigInteger(), ForeignKey("predefined_master.id"))
@@ -59,13 +56,10 @@ class User(CommonModel, Base):
     google_auth_token = Column(String(500), nullable=True)
     apple_auth_token = Column(String(500), nullable=True)
 
-    roles_name = None
-    roles_ids = None
-
     @property
     def roles_name(self):
         role_codes = [role.code for role in self.roles] if self.roles else []
-        return role_codes
+        return ", ".join(role_codes)
 
     @property
     def roles_ids(self):
@@ -92,7 +86,7 @@ class User(CommonModel, Base):
         return flask_bcrypt.check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return f"<User '{self.user_id}'>"
+        return f"<User '{self.id}'>"
 
     def get_auth_config(self, session):
         """

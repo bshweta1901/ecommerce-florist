@@ -29,27 +29,27 @@ def validate_file_format(file, entity_type):
         if file.content_length > max_file_size:
             raise CustomException(status_code=400, message="File Size Limit Exceeded")
 
-        predefined_master = get_predefined_by_type_and_code(
-            "FILE-FORMAT", f"{entity_type}-FILE-FORMAT"
-        )
+            # predefined_master = get_predefined_by_type_and_code(
+            #     "FILE-FORMAT", f"{entity_type}-FILE-FORMAT"
+            # )
 
-        if predefined_master is not None and len(predefined_master) > 0:
-            # Save File format in list
-            format_list = (
-                predefined_master[0].name.split(",")
-                if "," in predefined_master[0].name
-                else [predefined_master[0].name]
-            )
+            # if predefined_master is not None and len(predefined_master) > 0:
+            #     # Save File format in list
+            #     format_list = (
+            #         predefined_master[0].name.split(",")
+            #         if "," in predefined_master[0].name
+            #         else [predefined_master[0].name]
+            #     )
             current_app.logger.info(f"Format List: {format_list}")
 
             # Check file format
-            if file.mimetype in format_list:
-                current_app.logger.info("File format is valid")
-                return True
+        # if file.mimetype in format_list:
+        # current_app.logger.info("File format is valid")
+        return True
 
-            raise CustomException(
-                status_code=400, message=f"Only Supports {', '.join(format_list)}"
-            )
+        # raise CustomException(
+        #     status_code=400, message=f"Only Supports {', '.join(format_list)}"
+        # )
 
     except CustomException as e:
         # Use e.message directly
@@ -269,6 +269,51 @@ def upload_image(data, file, base_directory, entity_type, field, is_upload=False
     except Exception as e:
         print(f"Error uploading image: {e}")
         return None
+
+
+def upload_and_link_documents(
+    entity_instance, files, base_directory, entity_type, linking_model, entity_field
+):
+    """
+    Upload multiple files and link them dynamically to any entity (Product, Category, etc.)
+
+    Args:
+        entity_instance: The database model instance (like ProductMaster, Category, etc.).
+        files: List of uploaded files.
+        base_directory: Folder location for saving.
+        entity_type: String to identify entity type (e.g., 'product', 'category').
+        linking_model: The linking table model (e.g., ProductDocument).
+        entity_field: The field name in linking_model that points to the entity (e.g., 'product_id').
+
+    Returns:
+        Updated entity_instance.
+    """
+    try:
+
+        if not files:
+            return entity_instance
+
+        for file in files:
+            # 1. Upload the file to DocumentMaster
+            document_master = upload_document(file, base_directory, entity_type)
+
+            # 2. Create a linking record dynamically
+            linking_record = linking_model(
+                **{
+                    entity_field: entity_instance.id,
+                    "document_id": document_master.id,
+                }
+            )
+
+            db.session.add(linking_record)
+
+        db.session.commit()
+
+        return entity_instance
+
+    except Exception as e:
+        db.session.rollback()
+        raise e
 
 
 # Function call (fixed syntax)

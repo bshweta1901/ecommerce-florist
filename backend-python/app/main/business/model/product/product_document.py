@@ -19,6 +19,10 @@ class ProductDocument(CommonModel, db.Model):
         "ProductMaster", foreign_keys=[product_id], backref="document_as_product"
     )
 
+    @property
+    def file_path(self):
+        return self.document.file_path if self.document is not None else None
+
     def save(self):
         db.session.add(self)
         db.session.commit()

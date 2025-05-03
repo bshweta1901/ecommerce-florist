@@ -33,48 +33,49 @@ def create_entity(data):
 
 
 def get_all_entities(data):
-    with session_scope() as session:
-        # Default values
-        is_sort = data.get("is_sort", False)
-        page = data.get("page_number", 1)
-        size = data.get("page_size", 0)
+    # with session_scope() as session:
+    # Default values
+    is_sort = data.get("is_sort", False)
+    page = data.get("page_number", None)
+    size = data.get("page_size", None)
 
-        query = (
-            session.query(predefined_alias)
-            .filter(predefined_alias.is_delete == False)
-            .options(joinedload(predefined_alias.parent))
+    query = (
+        db.session.query(predefined_alias)
+        .filter(predefined_alias.is_delete == False)
+        .options(joinedload(predefined_alias.parent))
+    )
+    query = query_criteria(query, data)  # Apply filters
+    # Grouping by predefined_alias.id
+    query = query.group_by(predefined_alias.id)
+
+    # Sorting logic
+    if is_sort:
+        query = query.order_by(asc(predefined_alias.sequence_order))
+    else:
+        query = query.order_by(
+            case(
+                (
+                    predefined_alias.name.op("REGEXP")("^[0-9]+$"),
+                    cast(predefined_alias.name, Double),
+                ),
+                else_=predefined_alias.name,
+            ).asc()
         )
-        query = query_criteria(query, data)  # Apply filters
-        # Grouping by predefined_alias.id
-        query = query.group_by(predefined_alias.id)
-
-        # Sorting logic
-        if is_sort:
-            query = query.order_by(asc(predefined_alias.sequence_order))
-        else:
-            query = query.order_by(
-                case(
-                    (
-                        predefined_alias.name.op("REGEXP")("^[0-9]+$"),
-                        cast(predefined_alias.name, Double),
-                    ),
-                    else_=predefined_alias.name,
-                ).asc()
-            )
-        total_records = query.count()  # Get total count before pagination
-        # Apply pagination if page and size are valid
+    total_records = query.count()  # Get total count before pagination
+    # Apply pagination if page and size are valid
+    if page is not None and size is not None:
         if size > 0:
             query = query.limit(size).offset((page - 1) * size)
 
-        data_list = query.all()
-
-        return {
-            "data": data_list,
-            "total": total_records,
-            "page": page,
-            "page_size": size,
-            "total_pages": (total_records + max(size, 1) - 1) // max(size, 1),
-        }
+    data_list = query.all()
+    size = 0 if size is None else size
+    return {
+        "data": data_list,
+        "total": total_records,
+        "page": page,
+        "page_size": size,
+        "total_pages": (total_records + max(size, 1) - 1) // max(size, 1),
+    }
 
 
 def query_criteria(query, data):
@@ -89,8 +90,8 @@ def query_criteria(query, data):
         query = query.filter(predefined_alias.parent_id == parent_id)
     if entity_type is not None:
         query = query.filter(predefined_alias.entity_type == entity_type)
-    if sub_entity is not None:
-        query = query.filter(predefined_alias.sub_entity == sub_entity)
+    # if sub_entity is not None:
+    #     query = query.filter(predefined_alias.sub_entity == sub_entity)
     if code is not None:
         query = query.filter(predefined_alias.code == code)
 

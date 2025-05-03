@@ -45,6 +45,7 @@ class UserDto:
             "roles": fields.List(fields.Nested(role)),  # List of roles
             "full_name": fields.String(),
             "description": fields.String(),
+            "roles_name": fields.String(),
             # "sports_experience": fields.String(),
             # "dob": fields.String(),  # Use ISO format string for Date
             # "roles": fields.List(fields.Nested(role)),

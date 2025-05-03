@@ -1,280 +1,123 @@
-from flask_restx import Namespace, fields
-from ....utils.payload.predefined_dto import PredefinedDto
-from ..util.product_feature_dto import ProductFeatureDto
-
-from ....utils.payload.document_dto import DocumentDto
-from werkzeug.datastructures import FileStorage
+import json
+from flask_restx import Namespace, fields, marshal
+from app.main.business.util.category.category_dto import CategoryDto
+from app.main.business.util.category.sub_category_dto import SubCategoryDto
+from app.main.utils.payload.common_model_dto import CommonModelDto
 from flask_restx import reqparse
+from werkzeug.datastructures import FileStorage
+
+from app.main.utils.payload.predefined_dto import PredefinedDto
 
 
 class ProductDto:
-    product_api = Namespace("product", description="Product related operations")
-    _predefined = PredefinedDto.predefined
+    """
+    Data Transfer Object (DTO) for Product.
+    Defines API models for handling product-related operations.
+    """
 
-    document_product_dto = product_api.model(
-        "document_product_dto",
+    api = Namespace("Product", description="API for managing product data")
+
+    product_image = api.model(
+        "ProductImage",
         {
-            "document": fields.Nested(
-                DocumentDto.document_res, description="Document details"
-            ),
-            "product_id": fields.Integer(description="Product ID"),
-            "product_document_id": fields.Integer(description="Product Document ID"),
+            "id": fields.Integer(description="ID of the image"),
+            "file_path": fields.String(description="URL of the image"),
+        },
+    )
+    remove_img_model = api.model(
+        "RemoveImages",
+        {
+            "ids": fields.List(
+                fields.Integer, required=True, description="List of product image IDs"
+            )
         },
     )
 
-    document_product_dto = product_api.model(
-        "document_product_dto",
-        {
-            "document": fields.Nested(
-                DocumentDto.document_res, description="Document details"
-            ),
-            "product_id": fields.Integer(description="Product ID"),
-            "product_document_id": fields.Integer(description="Product Document ID"),
-        },
-    )
-
-    product = product_api.model(
-        "product_master",
-        {
-            "product_id": fields.Integer(
-                required=False, description="Id of the product"
-            ),
-            "product_name": fields.String(required=False, description="Product name"),
-            "product_price": fields.Float(required=False, description="Product price"),
-            "product_offer_price": fields.Float(
-                required=False, description="Product offer price"
-            ),
-            "category": fields.Nested(
-                _predefined, only=("predefined_id", "name", "code", "entity_type")
-            ),
-            "make": fields.Nested(
-                _predefined, only=("predefined_id", "name", "code", "entity_type")
-            ),
-            "model": fields.Nested(
-                _predefined, only=("predefined_id", "name", "code", "entity_type")
-            ),
-            "variant": fields.Nested(
-                _predefined, only=("predefined_id", "name", "code", "entity_type")
-            ),
-            "brand": fields.Nested(PredefinedDto.predefined_res),
-            "document_as_product": fields.List(
-                fields.Nested(document_product_dto),
-            ),
-        },
-    )
-
-    _product_response = product_api.model(
+    product_res = api.model(
         "ProductResponse",
         {
-            "product_id": fields.Integer(required=False),
-            "is_wishlist": fields.Boolean(),
-            "is_goto": fields.Boolean(),
-            "is_wishlist": fields.Boolean(),
-            "is_goto": fields.Boolean(),
-            "product_name": fields.String(required=False),
-            "warranty": fields.String(required=False),
-            "rating": fields.String(required=False),
-            "width": fields.Nested(PredefinedDto.predefined_res),
-            "aspect_ratio": fields.Nested(PredefinedDto.predefined_res),
-            "rim": fields.Nested(PredefinedDto.predefined_res),
-            "key_feature": fields.String(
-                required=False,
+            "id": fields.Integer(description="ID of the product"),
+            "name": fields.String(description="Name of the product"),
+            "description": fields.String(description="Description of the product"),
+            "short_description": fields.String(
+                description="Short Description of the product"
             ),
-            "fit_in_vehicle_name": fields.String(required=False),
-            "product_price": fields.Float(required=False),
-            "ply_rating": fields.Float(required=False),
-            "product_offer_price": fields.Float(attribute="offer_price"),
-            "category_id": fields.Integer(required=False),
-            "brand_id": fields.Integer(required=False),
-            "make_id": fields.Integer(required=False),
-            "model_id": fields.Integer(required=False),
-            "tyer_type_id": fields.Integer(required=False),
-            "tyer_ps_id": fields.Integer(required=False),
-            "variant_id": fields.Integer(required=False),
-            "product_img": fields.String(),
-            "description": fields.String(),
-            "model": fields.Nested(PredefinedDto.predefined_res),
-            "make": fields.Nested(PredefinedDto.predefined_res),
-            "variant": fields.Nested(PredefinedDto.predefined_res),
-            "brand": fields.Nested(PredefinedDto.predefined_res),
-            "category": fields.Nested(PredefinedDto.predefined_res),
-            "tyer_type": fields.Nested(PredefinedDto.predefined_res),
-            "product_type": fields.Nested(PredefinedDto.predefined_res),
-            "product_type_id": fields.Integer(required=False),
-            "tyre_construction": fields.Nested(PredefinedDto.predefined_res),
-            "tyre_construction_id": fields.Integer(required=False),
-            "tyer_ps": fields.Nested(PredefinedDto.predefined_res),
-            "variant": fields.Nested(PredefinedDto.predefined_res),
-            "product_feature": fields.List(
-                fields.Nested(ProductFeatureDto.product_feature_model)
+            "price": fields.Float(description="Price of the product"),
+            "product_status_name": fields.String(description="Price of the product"),
+            "offer_price": fields.Float(description="Offer Price of the product"),
+            "sku": fields.String(description="SKU number"),
+            "product_status_id": fields.Integer(description="Status ID of the product"),
+            "category": fields.Nested(
+                CategoryDto.category_res, description="Category ID of the product"
             ),
-            "document_as_product": fields.List(
-                fields.Nested(document_product_dto), attribute="product_documents"
+            "product_status": fields.Nested(
+                PredefinedDto.predefined_res, description="Category ID of the product"
             ),
-            "discounted_price": fields.Float(default=0.0, required=False),
-            "entity_type": fields.String(
-                description="sort_by list search by", example="POPULAR/RECOMMENDED"
+            "sub_category": fields.Nested(
+                SubCategoryDto.sub_category_res,
+                description="Sub Category ID of the product",
             ),
-            "reviews_rating": fields.Float(),
-            "reviews_count": fields.Integer(),
-            "is_deactivate": fields.String(required=False, description="is_deactivate"),
-            "purchase_price": fields.Float(),
-            "product_gst": fields.Float(),
-            "hsn_code": fields.String(),
-            "compatible_vehicles": fields.String(),
-            "cart_item_id": fields.Integer(),
-            "slug": fields.String(),
-            "gst_id": fields.Integer(),
-            "gst": fields.Nested(_predefined),
+            "category_id": fields.Integer(description="Category ID of the product"),
+            "sub_category_id": fields.Integer(
+                description="Sub Category ID of the product"
+            ),
+            "product_images": fields.List(
+                fields.Nested(product_image),
+                description="List of product images",
+            ),
+            **CommonModelDto.common_model_dto,
         },
     )
 
-    _product_list_req = product_api.model(
-        "product_list_req",
+    product_data = api.model(
+        "ProductDataRequest",
         {
-            "search_by": fields.String(description="Vehicle list search by"),
-            "is_user": fields.Boolean(description="is_user list search by"),
-            "sort_by": fields.String(
-                description="sort_by list search by",
-                example="ASC/DESC/POPULAR/RECOMMENDED",
+            "id": fields.Integer(),
+            "name": fields.String(required=True, description="Name of the product"),
+            "description": fields.String(description="Description of the product"),
+            "price": fields.Float(required=True, description="Price of the product"),
+            "sku": fields.Integer(required=True, description="SKU number"),
+            "product_status_id": fields.Integer(description="Status ID of the product"),
+            "category_id": fields.Integer(description="Category ID of the product"),
+            "sub_category_id": fields.Integer(
+                description="Sub Category ID of the product"
             ),
-            "entity_type": fields.String(
-                description="sort_by list search by", example="POPULAR/RECOMMENDED"
-            ),
-            "created_date_from": fields.Date(
-                description="Start date for creation date filter"
-            ),
-            "created_date_to": fields.Date(
-                description="End date for creation date filter"
-            ),
-            "make_ids": fields.List(
-                fields.Integer(), description="Make ID to filter by"
-            ),
-            "model_ids": fields.List(
-                fields.Integer(description="Model ID to filter by")
-            ),
-            "variant_ids": fields.List(
-                fields.Integer(description="Variant ID to filter by")
-            ),
-            "category_ids": fields.List(fields.Integer()),
-            "brand_ids": fields.List(fields.Integer()),
-            "tyer_type_ids": fields.List(fields.Integer()),
-            "tyer_ps_ids": fields.List(fields.Integer()),
-            "width_id": fields.List(
-                fields.Integer(description="Width ID to filter by")
-            ),
-            "rim_id": fields.List(fields.Integer(description="Rim ID to filter by")),
-            "aspect_ratio_ids": fields.List(
-                fields.Integer(description="Ascpect Ratio ID to filter by")
-            ),
-            "width_id": fields.List(
-                fields.Integer(description="Width ID to filter by")
-            ),
-            "rim_id": fields.List(fields.Integer(description="Rim ID to filter by")),
-            "aspect_ratio_ids": fields.List(
-                fields.Integer(description="Ascpect Ratio ID to filter by")
-            ),
-            "price_range_from": fields.Float(),
-            "price_range_to": fields.Float(),
         },
     )
 
-    create_product = product_api.model(
-        "create_product",
+    # Convert model structure to a JSON schema dynamically
+    json_schema = json.dumps(marshal({}, product_data), indent=4)
+
+    create_product_parser = reqparse.RequestParser()
+    create_product_parser.add_argument(
+        "images",
+        type=FileStorage,
+        location="files",
+        required=False,
+        action="append",  # 👈 important to accept multiple images
+        help="Product Images (multiple allowed)",
+    )
+    create_product_parser.add_argument(
+        "data",
+        type=str,
+        required=False,
+        help=str(json_schema),
+    )
+
+    request_payload = api.model(
+        "ProductRequest",
         {
-            "product_name": fields.String(required=False),
-            "warranty": fields.String(required=False),
-            "rating": fields.String(required=False),
-            "width_id": fields.Integer(required=False),
-            "aspect_ratio_id": fields.Integer(required=False),
-            "rim_id": fields.Integer(required=False),
-            "key_feature": fields.String(required=False),
-            "fit_in_vehicle_name": fields.String(required=False),
-            "product_price": fields.Float(required=False),
-            "ply_rating": fields.Float(required=False),
-            "product_offer_price": fields.Float(),
-            "category_id": fields.Integer(required=False),
-            "brand_id": fields.Integer(required=False),
-            "make_id": fields.Integer(required=False),
-            "model_id": fields.Integer(required=False),
-            "tyer_type_id": fields.Integer(required=False),
-            "tyer_ps_id": fields.Integer(required=False),
-            "product_type_id": fields.Integer(required=False),
-            "variant_id": fields.Integer(required=False),
-            "product_img": fields.String(),
-            "description": fields.String(),
-            "feature_ids": fields.List(fields.Integer(description="Feature IDs")),
-            "hsn_code": fields.String(),
-            "product_gst": fields.Float(),
-            "purchase_price": fields.Float(),
-            "compatible_vehicles": fields.String(),
-            "slug": fields.String(),
-            "entity_type": fields.String(),
-            "gst_id": fields.Integer(),
+            **CommonModelDto.common_req,
         },
     )
 
-    update_product = product_api.model(
-        "ProductDTO",
+    data_list = api.model(
+        "ProductListData",
         {
-            "product_name": fields.String(required=False),
-            "warranty": fields.String(required=False),
-            "rating": fields.Integer(required=True),
-            "width_id": fields.Integer(required=False),
-            "aspect_ratio_id": fields.Integer(required=False),
-            "rim_id": fields.Integer(required=False),
-            "key_feature": fields.String(required=False),
-            "fit_in_vehicle_name": fields.String(required=False),
-            "product_price": fields.Float(required=False),
-            "ply_rating": fields.Float(required=False),
-            "product_offer_price": fields.Float(),
-            "category_id": fields.Integer(required=False),
-            "brand_id": fields.Integer(required=False),
-            "make_id": fields.Integer(required=False),
-            "model_id": fields.Integer(required=False),
-            "tyer_type_id": fields.Integer(required=False),
-            "tyer_ps_id": fields.Integer(required=False),
-            "variant_id": fields.Integer(required=False),
-            "product_img": fields.String(),
-            "description": fields.String(),
-            "feature_ids": fields.List(fields.Integer(description="Feature IDs")),
-            "slug": fields.String(),
+            "data": fields.List(
+                fields.Nested(product_res),
+                description="List of products",
+            ),
+            **CommonModelDto.data_list,
         },
-    )
-
-    product_fitment_dto = product_api.model(
-        "product_fitment_dto",
-        {
-            "product_fitment_id": fields.Integer(required=False),
-            "product_id": fields.Integer(required=False),
-            "category_id": fields.Integer(required=False),
-            "product_type_id": fields.Integer(required=False),
-            "variant_id": fields.Integer(required=False),
-            "make_id": fields.Integer(required=False),
-            "model_id": fields.Integer(required=False),
-            "category": fields.Nested(_predefined, required=False),
-            "product_type": fields.Nested(_predefined, required=False),
-            "variant": fields.Nested(_predefined, required=False),
-            "make": fields.Nested(_predefined, required=False),
-            "model": fields.Nested(_predefined, required=False),
-            "product": fields.Nested(product, required=False),
-        },
-    )
-
-    product_fitment_list_dto = product_api.model(
-        "product_fitment_list_dto",
-        {
-            "product_fitment_id": fields.Integer(required=False),
-            "product_id": fields.Integer(required=False),
-            "category_id": fields.Integer(required=False),
-            "product_type_id": fields.Integer(required=False),
-            "variant_id": fields.Integer(required=False),
-            "page_number": fields.Integer(required=False),
-            "page_size": fields.Integer(required=False),
-        },
-    )
-
-    import_parser = reqparse.RequestParser()
-    import_parser.add_argument(
-        "file", location="files", type=FileStorage, required=True, help="Document file"
     )

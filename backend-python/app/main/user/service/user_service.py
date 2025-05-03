@@ -84,18 +84,17 @@ def create_entity(data, image):
 
             if not new_user.roles:
                 raise CustomException("Roles not Found", 401)
-
             # Upload Image if provided
             if image:
                 document_master = upload_document(
-                    image, "users", new_user.id, "PROFILE-IMAGE", session
+                    file=image, base_directory="users", entity_type="PROFILE-IMAGE"
                 )
                 if isinstance(document_master, DocumentMaster):
                     new_user.profile_img_id = document_master.id
                 else:
                     return document_master
 
-            update_user_access(new_user, session)
+            # update_user_access(new_user, session)
             session.commit()
 
             return {
@@ -140,22 +139,22 @@ def update_user_access(user, session):
         # Find role_module_ids to soft delete (current access that isn't in new roles)
         role_module_ids_to_soft_delete = current_access_ids - new_role_module_ids
 
-        # Add new access_control entries
-        if role_module_ids_to_add:
-            for role_module_id in role_module_ids_to_add:
-                access = AccessControl(
-                    user_id=user_id,
-                    role_module_id=role_module_id,
-                    is_delete=False,
-                )
-                user.access_controls.append(access)
+        # # Add new access_control entries
+        # if role_module_ids_to_add:
+        #     for role_module_id in role_module_ids_to_add:
+        #         access = AccessControl(
+        #             user_id=user_id,
+        #             role_module_id=role_module_id,
+        #             is_delete=False,
+        #         )
+        #         user.access_controls.append(access)
 
-        # Soft delete old access_modules by setting is_delete=True
-        if role_module_ids_to_soft_delete:
-            session.query(AccessControl).filter(
-                AccessControl.user_id == user_id,
-                AccessControl.role_module_id.in_(role_module_ids_to_soft_delete),
-            ).update({"is_delete": True}, synchronize_session=False)
+        # # Soft delete old access_modules by setting is_delete=True
+        # if role_module_ids_to_soft_delete:
+        #     session.query(AccessControl).filter(
+        #         AccessControl.user_id == user_id,
+        #         AccessControl.role_module_id.in_(role_module_ids_to_soft_delete),
+        #     ).update({"is_delete": True}, synchronize_session=False)
 
         # Commit changes
         session.commit()
@@ -441,10 +440,10 @@ def upload_profile_doc(uuid, image):
 
 def list_roles():
     try:
-        with session_scope() as session:
-            roles = session.query(Role).all()
-            res = {"data": roles}
-            return res, 200
+        # with session_scope() as session:
+        roles = db.session.query(Role).all()
+        res = {"data": roles}
+        return res, 200
     except Exception as e:
         current_app.logger.error(f"An error occurred: {str(e)}")
         raise CustomException(str(e), 500)
