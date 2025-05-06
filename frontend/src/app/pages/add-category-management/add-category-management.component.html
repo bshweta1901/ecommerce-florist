@@ -1,0 +1,81 @@
+<form [formGroup]="addCategoryForm" autocomplete="off">
+    <div class="add-project-wrap">    
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="category.name" formControlName="name"  maxlength="20">
+                <label for="inputtext">Name*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addCategoryForm.get('name').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addCategoryForm.get('name').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+        <div class="field col-12">
+            <span class="p-float-label">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="category.description" formControlName="description"  maxlength="20">
+                <label for="inputtext">Description*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addCategoryForm.get('description').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addCategoryForm.get('description').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div>
+        <!-- <div class="field col-12">
+            <span class="p-float-label">
+                <input type="file" id="inputtext" pInputText [(ngModel)]="category.name" formControlName="description"  maxlength="20">
+                <label for="inputtext">NamDescriptione*</label>
+            </span>
+            <div style="color:Red; font-size: 10px;" *ngIf="addCategoryForm.get('name').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addCategoryForm.get('name').hasError('onlySpaces')">Empty data is not allowed.</div>
+        </div> -->
+        <div class="card flex justify-center">
+            <p-toast></p-toast>
+          
+            <!-- If NO existing image, show upload control -->
+            <p-fileUpload
+              *ngIf="!category?.category_img_path"
+              name="image"
+              accept="image/*"
+              [auto]="true"
+              chooseLabel="Browse"
+              [customUpload]="true"
+              (onSelect)="onImageSelect($event)"
+              (uploadHandler)="onImageUpload($event)">
+            </p-fileUpload>
+          
+            <!-- If existing image is present, mimic uploaded file inside upload area -->
+            <div *ngIf="category?.category_img_path" class="p-fileupload p-fileupload-advanced p-component">
+              <div class="p-fileupload-content">
+                <div class="p-fileupload-files">
+                  <div class="p-fileupload-row">
+                    <div class="p-fileupload-file-thumbnail">
+                      <img
+                        [src]="category.category_img_path"
+                        alt="Existing Image"
+                        width="50"
+                        height="50"
+                        style="object-fit: cover; border-radius: 4px;"
+                      />
+                    </div>
+                  
+                    <button
+                      type="button"
+                      class="p-button p-button-danger p-button-sm"
+                      (click)="removeImage()">
+                      <i class="pi pi-times"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+
+        
+    </div>
+    <div class="popup-form-btn">
+        <button pButton type="button" *ngIf="hideButton" (click)="saveCategory()" [disabled]="!addCategoryForm.valid"
+        label="Save category" class="p-button-raised" [loading]="isLoading"></button>
+        <button pButton type="button" *ngIf="!hideButton" (click)="updateCategory()"[disabled]="!addCategoryForm.valid"
+        label="Update category" class="p-button-raised" [loading]="isLoading"></button>
+    
+        <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="close.emit($event)"></button>
+    </div>
+</form>    

@@ -65,7 +65,7 @@ export class AppLoginComponent {
                 this.rememberMe = true;
                 console.log(parsedEmail, "savedEmail"); // Log the parsed object
                 console.log(this.user, "savedEmail");
-                this.router.navigate(["/panel/dashboard"]);
+                this.router.navigate(["/panel/product-list"]);
             } catch (error) {
                 console.error(
                     "Failed to parse savedEmail from localStorage",
@@ -476,7 +476,7 @@ export class AppLoginComponent {
     }
 
     redirection() {
-        this.router.navigateByUrl("/panel/dashboard");
+        this.router.navigateByUrl("/panel/product-list");
 
         // this.accessControlMasterMap = this.authService.getAccessControlMapData();
         // console.log(this.accessControlMasterMap,"accessControlMasterMap");

@@ -25,7 +25,6 @@ export class StaffListComponent implements OnInit {
   titleEVent: any;
   openAddDialogModuleEvent: boolean = false;
   staff:StaffMaster = new StaffMaster();
-  factory: Factory = new Factory();
   hideButtonView: boolean = false;
   pageSize: number = 10;
   searchPlaceholder: string = "";
@@ -48,7 +47,7 @@ export class StaffListComponent implements OnInit {
     // }
     
     this.setTableSetting();
-    // this.getStaffList();
+    this.getStaffList();
     // this.getStatusList();
   }
 
@@ -73,33 +72,27 @@ export class StaffListComponent implements OnInit {
     };
     this.tableColsEvent = [
       // { field: 'id', header: 'ID', fieldType: "text" },
-      { field: 'name', header: 'Name', fieldType: "adminTrue" },
+      { field: 'full_name', header: 'Name', fieldType: "adminTrue" },
       { field: 'email', header: 'Email ID', fieldType: "text"},
       { field: 'phone', header: 'Contact No', fieldType: "text"},
-      { field: 'roleCode', header: 'Role', fieldType: "text"},  
-      { field: 'status', header: 'Status', fieldType: 'status' },
-      { field: 'factoryName', header: 'Products', fieldType:"text"},
+      { field: 'roles_name', header: 'Role', fieldType: "text"},  
+      { field: 'status', header: 'Status', fieldType: 'text' },
+
     ];
   }
 
   getStaffList() {
     //const sessiondata = this.auth.getUserSession();
     //console.log(this.staff, 'session data');
-    if(this.staff.firstName)
-    {
-      this.staff = new StaffMaster();
-    }
-    this.factory = this.factoryService.getFactorySession();
-    this.staff.factoryId = this.factory.factoryMaster.factoryId;
 
-    this.staff.pageNumber = this.staff?.pageNumber ? this.staff?.pageNumber : this.pageNumber;
-    this.staff.pageSize = this.staff?.pageSize ? this.staff?.pageSize : this.pageSize;
+    this.staff.page = this.staff?.page ? this.staff?.page : this.pageNumber;
+    this.staff.per_page = this.staff?.per_page ? this.staff?.per_page : this.pageSize;
     
     this.staffService.getStaffList(this.staff).subscribe(
       (data) => {
         
         this.eventList = data.data;        
-        this.getStaffListLength();
+        this.totalRecords = data.total
       },
       (err: HttpErrorResponse) => {
         if (err.status === 200) {
@@ -119,29 +112,11 @@ export class StaffListComponent implements OnInit {
     this.getStaffList();
     this.visibleSidebar = false;
   }
-  getStaffListLength() {
-    this.factory = this.factoryService.getFactorySession();
-    this.staff.factoryId = this.factory.factoryMaster.factoryId;
-    this.staff.pageNumber = this.staff?.pageNumber ? this.staff?.pageNumber : this.pageNumber;
-    this.staff.pageSize = this.staff?.pageSize ? this.staff?.pageSize : this.pageSize;
-
-    this.staffService.getStaffListLength(this.staff).subscribe(
-      (data) => {
-        this.totalRecords = data.data;
-      },
-      (err: HttpErrorResponse) => {
-        if (err.status === 200) {
-          let jsonString = err.error.text;
-          jsonString = jsonString.substr(0, jsonString.indexOf('{"timestamp"}'));
-        }
-      }
-    );
-  }
 
   paginateEvent(event) {
     this.pageSize = event.rows;
-    this.staff.pageNumber = event.page;
-    this.staff.pageSize = this.pageSize;
+    this.staff.page = event.page;
+    this.staff.per_page = this.pageSize;
 
     this.auth.setFilterSessionData("Filter",this.staff);
     this.getStaffList();
@@ -264,13 +239,14 @@ export class StaffListComponent implements OnInit {
   saveEventDialog(){
     this.openAddDialogModuleEvent=false;
     this.getStaffList();
-    this.getStaffListLength();
   }
 
   getExportName(): string {
     return 'Staff List'; // Set the export filename based on the component name.
   }
-
+  getStatusText(isActive: boolean): string {
+    return isActive ? 'Active' : 'Deactive';
+  }
   exportEntity() {
     let newarray = []
  

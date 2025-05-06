@@ -17,7 +17,7 @@ export class PredefinedService {
 
     getPredefinedList(predefined: PredefinedMaster): Observable<any> {
         return this.http.post<any>(
-            environment.apiUrl + "api/predefined/list-by-type",
+            environment.apiUrl + "/predefined/list",
             predefined
         );
     }

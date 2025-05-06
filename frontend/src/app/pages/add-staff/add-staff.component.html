@@ -2,21 +2,14 @@
     <div class="add-project-wrap">    
         <div class="field col-12">
             <span class="p-float-label">
-                <input type="text" id="inputtext" pInputText [(ngModel)]="staff.firstName" formControlName="firstname" (keypress)="keyPressForName($event)" maxlength="20">
+                <input type="text" id="inputtext" pInputText [(ngModel)]="staff.full_name" formControlName="fullName" (keypress)="keyPressForName($event)" maxlength="20">
                 <label for="inputtext">First Name*</label>
             </span>
-            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('firstname').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
-            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('firstname').hasError('onlySpaces')">Empty data is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('fullName').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
+            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('fullName').hasError('onlySpaces')">Empty data is not allowed.</div>
         </div>
 
-        <div class="field col-12">
-            <span class="p-float-label">
-                <input type="text" id="inputtext" pInputText [(ngModel)]="staff.lastName" formControlName="lastname" (keypress)="keyPressForName($event)" maxlength="20">
-                <label for="inputtext">Last Name*</label>
-            </span>
-            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('lastname').hasError('leadingSpace')">Space at the beginning is not allowed.</div>
-            <div style="color:Red; font-size: 10px;" *ngIf="addStaffForm.get('lastname').hasError('onlySpaces')">Empty data is not allowed.</div>
-        </div>
+    
     
         <div class="field col-12 full-width">
             <span class="p-float-label">
@@ -54,17 +47,6 @@
 
         <div class="field col-12 full-width">
             <span class="p-float-label">
-                <p-multiSelect inputId="multiselect" [options]="factoryList" appendTo="body"
-                [(ngModel)]="staff.factory" formControlName="factory" optionLabel="factoryName" (onChange)="staffMultiselect($event.value, staff.factory)"></p-multiSelect>
-                <label for="inputtext">Factory *</label>
-            </span>
-            <div *ngIf="addStaffForm.controls.factory.invalid && (addStaffForm.controls.factory.dirty || addStaffForm.controls.factory.touched)">
-                <small class="p-error">Factory is required.</small>
-            </div>
-        </div>
-
-        <div class="field col-12 full-width">
-            <span class="p-float-label">
                 <p-dropdown inputId="multiselect" [options]="roleList" appendTo="body"
                 [(ngModel)]="staff.selectedRole" [autoDisplayFirst]="false" 
                 optionLabel="code" formControlName="roles"></p-dropdown>
@@ -97,21 +79,8 @@
             </span>
         </div>
 
-        <div class="field col-12 full-width">
-            <!-- <span class="p-float-label  p-input-icon-right">   -->
-                <p-checkbox [(ngModel)]="staff.adminLogin" label="Allowed Admin Login" [binary]="true" formControlName="adminLogin"></p-checkbox>         
-                <!-- <label for="inputtext">Allowed Admin Login</label> -->
-            <!-- </span> -->
-        </div>
+    
 
-        <div class="field col-12 full-width">
-            <span class="p-float-label">
-                <p-multiSelect inputId="multiselect" [options]="moduleList" appendTo="body"
-                (onChange)="staffAccessControlMultiselect($event.value, staff.selectedAccessControlList)" formControlName="accessControlMasterList" [(ngModel)]="staff.selectedAccessControlList"
-                optionLabel="moduleName"></p-multiSelect>
-                <label for="multiselect">Select Module*</label>
-            </span>
-        </div>
         
     </div>
     <div class="popup-form-btn">

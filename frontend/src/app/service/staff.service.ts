@@ -15,11 +15,11 @@ export class StaffService {
     constructor(private http: HttpClient, private sessionClient: SessionClient) { }
 
     getStaffList(staff:StaffMaster): Observable<any> {
-        return this.http.post<any>( environment.apiUrl + "api/user/list", staff);
+        return this.http.post<any>( environment.apiUrl + "/user/list", staff);
     }
 
     getStaffListLength(staff:StaffMaster): Observable<any>{
-        return this.http.post<any>(environment.apiUrl + "api/user/count",staff);
+        return this.http.post<any>(environment.apiUrl + "/user/count",staff);
     }
 
     setStaffSession(staff:StaffMaster) {
@@ -27,49 +27,49 @@ export class StaffService {
     }
 
     getStaffById(staff:StaffMaster): Observable<any>{
-        return this.http.get<any>(environment.apiUrl + "api/user/"+staff.id);
+        return this.http.get<any>(environment.apiUrl + "/user/"+staff.id);
     }
 
     deleteStaffById(id: StaffMaster): Observable<any>{
-        return this.http.delete<any>(environment.apiUrl + "api/user/"+id);
+        return this.http.delete<any>(environment.apiUrl + "/user/"+id);
     }
 
     getRoleList(role: Role): Observable<any> {
-        return this.http.post<any>( environment.apiUrl + "api/user/get-role-list", role);
+        return this.http.get<any>( environment.apiUrl + "/user/roles");
     }
 
-    saveStaff(staff: StaffMaster): Observable<any>
-    {
+    saveStaff(staff: Partial<StaffMaster>): Observable<any> {
         let formData: FormData = new FormData();
         
-        formData.append('user',JSON.stringify(staff)),
-        {
-            type: 'application/json'
-        };
-        //console.log(formData);
-        //console.log(staff);
-        return this.http.post(environment.apiUrl + "api/user/register",formData);
+        formData.append('data', JSON.stringify(staff)); // No second argument like type: application/json
+        
+        return this.http.post(environment.apiUrl + "/user/", formData, {
+            headers: {
+                'Accept': 'application/json' // optional
+                // Do NOT set 'Content-Type', browser will set it as multipart/form-data automatically
+            }
+        });
     }
-
+    
     updateStaff(staff:StaffMaster): Observable<any>{        
-        return this.http.put<any>(environment.apiUrl + "api/user/update",staff);
+        return this.http.put<any>(environment.apiUrl + "/user/update",staff);
     }
 
     getFactoryList(factory: Factory): Observable<any> {
-        return this.http.post<any>( environment.apiUrl + "api/factory/list-new", factory);
+        return this.http.post<any>( environment.apiUrl + "/factory/list-new", factory);
     }
 
     getModuleList(module: ModuleMaster): Observable<any> {
-        return this.http.post<any>( environment.apiUrl + "api/access-control/module/list", module);
+        return this.http.post<any>( environment.apiUrl + "/access-control/module/list", module);
     }
 
     activeStaff(staff: StaffMaster): Observable<any>
     {
-        return this.http.post(environment.apiUrl + "api/user/change-state",staff);
+        return this.http.post(environment.apiUrl + "/user/change-state",staff);
     }
 
     deactiveStaff(staff: StaffMaster): Observable<any>
     {
-        return this.http.post(environment.apiUrl + "api/user/change-state",staff);
+        return this.http.post(environment.apiUrl + "/user/change-state",staff);
     }
 }

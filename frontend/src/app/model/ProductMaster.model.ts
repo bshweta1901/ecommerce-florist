@@ -1,28 +1,35 @@
-import { Factory } from "./Factory.model";
-import { GiveAwayMaster } from "./GiveAwayMaster.model";
-import { PredefinedMaster } from "./PredefinedMaster.model";
 
-export class ProductMaster{
+import { PredefinedMaster } from "./PredefinedMaster.model";
+import { CategoryMaster } from "./CategoryMaster.model";
+import { SubCategoryMaster } from "./SubCategoryMaster.model";
+import { CommonMaster } from "./CommonMaster.model";
+
+export class ProductMaster extends CommonMaster{
     public id:number;
-    public uuid:string;
-    public productName:string;
-    public productSKU:string;
-    public lotNo:string;
+    public name:string;
+    public sku:string;
     public description:string;
-    public fatPercent:number;
-    public brand: PredefinedMaster;
-    public weight:PredefinedMaster;
-    public commodity:PredefinedMaster;
-    public itemType:PredefinedMaster;
-    public freezerTypes:PredefinedMaster;
-    public pageNumber:number;
-    public pageSize:number;
-    public searchValue;
-    public brandName;
-    public isAdmin:boolean;
-    public productCode:string;
-    public standardWeight:GiveAwayMaster;
-    public country:PredefinedMaster;
-    public isDeactivate:any;
-    public factoryMaster:Factory;
+    public short_description:string;
+    public price:number;
+    public offer_price:number;
+    public product_status:PredefinedMaster;
+    public product_status_id:number;
+    public category:CategoryMaster;
+    public category_id:number;
+    public sub_category:SubCategoryMaster;
+    public sub_category_id:number;
+    public is_add_on:Boolean=false;
+    public product_images: any[]; 
+    public product_status_name: any; 
+
+
+    constructor(init?: Partial<ProductMaster>) {
+        super();
+        Object.assign(this, init);
+    }
+  
+    toJSON() {
+        const { sub_category, product_images,category,status,product_status_name,product_status, ...rest } = this;
+        return rest;
+    }
 }

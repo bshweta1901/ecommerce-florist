@@ -1,8 +1,8 @@
 <app-common-table
-    [title]="'Customer Management'"
+    [title]="'Product Management'"
     [genericColsInput]="tableColsEvent"
     [genericTableSettingInput]="tableSettingsEvent"
-    [genericListInput]="dummyData"
+    [genericListInput]="eventList"
     (addEntityEvent)="addEvent()"
     (paginateEvent)="paginateEvent($event)"
     [totalRecords]="totalRecords"
@@ -12,7 +12,6 @@
     (deactiveDataEvent)="deactiveEntity($event)"
     (deleteDataEvent)="deleteEvent($event)"
     (filterEntityEvent)="openSidebar()"
-    (exportEntityEvent)="exportEntity()"
 >
     <!-- (searchEntityEvent)="searchData($event)" -->
     <!-- <span search class="p-input-icon-left mb-2 searchGeneric">

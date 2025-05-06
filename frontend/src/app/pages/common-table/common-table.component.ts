@@ -80,6 +80,7 @@ export class CommonTableComponent implements OnInit {
         new EventEmitter();
 
     @Input() genericTableSettingInput: any;
+    @Input() genericAddData: any;
     @Input() title: string;
     @Input() genericColsInput: any[] = [];
     @Input() genericListInput: any[] = [];

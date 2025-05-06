@@ -30,7 +30,6 @@ $primary-background-text: #fff;
 .actionClasses .p-button:focus {
     box-shadow: none;
 }
-
 .action-buttons {
     display: flex;
     gap: 1.5rem;
@@ -68,16 +67,34 @@ $primary-background-text: #fff;
 .action-button:active {
     background-color: #00408a;
 }
-
-.add-client {
-    display: flex;
-    align-items: center;
+.add-buttons {
+    display: inline-flex; /* Use inline-flex so it adjusts based on content */
+    align-items: center;   /* Vertically center content */
     background-color: #065388;
     border: none;
-    padding: 1rem;
+    padding: 0.5rem 1rem;  /* Dynamic padding with top/bottom and left/right */
     border-radius: 2rem;
     color: #fff;
+    min-width: 100px;       /* Set a minimum width for the button */
+    max-width: 100%;        /* Ensure it doesn't grow beyond the container width */
+    white-space: nowrap;    /* Prevent text from wrapping to the next line */
+    text-align: center;     /* Center text horizontally */
+    box-sizing: border-box; /* Ensure padding is included in the total width */
+    font-size: 1rem;        /* Flexible font size */
+    transition: background-color 0.3s ease; /* Add smooth transition for hover effect */
 }
+
+.add-buttons:hover {
+    background-color: #043a5b; /* Darken color on hover */
+}
+// .button-wrapper {
+//     width: 100%;            /* Ensure the button takes full width */
+//     margin-top: 10px;       /* Add spacing between the elements */
+//     display: flex;          /* Use flexbox for alignment */
+//     justify-content: center;/* Center button horizontally */
+// }
+
+
 
 .create-order {
     display: flex;

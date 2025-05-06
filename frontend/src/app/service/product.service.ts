@@ -48,60 +48,95 @@ export class ProductService {
 
     getProductList(product: ProductMaster): Observable<any> {
         return this.http.post<any>(
-            environment.apiUrl + "api/product/list",
+            environment.apiUrl + "/product/list",
             product
         );
     }
 
     getProductCodeList(product: ProductMaster): Observable<any> {
         return this.http.post<any>(
-            environment.apiUrl + "api/product/product-code-list",
+            environment.apiUrl + "/product/product-code-list",
             product
         );
     }
     getProductListLength(product: ProductMaster): Observable<any> {
         return this.http.post<any>(
-            environment.apiUrl + "api/product/count",
+            environment.apiUrl + "/product/count",
             product
         );
     }
+    removeProductImages(imageIds: number[]): Observable<any> {
+        const joinedIds = imageIds.join(',');
+        return this.http.delete(`${environment.apiUrl}/product/remove-product-img/${joinedIds}`);
+      }
+      
+      
+      
 
     getProductListExport(product: ProductMaster): Observable<any> {
         return this.http.post<any>(
-            environment.apiUrl + "api/product/export",
+            environment.apiUrl + "/product/export",
             product
         );
     }
 
     getProductById(product: ProductMaster): Observable<any> {
         return this.http.get<any>(
-            environment.apiUrl + "api/product/" + product.uuid
+            environment.apiUrl + "/product/" + product.id
         );
     }
 
     deleteProductById(product: ProductMaster): Observable<any> {
         return this.http.delete<any>(
-            environment.apiUrl + "api/product/delete/" + product.uuid
+            environment.apiUrl + "/product/" + product.id
         );
     }
 
     statusProductById(product: ProductMaster): Observable<any> {
         return this.http.get<any>(
-            environment.apiUrl + "api/product/change-state/" + product.uuid
+            environment.apiUrl + "/product/change-state/" + product.id
         );
     }
 
-    saveProduct(product: ProductMaster): Observable<any> {
-        return this.http.post<any>(
-            environment.apiUrl + "api/product/save",
-            product
-        );
-    }
+    saveProduct(product: ProductMaster, files?: File[], defaultImage?: File): Observable<any> {
+        const formData = new FormData();
+      
+        // Append product data
+        formData.append('data', JSON.stringify(product));
+      
+        // Append default image separately
+        if (defaultImage) {
+          formData.append('defaultImage', defaultImage); // field name must match backend expectation
+        }
+      
+        // Append other images
+        if (files) {
+          files.forEach(file => {
+            formData.append('images', file); // field name must match backend expectation
+          });
+        }
+      
+        return this.http.post<any>(`${environment.apiUrl}/product/`, formData);
+      }
+      
+      
+      
 
-    updateProduct(product: ProductMaster): Observable<any> {
+    updateProduct(product: Partial<ProductMaster>,files?: File[]): Observable<any> {
+        const formData = new FormData();
+      
+        // Append product data as a string, just like 'data="{...}"'
+        formData.append('data', JSON.stringify(product));
+      
+        // Append each image file under the field name 'images'
+        if (files) {
+          files.forEach(file => {
+            formData.append('images', file); // match your curl: --form 'images=@...'
+          });
+        }
         return this.http.put<any>(
-            environment.apiUrl + "api/product/update",
-            product
+            environment.apiUrl + "/product/"+product.id,
+            formData
         );
     }
 

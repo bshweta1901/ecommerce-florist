@@ -32,7 +32,8 @@
                             "src/assets",
                             "src/upload.php"
                         ],
-                        "styles": ["src/styles.scss"],
+                        "styles": ["src/styles.scss",
+                        "node_modules/primeicons/primeicons.css"],
                         "scripts": [
                             "node_modules/prismjs/prism.js",
                             "node_modules/prismjs/components/prism-typescript.js"
@@ -106,7 +107,8 @@
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
                         "scripts": [],
-                        "styles": ["src/styles.scss"],
+                        "styles": ["src/styles.scss",
+                        "node_modules/primeicons/primeicons.css"],
                         "assets": [
                           
                             "src/assets",

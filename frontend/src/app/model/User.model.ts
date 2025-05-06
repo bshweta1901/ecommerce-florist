@@ -7,7 +7,7 @@ export class User {
     public password: string;
     public otp: any;
     public code: string;
-    public name: string;
+    public fullName: string;
     public uuid: string;
     public customException: any;
     public profileImageUrl: string;
@@ -23,8 +23,6 @@ export class User {
     public roleName: string;
     public newPassword: string;
     public confirmNewPassword: string;
-    public firstName: string;
-    public lastName: string;
     public roles: any[];
     public roleList: any[];
     public access_token: string;

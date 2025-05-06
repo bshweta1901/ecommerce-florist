@@ -1,31 +1,36 @@
 
 export class StaffMaster{
     public id:number;
-    public firstName:string;
-    public lastName:string;
-    public searchBy:string;
-    public pageNumber:number;
-    public pageSize:number;
-    // public roleId;
-    // public factoryId;
-    // public isDeactivate;
+    public full_name:string;
+    public search_by:string;
+    public page:number;
+    public per_page:number;
     public searchValue:string;
     public email:string;
     public phone:number;
     public selectedRoleValueList:any[];
     public roles:any[];
     public roleList:any[];
-    public factory:any[];
-    public selectedFactoryValueList:any[];
     public rangeDates:Date[];
     public alternatePhone:number;
     public dob;
     public doj;
-    public factoryUserList:any[]=[];
     public selectedRole;
-    public staffMasterList:any[]=[];
-    public factoryId:number;
     public adminLogin:boolean;
-    public accessControlMasterList:any[]=[];
-    public selectedAccessControlList:any[];
+    constructor(init?: Partial<StaffMaster>) {
+        Object.assign(this, init);
+      }
+    
+      toJSON() {
+        const { selectedRoleValueList, selectedRole, doj, ...rest } = this;
+    
+        if (this.dob instanceof Date) {
+            rest.dob = this.dob.toISOString().split('T')[0]; // Convert Date object to 'YYYY-MM-DD'
+        } else if (typeof this.dob === 'string') {
+            rest.dob = this.dob.split('T')[0]; // In case it's already a string
+        }
+    
+        return rest;
+    }
+    
 }

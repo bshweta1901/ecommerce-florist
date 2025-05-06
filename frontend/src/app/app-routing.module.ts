@@ -23,6 +23,16 @@ import { StaffListComponent } from "./pages/staff-list/staff-list.component";
 import { AgreementComponent } from "./pages/customer-management/agreement/agreement.component";
 import { UpdateStatusOrderComponent } from "./pages/order-details/update-status-order/update-status-order.component";
 import { ServiceSparePartComponent } from "./pages/service-spare-part/service-spare-part.component";
+import { ProductManagementComponent } from "./pages/product-management/product-management.component";
+import { CategoryManagementComponent } from "./pages/category-management/category-management.component";
+import { AddCategoryManagementComponent } from "./pages/add-category-management/add-category-management.component";
+import { SubCategoryMangementComponent } from "./pages/sub-category-mangement/sub-category-mangement.component";
+import { AddSubCategoryComponent } from "./pages/add-sub-category/add-sub-category.component";
+import { AddProductComponent } from "./pages/add-product/add-product.component";
+import { ProductAddOnComponent } from "./pages/product-add-on/product-add-on.component";
+import { AddProductAddOnComponent } from "./pages/add-product-add-on/add-product-add-on.component";
+// import { SubCategoryComponent } from "./pages/sub-category/sub-category.component";
+// import { AddSubCategoryComponent } from "./pages/add-sub-category/add-sub-category.component";
 
 @NgModule({
     imports: [
@@ -39,9 +49,30 @@ import { ServiceSparePartComponent } from "./pages/service-spare-part/service-sp
                         },
 
                         { path: "staff-list", component: StaffListComponent },
+                        { path: "sub-category", component: SubCategoryMangementComponent },
                         {
-                            path: "customer-management",
-                            component: CustomerManagementComponent,
+                            path: "add-sub-category",
+                            component: AddSubCategoryComponent,
+                        },
+                        {
+                            path: "add-product",
+                            component: AddProductComponent,
+                        },
+                        {
+                            path: "product-list",
+                            component: ProductManagementComponent,
+                        },
+                        {
+                            path: "add-on-list",
+                            component: ProductAddOnComponent,
+                        },
+                        {
+                            path: "add-on",
+                            component: AddProductAddOnComponent,
+                        },
+                        {
+                            path: "category-management",
+                            component: CategoryManagementComponent,
                         },
                         {
                             path: "add-client",
@@ -78,6 +109,10 @@ import { ServiceSparePartComponent } from "./pages/service-spare-part/service-sp
                         {
                             path: "status-service-request-management",
                             component: StatusServiceRequestManagementComponent,
+                        },
+                        {
+                            path: "add-category",
+                            component: AddCategoryManagementComponent,
                         },
                         {
                             path: "status-service-request-management/:id",
@@ -190,6 +225,13 @@ import { ServiceSparePartComponent } from "./pages/service-spare-part/service-sp
                     loadChildren: () =>
                         import("./pages/add-product/add-product.module").then(
                             (m) => m.AddProductModule
+                        ),
+                },
+                {
+                    path: "add-category",
+                    loadChildren: () =>
+                        import("./pages/add-category-management/add-category-management.module").then(
+                            (m) => m.AddCategoryManagementModule
                         ),
                 },
                 {
@@ -347,6 +389,13 @@ import { ServiceSparePartComponent } from "./pages/service-spare-part/service-sp
                             "./pages/service-spare-part/service-spare-part.module"
                         ).then((m) => m.ServiceSparePartModule),
                 },
+            { path: 'category-management', loadChildren: () => import('./pages/category-management/category-management.module').then(m => m.CategoryManagementModule) },
+            { path: 'add-category-management', loadChildren: () => import('./pages/add-category-management/add-category-management.module').then(m => m.AddCategoryManagementModule) },
+            { path: 'banner-managment', loadChildren: () => import('./pages/banner-managment/banner-managment.module').then(m => m.BannerManagmentModule) },
+            { path: 'sub-category-mangement', loadChildren: () => import('./pages/sub-category-mangement/sub-category-mangement.module').then(m => m.SubCategoryMangementModule) },
+            { path: 'add-sub-category', loadChildren: () => import('./pages/add-sub-category/add-sub-category.module').then(m => m.AddSubCategoryModule) },
+            { path: 'product-add-on', loadChildren: () => import('./pages/product-add-on/product-add-on.module').then(m => m.ProductAddOnModule) },
+            { path: 'add-product-add-on', loadChildren: () => import('./pages/add-product-add-on/add-product-add-on.module').then(m => m.AddProductAddOnModule) },
                 { path: "**", redirectTo: "/notfound" },
             ],
             { scrollPositionRestoration: "enabled" }

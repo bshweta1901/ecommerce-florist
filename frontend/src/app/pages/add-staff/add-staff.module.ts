@@ -10,6 +10,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CheckboxModule } from 'primeng/checkbox';
+import { CustomValidationModule } from "../custom-validation/custom-validation.module";
 
 @NgModule({
   declarations: [
@@ -25,8 +26,9 @@ import { CheckboxModule } from 'primeng/checkbox';
     ButtonModule,
     DropdownModule,
     CalendarModule,
-    MultiSelectModule
-  ],
+    MultiSelectModule,
+    CustomValidationModule
+],
   exports: [AddStaffComponent]
 })
 export class AddStaffModule { }

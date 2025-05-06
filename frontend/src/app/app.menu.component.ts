@@ -72,24 +72,26 @@ export class AppMenuComponent implements OnInit {
 
         this.model = [
             {
+                label: " Management",
+                icon: "pi pi-fw pi-wrench",
                 items: [
+                    // {
+                    //     label: "Dashboard",
+                    //     icon: "pi pi-home",
+                    //     routerLink: ["/panel/dashboard"],
+                    //     tooltip: "View the dashboard",
+                    //     title: "",
+                    // },
                     {
-                        label: "Dashboard",
-                        icon: "pi pi-home",
-                        routerLink: ["/panel/dashboard"],
-                        tooltip: "View the dashboard",
-                        title: "",
-                    },
-                    {
-                        label: "Customer Management",
+                        label: "Staff Management",
                         icon: "pi pi-users",
-                        routerLink: ["/panel/customer-management"],
-                        tooltip: "View the Customer Management",
+                        routerLink: ["/panel/staff-list"],
+                        tooltip: "View the Staff Management",
                     },
                     {
                         label: "Product Management",
                         icon: "pi pi-file-o",
-                        routerLink: ["/panel/product-details"],
+                        routerLink: ["/panel/product-list"],
                         tooltip: "View the Product Details",
                     },
                 ],
@@ -101,21 +103,21 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: "Category Master",
                         icon: "pi pi-chart-pie",
-                        routerLink: ["/panel/spare-part-management"],
-                        tooltip: "View the Spare Part Master",
+                        routerLink: ["/panel/category-management"],
+                        tooltip: "View the Category Management",
                     },
                     {
                         label: "Sub Category Master",
                         icon: "pi pi-building",
-                        routerLink: ["/panel/catelog-management"],
-                        tooltip: "View the Product Catelog & Pricing",
+                        routerLink: ["/panel/sub-category"],
+                        tooltip: "View the Sub Category",
                     },
 
                     {
-                        label: "Pincode Master",
+                        label: "Adds-on Master",
                         icon: "pi pi-user",
-                        routerLink: ["/panel/service-person-management"],
-                        tooltip: "View the Service Engineer",
+                        routerLink: ["/panel/add-on-list"],
+                        tooltip: "View the Add On ",
                     },
                 ],
             },

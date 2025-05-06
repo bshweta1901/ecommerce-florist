@@ -212,7 +212,7 @@ export class AppTopBarComponent {
     }
 
     isDashboardRoute(): boolean {
-        return this.router.url === "/panel/dashboard";
+        return this.router.url === "/panel/product-list";
     }
 
     getFactoryList() {
