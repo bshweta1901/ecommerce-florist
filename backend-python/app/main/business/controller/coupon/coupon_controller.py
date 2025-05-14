@@ -1,18 +1,11 @@
 from flask import request
 from flask_restx import Resource
 import json
-from .service.coupon_service import (
-    create_coupon,
-    get_all_coupon,
-    get_coupon_count,
-    update_coupon,
-    get_coupon,
-    apply_coupon,
-    change_status,
-    delete_coupon,
-)
-from .utils.coupon_utils import CouponDto
+
 from flask_jwt_extended import jwt_required
+
+from app.main.business.service.coupon.coupon_service import create_coupon
+from app.main.business.util.coupon.coupon_utils import CouponDto
 
 api = CouponDto.coupon_api
 _coupon = CouponDto.coupon_list

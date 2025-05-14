@@ -20,7 +20,10 @@ def create_entity(data, image):
             # Upload Image if provided
             if image:
                 document_master = upload_document(
-                    file=image, base_directory="category", entity_type="CATEGORY-IMAGE"
+                    file=image,
+                    base_directory="category",
+                    entity_type="CATEGORY-IMAGE",
+                    session=session,
                 )
                 if isinstance(document_master, DocumentMaster):
                     category.category_img_id = document_master.id
@@ -116,6 +119,7 @@ def update_entity(id, data, image):
                 file=image,
                 base_directory="category",
                 entity_type="CATEGORY-IMAGE",
+                session=None,
                 old_document_id=entity.catgory_img_id,
             )
             # if isinstance(document_master, DocumentMaster):

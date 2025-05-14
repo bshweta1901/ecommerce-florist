@@ -1,32 +1,21 @@
 from flask_restx import Namespace, fields
+
+from app.main.business.util.product.product_dto import ProductDto
+from app.main.user.util.user_dto import UserDto
 from ....utils.payload.predefined_dto import PredefinedDto
 
 # from ...service_point.util.service_point_dto import ServicePointDto
-from ..product.util.product_dto import ProductDto
-from ....user.util.dto import UserDto
-from ....user.util.user_address_dto import UserAddressDto
-from ...company.util.company_master_dto import CompanyMasterDto
-from ....business.vehicle.util.vehicle_dto import VehicleDTO
 
-from ....user.util.user_address_dto import UserAddressDto
-from ...company.util.company_master_dto import CompanyMasterDto
 from flask_restx import reqparse
 from werkzeug.datastructures import FileStorage
-from ...service_management.utils.service_management_dto import ServiceMasterDto
 
 
 class OrderDto:
     order_api = Namespace("order", description="Order related operations")
-    _predefined = PredefinedDto.predefined
+    _predefined = PredefinedDto.predefined_res
 
-    _product_dto = ProductDto.product
+    _product_dto = ProductDto.product_res
     _user_dto = UserDto.user
-    _address = UserAddressDto.address_response
-    _company_dto = CompanyMasterDto.company_list
-    _company_user_dto = CompanyMasterDto.company_user_dto
-    _vehicle_dto = VehicleDTO._vehicle_response
-    _company_department = CompanyMasterDto.company_department_dto
-    _service_dto = ServiceMasterDto.service_master_dto
 
     _service_point = order_api.model(
         "service_point",
@@ -93,7 +82,6 @@ class OrderDto:
             "total_amount": fields.Float,
             "discount": fields.Float,
             "product": fields.Nested(_product_dto),
-            "service": fields.Nested(_service_dto),
             "qty_balance": fields.Integer(),
             "tax": fields.Float(),
             "created_at": fields.DateTime(),
@@ -119,8 +107,6 @@ class OrderDto:
             ),
             "city": fields.Nested(PredefinedDto.predefined_res),
             "payment_status": fields.Nested(PredefinedDto.predefined_res),
-            "shipping_address": fields.Nested(_address),
-            "billing_address": fields.Nested(_address),
             "service_point": fields.Nested(_service_point),
             "amount": fields.Float(required=False),
             "offer_amount": fields.Float(required=False),
@@ -138,13 +124,7 @@ class OrderDto:
             "user": fields.Nested(_user_dto),
             "reject_reason": fields.String(),
             "created_at": fields.DateTime(),
-            "company": fields.Nested(_company_dto),
-            "company_user": fields.Nested(_company_user_dto),
             "service_start_date": fields.DateTime(),
-            "vehicle": fields.Nested(_vehicle_dto),
-            "department": fields.Nested(_company_department),
-            "admin_user": fields.Nested(_user_dto),
-            "admin_user_dept": fields.Nested(_company_department),
             "service_point_user": fields.Nested(_user_dto),
             "mechmiles_staff_id": fields.Integer(),
             "mechmiles_staff": fields.Nested(_user_dto),
@@ -378,23 +358,12 @@ class OrderDto:
             "service_point_id": fields.Integer(
                 required=False, description="Id of the service point"
             ),
-            "vehicle": fields.Nested(_vehicle_dto),
-            "service_point": fields.Nested(_service_point),
             "amount": fields.Float(required=False),
             "offer_amount": fields.Float(required=False),
             "tax": fields.Float(required=False),
             "payable_amount": fields.Float(required=False),
             "customer": fields.Nested(_user_dto, attribute="user"),
             "qty_balance": fields.Integer(),
-            "shipping_address": fields.Nested(_address),
-            "billing_address": fields.Nested(_address),
-            "created_at": fields.DateTime(),
-            "status": fields.Nested(_predefined),
-            "company": fields.Nested(_company_dto),
-            "company_user": fields.Nested(_company_user_dto),
-            "total_quantity": fields.Integer(),
-            "total_amount": fields.Float(),
-            "department": fields.Nested(_company_department),
             "created_at": fields.DateTime(),
         },
     )

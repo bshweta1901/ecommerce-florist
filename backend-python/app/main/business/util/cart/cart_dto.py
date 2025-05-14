@@ -1,8 +1,6 @@
 from flask_restx import fields, Namespace
 
-from ...product.util.product_dto import ProductDto
-from ...service_management.utils.service_management_dto import ServiceMasterDto
-from ...vehicle.util.vehicle_dto import VehicleDTO
+from app.main.business.util.product.product_dto import ProductDto
 
 
 class CartDto:
@@ -10,8 +8,8 @@ class CartDto:
     cart_namespace = Namespace("cart", description="Cart operations")
 
     # Reference the product fields from ProductDto
-    product_fields = ProductDto._product_response
-    _vehicle = VehicleDTO._vehicle_response
+    product_fields = ProductDto.product_res
+    _vehicle = {}
 
     # Define expected fields using fields
     cart_item_fields = cart_namespace.model(
@@ -85,16 +83,6 @@ class CartDto:
             "is_wishList": fields.Boolean(description="Is WishList"),
             "created_by_id": fields.Integer(description="User ID"),
             "created_date": fields.DateTime(description="Creation Date"),
-            "service_id": fields.Integer(),
-            "service": fields.Nested(ServiceMasterDto.service_master_dto),
-            "vehicle_id": fields.Integer(),
-            "vehicle": fields.Nested(
-                _vehicle
-                # {
-                #     "product_id": fields.Integer(description="Product ID"),
-                #     "product_name": fields.String(description="Product Name"),
-                # }
-            ),
             "product": fields.Nested(
                 product_fields
                 # {

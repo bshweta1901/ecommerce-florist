@@ -56,6 +56,14 @@ class ProductMaster(CommonModel, Base):
     def product_status_name(self):
         return self.product_status.name if self.product_status is not None else None
 
+    @property
+    def is_default_img_path(self):
+        default_img = next(
+            (img for img in self.product_images if getattr(img, "is_default", False)),
+            None,
+        )
+        return default_img.file_path if default_img else None
+
     # @property
     # def reviews_rating(self):
     #     query = ReviewsMaster.query.filter_by(product_id=self.product_id).filter(

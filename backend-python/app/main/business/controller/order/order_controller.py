@@ -1,31 +1,8 @@
-from ..util.order_dto import OrderDto
-from flask import request, jsonify
-from flask_cors import cross_origin
+from flask import request
 from flask_jwt_extended import jwt_required
-from ..service.order_service import (
-    save_order,
-    update_order,
-    get_orders,
-    get_orders_count,
-    get_order_stats,
-    change_order_status,
-    change_approval_order_status,
-    get_order_by_id,
-    order_invoice,
-    export_orders,
-    assigned_order,
-    unassigned_order,
-    save_custom_order,
-    update_custom_order,
-)
-from ..service.receipt_service import (
-    save_receipt,
-    get_receipt_by_id,
-    get_receipt_count,
-    get_receipt_list,
-    update_receipt,
-    upload_transaction_doc,
-)
+from app.main.business.service.order.order_service import save_order
+from app.main.business.util.order.order_dto import OrderDto
+
 
 api = OrderDto.order_api
 _order = OrderDto.order_save_req

@@ -15,7 +15,7 @@ import mimetypes
 
 import os
 import traceback
-from ....extensions import db
+from ....extensions import db, session_scope
 
 
 def validate_file_format(file, entity_type):
@@ -177,10 +177,12 @@ def set_file_permissions(file_path):
         )
 
 
-def save_document(document_data):
+def save_document(document_data, session):
+
     print(document_data)
-    data = document_data.save()
-    return data
+    session.add(document_data)
+    session.commit()  # writes to DB
+    return document_data
 
 
 def get_predefined_by_type_and_code(entity_type, code):
@@ -216,12 +218,15 @@ def delete_old_image(document_ids_list, session):
         raise
 
 
-def upload_document(file, base_directory, entity_type, old_document_id=None):
+def upload_document(file, base_directory, entity_type, session, old_document_id=None):
     try:
+
         if old_document_id is not None:
-            document = DocumentMaster.query.filter(
-                DocumentMaster.id == old_document_id
-            ).first()
+            document = (
+                session.query(DocumentMaster)
+                .filter(DocumentMaster.id == old_document_id)
+                .first()
+            )
             filePathString = document.file_path
             actualPath = current_app.config["DOCUMENT_TEMP_URL"]
             filePath = os.path.join(
@@ -241,8 +246,8 @@ def upload_document(file, base_directory, entity_type, old_document_id=None):
         document.entity_name = entity_type
         document.file_type = get_file_type(document.actual_path)
 
-        document_master = save_document(document)
-        return document_master
+        document_master = save_document(document, session)
+        return document
 
     except Exception as e:
         current_app.logger.error(f"An error occurred during document upload: {str(e)}")

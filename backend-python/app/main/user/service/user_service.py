@@ -87,7 +87,10 @@ def create_entity(data, image):
             # Upload Image if provided
             if image:
                 document_master = upload_document(
-                    file=image, base_directory="users", entity_type="PROFILE-IMAGE"
+                    file=image,
+                    base_directory="users",
+                    entity_type="PROFILE-IMAGE",
+                    session=session,
                 )
                 if isinstance(document_master, DocumentMaster):
                     new_user.profile_img_id = document_master.id

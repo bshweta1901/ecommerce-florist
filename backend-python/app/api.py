@@ -19,6 +19,9 @@ from .main.communication.notification.controller.fcm_notification_controller imp
 
 
 from .main.communication.email.controller.email_controller import api as email_ns
+from .main.business.controller.cart.cart_controller import api as cart_ns
+from .main.business.controller.order.order_controller import api as order_ns
+from .main.business.controller.coupon.coupon_controller import api as coupon_ns
 
 from .main.communication.template.model.template_master import TemplateMaster
 from app.main.communication.notification.model.communication_logs import (
@@ -35,3 +38,6 @@ def register_namespaces(api_db):
     api_db.add_namespace(category_ns, path="/category")
     api_db.add_namespace(sub_category_nss, path="/sub-category")
     api_db.add_namespace(product_ns, path="/product")
+    api_db.add_namespace(cart_ns, path="/card")
+    api_db.add_namespace(order_ns, path="/order")
+    api_db.add_namespace(coupon_ns, path="/coupon")

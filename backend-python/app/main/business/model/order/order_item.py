@@ -1,56 +1,34 @@
-from .....extensions import db
-from ....utils.model.common_model import CommonModel
-from ...product.model.product_master import ProductMaster
+from app.extensions import Base
+from app.main.business.model.product.product_master import ProductMaster
+from app.main.utils.model.common_model import CommonModel
+from sqlalchemy import BigInteger, Column, ForeignKey, String, Double
+
+from sqlalchemy.orm import relationship
 
 
-class OrderItem(CommonModel, db.Model):
+class OrderItem(CommonModel, Base):
     __tablename__ = "order_item"
-    order_item_id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
-    product_id = db.Column(
-        db.BigInteger,
-        db.ForeignKey("product_master.product_id"),
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    product_id = Column(
+        BigInteger,
+        ForeignKey("product_master.id"),
     )
-    service_id = db.Column(
-        db.BigInteger,
-        db.ForeignKey("service_master.service_id"),
-    )
-    order_id = db.Column(
-        db.BigInteger,
-        db.ForeignKey("order_master.order_id"),
-    )
-    item_quantity = db.Column(db.BigInteger)
-    amount = db.Column(db.Float)
-    product_purchase_price = db.Column(db.Float)
-    base_price = db.Column(db.Float)
-    tax = db.Column(db.Float)
-    total_base_amount = db.Column(db.Float)
-    total_purchase_amount = db.Column(db.Float)
-    total_amount = db.Column(db.Float)
-    discount = db.Column(db.Float)
-    qty_balance = db.Column(db.BigInteger)
-    product = db.relationship(
+    product = relationship(
         "ProductMaster", lazy="joined", backref="product_from_order_item"
     )
-    service = db.relationship(
-        "ServiceMaster", lazy="joined", backref="service_from_order_item"
+    order_id = Column(
+        BigInteger,
+        ForeignKey("order_master.id"),
     )
-    order = db.relationship(
-        "OrderMaster", lazy="joined", backref="order_from_order_item"
-    )
-
-    vehicle_id = db.Column(db.BigInteger, db.ForeignKey("vehicle.id"), nullable=False)
-    vehicle = db.relationship(
-        "Vehicle", foreign_keys=[vehicle_id], backref="Vehicle_for_order_item"
-    )
-    # department_id = db.Column(
-    #     db.BigInteger, db.ForeignKey("predefined_master.id"), nullable=True
-    # )
-    # department = db.relationship(
-    #     "PredefinedMaster",
-    #     foreign_keys=[department_id],
-    #     backref="department_from_order_item",
-    # )
-    # qty_unassigned = db.Column(db.BigInteger())
+    order = relationship("OrderMaster", lazy="joined", backref="order_from_order_item")
+    item_quantity = Column(BigInteger)
+    amount = Column(Double)
+    tax = Column(Double)
+    total_base_amount = Column(Double)
+    total_purchase_amount = Column(Double)
+    total_amount = Column(Double)
+    discount = Column(Double)
+    qty_balance = Column(BigInteger)
 
     def conver_cart_item_to_order_item(self, cart_item):
         self.product_purchase_price = 0

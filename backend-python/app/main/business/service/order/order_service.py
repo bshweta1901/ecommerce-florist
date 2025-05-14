@@ -1,43 +1,21 @@
-from ...company.model.company_price import CompanyPrice
 from flask_jwt_extended import get_jwt_identity
-from ....user.model.user import User
-from ..model.order import OrderMaster
-from .....extensions import db
-from ...cart.cart_service import get_cart_list
-from ..model.order_item import OrderItem
-from ....utils.service.predefined_service import get_predefined_by_type_and_code
-from ....user.service.user_service import get_user_by_username, get_user_by_id
-from ...company.service.wallet_history_service import create_wallet_history
-from ...company.model.company_user import CompanyUser
-from ...service_point.model.service_user import ServiceUser
-from ....user.model.role import Role
-from ...cart.model.cart_item import CartItem
-from sqlalchemy import func
-from ...company.model.wallet_history import WalletHistory
-from ...coupon.service.coupon_service import apply_coupon
-from ...company.model.company_master import CompanyMaster
-from ...order.constant.order_constant import (
-    ORDER_CANCELLED,
-    ORDER_COMPLETED,
-    ORDER_ENTITY_TYPE,
-    ORDER_INPROGRESS,
-    ORDER_PENDING,
-    ORDER_STATUS_APPROVED,
-    ORDER_STATUS_REJECTED,
-    ORDER_STATUS_ENTITY_TYPE,
-)
 
-from ...appoinment.utils.appointment_constant import (
-    APPOINTMENT_ENTITY_TYPE,
-    APPOINTMENT_PENDING,
-)
+from app.main.business.model.order.order import OrderMaster
+from app.main.business.model.order.order_item import OrderItem
+from app.main.business.service.cart.cart_service import get_cart_list
+from ....user.model.user import User
+from .....extensions import db
+
+from ....utils.service.predefined_service import get_all_entities
+from ....user.service.user_service import get_user_by_username
+from ....user.model.role import Role
+from sqlalchemy import func
+
+
 from flask_restx import abort
-from ...utils.common_communication import send_mail, send_notification
-import pdfkit
+
+# import pdfkit
 from flask import current_app
-from ...company.model.company_user import CompanyUser
-from ...product.model.product_master import ProductMaster
-from ...service_point.model.service_user import ServiceUser
 from ....user.model.role import Role
 from sqlalchemy import func, desc
 from sqlalchemy.orm import aliased
@@ -45,7 +23,7 @@ from sqlalchemy import exists
 from app.main.user.model.role import Role
 from app.main.user.model.role import user_roles
 from flask import Flask, render_template
-from ....user.Constants.role_constants import ROLE_CORPORATE_ADMIN, ROLE_SP_ADMIN
+
 import pandas as pd
 from datetime import datetime
 import os
@@ -54,16 +32,12 @@ from ....utils.service.document_service import (
     set_file_permissions,
 )
 from sqlalchemy import and_, or_
-from ....user.service.user_service import send_email_with_attachment
-from ....payment.models.payment_transaction import PaymentTransaction
+
 from ....utils.model.predefined_master import PredefinedMaster
-from ...company.service.wallet_history_service import cal_wallet_history
-from ...service_point.model.service_point_model import ServicePoint
-from ...appoinment.model.appointment_model import AppointmentMaster
-from ...appoinment.model.appoinment_item_model import AppointmentItemsMaster
-from ...cart.util.item_constant import PRODUCT_GST, SERVICE_GST
+
 from ....user.model.user_address import UserAddress
-from num2words import num2words
+
+# from num2words import num2words
 from sqlalchemy import func, cast, Date
 
 

@@ -32,6 +32,7 @@ def create_entity(data, image):
                 file=image,
                 base_directory="sub-category",
                 entity_type="Sub-CATEGORY-IMAGE",
+                session=session,
             )
             if isinstance(document_master, DocumentMaster):
                 entity.sub_category_img_id = document_master.id

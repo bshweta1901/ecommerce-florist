@@ -50,6 +50,7 @@ class ProductDto:
             "category": fields.Nested(
                 CategoryDto.category_res, description="Category ID of the product"
             ),
+            "is_default_img_path": fields.String(description="Price of the product"),
             "product_status": fields.Nested(
                 PredefinedDto.predefined_res, description="Category ID of the product"
             ),
@@ -95,6 +96,13 @@ class ProductDto:
         location="files",
         required=False,
         action="append",  # 👈 important to accept multiple images
+        help="Product Images (multiple allowed)",
+    )
+    create_product_parser.add_argument(
+        "defaultImage",
+        type=FileStorage,
+        location="files",
+        required=False,  # 👈 important to accept multiple images
         help="Product Images (multiple allowed)",
     )
     create_product_parser.add_argument(
