@@ -96,43 +96,22 @@
 
     </div>
 
-    <div class="field col-12 full-width">
-        <label for="images">Product Images *</label>
-        <input type="file" id="images" (change)="onImageSelected($event)" multiple accept="image/*" />
-        <div style="color:Red; font-size: 10px;" *ngIf="addProductForm.hasError('isDefaultImage')"> Please select a default image.</div>
+    <input type="file" (change)="onImageUpload($event)" multiple />
 
-   
-          
-       <!-- Existing Images -->
-       <div *ngFor="let img of product.product_images; let i = index" 
-       class="img-container" 
-       [ngClass]="{'highlight-default': img.is_default}">
-    <img [src]="img.file_path" alt="Product Image" width="100" height="100" />
-    <label>
-      <input type="checkbox"
-             [checked]="img.is_default"
-             formName="is_default"
-             (change)="markExistingDefault(i)" />
-      Default
-    </label>
-    <button type="button" (click)="removeExistingImage(i)">Remove</button>
-  </div>
+<div *ngFor="let img of imagesList; let i = index" class="img-preview">
+  <img [src]="img.previewUrl" width="100" />
   
-  
-  <!-- Selected New Images -->
-  <div *ngFor="let img of selectedImages; let i = index" 
-  class="img-container" 
-  [ngClass]="{'highlight-default': img.isDefault}">
-<img [src]="img.preview" alt="Selected Image" width="100" height="100" />
-<label>
- <input type="checkbox" [checked]="img.isDefault" formName="is_default" (change)="markNewDefault(i)" />
- Default
-</label>
-<button type="button" (click)="removeSelectedImage(i)">Remove</button>
+  <label>
+    <input type="radio" name="defaultImage" [checked]="img.isDefault" (change)="setAsDefault(i)" />
+    Default
+  </label>
+
+  <button type="button" (click)="removeImage(i)">Remove</button>
 </div>
 
-  
-      </div>
+
+
+    
       
         
 

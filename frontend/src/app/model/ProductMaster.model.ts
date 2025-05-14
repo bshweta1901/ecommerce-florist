@@ -21,7 +21,8 @@ export class ProductMaster extends CommonMaster{
     public is_add_on:Boolean=false;
     public product_images: any[]; 
     public product_status_name: any; 
-
+    public is_default_img_path:any;
+    public default_image_id:any;
 
     constructor(init?: Partial<ProductMaster>) {
         super();
@@ -29,7 +30,7 @@ export class ProductMaster extends CommonMaster{
     }
   
     toJSON() {
-        const { sub_category, product_images,category,status,product_status_name,product_status, ...rest } = this;
+        const { sub_category, product_images,is_default_img_path,category,status,product_status_name,product_status, ...rest } = this;
         return rest;
     }
 }

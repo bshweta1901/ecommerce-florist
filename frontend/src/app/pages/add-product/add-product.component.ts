@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { CategoryMaster } from 'src/app/model/CategoryMaster.model';
 import { Factory } from 'src/app/model/Factory.model';
 import { GiveAwayMaster } from 'src/app/model/GiveAwayMaster.model';
@@ -54,6 +54,8 @@ export class AddProductComponent implements OnInit {
   fatList:any[];
   removedImageIds: number[] = [];
   itemList:any[];
+  images: { file: File, previewUrl: string, isDefault: boolean }[] = [];
+
   product:ProductMaster = new ProductMaster();
   @Output() close = new EventEmitter<boolean>();
   @Input() hideButton: boolean;
@@ -76,10 +78,11 @@ export class AddProductComponent implements OnInit {
   countryList:PredefinedMaster[]=[];
   selectedDefaultImageId: number | null = null;
   imageSelected: boolean = false;
+  imagesList: { id?:number; file: File, previewUrl: string, isDefault: boolean ,isNew: boolean; }[] = [];
 
 
   selectedImages: { file: File, preview: string, isDefault: boolean }[] = [];
-  images: { file: File, preview: string, isDefault: boolean }[] = [];
+  // images: { file: File, preview: string, isDefault: boolean }[] = [];
 
   constructor( private categoryService:CategoryService, private predefinedService:PredefinedService, private productService:ProductService, private sweetAlertService:SweetAlertService) { }
   ngOnInit(): void {
@@ -94,112 +97,115 @@ export class AddProductComponent implements OnInit {
       price: new FormControl(null),
       offer_price: new FormControl(null),
       sub_category: new FormControl(null),
-      is_default: new FormControl([Validators.required]),
-      // defaultImage: new FormControl('', [this.defaultImageValidator.bind(this)]),
-      // defaultImage: new FormControl(null, Validators.required),
+      images: new FormControl([], Validators.required)
     }, offerPriceValidator);  // 👈 apply the group-level validator here
     console.log("product..",this.product)
+    
   
     if (this.eventData) {
       this.product = this.eventData;
-      const selectedDefaultImageId = this.product.product_images?.find(img => img.is_default)?.id || null;
-      this.selectedDefaultImageId = selectedDefaultImageId;
-
-
+       this.patchForm(this.product);
+   
       this.addProductForm.patchValue({
-        name: this.product.name,
-        description: this.product.description,
-        // category_img: this.product.category_img
-      });
+  name: this.product.name,
+  description: this.product.description,
+  short_description: this.product.short_description,
+  sku: this.product.sku,
+  product_status: this.product.product_status?.id,
+  category: this.product.category?.id,
+  price: this.product.price,
+  offer_price: this.product.offer_price,
+  sub_category: this.product.sub_category?.id
+});
+
     }
     if (this.product.category) {
       this.getSubCategoryList(this.product.category);  // This will set subcategory correctly inside
     }
+    
     console.log("eventData..",this.product)
+
+
+    
     this.getCategoryList();
     this.getProductStatusList();
   }
 
-  validateDefaultImage(): void {
-    const hasDefaultInExisting = this.product.product_images?.some(img => img.is_default);
-    const hasDefaultInNew = this.selectedImages?.some(img => img.isDefault);
-  
-    if (!hasDefaultInExisting && !hasDefaultInNew) {
-      this.addProductForm.get('defaultImage')?.setErrors({ noDefaultImage: true });
-    } else {
-      this.addProductForm.get('defaultImage')?.setErrors(null);
-    }
-  
-    // Force form to update validity
-    this.addProductForm.get('defaultImage')?.updateValueAndValidity();
-  }
-  
+ onImageUpload(event: any) {
+  const files = event.target.files;
 
-  defaultImageValidator(control: AbstractControl): ValidationErrors | null {
-    const hasDefaultInExisting = this.product?.product_images?.some(img => img.is_default);
-    const hasDefaultInSelected = this.selectedImages?.some(img => img.isDefault);
-    return (hasDefaultInExisting || hasDefaultInSelected) ? null : { noDefaultImage: true };
+  for (let file of files) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.imagesList.push({
+        file: file,
+        previewUrl: e.target.result,
+        isDefault: this.imagesList.length === 0,  // Make first image default by default
+        isNew: true                                // Mark as new image
+      });
+
+      this.updateImageControl(); // Validate and sync with form
+    };
+    reader.readAsDataURL(file);
   }
-  
-    
-  
-  
-  onImageSelected(event: any): void {
-    const files: FileList = event.target.files;
-    if (files && files.length > 0) {
-      this.imageSelected = true;
-      for (let i = 0; i < files.length; i++) {
-        const file: File = files[i];
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          const image = {
-            file: file,
-            preview: e.target.result, // ✅ Changed from 'url' to 'preview'
-            isDefault: false
-          };
-          this.selectedImages.push(image);
-  
-          // Set first image as default if none is set
-          if (!this.selectedImages.some(img => img.isDefault)) {
-            this.selectedImages[0].isDefault = true;
-          }
-  
-          // ✅ Set productImages control as valid
-          this.addProductForm.get('productImages')?.setValue(this.selectedImages);
-          this.addProductForm.get('productImages')?.updateValueAndValidity();
-        };
-        reader.readAsDataURL(file);
-      }
-    } else {
-      this.imageSelected = false;
-      this.selectedImages = [];
-      this.addProductForm.get('productImages')?.setValue(null);
-      this.addProductForm.get('productImages')?.updateValueAndValidity();
-    }
-    
-  this.validateDefaultImage();
+
+  // Reset the input so user can upload the same file again if needed
+  event.target.value = '';
+}
+
+      patchForm(productData: any) {
+  this.addProductForm.patchValue({
+    name: productData.name,
+    description: productData.description,
+    // ... other fields
+  });
+
+  // Populate existing images
+  if (productData.product_images) {
+    this.imagesList = productData.product_images.map((img: any, index: number) => ({
+      id: img.id,
+      previewUrl: img.file_path,
+      isDefault: index === 0, // or based on actual "isDefault" if provided
+      isNew: false
+    }));
+
+    this.updateImageControl(); // ✅ validate the image control
   }
-  
-  markExistingDefault(index: number): void {
-    this.product.product_images.forEach((img, i) => img.is_default = i === index);
-    this.validateDefaultImage();
+}
+removeImage(index: number) {
+  const imageToRemove = this.imagesList[index];
+
+  // If the image has an `id`, push it to removedImageIds
+  if ('id' in imageToRemove && imageToRemove.id) {
+    this.removedImageIds.push(imageToRemove.id);
   }
-  
-  markNewDefault(index: number): void {
-    debugger;
-    this.selectedImages.forEach((img, i) => img.isDefault = i === index);
-    this.validateDefaultImage();
+
+  this.imagesList.splice(index, 1);
+  this.updateImageControl();
+}
+
+
+  updateImageControl() {
+  // You can store image names or just track if valid
+  const hasDefault = this.imagesList.some(img => img.isDefault);
+// debugger;
+  if (this.imagesList.length && hasDefault) {
+    this.addProductForm.get('images')?.setValue(this.imagesList);
+    this.addProductForm.get('images')?.setErrors(null);
+  } else {
+    this.addProductForm.get('images')?.setErrors({ required: true });
   }
-  
-  removeExistingImage(index: number): void {
-    this.product.product_images.splice(index, 1);
-    this.validateDefaultImage();
-  }
-  
-  removeSelectedImage(index: number): void {
-    this.selectedImages.splice(index, 1);
-    this.validateDefaultImage();
-  }
+}
+
+
+
+
+
+setAsDefault(index: number) {
+  this.imagesList.forEach((img, i) => img.isDefault = i === index);
+  this.updateImageControl();
+}
+
   
 
 onCategoryChange(categoryId: string | number) {
@@ -258,7 +264,7 @@ onCategoryChange(categoryId: string | number) {
 
 
   saveProduct(): void {
-    debugger;
+    // debugger;
       // Check if form is invalid
     if (this.addProductForm.invalid) {
       this.addProductForm.markAllAsTouched();
@@ -266,7 +272,8 @@ onCategoryChange(categoryId: string | number) {
     }
 
     // Custom image validation
-    const defaultImageEntry = this.selectedImages.find(i => i.isDefault);
+    const defaultImageEntry = this.imagesList.find(i => i.isDefault);
+
     if (!defaultImageEntry) {
       this.addProductForm.get('defaultImage')?.setErrors({ noDefaultImage: true });
       return;
@@ -279,9 +286,9 @@ onCategoryChange(categoryId: string | number) {
     this.product.product_status_id = this.product.product_status.id;
   
     const defaultImage = defaultImageEntry.file;
-    const otherImages = this.selectedImages.filter(i => !i.isDefault).map(i => i.file);
+    const otherImages = this.imagesList.filter(i => !i.isDefault).map(i => i.file);
   
-    this.productService.saveProduct(this.product, otherImages, defaultImage).subscribe(
+    this.productService.saveProduct(this.product,defaultImage, otherImages).subscribe(
       (data) => {
         this.sweetAlertService.successAlert("Product has been added successfully");
         this.saveEvents.emit();
@@ -301,58 +308,60 @@ onCategoryChange(categoryId: string | number) {
   
   
 
-  updateProduct(): void {
-    // Validation: Make sure one new image is selected as default (if any images are uploaded)
-    let defaultImageFile: File | null = null;
-if (this.selectedImages.length > 0) {
-  const defaultImageEntry = this.selectedImages.find(i => i.isDefault);
-  if (!defaultImageEntry) {
-    this.sweetAlertService.errorAlert('Please select a default image.');
-    return;
-  }
-  defaultImageFile = defaultImageEntry.file;
-}
+updateProduct(): void {
+  // debugger;
+   
+  // Validate that if images are present, one must be marked as default
+  const defaultImageEntry = this.imagesList.find(i => i.isDefault);
+  const defaultImageFile: File | null = defaultImageEntry?.file || null;
+  // 3. If the default image has an `id` (i.e., it's an existing image), fetch the ID
+  const selectedDefaultImageId: number | null = defaultImageEntry.hasOwnProperty('id') ? defaultImageEntry.id : null;
 
-// If an existing image is marked as default, call API to update it
-if (this.selectedDefaultImageId) {
-  console.log("defaylt image")
-  // this.productService.setDefaultProductImage(this.product.id, this.selectedDefaultImageId).subscribe(
-  //   () => console.log('Default image updated'),
-  //   err => console.error('Failed to set default image', err)
-  // );
-}
+this.product.default_image_id=selectedDefaultImageId
+  let otherImages = this.imagesList
+  .filter(i => !i.isDefault && !('id' in i))
+  .map(i => i.file);
   
-    this.product.category_id = this.product.category.id;
-    this.product.sub_category_id = this.product.sub_category.id;
-    this.product.product_status_id = this.product.product_status.id;
-    this.product = new ProductMaster(this.product);
-  
-    if (this.removedImageIds.length > 0) {
-      this.productService.removeProductImages(this.removedImageIds).subscribe(
-        () => console.log('Removed old images'),
-        err => console.error('Error removing images', err)
-      );
-    }
-  
-    this.productService.updateProduct(this.product.toJSON(), this.selectedImages.map(i => i.file)).subscribe(
-      (data) => {
-        this.sweetAlertService.successAlert("Product Updated Successfully");
-        this.saveEvents.emit();
-      },
-      (err: HttpErrorResponse) => {
-        this.isLoading = false;
-        if (err.status === 200) {
-          let jsonString = err.error.text;
-          jsonString = jsonString.substr(0, jsonString.indexOf('{"timestamp"'));
-        } else if (err.status === 400) {
-          this.msg = err.error.error.message;
-          this.sweetAlertService.errorAlert(this.msg);
-          this.saveEvents.emit();
-        }
-      }
+
+
+  // Set product IDs from nested objects
+  this.product.category_id = this.product.category?.id;
+  this.product.sub_category_id = this.product.sub_category?.id;
+  this.product.product_status_id = this.product.product_status?.id;
+
+  // Convert to ProductMaster object
+  this.product = new ProductMaster(this.product);
+
+  // Remove any deleted images if applicable
+  if (this.removedImageIds.length > 0) {
+    this.productService.removeProductImages(this.removedImageIds).subscribe(
+      () => console.log('Removed old images'),
+      err => console.error('Error removing images', err)
     );
   }
-  
+
+  // Call update product API
+  this.productService.updateProduct(this.product.toJSON(), defaultImageFile,otherImages).subscribe(
+    (data) => {
+      this.sweetAlertService.successAlert("Product Updated Successfully");
+      this.saveEvents.emit();
+    },
+    (err: HttpErrorResponse) => {
+      this.isLoading = false;
+      if (err.status === 200) {
+        const jsonString = err.error.text;
+        console.warn('200 OK with error: ', jsonString);
+      } else if (err.status === 400) {
+        this.msg = err.error?.error?.message || "Bad Request";
+        this.sweetAlertService.errorAlert(this.msg);
+        this.saveEvents.emit();
+      } else {
+        this.sweetAlertService.errorAlert("Something went wrong. Please try again.");
+      }
+    }
+  );
+}
+
 
   getCategoryList() {
     const category = new CategoryMaster();

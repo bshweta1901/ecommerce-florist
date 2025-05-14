@@ -98,7 +98,7 @@ export class ProductService {
         );
     }
 
-    saveProduct(product: ProductMaster, files?: File[], defaultImage?: File): Observable<any> {
+    saveProduct(product: ProductMaster, defaultImage?: File, files?: File[]): Observable<any> {
         const formData = new FormData();
       
         // Append product data
@@ -122,18 +122,24 @@ export class ProductService {
       
       
 
-    updateProduct(product: Partial<ProductMaster>,files?: File[]): Observable<any> {
+    updateProduct(product: Partial<ProductMaster>,defaultImage?: File,files?: File[]): Observable<any> {
         const formData = new FormData();
       
         // Append product data as a string, just like 'data="{...}"'
         formData.append('data', JSON.stringify(product));
       
-        // Append each image file under the field name 'images'
+                // Append default image separately
+        if (defaultImage) {
+          formData.append('defaultImage', defaultImage); // field name must match backend expectation
+        }
+      
+        // Append other images
         if (files) {
           files.forEach(file => {
-            formData.append('images', file); // match your curl: --form 'images=@...'
+            formData.append('images', file); // field name must match backend expectation
           });
         }
+      
         return this.http.put<any>(
             environment.apiUrl + "/product/"+product.id,
             formData

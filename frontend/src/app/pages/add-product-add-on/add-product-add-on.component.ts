@@ -181,11 +181,13 @@ export class AddProductAddOnComponent implements OnInit {
   
     saveProduct(): void
     {
+      const defaultImageEntry = this.selectedImages.find(i => i.file);
+      const defaultImage = defaultImageEntry.file;
       this.product.category_id=this.product.category.id;
       this.product.sub_category_id=this.product.sub_category.id;
       this.product.product_status_id=this.product.product_status.id;
       this.product.is_add_on=true
-      this.productService.saveProduct(this.product,this.selectedImages.map(i => i.file)).subscribe(
+      this.productService.saveProduct(this.product,defaultImage).subscribe(
         (data) => {
           //console.log(data,"data");
           this.sweetAlertService.successAlert(
@@ -213,6 +215,8 @@ export class AddProductAddOnComponent implements OnInit {
   
     updateProduct(): void
     {
+      const defaultImageEntry = this.selectedImages.find(i => i.file);
+      const defaultImage = defaultImageEntry.file;
       this.product.category_id=this.product.category.id;
       this.product.sub_category_id=this.product.sub_category.id;
       
@@ -230,7 +234,7 @@ export class AddProductAddOnComponent implements OnInit {
   
       //this.isLoading = true;
       //this.service.entityType = 'SERVICE';
-      this.productService.updateProduct(this.product.toJSON(),this.selectedImages.map(i => i.file)).subscribe(
+      this.productService.updateProduct(this.product.toJSON(),defaultImage).subscribe(
         (data) => {
           //this.isLoading = false;
           this.sweetAlertService.successAlert(
