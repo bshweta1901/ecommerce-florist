@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Package } from "src/app/model/Package.model";
 import { PredefinedMaster } from "src/app/model/PredefinedMaster.model";
@@ -74,13 +74,13 @@ export class AddCatelogManagementComponent implements OnInit {
     selectedFiles: any[] = [];
     selectedProductFile: { name: string; objectURL: SafeResourceUrl }[] = [];
     selectedWarrantyFile: { name: string; objectURL: SafeResourceUrl }[] = [];
-    addProductDetailsForm: FormGroup;
-    addCreatePackageFormWarranty: FormGroup;
-    addCreatePackageFormAmc: FormGroup;
-    addCreatePackageFormCamc: FormGroup;
-    addCreatePackageFormDemand: FormGroup;
-    addCreatePackageFormInstallation: FormGroup;
-    addSparePartForm: FormGroup;
+    addProductDetailsForm: UntypedFormGroup;
+    addCreatePackageFormWarranty: UntypedFormGroup;
+    addCreatePackageFormAmc: UntypedFormGroup;
+    addCreatePackageFormCamc: UntypedFormGroup;
+    addCreatePackageFormDemand: UntypedFormGroup;
+    addCreatePackageFormInstallation: UntypedFormGroup;
+    addSparePartForm: UntypedFormGroup;
     catelogId: boolean = false;
     id: string;
     getProductUuid: any = {};
@@ -201,9 +201,9 @@ export class AddCatelogManagementComponent implements OnInit {
             );
         });
 
-        this.addProductDetailsForm = new FormGroup({
-            selectedProductCategory: new FormControl("", [Validators.required]),
-            sku: new FormControl("", Validators.required),
+        this.addProductDetailsForm = new UntypedFormGroup({
+            selectedProductCategory: new UntypedFormControl("", [Validators.required]),
+            sku: new UntypedFormControl("", Validators.required),
             // product_name: new FormControl("", [
             //     Validators.required,
             //     Validators.pattern(/^[a-zA-Z]*$/),
@@ -212,47 +212,47 @@ export class AddCatelogManagementComponent implements OnInit {
             //     Validators.required,
             //     Validators.pattern(/^[0-9]*$/),
             // ]),
-            product_name: new FormControl("", Validators.required),
-            sap_oracle_code: new FormControl("", Validators.required),
-            approx_life: new FormControl("", [
+            product_name: new UntypedFormControl("", Validators.required),
+            sap_oracle_code: new UntypedFormControl("", Validators.required),
+            approx_life: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^[0-9]*$/),
             ]),
-            standard_price: new FormControl("", [
+            standard_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            selling_price: new FormControl("", [
+            selling_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            tax: new FormControl("", [
+            tax: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            selectedSparePartList: new FormControl("", [Validators.required]),
-            repairChecklist: new FormControl(""),
-            problemDiagnosis: new FormControl(""),
-            selectedProductOEM: new FormControl("", [Validators.required]),
-            description: new FormControl(""),
+            selectedSparePartList: new UntypedFormControl("", [Validators.required]),
+            repairChecklist: new UntypedFormControl(""),
+            problemDiagnosis: new UntypedFormControl(""),
+            selectedProductOEM: new UntypedFormControl("", [Validators.required]),
+            description: new UntypedFormControl(""),
         });
 
-        this.addCreatePackageFormWarranty = new FormGroup({
-            warranty_Tat: new FormControl("", Validators.required),
-            Warranty_coverage_details: new FormControl("", Validators.required),
-            warranty_Tenure: new FormControl("", Validators.required),
-            fileUploadeForm: new FormControl(""),
-            Amc_standard_price: new FormControl(""),
-            Amc_selling_price: new FormControl(""),
-            tax: new FormControl(""),
+        this.addCreatePackageFormWarranty = new UntypedFormGroup({
+            warranty_Tat: new UntypedFormControl("", Validators.required),
+            Warranty_coverage_details: new UntypedFormControl("", Validators.required),
+            warranty_Tenure: new UntypedFormControl("", Validators.required),
+            fileUploadeForm: new UntypedFormControl(""),
+            Amc_standard_price: new UntypedFormControl(""),
+            Amc_selling_price: new UntypedFormControl(""),
+            tax: new UntypedFormControl(""),
         });
 
-        this.addCreatePackageFormAmc = new FormGroup({
-            amc_Tat: new FormControl("", [
+        this.addCreatePackageFormAmc = new UntypedFormGroup({
+            amc_Tat: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^[0-9]*$/),
             ]),
-            Amc_Tax: new FormControl("", [
+            Amc_Tax: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
@@ -260,86 +260,86 @@ export class AddCatelogManagementComponent implements OnInit {
             //     Validators.required,
             //     Validators.pattern(/^[a-zA-Z]*$/),
             // ]),
-            Amc_Package_name: new FormControl("", Validators.required),
-            Amc_Tenure: new FormControl("", Validators.required),
-            Amc_Preventive_Maintenance: new FormControl("", [
+            Amc_Package_name: new UntypedFormControl("", Validators.required),
+            Amc_Tenure: new UntypedFormControl("", Validators.required),
+            Amc_Preventive_Maintenance: new UntypedFormControl("", [
                 Validators.required,
             ]),
-            Amc_standard_price: new FormControl("", [
-                Validators.required,
-                Validators.pattern(/^\d+(\.\d{1,2})?$/),
-            ]),
-            Amc_selling_price: new FormControl("", [
+            Amc_standard_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            Amc_coverage_details: new FormControl(""),
+            Amc_selling_price: new UntypedFormControl("", [
+                Validators.required,
+                Validators.pattern(/^\d+(\.\d{1,2})?$/),
+            ]),
+            Amc_coverage_details: new UntypedFormControl(""),
         });
 
-        this.addCreatePackageFormCamc = new FormGroup({
+        this.addCreatePackageFormCamc = new UntypedFormGroup({
             // Camc_Name: new FormControl("", [
             //     Validators.required,
             //     Validators.pattern(/^[a-zA-Z]*$/),
             // ]),
-            Camc_Name: new FormControl("", Validators.required),
+            Camc_Name: new UntypedFormControl("", Validators.required),
 
-            Camc_Tat: new FormControl("", [
+            Camc_Tat: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^[0-9]*$/),
             ]),
-            Camc_Tax: new FormControl("", [
+            Camc_Tax: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            Camc_Tenure: new FormControl("", Validators.required),
-            Camc_Preventive_Maintenance: new FormControl("", [
+            Camc_Tenure: new UntypedFormControl("", Validators.required),
+            Camc_Preventive_Maintenance: new UntypedFormControl("", [
                 Validators.required,
             ]),
-            Camc_standard_price: new FormControl("", [
-                Validators.required,
-                Validators.pattern(/^\d+(\.\d{1,2})?$/),
-            ]),
-            Camc_selling_price: new FormControl("", [
+            Camc_standard_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            Camc_coverage_details: new FormControl(""),
+            Camc_selling_price: new UntypedFormControl("", [
+                Validators.required,
+                Validators.pattern(/^\d+(\.\d{1,2})?$/),
+            ]),
+            Camc_coverage_details: new UntypedFormControl(""),
         });
 
-        this.addCreatePackageFormDemand = new FormGroup({
-            OnDemand_standard_price: new FormControl("", [
+        this.addCreatePackageFormDemand = new UntypedFormGroup({
+            OnDemand_standard_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            OnDemand_selling_price: new FormControl("", [
+            OnDemand_selling_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            OnDemand_Tax: new FormControl("", [
+            OnDemand_Tax: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            OnDemand_TAT: new FormControl(""),
+            OnDemand_TAT: new UntypedFormControl(""),
         });
 
-        this.addCreatePackageFormInstallation = new FormGroup({
-            Installation_standard_price: new FormControl("", [
+        this.addCreatePackageFormInstallation = new UntypedFormGroup({
+            Installation_standard_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            Installation_selling_price: new FormControl("", [
+            Installation_selling_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            Installation_Tax: new FormControl("", [
+            Installation_Tax: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            Installation_TAT: new FormControl(""),
+            Installation_TAT: new UntypedFormControl(""),
         });
 
-        this.addSparePartForm = new FormGroup({
-            selectedSparePart: new FormControl(null, [Validators.required]),
+        this.addSparePartForm = new UntypedFormGroup({
+            selectedSparePart: new UntypedFormControl(null, [Validators.required]),
         });
     }
 

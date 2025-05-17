@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Factory } from 'src/app/model/Factory.model';
 import { FactoryService } from 'src/app/service/factory.service';
 import { SweetAlertService } from 'src/app/service/sweet-alert.service';
@@ -11,7 +11,7 @@ import { SweetAlertService } from 'src/app/service/sweet-alert.service';
   styleUrls: ['./add-factory.component.scss']
 })
 export class AddFactoryComponent implements OnInit {
-  addFactoryForm: FormGroup;
+  addFactoryForm: UntypedFormGroup;
   rackList:any[];
   trolleyList:any[];
   // freezer: Freezer = new Freezer();
@@ -28,10 +28,10 @@ export class AddFactoryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.addFactoryForm = new FormGroup({
-      location: new FormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
-      factoryName: new FormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
-      code: new FormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)])
+    this.addFactoryForm = new UntypedFormGroup({
+      location: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
+      factoryName: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
+      code: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)])
     });
 
     if(this.eventData)

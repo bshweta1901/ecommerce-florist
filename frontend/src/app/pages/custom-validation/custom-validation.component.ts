@@ -1,5 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { HeadCallsService } from 'src/app/service/HeadCalls.service';
 import { AuthService } from 'src/app/service/auth.service';
 
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./custom-validation.component.scss']
 })
 export class CustomValidationComponent implements OnInit {
-  @Input() control: FormControl;
+  @Input() control: UntypedFormControl;
   @Input() label: string;
   getHeadCallsResponse:any;
   getRemoteConfigResponse:any;

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import {
     OrderDetailsMaster,
@@ -61,7 +61,7 @@ export class OrderDetailsComponent implements OnInit {
 
     visibleSidebar: boolean = false;
 
-    updateStatusForm: FormGroup;
+    updateStatusForm: UntypedFormGroup;
     selectedUpdateStatus: UpdateCustomerInvoice = {} as UpdateCustomerInvoice;
     updateStatusObject: ReceiptMaster = {} as ReceiptMaster;
     receiptList: ReceiptMaster[] = [];
@@ -88,17 +88,17 @@ export class OrderDetailsComponent implements OnInit {
         this.getPredefinedByType("MODE-OF-PAYMENT");
         this.getPredefinedByType("RECEIPT-STATUS");
         this.getorderDetailsMode();
-        this.updateStatusForm = new FormGroup({
-            selectedUpdateStatus: new FormControl({} as PredefinedMaster, [
+        this.updateStatusForm = new UntypedFormGroup({
+            selectedUpdateStatus: new UntypedFormControl({} as PredefinedMaster, [
                 objectValidator(),
             ]),
-            selectedModeOfPayment: new FormControl({} as PredefinedMaster, [
+            selectedModeOfPayment: new UntypedFormControl({} as PredefinedMaster, [
                 objectValidator(),
             ]),
-            transaction_details: new FormControl("", Validators.required),
-            amount: new FormControl("", Validators.required),
-            remarks: new FormControl(""),
-            payment_date: new FormControl(""),
+            transaction_details: new UntypedFormControl("", Validators.required),
+            amount: new UntypedFormControl("", Validators.required),
+            remarks: new UntypedFormControl(""),
+            payment_date: new UntypedFormControl(""),
         });
     }
     setTableSetting() {

@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Factory } from 'src/app/model/Factory.model';
 import { GiveAwayMaster } from 'src/app/model/GiveAwayMaster.model';
 import { PredefinedMaster } from 'src/app/model/PredefinedMaster.model';
@@ -18,7 +18,7 @@ import { SweetAlertService } from 'src/app/service/sweet-alert.service';
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
-  addProductForm:FormGroup;
+  addProductForm:UntypedFormGroup;
   brandList:any[];
   stdList:any[];
   freezerList:any[];
@@ -48,21 +48,21 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.addProductForm = new FormGroup({
-      productName: new FormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
-      productSKU: new FormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
+    this.addProductForm = new UntypedFormGroup({
+      productName: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
+      productSKU: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
       // lotNo: new FormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
-      description: new FormControl("", [this.leadingSpaceValidator, Validators.maxLength(500)]),
-      fatPercent: new FormControl("", [Validators.required]),
-      brand: new FormControl(""),
-      weight: new FormControl("", [Validators.required]),
-      productCode: new FormControl("", [Validators.required]),
-      weightkg: new FormControl("",[Validators.required]),
+      description: new UntypedFormControl("", [this.leadingSpaceValidator, Validators.maxLength(500)]),
+      fatPercent: new UntypedFormControl("", [Validators.required]),
+      brand: new UntypedFormControl(""),
+      weight: new UntypedFormControl("", [Validators.required]),
+      productCode: new UntypedFormControl("", [Validators.required]),
+      weightkg: new UntypedFormControl("",[Validators.required]),
       // commodity: new FormControl("", [Validators.required]),
       // itemType: new FormControl("", [Validators.required]),
-      country: new FormControl("", [Validators.required]),
+      country: new UntypedFormControl("", [Validators.required]),
 
-      freezerTypes: new FormControl("", [Validators.required]),
+      freezerTypes: new UntypedFormControl("", [Validators.required]),
     });
 
     if(this.eventData)

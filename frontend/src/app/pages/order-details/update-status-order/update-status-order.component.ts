@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Address } from "src/app/demo/domain/customer";
 import {
@@ -46,7 +46,7 @@ export class UpdateStatusOrderComponent implements OnInit {
     predefinedMasterObject: PredefinedMaster = {} as PredefinedMaster;
     selectedModeOfPayment: PredefinedMaster = {} as PredefinedMaster;
     id: string;
-    updateStatusForm: FormGroup;
+    updateStatusForm: UntypedFormGroup;
     customerId: string;
     updateStatusObject: UpdateCustomerInvoice = {} as UpdateCustomerInvoice;
     selectedUpdateStatus: UpdateCustomerInvoice = {} as UpdateCustomerInvoice;
@@ -66,8 +66,8 @@ export class UpdateStatusOrderComponent implements OnInit {
         this.getPredefinedByType("MODE-OF-PAYMENT");
         this.getorderDetailsMode();
 
-        this.updateStatusForm = new FormGroup({
-            selectedUpdateStatus: new FormControl({} as PredefinedMaster, [
+        this.updateStatusForm = new UntypedFormGroup({
+            selectedUpdateStatus: new UntypedFormControl({} as PredefinedMaster, [
                 objectValidator(),
             ]),
             // selectedModeOfPayment: new FormControl({} as PredefinedMaster, [
@@ -78,7 +78,7 @@ export class UpdateStatusOrderComponent implements OnInit {
             //     Validators.required,
             //     Validators.pattern("^[0-9]*$"),
             // ]),
-            remarks: new FormControl(""),
+            remarks: new UntypedFormControl(""),
         });
     }
     setTableSetting() {

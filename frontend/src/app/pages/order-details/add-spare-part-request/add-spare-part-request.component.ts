@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { AddSparePart } from "src/app/model/OrderDetails.model";
 import { PredefinedMaster } from "src/app/model/PredefinedMaster.model";
 import { SparePartManager } from "src/app/model/SparePartMaster.model";
@@ -55,7 +55,7 @@ export class AddSparePartRequestComponent implements OnInit {
     SparePartList: AddSparePart[] = [];
     productList: string[] = [];
     addProducts: any[] = [];
-    addSparePartForm: FormGroup;
+    addSparePartForm: UntypedFormGroup;
     serviceRequestList: ServiceRequestMaster[] = [];
     selectedServiceRequest: ServiceRequestMaster = {} as ServiceRequestMaster;
     serviceRequestObject: ServiceRequestMaster = {} as ServiceRequestMaster;
@@ -76,17 +76,17 @@ export class AddSparePartRequestComponent implements OnInit {
         this.getSparePartManagerList();
         this.getServiceRequest();
 
-        this.addSparePartForm = new FormGroup({
-            serviceRequest: new FormControl("", [objectValidator()]),
-            selectedSparePart: new FormControl("", [objectValidator()]),
-            subtotal: new FormControl("", Validators.required),
-            discount_total: new FormControl("", [
+        this.addSparePartForm = new UntypedFormGroup({
+            serviceRequest: new UntypedFormControl("", [objectValidator()]),
+            selectedSparePart: new UntypedFormControl("", [objectValidator()]),
+            subtotal: new UntypedFormControl("", Validators.required),
+            discount_total: new UntypedFormControl("", [
                 Validators.required,
                 Validators.max(100),
                 Validators.pattern("^[0-9]*$"),
             ]),
-            tax_total: new FormControl("", Validators.required),
-            total_payable: new FormControl("", Validators.required),
+            tax_total: new UntypedFormControl("", Validators.required),
+            total_payable: new UntypedFormControl("", Validators.required),
         });
     }
     setTableSetting() {

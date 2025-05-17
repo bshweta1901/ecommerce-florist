@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Role } from 'src/app/model/Role.model';
 import { User } from 'src/app/model/User.model';
 import { SweetAlertService } from 'src/app/service/sweet-alert.service';
@@ -13,7 +13,7 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class AddUserComponent implements OnInit {
 
-  addUserForm:FormGroup;
+  addUserForm:UntypedFormGroup;
   userList:any[];
   clientList:any[];
   roleList:any[];
@@ -57,15 +57,15 @@ export class AddUserComponent implements OnInit {
       console.log(this.user, "user for update");
     }
 
-    this.addUserForm = new FormGroup({
-      firstName: new FormControl("", [Validators.required, this.leadingSpaceValidator]),
-      lastName: new FormControl("", [Validators.required, this.leadingSpaceValidator]),
-      phone: new FormControl("", Validators.required),
-      address: new FormControl(""),
-      email: new FormControl("", [Validators.required,Validators.pattern(
+    this.addUserForm = new UntypedFormGroup({
+      firstName: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator]),
+      lastName: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator]),
+      phone: new UntypedFormControl("", Validators.required),
+      address: new UntypedFormControl(""),
+      email: new UntypedFormControl("", [Validators.required,Validators.pattern(
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
       )]),
-      password: new FormControl(""),
+      password: new UntypedFormControl(""),
       // address: new FormControl(""),
     });
 

@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Factory } from 'src/app/model/Factory.model';
 import { ModuleMaster } from 'src/app/model/ModuleMaster.model';
 import { Role } from 'src/app/model/Role.model';
@@ -15,7 +15,7 @@ import { SweetAlertService } from 'src/app/service/sweet-alert.service';
   styleUrls: ['./add-staff.component.scss']
 })
 export class AddStaffComponent implements OnInit {
-  addStaffForm:FormGroup;
+  addStaffForm:UntypedFormGroup;
   staff:StaffMaster = new StaffMaster();
   @Output() close = new EventEmitter<boolean>();
   @Input() hideButton: boolean;
@@ -37,20 +37,20 @@ export class AddStaffComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.addStaffForm = new FormGroup({
-      firstname: new FormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
-      lastname: new FormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
-      email: new FormControl("", [Validators.required,Validators.pattern(
+    this.addStaffForm = new UntypedFormGroup({
+      firstname: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
+      lastname: new UntypedFormControl("", [Validators.required, this.leadingSpaceValidator, Validators.maxLength(500)]),
+      email: new UntypedFormControl("", [Validators.required,Validators.pattern(
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
       )]),
-      phone: new FormControl(""),
-      alternatePhone :  new FormControl(""),
-      dob: new FormControl(""),
-      doj: new FormControl(""),
-      factory: new FormControl("", [Validators.required]),
-      roles: new FormControl("", [Validators.required]),
-      adminLogin : new FormControl(false),
-      accessControlMasterList : new FormControl("",[Validators.required]),
+      phone: new UntypedFormControl(""),
+      alternatePhone :  new UntypedFormControl(""),
+      dob: new UntypedFormControl(""),
+      doj: new UntypedFormControl(""),
+      factory: new UntypedFormControl("", [Validators.required]),
+      roles: new UntypedFormControl("", [Validators.required]),
+      adminLogin : new UntypedFormControl(false),
+      accessControlMasterList : new UntypedFormControl("",[Validators.required]),
     });
 
     if(this.eventData)

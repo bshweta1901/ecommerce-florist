@@ -19,7 +19,7 @@ import { ProductCategory } from "src/app/model/Product";
 import { PredefinedService } from "src/app/service/predefined.service";
 import { PredefinedMaster } from "src/app/model/PredefinedMaster.model";
 import { Address } from "src/app/demo/domain/customer";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -86,8 +86,8 @@ export class AddServicePersonManagementComponent implements OnInit {
     roleList: RoleServiceEngineer[] = [];
     selectedRoleObject: RoleServiceEngineer = {} as RoleServiceEngineer;
     selectedRole: RoleServiceEngineer = {} as RoleServiceEngineer;
-    addPersonalDetailForm: FormGroup;
-    addAddressDetailForm: FormGroup;
+    addPersonalDetailForm: UntypedFormGroup;
+    addAddressDetailForm: UntypedFormGroup;
     serviceRequestList: ServiceRequestMaster[] = [];
     serviceRequestObject: ServiceRequestMaster = {} as ServiceRequestMaster;
     serviceEngineerRequestList: ServiceRequestMaster[] = [];
@@ -174,42 +174,42 @@ export class AddServicePersonManagementComponent implements OnInit {
         //     this.getServicePersonById();
         // });
 
-        this.addPersonalDetailForm = new FormGroup({
-            uuid: new FormControl(""),
-            first_name: new FormControl("", Validators.required),
-            employeeId: new FormControl("", Validators.required),
-            email: new FormControl("", [
+        this.addPersonalDetailForm = new UntypedFormGroup({
+            uuid: new UntypedFormControl(""),
+            first_name: new UntypedFormControl("", Validators.required),
+            employeeId: new UntypedFormControl("", Validators.required),
+            email: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(
                     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
                 ),
             ]),
-            phone: new FormControl("", [
+            phone: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^[6789]\d{9}$/),
             ]),
-            selectedProductCategoryList: new FormControl("", [
+            selectedProductCategoryList: new UntypedFormControl("", [
                 Validators.required,
             ]),
-            allowed_discount: new FormControl("", Validators.required),
-            slot: new FormControl("", [Validators.required]),
-            roles: new FormControl("", [Validators.required]),
-            manager_uuid: new FormControl(""),
-            ctc: new FormControl("", [
+            allowed_discount: new UntypedFormControl("", Validators.required),
+            slot: new UntypedFormControl("", [Validators.required]),
+            roles: new UntypedFormControl("", [Validators.required]),
+            manager_uuid: new UntypedFormControl(""),
+            ctc: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
         });
 
-        this.addAddressDetailForm = new FormGroup({
-            uuid: new FormControl(""),
-            address_1: new FormControl("", Validators.required),
-            address_2: new FormControl(""),
-            state: new FormControl("", [Validators.required]),
-            city_type: new FormControl("", [Validators.required]),
-            city: new FormControl("", [Validators.required]),
-            zone_uuid: new FormControl("", [Validators.required]),
-            pincode: new FormControl("", [
+        this.addAddressDetailForm = new UntypedFormGroup({
+            uuid: new UntypedFormControl(""),
+            address_1: new UntypedFormControl("", Validators.required),
+            address_2: new UntypedFormControl(""),
+            state: new UntypedFormControl("", [Validators.required]),
+            city_type: new UntypedFormControl("", [Validators.required]),
+            city: new UntypedFormControl("", [Validators.required]),
+            zone_uuid: new UntypedFormControl("", [Validators.required]),
+            pincode: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^[0-9]*$/),
             ]),

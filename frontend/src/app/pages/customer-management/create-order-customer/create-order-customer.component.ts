@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Customer, CustomerProduct } from "src/app/demo/domain/customer";
 import { Contract, ContractItem } from "src/app/model/Contract.model";
@@ -60,7 +60,7 @@ export class CreateOrderCustomerComponent implements OnInit {
     packageList: Package[] = [];
     selectedPackage: Package = { maintenance_cycle: { name: "" } } as Package;
 
-    createOrderForm: FormGroup;
+    createOrderForm: UntypedFormGroup;
     productDisplay: any;
     type: any;
     packadeId: any;
@@ -98,23 +98,23 @@ export class CreateOrderCustomerComponent implements OnInit {
             this.getCustomerList();
         });
 
-        this.createOrderForm = new FormGroup({
+        this.createOrderForm = new UntypedFormGroup({
             // selectedCustomer: new FormControl("", [
             //     Validators.required,
             //     objectValidator(),
             // ]),
             // serial_no: new FormControl(""),
-            selectedCustomerProduct: new FormControl("", [
+            selectedCustomerProduct: new UntypedFormControl("", [
                 Validators.required,
                 objectValidator(),
             ]),
-            selectedPackageServiceType: new FormControl("", [
+            selectedPackageServiceType: new UntypedFormControl("", [
                 Validators.required,
                 objectValidator(),
             ]),
 
-            tenure: new FormControl(""),
-            tat: new FormControl(""),
+            tenure: new UntypedFormControl(""),
+            tat: new UntypedFormControl(""),
         });
         console.log(this.selectedCustomerProduct, "selectedCustomerProduct");
 

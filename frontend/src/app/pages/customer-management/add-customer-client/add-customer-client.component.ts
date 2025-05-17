@@ -2,7 +2,7 @@ import { Address } from "./../../../domain/customer";
 import { DatePipe, formatDate } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Route, Router } from "@angular/router";
 import {
     Customer,
@@ -151,12 +151,12 @@ export class AddCustomerClientComponent implements OnInit {
         page_size: 10000,
     } as PredefinedMaster;
 
-    addCustomerForm: FormGroup;
-    addAddressForm: FormGroup;
-    updateAddressForm: FormGroup;
-    addProductForm: FormGroup;
-    updateProductForm: FormGroup;
-    contractUpdateForm: FormGroup;
+    addCustomerForm: UntypedFormGroup;
+    addAddressForm: UntypedFormGroup;
+    updateAddressForm: UntypedFormGroup;
+    addProductForm: UntypedFormGroup;
+    updateProductForm: UntypedFormGroup;
+    contractUpdateForm: UntypedFormGroup;
     productCategory: ProductCategory = new ProductCategory();
     showView: any;
     oredrDetailsObject: OrderDetailsMaster = {} as OrderDetailsMaster;
@@ -194,93 +194,93 @@ export class AddCustomerClientComponent implements OnInit {
         this.minDate = new Date();
         this.setTableSetting();
 
-        this.addCustomerForm = new FormGroup({
-            name: new FormControl("", Validators.required),
-            email: new FormControl("", [
+        this.addCustomerForm = new UntypedFormGroup({
+            name: new UntypedFormControl("", Validators.required),
+            email: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(
                     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
                 ),
             ]),
-            phone: new FormControl("", [
+            phone: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^[6789]\d{9}$/),
             ]),
-            uuid: new FormControl(""),
-            parent: new FormControl(""),
-            type: new FormControl("", Validators.required),
+            uuid: new UntypedFormControl(""),
+            parent: new UntypedFormControl(""),
+            type: new UntypedFormControl("", Validators.required),
             // kyc_no: new FormControl(""),
-            kyc_no: new FormControl(""),
-            selectedContractStatus: new FormControl(""),
+            kyc_no: new UntypedFormControl(""),
+            selectedContractStatus: new UntypedFormControl(""),
         });
-        this.addAddressForm = new FormGroup({
-            address1: new FormControl("", Validators.required),
-            state: new FormControl("", Validators.required),
-            cityType: new FormControl("", Validators.required),
-            city: new FormControl("", Validators.required),
-            zone: new FormControl(""),
-            pincodeType: new FormControl("", Validators.required),
-            spoc_name: new FormControl("", Validators.required),
-            spoc_email: new FormControl("", [
+        this.addAddressForm = new UntypedFormGroup({
+            address1: new UntypedFormControl("", Validators.required),
+            state: new UntypedFormControl("", Validators.required),
+            cityType: new UntypedFormControl("", Validators.required),
+            city: new UntypedFormControl("", Validators.required),
+            zone: new UntypedFormControl(""),
+            pincodeType: new UntypedFormControl("", Validators.required),
+            spoc_name: new UntypedFormControl("", Validators.required),
+            spoc_email: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(
                     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
                 ),
             ]),
-            phone: new FormControl(""),
-            address2: new FormControl(""),
+            phone: new UntypedFormControl(""),
+            address2: new UntypedFormControl(""),
         });
-        this.contractUpdateForm = new FormGroup({
-            legalEntity: new FormControl(""),
-            legalBranch: new FormControl(""),
-            contract_Date: new FormControl("", Validators.required),
-            remarks: new FormControl(""),
-            splitPayment: new FormControl("", Validators.required),
-            invoices: new FormControl("", Validators.required),
-            paymentTerms: new FormControl("", [
+        this.contractUpdateForm = new UntypedFormGroup({
+            legalEntity: new UntypedFormControl(""),
+            legalBranch: new UntypedFormControl(""),
+            contract_Date: new UntypedFormControl("", Validators.required),
+            remarks: new UntypedFormControl(""),
+            splitPayment: new UntypedFormControl("", Validators.required),
+            invoices: new UntypedFormControl("", Validators.required),
+            paymentTerms: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern("^[0-9]*$"), // Accepts only numbers
             ]),
-            billingAddress: new FormControl("", Validators.required),
-            billingCity: new FormControl("", Validators.required),
-            billingState: new FormControl("", Validators.required),
-            billingPincode: new FormControl("", Validators.required),
-            gst: new FormControl("", [
+            billingAddress: new UntypedFormControl("", Validators.required),
+            billingCity: new UntypedFormControl("", Validators.required),
+            billingState: new UntypedFormControl("", Validators.required),
+            billingPincode: new UntypedFormControl("", Validators.required),
+            gst: new UntypedFormControl("", [
                 Validators.pattern(
                     /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9A-Z]{1}$/
                 ),
             ]),
-            terms: new FormControl("", Validators.required),
-            is_checkBox: new FormControl(""),
+            terms: new UntypedFormControl("", Validators.required),
+            is_checkBox: new UntypedFormControl(""),
         });
 
-        this.updateAddressForm = new FormGroup({
-            address1: new FormControl("", Validators.required),
-            address2: new FormControl(""),
-            state: new FormControl("", Validators.required),
-            cityType: new FormControl("", Validators.required),
-            city: new FormControl("", Validators.required),
-            zone: new FormControl(""),
-            pincodeType: new FormControl("", Validators.required),
-            spoc_name: new FormControl("", Validators.required),
-            spoc_email: new FormControl("", [
+        this.updateAddressForm = new UntypedFormGroup({
+            address1: new UntypedFormControl("", Validators.required),
+            address2: new UntypedFormControl(""),
+            state: new UntypedFormControl("", Validators.required),
+            cityType: new UntypedFormControl("", Validators.required),
+            city: new UntypedFormControl("", Validators.required),
+            zone: new UntypedFormControl(""),
+            pincodeType: new UntypedFormControl("", Validators.required),
+            spoc_name: new UntypedFormControl("", Validators.required),
+            spoc_email: new UntypedFormControl("", [
                 Validators.required,
                 Validators.email,
             ]),
-            phone: new FormControl(""),
+            phone: new UntypedFormControl(""),
         });
 
         this.setProductFormProperties();
 
-        this.updateProductForm = new FormGroup({
-            location: new FormControl("", Validators.required),
-            category: new FormControl("", Validators.required),
-            name: new FormControl("", Validators.required),
-            serial_no: new FormControl("", Validators.required),
-            approx_life: new FormControl("", Validators.required),
-            sku: new FormControl("", Validators.required),
-            sap_code: new FormControl(""),
-            start_date: new FormControl("", Validators.required),
+        this.updateProductForm = new UntypedFormGroup({
+            location: new UntypedFormControl("", Validators.required),
+            category: new UntypedFormControl("", Validators.required),
+            name: new UntypedFormControl("", Validators.required),
+            serial_no: new UntypedFormControl("", Validators.required),
+            approx_life: new UntypedFormControl("", Validators.required),
+            sku: new UntypedFormControl("", Validators.required),
+            sap_code: new UntypedFormControl(""),
+            start_date: new UntypedFormControl("", Validators.required),
         });
         this.activatedRoute.paramMap.subscribe((url: any) => {
             this.customerId = url.params.id;
@@ -790,15 +790,15 @@ export class AddCustomerClientComponent implements OnInit {
     }
 
     setProductFormProperties() {
-        this.addProductForm = new FormGroup({
-            location: new FormControl("", objectValidator()),
-            category: new FormControl("", objectValidator()),
-            name: new FormControl("", Validators.required),
-            serial_no: new FormControl("", Validators.required),
-            approx_life: new FormControl(""),
-            sku: new FormControl(""),
-            sap_code: new FormControl(""),
-            start_date: new FormControl("", Validators.required),
+        this.addProductForm = new UntypedFormGroup({
+            location: new UntypedFormControl("", objectValidator()),
+            category: new UntypedFormControl("", objectValidator()),
+            name: new UntypedFormControl("", Validators.required),
+            serial_no: new UntypedFormControl("", Validators.required),
+            approx_life: new UntypedFormControl(""),
+            sku: new UntypedFormControl(""),
+            sap_code: new UntypedFormControl(""),
+            start_date: new UntypedFormControl("", Validators.required),
         });
     }
 
