@@ -27,7 +27,6 @@
         "@fullcalendar/daygrid": "^5.8.0",
         "@fullcalendar/interaction": "^5.8.0",
         "@fullcalendar/timegrid": "^5.8.0",
-        "angular-signature-pad": "^0.0.14",
         "angularx-qrcode": "^13.0.8",
         "chart.js": "^3.3.2",
         "file-saver": "^2.0.5",
