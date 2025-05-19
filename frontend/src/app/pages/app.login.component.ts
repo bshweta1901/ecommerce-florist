@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { AccessControlMaster } from "../model/AccessControlMaster.model";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { SaveNotification, User } from "../model/User.model";
 import { Router } from "@angular/router";
 import { AuthService } from "../service/auth.service";
@@ -24,8 +24,8 @@ export class AppLoginComponent {
     accessControlFilter: AccessControlMaster = new AccessControlMaster();
     accessList: AccessControlMaster[] = [];
     accessControlMasterMap: { [moduleCode: string]: AccessControlMaster } = {};
-    myForm: FormGroup;
-    addOTPForm: FormGroup;
+    myForm: UntypedFormGroup;
+    addOTPForm: UntypedFormGroup;
     user: User = new User();
     userOtp: User = new User();
     saveNotificationObj: SaveNotification = new SaveNotification();
@@ -52,9 +52,9 @@ export class AppLoginComponent {
     ) {}
 
     ngOnInit(): void {
-        this.myForm = new FormGroup({
-            username: new FormControl("", Validators.required),
-            password: new FormControl("", [Validators.required]),
+        this.myForm = new UntypedFormGroup({
+            username: new UntypedFormControl("", Validators.required),
+            password: new UntypedFormControl("", [Validators.required]),
         });
         this.savedEmail = localStorage.getItem("savedEmail");
 
@@ -75,8 +75,8 @@ export class AppLoginComponent {
             }
         }
 
-        this.addOTPForm = new FormGroup({
-            otp: new FormControl("", [
+        this.addOTPForm = new UntypedFormGroup({
+            otp: new UntypedFormControl("", [
                 Validators.required,
                 Validators.minLength(6),
                 Validators.maxLength(6),

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PredefinedMaster } from "src/app/model/PredefinedMaster.model";
 import {
@@ -33,7 +33,7 @@ export class AddSparePartManagementComponent implements OnInit {
     selectedType: PredefinedMaster = {} as PredefinedMaster;
     predefineObject: PredefinedMaster = {} as PredefinedMaster;
     selectedProductCategory: ProductCategory = {} as ProductCategory;
-    addSparePartForm: FormGroup;
+    addSparePartForm: UntypedFormGroup;
     sparePartId: boolean = false;
     actionForEdit: boolean = false;
     actionForView: boolean = false;
@@ -72,27 +72,27 @@ export class AddSparePartManagementComponent implements OnInit {
             });
         });
 
-        this.addSparePartForm = new FormGroup({
-            uuid: new FormControl(""),
-            selectedProductCategory: new FormControl("", [Validators.required]),
-            spare_part_name: new FormControl("", Validators.required),
-            spare_part_type_name: new FormControl("", Validators.required),
-            sku: new FormControl("", [Validators.required]),
-            spare_part_status_name: new FormControl("", [Validators.required]),
-            approx_life: new FormControl("", Validators.required),
-            standard_price: new FormControl("", [
+        this.addSparePartForm = new UntypedFormGroup({
+            uuid: new UntypedFormControl(""),
+            selectedProductCategory: new UntypedFormControl("", [Validators.required]),
+            spare_part_name: new UntypedFormControl("", Validators.required),
+            spare_part_type_name: new UntypedFormControl("", Validators.required),
+            sku: new UntypedFormControl("", [Validators.required]),
+            spare_part_status_name: new UntypedFormControl("", [Validators.required]),
+            approx_life: new UntypedFormControl("", Validators.required),
+            standard_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            selling_price: new FormControl("", [
+            selling_price: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            tax: new FormControl("", [
+            tax: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            description: new FormControl(""),
+            description: new UntypedFormControl(""),
         });
     }
 

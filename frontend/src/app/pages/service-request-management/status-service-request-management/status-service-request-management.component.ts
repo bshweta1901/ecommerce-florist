@@ -1,6 +1,6 @@
 import { DatePipe } from "@angular/common";
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { PredefinedMaster } from "src/app/model/PredefinedMaster.model";
 import {
@@ -74,9 +74,9 @@ export class StatusServiceRequestManagementComponent implements OnInit {
     technicalReportUrl: string | null = null;
     sopDetails: SopDetail = {} as SopDetail;
     docs: Doc = {} as Doc;
-    updateServiceStatusForm: FormGroup;
-    reassignForm: FormGroup;
-    rescheduleForm: FormGroup;
+    updateServiceStatusForm: UntypedFormGroup;
+    reassignForm: UntypedFormGroup;
+    rescheduleForm: UntypedFormGroup;
     customerId: string;
     sparePartUuid: string;
     predefinedMasterObject: PredefinedMaster = {} as PredefinedMaster;
@@ -117,19 +117,19 @@ export class StatusServiceRequestManagementComponent implements OnInit {
         this.getManualAssign();
         this.getSlot();
 
-        this.updateServiceStatusForm = new FormGroup({
-            name: new FormControl("", [Validators.required]),
+        this.updateServiceStatusForm = new UntypedFormGroup({
+            name: new UntypedFormControl("", [Validators.required]),
         });
 
-        this.reassignForm = new FormGroup({
-            manual_assign: new FormControl({} as PredefinedMaster, [
+        this.reassignForm = new UntypedFormGroup({
+            manual_assign: new UntypedFormControl({} as PredefinedMaster, [
                 objectValidator(),
             ]),
         });
 
-        this.rescheduleForm = new FormGroup({
-            date: new FormControl("", [Validators.required]),
-            slot: new FormControl("", [Validators.required]),
+        this.rescheduleForm = new UntypedFormGroup({
+            date: new UntypedFormControl("", [Validators.required]),
+            slot: new UntypedFormControl("", [Validators.required]),
         });
     }
 
