@@ -1,7 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import {
     CustomerCategory,
     Customer,
@@ -222,42 +222,42 @@ export class MasterSettingComponent implements OnInit {
     updatedLegalState: PredefinedMaster = new PredefinedMaster();
     updatedLegalCity: PredefinedMaster = new PredefinedMaster();
 
-    customerTypeForm: FormGroup;
-    stateForm: FormGroup;
-    cityForm: FormGroup;
-    zoneForm: FormGroup;
-    parentGroupForm: FormGroup;
-    productCategoryForm: FormGroup;
-    unavailabilityForm: FormGroup;
-    entityCurrencyForm: FormGroup;
-    productOEMForm: FormGroup;
-    sparePartTypeForm: FormGroup;
-    cityTypeForm: FormGroup;
-    slotTypeForm: FormGroup;
-    updateSlotForm: FormGroup;
+    customerTypeForm: UntypedFormGroup;
+    stateForm: UntypedFormGroup;
+    cityForm: UntypedFormGroup;
+    zoneForm: UntypedFormGroup;
+    parentGroupForm: UntypedFormGroup;
+    productCategoryForm: UntypedFormGroup;
+    unavailabilityForm: UntypedFormGroup;
+    entityCurrencyForm: UntypedFormGroup;
+    productOEMForm: UntypedFormGroup;
+    sparePartTypeForm: UntypedFormGroup;
+    cityTypeForm: UntypedFormGroup;
+    slotTypeForm: UntypedFormGroup;
+    updateSlotForm: UntypedFormGroup;
     showText: boolean = false;
-    updateSlotTwoForm: FormGroup;
-    updatedForms: FormGroup;
-    updatedStateForms: FormGroup;
-    updatedParentGroupForm: FormGroup;
-    updatedCityForms: FormGroup;
-    updatedZoneForm: FormGroup;
-    updatedUnavailabilityForm: FormGroup;
-    updatedSparePartForm: FormGroup;
-    updatedProductOEMForm: FormGroup;
-    updatedCurrencytForm: FormGroup;
-    updatedCityTabForm: FormGroup;
-    repairChecklistForm: FormGroup;
-    problemStatementForm: FormGroup;
-    categoryNameForm: FormGroup;
-    legalEntityForm: FormGroup;
-    legalBrancheForm: FormGroup;
-    legalSubsidiaryForm: FormGroup;
-    editRepairForm: FormGroup;
-    editProblemForm: FormGroup;
-    updatedLegalEntityForm: FormGroup;
-    updatedLegalBranchForm: FormGroup;
-    updatedLegalSubsidiaryForm: FormGroup;
+    updateSlotTwoForm: UntypedFormGroup;
+    updatedForms: UntypedFormGroup;
+    updatedStateForms: UntypedFormGroup;
+    updatedParentGroupForm: UntypedFormGroup;
+    updatedCityForms: UntypedFormGroup;
+    updatedZoneForm: UntypedFormGroup;
+    updatedUnavailabilityForm: UntypedFormGroup;
+    updatedSparePartForm: UntypedFormGroup;
+    updatedProductOEMForm: UntypedFormGroup;
+    updatedCurrencytForm: UntypedFormGroup;
+    updatedCityTabForm: UntypedFormGroup;
+    repairChecklistForm: UntypedFormGroup;
+    problemStatementForm: UntypedFormGroup;
+    categoryNameForm: UntypedFormGroup;
+    legalEntityForm: UntypedFormGroup;
+    legalBrancheForm: UntypedFormGroup;
+    legalSubsidiaryForm: UntypedFormGroup;
+    editRepairForm: UntypedFormGroup;
+    editProblemForm: UntypedFormGroup;
+    updatedLegalEntityForm: UntypedFormGroup;
+    updatedLegalBranchForm: UntypedFormGroup;
+    updatedLegalSubsidiaryForm: UntypedFormGroup;
     showInput: boolean = false;
     constructor(
         public authService: AuthService,
@@ -271,234 +271,234 @@ export class MasterSettingComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.customerTypeForm = new FormGroup({
-            value: new FormControl("", Validators.required),
+        this.customerTypeForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
         });
-        this.stateForm = new FormGroup({
-            value: new FormControl("", Validators.required),
+        this.stateForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
         });
-        this.cityForm = new FormGroup({
-            value: new FormControl("", Validators.required),
+        this.cityForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
         });
-        this.zoneForm = new FormGroup({
-            value: new FormControl("", Validators.required),
-        });
-
-        this.parentGroupForm = new FormGroup({
-            value: new FormControl("", Validators.required),
-            code: new FormControl("", Validators.required),
-        });
-        this.productCategoryForm = new FormGroup({
-            product_category: new FormControl("", Validators.required),
-        });
-        this.unavailabilityForm = new FormGroup({
-            value: new FormControl("", Validators.required),
-        });
-        this.productOEMForm = new FormGroup({
-            value: new FormControl("", Validators.required),
-        });
-        this.entityCurrencyForm = new FormGroup({
-            value: new FormControl("", Validators.required),
-        });
-        this.sparePartTypeForm = new FormGroup({
-            value: new FormControl("", Validators.required),
-        });
-        this.cityTypeForm = new FormGroup({
-            state: new FormControl("", Validators.required),
-            cityType: new FormControl("", Validators.required),
-        });
-        this.slotTypeForm = new FormGroup({
-            slotName: new FormControl("", Validators.required),
-            selectedStartTime: new FormControl("", Validators.required),
-            selectedEndTime: new FormControl("", Validators.required),
+        this.zoneForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
         });
 
-        this.updateSlotForm = new FormGroup({
-            updateName: new FormControl("", Validators.required),
-            updatedStartTime: new FormControl("", [Validators.required]),
+        this.parentGroupForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
+            code: new UntypedFormControl("", Validators.required),
+        });
+        this.productCategoryForm = new UntypedFormGroup({
+            product_category: new UntypedFormControl("", Validators.required),
+        });
+        this.unavailabilityForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
+        });
+        this.productOEMForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
+        });
+        this.entityCurrencyForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
+        });
+        this.sparePartTypeForm = new UntypedFormGroup({
+            value: new UntypedFormControl("", Validators.required),
+        });
+        this.cityTypeForm = new UntypedFormGroup({
+            state: new UntypedFormControl("", Validators.required),
+            cityType: new UntypedFormControl("", Validators.required),
+        });
+        this.slotTypeForm = new UntypedFormGroup({
+            slotName: new UntypedFormControl("", Validators.required),
+            selectedStartTime: new UntypedFormControl("", Validators.required),
+            selectedEndTime: new UntypedFormControl("", Validators.required),
         });
 
-        this.updateSlotTwoForm = new FormGroup({
-            updatedEndTime: new FormControl("", [Validators.required]),
+        this.updateSlotForm = new UntypedFormGroup({
+            updateName: new UntypedFormControl("", Validators.required),
+            updatedStartTime: new UntypedFormControl("", [Validators.required]),
         });
 
-        this.updatedForms = new FormGroup({
-            customerType: new FormControl("", Validators.required),
+        this.updateSlotTwoForm = new UntypedFormGroup({
+            updatedEndTime: new UntypedFormControl("", [Validators.required]),
         });
 
-        this.updatedStateForms = new FormGroup({
-            updateStateType: new FormControl("", Validators.required),
+        this.updatedForms = new UntypedFormGroup({
+            customerType: new UntypedFormControl("", Validators.required),
         });
 
-        this.updatedParentGroupForm = new FormGroup({
-            parentGroupName: new FormControl("", Validators.required),
-            parentGroupCode: new FormControl("", Validators.required),
+        this.updatedStateForms = new UntypedFormGroup({
+            updateStateType: new UntypedFormControl("", Validators.required),
         });
 
-        this.updatedCityForms = new FormGroup({
-            cityTypeName: new FormControl("", Validators.required),
+        this.updatedParentGroupForm = new UntypedFormGroup({
+            parentGroupName: new UntypedFormControl("", Validators.required),
+            parentGroupCode: new UntypedFormControl("", Validators.required),
         });
 
-        this.updatedZoneForm = new FormGroup({
-            zoneTypeName: new FormControl("", Validators.required),
+        this.updatedCityForms = new UntypedFormGroup({
+            cityTypeName: new UntypedFormControl("", Validators.required),
         });
 
-        this.updatedUnavailabilityForm = new FormGroup({
-            unavailabilityTypeName: new FormControl("", Validators.required),
+        this.updatedZoneForm = new UntypedFormGroup({
+            zoneTypeName: new UntypedFormControl("", Validators.required),
         });
 
-        this.updatedSparePartForm = new FormGroup({
-            sparePartTypeName: new FormControl("", Validators.required),
+        this.updatedUnavailabilityForm = new UntypedFormGroup({
+            unavailabilityTypeName: new UntypedFormControl("", Validators.required),
         });
 
-        this.updatedProductOEMForm = new FormGroup({
-            OemName: new FormControl("", Validators.required),
+        this.updatedSparePartForm = new UntypedFormGroup({
+            sparePartTypeName: new UntypedFormControl("", Validators.required),
         });
 
-        this.updatedCurrencytForm = new FormGroup({
-            CurrencyName: new FormControl("", Validators.required),
+        this.updatedProductOEMForm = new UntypedFormGroup({
+            OemName: new UntypedFormControl("", Validators.required),
         });
 
-        this.updatedCityTabForm = new FormGroup({
-            updatedSelectedState: new FormControl("", Validators.required),
-            cityTabTypeName: new FormControl("", Validators.required),
+        this.updatedCurrencytForm = new UntypedFormGroup({
+            CurrencyName: new UntypedFormControl("", Validators.required),
         });
 
-        this.repairChecklistForm = new FormGroup({
-            addRepairChecklist: new FormControl("", Validators.required),
+        this.updatedCityTabForm = new UntypedFormGroup({
+            updatedSelectedState: new UntypedFormControl("", Validators.required),
+            cityTabTypeName: new UntypedFormControl("", Validators.required),
         });
 
-        this.problemStatementForm = new FormGroup({
-            addproblemStatement: new FormControl("", Validators.required),
+        this.repairChecklistForm = new UntypedFormGroup({
+            addRepairChecklist: new UntypedFormControl("", Validators.required),
         });
 
-        this.categoryNameForm = new FormGroup({
-            editCategoryName: new FormControl("", Validators.required),
+        this.problemStatementForm = new UntypedFormGroup({
+            addproblemStatement: new UntypedFormControl("", Validators.required),
         });
 
-        this.legalEntityForm = new FormGroup({
-            name: new FormControl("", [
+        this.categoryNameForm = new UntypedFormGroup({
+            editCategoryName: new UntypedFormControl("", Validators.required),
+        });
+
+        this.legalEntityForm = new UntypedFormGroup({
+            name: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern("^[A-Za-z _-]+$"),
             ]),
-            gstNumber: new FormControl("", Validators.required),
-            panNumber: new FormControl("", Validators.required),
-            financialYear: new FormControl("", Validators.required),
-            rocNumber: new FormControl("", Validators.required),
-            tdsNumber: new FormControl("", Validators.required),
+            gstNumber: new UntypedFormControl("", Validators.required),
+            panNumber: new UntypedFormControl("", Validators.required),
+            financialYear: new UntypedFormControl("", Validators.required),
+            rocNumber: new UntypedFormControl("", Validators.required),
+            tdsNumber: new UntypedFormControl("", Validators.required),
             // registeredAddress: new FormControl("", Validators.required),
-            selectedLegalBranch: new FormControl(""),
-            selectedLegalSubsidiaries: new FormControl(""),
-            bank_name: new FormControl("", Validators.required),
-            bank_account_name: new FormControl("", Validators.required),
-            bank_account_number: new FormControl("", Validators.required),
-            bank_ifsc_code: new FormControl("", Validators.required),
-            address_1: new FormControl("", Validators.required),
-            state: new FormControl("", Validators.required),
-            country: new FormControl("", Validators.required),
-            city: new FormControl("", Validators.required),
-            pincode: new FormControl("", Validators.required),
-            address_2: new FormControl(""),
+            selectedLegalBranch: new UntypedFormControl(""),
+            selectedLegalSubsidiaries: new UntypedFormControl(""),
+            bank_name: new UntypedFormControl("", Validators.required),
+            bank_account_name: new UntypedFormControl("", Validators.required),
+            bank_account_number: new UntypedFormControl("", Validators.required),
+            bank_ifsc_code: new UntypedFormControl("", Validators.required),
+            address_1: new UntypedFormControl("", Validators.required),
+            state: new UntypedFormControl("", Validators.required),
+            country: new UntypedFormControl("", Validators.required),
+            city: new UntypedFormControl("", Validators.required),
+            pincode: new UntypedFormControl("", Validators.required),
+            address_2: new UntypedFormControl(""),
         });
 
-        this.legalBrancheForm = new FormGroup({
-            name: new FormControl("", [
+        this.legalBrancheForm = new UntypedFormGroup({
+            name: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern("^[A-Za-z _-]+$"),
             ]),
-            gstNumber: new FormControl("", Validators.required),
-            legalEntity: new FormControl("", Validators.required),
-            tdsNumber: new FormControl("", Validators.required),
+            gstNumber: new UntypedFormControl("", Validators.required),
+            legalEntity: new UntypedFormControl("", Validators.required),
+            tdsNumber: new UntypedFormControl("", Validators.required),
             // registeredAddress: new FormControl("", Validators.required),
-            bank_name: new FormControl("", Validators.required),
-            bank_account_name: new FormControl("", Validators.required),
-            bank_account_number: new FormControl("", Validators.required),
-            bank_ifsc_code: new FormControl("", Validators.required),
-            address_1: new FormControl("", Validators.required),
-            state: new FormControl("", Validators.required),
-            country: new FormControl("", Validators.required),
-            city: new FormControl("", Validators.required),
-            pincode: new FormControl("", Validators.required),
-            address_2: new FormControl(""),
+            bank_name: new UntypedFormControl("", Validators.required),
+            bank_account_name: new UntypedFormControl("", Validators.required),
+            bank_account_number: new UntypedFormControl("", Validators.required),
+            bank_ifsc_code: new UntypedFormControl("", Validators.required),
+            address_1: new UntypedFormControl("", Validators.required),
+            state: new UntypedFormControl("", Validators.required),
+            country: new UntypedFormControl("", Validators.required),
+            city: new UntypedFormControl("", Validators.required),
+            pincode: new UntypedFormControl("", Validators.required),
+            address_2: new UntypedFormControl(""),
         });
 
-        this.legalSubsidiaryForm = new FormGroup({
-            name: new FormControl("", [
+        this.legalSubsidiaryForm = new UntypedFormGroup({
+            name: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern("^[A-Za-z _-]+$"),
             ]),
-            gstNumber: new FormControl("", Validators.required),
-            panNumber: new FormControl("", Validators.required),
-            financialYear: new FormControl("", Validators.required),
-            rocNumber: new FormControl("", Validators.required),
-            tdsNumber: new FormControl("", Validators.required),
-            registeredAddress: new FormControl("", Validators.required),
-            legalEntity: new FormControl("", Validators.required),
+            gstNumber: new UntypedFormControl("", Validators.required),
+            panNumber: new UntypedFormControl("", Validators.required),
+            financialYear: new UntypedFormControl("", Validators.required),
+            rocNumber: new UntypedFormControl("", Validators.required),
+            tdsNumber: new UntypedFormControl("", Validators.required),
+            registeredAddress: new UntypedFormControl("", Validators.required),
+            legalEntity: new UntypedFormControl("", Validators.required),
         });
 
         // this.editRepairForm = new FormGroup({
         //     editRepairChecklist: new FormControl("", Validators.required),
         // });
 
-        this.updatedLegalEntityForm = new FormGroup({
-            name: new FormControl("", [
+        this.updatedLegalEntityForm = new UntypedFormGroup({
+            name: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern("^[A-Za-z _-]+$"),
             ]),
-            gstNumber: new FormControl("", Validators.required),
-            panNumber: new FormControl("", Validators.required),
-            financialYear: new FormControl("", Validators.required),
-            rocNumber: new FormControl("", Validators.required),
-            tdsNumber: new FormControl("", Validators.required),
+            gstNumber: new UntypedFormControl("", Validators.required),
+            panNumber: new UntypedFormControl("", Validators.required),
+            financialYear: new UntypedFormControl("", Validators.required),
+            rocNumber: new UntypedFormControl("", Validators.required),
+            tdsNumber: new UntypedFormControl("", Validators.required),
             // registeredAddress: new FormControl("", Validators.required),
-            updateSelectedBranch: new FormControl(""),
-            updateSelectedSubsidiaries: new FormControl(""),
+            updateSelectedBranch: new UntypedFormControl(""),
+            updateSelectedSubsidiaries: new UntypedFormControl(""),
 
-            bank_name: new FormControl("", Validators.required),
-            bank_account_name: new FormControl("", Validators.required),
-            bank_account_number: new FormControl("", Validators.required),
-            bank_ifsc_code: new FormControl("", Validators.required),
-            address_1: new FormControl("", Validators.required),
-            state: new FormControl("", Validators.required),
-            country: new FormControl("", Validators.required),
-            city: new FormControl("", Validators.required),
-            pincode: new FormControl("", Validators.required),
-            address_2: new FormControl(""),
+            bank_name: new UntypedFormControl("", Validators.required),
+            bank_account_name: new UntypedFormControl("", Validators.required),
+            bank_account_number: new UntypedFormControl("", Validators.required),
+            bank_ifsc_code: new UntypedFormControl("", Validators.required),
+            address_1: new UntypedFormControl("", Validators.required),
+            state: new UntypedFormControl("", Validators.required),
+            country: new UntypedFormControl("", Validators.required),
+            city: new UntypedFormControl("", Validators.required),
+            pincode: new UntypedFormControl("", Validators.required),
+            address_2: new UntypedFormControl(""),
         });
 
-        this.updatedLegalBranchForm = new FormGroup({
-            name: new FormControl("", [
+        this.updatedLegalBranchForm = new UntypedFormGroup({
+            name: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern("^[A-Za-z _-]+$"),
             ]),
-            gstNumber: new FormControl("", Validators.required),
-            legalEntity: new FormControl("", Validators.required),
-            tdsNumber: new FormControl("", Validators.required),
+            gstNumber: new UntypedFormControl("", Validators.required),
+            legalEntity: new UntypedFormControl("", Validators.required),
+            tdsNumber: new UntypedFormControl("", Validators.required),
             // registeredAddress: new FormControl("", Validators.required),
-            bank_name: new FormControl("", Validators.required),
-            bank_account_name: new FormControl("", Validators.required),
-            bank_account_number: new FormControl("", Validators.required),
-            bank_ifsc_code: new FormControl("", Validators.required),
-            address_1: new FormControl("", Validators.required),
-            state: new FormControl("", Validators.required),
-            country: new FormControl("", Validators.required),
-            city: new FormControl("", Validators.required),
-            pincode: new FormControl("", Validators.required),
-            address_2: new FormControl(""),
+            bank_name: new UntypedFormControl("", Validators.required),
+            bank_account_name: new UntypedFormControl("", Validators.required),
+            bank_account_number: new UntypedFormControl("", Validators.required),
+            bank_ifsc_code: new UntypedFormControl("", Validators.required),
+            address_1: new UntypedFormControl("", Validators.required),
+            state: new UntypedFormControl("", Validators.required),
+            country: new UntypedFormControl("", Validators.required),
+            city: new UntypedFormControl("", Validators.required),
+            pincode: new UntypedFormControl("", Validators.required),
+            address_2: new UntypedFormControl(""),
         });
 
-        this.updatedLegalSubsidiaryForm = new FormGroup({
-            name: new FormControl("", [
+        this.updatedLegalSubsidiaryForm = new UntypedFormGroup({
+            name: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern("^[A-Za-z _-]+$"),
             ]),
-            gstNumber: new FormControl("", Validators.required),
-            panNumber: new FormControl("", Validators.required),
-            financialYear: new FormControl("", Validators.required),
-            rocNumber: new FormControl("", Validators.required),
-            tdsNumber: new FormControl("", Validators.required),
-            registeredAddress: new FormControl("", Validators.required),
-            legalEntity: new FormControl("", Validators.required),
+            gstNumber: new UntypedFormControl("", Validators.required),
+            panNumber: new UntypedFormControl("", Validators.required),
+            financialYear: new UntypedFormControl("", Validators.required),
+            rocNumber: new UntypedFormControl("", Validators.required),
+            tdsNumber: new UntypedFormControl("", Validators.required),
+            registeredAddress: new UntypedFormControl("", Validators.required),
+            legalEntity: new UntypedFormControl("", Validators.required),
         });
 
         // this.editProblemForm = new FormGroup({

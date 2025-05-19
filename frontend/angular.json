@@ -32,8 +32,12 @@
                             "src/assets",
                             "src/upload.php"
                         ],
-                        "styles": ["src/styles.scss",
-                        "node_modules/primeicons/primeicons.css"],
+ "styles": [
+      "src/styles.scss",
+      "node_modules/@fullcalendar/common/main.css",
+      "node_modules/@fullcalendar/daygrid/main.css",
+      "node_modules/@fullcalendar/timegrid/main.css"
+    ],
                         "scripts": [
                             "node_modules/prismjs/prism.js",
                             "node_modules/prismjs/components/prism-typescript.js"
@@ -125,6 +129,5 @@
                 }
             }
         }
-    },
-    "defaultProject": "poseidon-cli"
+    }
 }

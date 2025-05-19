@@ -9,7 +9,7 @@ import { CustomerService } from "src/app/service/customerservice";
 import { Customer } from "src/app/demo/domain/customer";
 import { ServiceRequestService } from "src/app/service/servicerequest.service";
 import { ServiceEngineerList } from "src/app/model/ServiceRequest.model";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { objectValidator } from "../../custom-validator";
 @Component({
     selector: "app-add-on-demand",
@@ -52,7 +52,7 @@ export class AddOnDemandComponent implements OnInit {
     serviceEngineerObject: ServiceEngineerList = {} as ServiceEngineerList;
     selectedServiceEngineer: ServiceEngineerList = {} as ServiceEngineerList;
     serviceEngineerList: ServiceEngineerList[] = [];
-    addOnDemandForm: FormGroup;
+    addOnDemandForm: UntypedFormGroup;
     filteredcustomersList: any[] = [];
     filteredServiceList: any[] = [];
 
@@ -70,26 +70,26 @@ export class AddOnDemandComponent implements OnInit {
         this.getCustomerList();
         this.getServiceEngineerList();
 
-        this.addOnDemandForm = new FormGroup({
-            addOnDemandObject: new FormControl("", [objectValidator()]),
-            location: new FormControl("", [objectValidator()]),
-            servicePerson: new FormControl("", [objectValidator()]),
-            discount: new FormControl("", [
+        this.addOnDemandForm = new UntypedFormGroup({
+            addOnDemandObject: new UntypedFormControl("", [objectValidator()]),
+            location: new UntypedFormControl("", [objectValidator()]),
+            servicePerson: new UntypedFormControl("", [objectValidator()]),
+            discount: new UntypedFormControl("", [
                 Validators.required,
                 Validators.max(100),
                 Validators.pattern("^[0-9]*$"),
             ]),
-            discount_total: new FormControl("", [
+            discount_total: new UntypedFormControl("", [
                 Validators.required,
                 Validators.pattern(/^\d+(\.\d{1,2})?$/),
             ]),
-            tax_total: new FormControl("", [
+            tax_total: new UntypedFormControl("", [
                 Validators.required,
                 Validators.max(1000),
                 Validators.pattern("^[0-9]*$"),
             ]),
-            total_payable: new FormControl("", Validators.required),
-            subtotal: new FormControl("", [
+            total_payable: new UntypedFormControl("", Validators.required),
+            subtotal: new UntypedFormControl("", [
                 Validators.required,
                 Validators.max(100000),
                 Validators.pattern("^[0-9]*$"),
