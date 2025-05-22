@@ -77,6 +77,7 @@ export class ProductManagementComponent implements OnInit {
                 { field: 'name', header: 'Name', fieldType: "text" },
                 { field: 'description', header: 'Description', fieldType: "text" },
                 { field: 'product_status_name', header: 'Product Status', fieldType: "text" },
+                 { field: 'is_default_img_path', header: 'Image', fieldType: "image" },
                 { field: 'status', header: 'Status', fieldType: "text" },
             ];
             this.addData={
