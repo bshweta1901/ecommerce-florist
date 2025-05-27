@@ -46,7 +46,7 @@ class MailConfig:
 class DevelopmentConfig(Config, DatabaseConfig, FileConfig, MailConfig):
     DEBUG = True
     RESTX_MASK_SWAGGER = False
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:root@" "localhost/ecommerce"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://saavitek_user:Savi@2025@49.36.98.240/saavitek_ecommerce_florist"
     SQLALCHEMY_ECHO = True
     TYPE = "TEST"
 
